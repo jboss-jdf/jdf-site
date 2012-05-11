@@ -1,0 +1,26 @@
+!!!5
+%html
+  %head
+    %meta{ :charset=>'utf-8' }
+    %title An awesome site 
+    %meta{ :name=>'viewport', :content=>'width=device-width, initial-scale=1.0' }
+    :css
+      body {
+        padding-top: 60px;
+      }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'http://static.jboss.org/theme/css/awestruct/jbossdefault_wrapper.css', :media=>'screen, projection' }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"#{site.base_url}/stylesheets/styles.css" }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'http://static.jboss.org/theme/css/awestruct/jbossdefault_content.css', :media=>'screen, projection' } 
+    /[if lt IE 9]
+      %script{ :type=>'text/javascript', :src=>'//html5shim.googlecode.com/svn/trunk/html5.js' }
+    %script{:type=>'text/javascript', :src=>'http://static.jboss.org/theme/js/tabzilla.js' }
+  %body
+    = remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
+    .container
+      ~ content
+      %hr
+    = remotePartial('http://static.jboss.org/theme/includes/org_footer2.html')
+    
+    -# Uncomment script tags (remove leading -#) when you're ready to use behaviors
+    -# %script{ :type=>'text/javascript', :src=>'//cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js' }
+    -# %script{ :type=>'text/javascript', :src=>"#{site.base_url}/javascripts/bootstrap-collapse.js" }
