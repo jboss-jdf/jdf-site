@@ -1,0 +1,14 @@
+---
+layout: news 
+title: jdf News
+title_link: /news/
+body_class: news index
+---
+- page.news.each do |post|
+  = partial('post.html.haml', {'parent'=>page, 'post'=>post, 'include_comments_count'=>post.equal?(page.news.last)})
+%ul.pager
+  %li.previous{:class=>('disabled' unless page.news.next_page)}
+    %a{:href=>page.news.next_page ? page.news.next_page.url : '#'} &laquo; Older
+  %li.pages Page #{page.news.current_page_index + 1} of #{page.news.pages.size}
+  %li.next{:class=>('disabled' unless page.news.previous_page)}
+    %a{:href=>page.news.previous_page ? page.news.previous_page.url : '#'} Newer &raquo;

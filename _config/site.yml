@@ -1,0 +1,6 @@
+profiles:
+  development:
+    base_url: http://people.redhat.com/~pmuir/jdfsite
+    deploy:
+      host: people.redhat.com 
+      path: /home/remote/pmuir/public_html/jdfsite 

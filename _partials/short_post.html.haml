@@ -1,0 +1,12 @@
+---
+---
+%article.post
+  %header.header
+    %h2.title
+      %a{:href=>page.post.url}= page.post.title
+    .byline
+      .date= page.post.date.strftime('<abbr>%b</abbr> %d') if !page.post.date.nil?
+  .body
+    ~ page.post.content
+  .footer
+    %a{:href=>page.post.url} permalink
