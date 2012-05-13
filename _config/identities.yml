@@ -1,0 +1,6 @@
+# Information which cannot be captured automatically (yet)
+- github_id: pmuir
+  role: Project Lead 
+# Cannot resolve full names for the following accounts
+- github_id: jaikiran
+  name: Jaikiran Pai

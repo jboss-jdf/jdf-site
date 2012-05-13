@@ -1,11 +1,8 @@
 ---
 layout: post
-title: Welcome 
+title: What is JDF? 
 author: pmuir
 tags: [ welcome ]
 ---
-
-Welcome!
-========
 
 Welcome to JDF!

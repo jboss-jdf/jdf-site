@@ -20,8 +20,8 @@ title: JBoss Developer Framework
 .row
   .span6
     %h1 Latest News
-    - site.news.each do |post|
-      = partial('short_post.html.haml', {'parent'=>page, 'post'=>post, 'include_comments_count'=>post.equal?(site.news.last)})
+    - site.posts.each do |post|
+      = partial('short_post.html.haml', {'parent'=>page, 'post'=>post, 'include_comments_count'=>post.equal?(site.posts.last)})
   .span6
     .spotlight
       %h1 Spotlight
@@ -30,15 +30,15 @@ title: JBoss Developer Framework
     %ul
       - for session in site.sessions[0,3]
         %li
-          %span.date<
-            %abbr><= session.start_datetime.strftime('%b')
-            = session.start_datetime.strftime('%d')
           %h3(style='line-height: 1; margin-bottom: 0;')
             %a{:href=>session.event_url}= session.event
-          %em.location(style='display: block; margin-bottom: .5em;')= session.event_location
+          .event
+            %abbr= session.start_datetime.strftime('%b')
+            = session.start_datetime.strftime('%d') + ' : '
+            = session.event_location
           %p<>
             #{session.speaker_names.join(' and ')} will present:
-            %br
-            %a{:href=>session.detail_url}= session.title
+            %em 
+              %a{:href=>session.detail_url}= session.title
     .more
       %a(href='/events') View all events &raquo;

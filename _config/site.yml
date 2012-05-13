@@ -1,3 +1,11 @@
+# author is used in the atom feed
+author: JBoss Developer Framework
+jira_key: JDF
+ohloh_id: jbossdeveloperframework
+disqus: jdf
+show_debug: true
+
+
 profiles:
   development:
     base_url: http://people.redhat.com/~pmuir/jdfsite
