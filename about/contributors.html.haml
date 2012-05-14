@@ -21,7 +21,7 @@ title: Contributors
                 #{contributor.bio}
             - else
               No bio available.
-        .photo
+        %div{:class => contributor.role ? "photo team-member" : "photo"}
           %img{:src=>contributor.avatar_url(140), :alt=>contributor.name, :data=>{:toggle=>'modal', :target=>'#' + contributor.github_id}}
           %ul
             %li

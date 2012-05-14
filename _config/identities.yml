@@ -1,6 +1,16 @@
 # Information which cannot be captured automatically (yet)
 - github_id: pmuir
-  role: Project Lead 
+  role: Project Lead
+- github_id: mbogoevici
+  role: TicketMonster Architect
+- github_id: sgilda
+  role: Quickstarts Wizard
+- github_id: burrsutter
+  role: Product Manager
+- github_id: rayploski
+  role: Marketing
+- github_id: lightguard
+  role: Seam Migration Guru
 # Cannot resolve full names for the following accounts
 - github_id: jaikiran
   name: Jaikiran Pai

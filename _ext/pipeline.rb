@@ -9,6 +9,9 @@ require_relative 'jdf'
 require_relative 'posts_helper'
 require_relative 'disqus_more'
 require_relative 'jira'
+require_relative 'external'
+require_relative 'guide'
+
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -43,6 +46,11 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Tagger.new(:posts, '/news/index', '/news/tags', :per_page => 5)
   extension Awestruct::Extensions::TagCloud.new(:posts, '/news/tags/index.html')
   extension Awestruct::Extensions::Disqus.new
+
+  extension Awestruct::Extensions::External.new('/examples/guide', 'guide')
+
+  # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
+  extension Awestruct::Extensions::Guide::Index.new('/examples/guide', 15)
 
   # Must be after all other extensions that might populate identities
   extension Awestruct::Extensions::Identities::Cache.new

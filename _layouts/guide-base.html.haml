@@ -1,0 +1,32 @@
+---
+layout: base
+---
+#main(role='main')
+  #content-header
+    .container
+      .headline
+        %h1
+          %a{:href=>'/guides/'} JBoss Developer Framework Guides
+          %small TODO
+        .directory
+          %a#guides_menu.guides_menu{:href=>'./'}
+            Guides Index
+            %i.icon-menu-closed
+          #guides{:style=>'display: none'}
+            %a.guides_menu{:href=>'./'}
+              Guides Index
+              %i.icon-menu-open
+            %hr.clear
+              - for guide in site.guides.each
+                %dd<
+                  %a{:href=>guide.url}= guide.title
+                  - if guide.languages
+                    %br
+                    %a{:href=>guide.url}<
+                      %img.flag{:src=>site.languages.en.flag_icon, :rel=>'tooltip', :title=>"#{site.languages.en.display_name_local} (en)"}
+                    - for translation in guide.languages
+                      %a{:href=>translation.url}<
+                        %img.flag{:src=>translation.language.flag_icon, :rel=>'tooltip', :title=>"#{translation.language.display_name_local} (#{translation.language.code})"}
+      %script $(function() { activateGuideMenuControl() })
+  .container#guide
+    ~ content

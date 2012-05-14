@@ -2,8 +2,17 @@
 %html
   %head
     %meta{ :charset=>'utf-8' }
-    %title An awesome site 
+    %title= (page.title ? [page.title, page.site_title ? page.site_title : site.title] : [site.title, site.tagline]) * ' &#183; '
     %meta{ :name=>'viewport', :content=>'width=device-width, initial-scale=1.0' }
+    %meta(name='description'){:content=>page.description ? page.description : site.description}
+    - if site.keywords
+      %meta(name='keywords'){:content=>site.keywords}
+    - if page.author
+      %meta(name='author'){:content=>site.identities.lookup(page.author).name}
+    - if site.url
+      %link(rel='canonical'){:href=>site.url}
+    %link(rel='alternate' type='application/atom+xml' href='/news/atom.xml' title='JBoss Developer Framework News Atom feed')
+
     :css
       body {
         padding-top: 60px;
@@ -14,6 +23,11 @@
     /[if lt IE 9]
       %script{ :type=>'text/javascript', :src=>'//html5shim.googlecode.com/svn/trunk/html5.js' }
     %script{:type=>'text/javascript', :src=>'http://static.jboss.org/theme/js/tabzilla.js' }
+    %script{:type=>'text/javascript', :src=>'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js' }
+    - if page.javascripts
+      - page.javascripts.each do |javascript|
+        %script{:src=>javascript}
+
   %body
     = remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
     .container

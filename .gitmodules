@@ -1,0 +1,3 @@
+[submodule "examples/guide"]
+	path = examples/guide
+	url = git://github.com/jboss/ticket-monster-tutorial.git
