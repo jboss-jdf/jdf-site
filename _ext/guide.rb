@@ -50,11 +50,11 @@ module Awestruct
               page_content = Nokogiri::HTML(page.content)
               chapters = []
 
-              page_content.search('h3','//h3/a').each do |header_html|
+              page_content.search('h2','//h2/a').each do |header_html|
                 chapter = OpenStruct.new
                 chapter.text = header_html.inner_html
                 # FIXME we need a better way to generate link ids
-                chapter.link_id = chapter.text.gsub(' ', '_').gsub('&#8217;', '_').gsub(/[\(\)\.!]/, '').downcase
+                chapter.link_id = header_html.attribute('id')
                 chapters << chapter
               end
 
@@ -119,26 +119,7 @@ module Awestruct
       
         def transform(site, page, rendered)
           if page.guide
-            page_content = Nokogiri::HTML(rendered)
-
-            guide_root = page_content.at('div[@id=guide]')
-            
-            if (guide_root)
-              # Wrap <div class="header"> around the h2 section
-              # If you can do this more efficiently, feel free to improve it
-              guide_content = guide_root.search('h2','//h2/a')
-              guide_content.wrap('<div class="header"></div>') 
-
-              guide_root.search('h3','//h3/a').each do |header_html|
-                page.guide.chapters.each do |chapter|
-                  if header_html.inner_html.eql? chapter.text
-                    header_html.attributes['id'] = chapter.link_id
-                    break
-                  end
-                end
-              end
-              return page_content.to_html.gsub(/^<!DOCTYPE [^>]*>/, '<!DOCTYPE html>')
-            end
+            return rendered.gsub(/^<!DOCTYPE [^>]*>/, '<!DOCTYPE html>')
           end
           return rendered
         end

@@ -11,7 +11,7 @@ require_relative 'disqus_more'
 require_relative 'jira'
 require_relative 'external'
 require_relative 'guide'
-
+require_relative 'spotlight'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -48,6 +48,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Disqus.new
 
   extension Awestruct::Extensions::External.new('/examples/guide', 'guide')
+  extension Awestruct::Extensions::Spotlight.new('/spotlights')
 
   # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
   extension Awestruct::Extensions::Guide::Index.new('/examples/guide', 15)

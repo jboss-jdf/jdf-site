@@ -11,9 +11,11 @@ title: JBoss Developer Framework
     .span2
       %ul.unstyled
         %li Quickstarts
-        %li Examples
+        %li 
+          %a{:href=>"/examples"} Examples
         %li Migration 
-        %li About
+        %li 
+          %a{:href=>"/about"}About
   .row  
     .span10.cta
       %p LEARN MORE ABOUT JDF | GET STARTED NOW!
@@ -25,7 +27,20 @@ title: JBoss Developer Framework
   .span6
     .spotlight
       %h1 Spotlight
-      %p TODO Add spotlight
+      -# .slide required to fix IE bug in bootstrap < 2.1
+      #slideshow.carousel.slide
+        - site.spotlights.each do |spotlight|
+          - (1..spotlight.weight).each do |i|
+            .carousel-inner
+              .item
+                .container.layout-sample
+                  .headline
+                    %h2= spotlight.title
+                  .content= spotlight.content              
+      %a.carousel-control.left(href="#slideshow" data-slide="prev") &lsaquo;
+      %a.carousel-control.right(href="#slideshow" data-slide="next") &rsaquo;
+    %script $(function() { activateSlideshow() })
+
     %h1 Upcoming Events
     %ul
       - for session in site.sessions[0,3]

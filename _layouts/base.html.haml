@@ -19,11 +19,14 @@
       }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'http://static.jboss.org/theme/css/awestruct/jbossdefault_wrapper.css', :media=>'screen, projection' }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"#{site.base_url}/stylesheets/styles.css" }
-    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'http://static.jboss.org/theme/css/awestruct/jbossdefault_content.css', :media=>'screen, projection' } 
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'http://static.jboss.org/theme/css/awestruct/jbossdefault_content.css', :media=>'screen, projection' }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'/stylesheets/pygments.css', :media=>'screen, projection' }
     /[if lt IE 9]
       %script{ :type=>'text/javascript', :src=>'//html5shim.googlecode.com/svn/trunk/html5.js' }
     %script{:type=>'text/javascript', :src=>'http://static.jboss.org/theme/js/tabzilla.js' }
     %script{:type=>'text/javascript', :src=>'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js' }
+    %script{:type=>'text/javascript', :src=>'/javascripts/site.js' }
+
     - if page.javascripts
       - page.javascripts.each do |javascript|
         %script{:src=>javascript}
