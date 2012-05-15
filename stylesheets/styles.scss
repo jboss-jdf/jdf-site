@@ -259,3 +259,81 @@ body.guide {
 
 // Include responsive Bootstrap styles
 // @import "bootstrap-responsive";
+
+// Contributors
+// TODO: I think this would be better to put into a partial
+ul.contributors {
+  list-style: none;
+  padding: 0;
+  margin: .5em 0 2em 0;
+  & > li {
+    @include span(4);
+    margin-bottom: 2em;
+    display: block;
+    @include clearfix;
+    &:nth-of-type(3n+1) {
+      @include first;
+      clear: left;
+    }
+    line-height: 1.4;
+    .photo {
+      float: left;
+      position: relative;
+      margin-right: 10px;
+      overflow: hidden;
+      @extend .thumbnail;
+      cursor: pointer;
+      //&:hover {
+      //  border-color: $link_color;
+      //}
+      img {
+        display: block;
+        @include square(140px);
+      }
+      ul {
+        margin: 0 4px;
+        font-size: 0.9em;
+        padding: 0;
+        position: absolute;
+        height: 0px;
+        width: 140px; // 100% doesn't work here
+        left: 0;
+        bottom: 3px;
+        @include single-transition(height, .4s, ease-in-out);
+        background-color: $palette_black_20trans;
+        list-style: none;
+        text-align: center;
+        border-top: 1px solid $light_border;
+        @include single-box-shadow($palette_white_50trans, 0, 1px, 0, 0, inset);
+        overflow-y: hidden;
+        li {
+          font-size: 0.95em;
+          display: inline;
+          padding: 0 2px;
+          a {
+            color: $palette_white;
+          }
+          span {
+            color: $palette_40gray;
+          }
+        }
+      }
+      &:hover ul {
+        height: 24px;
+      }
+    }
+    h3 {
+      margin-bottom: .15em;
+    }
+    strong, em {
+      display: block;
+    }
+  }
+  & + p {
+    clear: left;
+    @extend .well;
+    strong {
+      display: block;
+    }
+  }
+}
