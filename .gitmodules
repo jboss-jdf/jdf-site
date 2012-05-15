@@ -1,4 +1,4 @@
 [submodule "examples/ticket-monster/guide"]
 	path = examples/ticket-monster/guide
-	url = /Users/pmuir/workspace/ticket-monster-tutorial
+	url = https://github.com/jboss/ticket-monster-tutorial.git
 	update = merge
