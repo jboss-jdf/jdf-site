@@ -2,33 +2,39 @@
 layout: guide-base
 ---
 - page.body_class = 'guide'
+- page.toTop = 1
 - page.bottom_javascripts = [ '/javascripts/jquery-scroll.js', 'http://apis.google.com/js/plusone.js' ]
 #content{:lang=>page.language ? page.language.code : nil}
-  - if page.authors
+  - if page.guide.authors
     .authors<
-      %strong= "Contributor#{page.authors.size > 1 ? 's' : ''}:"
+      %strong= "Author#{page.guide.authors.size > 1 ? 's' : ''}:"
       // TODO Link in to site identities
-      = ' '.concat(page.authors.map{|u| u} * ', ')
-      - if page.translators
-        %strong{:style=>'padding-left: 10px;'}= "Translator#{page.translators.size > 1 ? 's' : ''}:"
-        = ' '.concat(page.translators.map{|u| site.identities.lookup(u).to_link} * ', ')
-        %strong{:style=>'padding-left: 10px;'} Language:
-        %img.flag{:src=>page.language.flag_icon, :rel=>'tooltip', :title=>"#{page.language.display_name_local} (#{page.language.code})"}
-      - if page.languages
-        %strong{:style=>'padding-left: 10px;'} Translations:
-        - for translation in page.languages
-          - if translation.language != page.guide.language
-            %a{ :href=>translation.url }<
-              %img.flag{:src=>translation.language.flag_icon, :rel=>'tooltip', :title=>"#{translation.language.display_name_local} (#{translation.language.code})"}
-      %br
-      - if page.guide.group
-        %strong Level:
-        = ' '.concat(groups[page.guide.group - 1][1])
-      - if page.tags
-        %strong{:style=>"padding-left: #{page.guide.group ? 10 : 0}px;"} Tags:
-        = ' '.concat(page.tags * ', ')
-      %strong{:style=>"padding-left: #{page.guide.group || page.tags ? 10 : 0}px;"} Last Update:
-      = ' '.concat(page.guide.changes[0].date.strftime('%b %d, %Y'))
+      = ' '.concat(page.guide.authors.map{|u| u} * ', ')
+  - if page.guide.contributors
+    .authors<
+      %strong= "Contributor#{page.guide.contributors.size > 1 ? 's' : ''}:"
+      // TODO Link in to site identities
+      = ' '.concat(page.guide.contributors.map{|u| u} * ', ')
+  - if page.translators
+    %strong{:style=>'padding-left: 10px;'}= "Translator#{page.translators.size > 1 ? 's' : ''}:"
+    = ' '.concat(page.translators.map{|u| site.identities.lookup(u).to_link} * ', ')
+    %strong{:style=>'padding-left: 10px;'} Language:
+    %img.flag{:src=>page.language.flag_icon, :rel=>'tooltip', :title=>"#{page.language.display_name_local} (#{page.language.code})"}
+  - if page.languages
+    %strong{:style=>'padding-left: 10px;'} Translations:
+    - for translation in page.languages
+      - if translation.language != page.guide.language
+        %a{ :href=>translation.url }<
+          %img.flag{:src=>translation.language.flag_icon, :rel=>'tooltip', :title=>"#{translation.language.display_name_local} (#{translation.language.code})"}
+  %br
+  - if page.guide.group
+    %strong Level:
+    = ' '.concat(groups[page.guide.group - 1][1])
+  - if page.tags
+    %strong{:style=>"padding-left: #{page.guide.group ? 10 : 0}px;"} Tags:
+    = ' '.concat(page.tags * ', ')
+  %strong{:style=>"padding-left: #{page.guide.group || page.tags ? 10 : 0}px;"} Last Update:
+  = ' '.concat(page.guide.changes[0].date.strftime('%b %d, %Y'))
   ~ content
   %h2
     %a#share

@@ -155,6 +155,10 @@ function activateScrollingToc(sections) {
 
 function activateToTopControl() {
   $toTop = $('#toTop');
+  // skip if toTop link not present!
+  if (!$toTop) {
+    return;
+  }
   // skip this whole mess if we are hiding it on a device
   if ($toTop.css('display') == 'none') {
     return;
@@ -166,11 +170,6 @@ function activateToTopControl() {
       return false;
     }
   });
-
-  //if (window.location.pathname.search(/^\/(guides\/[^\/]+|blog)(\/|$)/) < 0) {
-  if (window.location.pathname.search(/\/(guide\/[^\/]+)(\/|$)/) < 0) {
-    return;
-  }
 
   var tuckedAway = true;
   var bannerFixed = $('#banner').css('position') == 'fixed';

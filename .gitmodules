@@ -2,3 +2,6 @@
 	path = examples/ticket-monster/guide
 	url = https://github.com/jboss/ticket-monster-tutorial.git
 	update = merge
+[submodule "quickstarts/jboss-as-quickstart"]
+	path = quickstarts/jboss-as-quickstart
+	url = https://github.com/jbossas/quickstart.git 

@@ -50,7 +50,9 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Spotlight.new('/spotlights')
 
   # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
-  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/guide', 15)
+  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/guide', 'asciidoc')
+  extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', 'md')
+
 
   # Must be after all other extensions that might populate identities
   extension Awestruct::Extensions::Identities::Cache.new

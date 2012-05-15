@@ -41,7 +41,8 @@
     .container
       ~ content
       %hr
-      %a#toTop.visible-desktop(href='#') Top
+      - if page.toTop
+        %a#toTop.visible-desktop(href='#') Top
     :plain
       <script>
         $(function() {
