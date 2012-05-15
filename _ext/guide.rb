@@ -37,11 +37,11 @@ module Awestruct
               # perhaps as little pictures like on github
 
               # Add the Authors to Page and Guide based on Git Commit history
-              #git_page_contributors = page_contributors(page, @num_changes)
-              #if not page.authors
-              #  page.authors = git_page_contributors
-              #end
-              #guide.authors = page.authors
+              git_page_contributors = page_contributors(page, @num_changes)
+              if not page.authors
+                page.authors = git_page_contributors
+              end
+              guide.authors = page.authors
 
               guide.changes = page_changes(page, @num_changes)
 
@@ -128,15 +128,16 @@ module Awestruct
       end
 
       ##
-      # Returns a Array of unique author.name's based on the Git commit history located 
-      # at page.site.dir for the given page. 
+      # Returns a Array of unique author.name's based on the Git commit history for the given page.
+      # Assumes guides are brought in as submodules so opens git rooted in the page's dir
       # The Array is ordered by number of commits done by the authors.
       #
       def page_contributors(page, size)
         authors = Hash.new
-        
-        g = Git.open(page.site.dir)
-        g.log(size).path(page.relative_source_path[1..-1]).each do |c|
+        page_dir = page.source_path.match(/(.*)\/([^\/]+)/)[1]
+        page_short_name = page.source_path.match(/(.*)\/([^\/]+)/)[2]
+        g = Git.open(page_dir)
+        g.log(size).path(page_short_name).each do |c|
           if authors[c.author.name]
             authors[c.author.name] = authors[c.author.name] + 1
           elsif
@@ -148,8 +149,11 @@ module Awestruct
 
       def page_changes(page, size)
         changes = []
-        g = Git.open(page.site.dir)
-        g.log(size).path(page.relative_source_path[1..-1]).each do |c|
+        page_dir = page.source_path.match(/(.*)\/([^\/]+)/)[1]
+        page_short_name = page.source_path.match(/(.*)\/([^\/]+)/)[2]
+
+        g = Git.open(page_dir)
+        g.log(size).path(page_short_name).each do |c|
           changes << Change.new(c.sha, c.author.name, c.author.date, c.message.split(/\n/)[0].chomp('.').capitalize)
         end
         if changes.length == 0

@@ -1,3 +1,4 @@
 [submodule "examples/ticket-monster/guide"]
 	path = examples/ticket-monster/guide
 	url = /Users/pmuir/workspace/ticket-monster-tutorial
+	update = merge

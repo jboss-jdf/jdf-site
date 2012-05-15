@@ -6,8 +6,9 @@ layout: guide-base
 #content{:lang=>page.language ? page.language.code : nil}
   - if page.authors
     .authors<
-      %strong= "Author#{page.authors.size > 1 ? 's' : ''}:"
-      = ' '.concat(page.authors.map{|u| site.identities.lookup(u).to_link} * ', ')
+      %strong= "Contributor#{page.authors.size > 1 ? 's' : ''}:"
+      // TODO Link in to site identities
+      = ' '.concat(page.authors.map{|u| u} * ', ')
       - if page.translators
         %strong{:style=>'padding-left: 10px;'}= "Translator#{page.translators.size > 1 ? 's' : ''}:"
         = ' '.concat(page.translators.map{|u| site.identities.lookup(u).to_link} * ', ')

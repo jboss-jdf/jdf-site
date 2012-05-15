@@ -72,6 +72,7 @@ $palette_terra: rgba(140,61,51,1);
 
 // Site fonts
 $default_font_family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$header_font_family: 'Lucida Sans', 'Lucida Sans Unicode', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif;
 $button_font_family: 12px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 $guide_dropdown_color: $palette_white;
 $guide_button_text_active_color: rgb(91, 182, 91);
@@ -80,7 +81,13 @@ $guide_content_background_color: $palette_white;
 $guide_author_name_color: $palette_60gray;
 $toc_text_color: $palette_50gray;
 $toc_link_color: transparentize($palette_blue, .1);
-
+$h1_color: #C00;
+$h2_color: #424242;
+$h3_color: #424242;
+$h4_color: #424242;
+$h5_color: #424242;
+$h6_color: #424242;
+$fixed_font_family: Menlo, Monaco, 'Courier New', monospace;
 
 
 @import "bootstrap";

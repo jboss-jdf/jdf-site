@@ -36,7 +36,10 @@ title: Contributors
                 %span Twitter
             %li
               %a{:href=>contributor.github.profile_url} GitHub
-        %h3= contributor.name
+        %h3
+          =contributor.name
+          - if contributor.role
+            ="(#{contributor.role})"
         %strong= contributor.company
         %em= contributor.location
   %p
