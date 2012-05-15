@@ -168,7 +168,7 @@ function activateToTopControl() {
   });
 
   //if (window.location.pathname.search(/^\/(guides\/[^\/]+|blog)(\/|$)/) < 0) {
-  if (window.location.pathname.search(/^\/(guides\/[^\/]+)(\/|$)/) < 0) {
+  if (window.location.pathname.search(/\/(guide\/[^\/]+)(\/|$)/) < 0) {
     return;
   }
 

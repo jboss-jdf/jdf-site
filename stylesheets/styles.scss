@@ -1,5 +1,261 @@
-// I gather this file is a starting point for the project.
-@import "bootstrap";
+@import "partials/base";
+@import "partials/addons";
+
+
+#toTop {
+  position: fixed;
+  top: -50px;
+  right: 0px;
+  background-color: $palette_60gray;
+  @include border-radius(8px 0 0 8px);
+  color: white;
+  font-weight: bold;
+  padding: 10px 12px;
+  text-decoration: none;
+}
+
+.col, .row-col, .span0 {
+  float: left;
+  margin-left: $gridGutterWidth;
+}
+
+// Guides
+
+body.guide {
+  #content-header {
+    & > .container {
+      position: relative;
+    }
+    .headline {
+      @extend .page-header;
+    }
+    h1 {
+      display: inline-block;
+      font-size: 3em; // FIXME make a variable
+      padding-left: 3px;
+      small {
+        font-family: $default_font_family;
+        font-size: 15px;
+        display: block;
+        padding-top: 8px;
+        margin-bottom: -18px;
+        //font-weight: normal;
+      }
+    }
+    // Styling for the guide button in the header (i.e. top of page)
+    .directory {
+      display: inline-block;
+      float: right;
+      @extend .gutter-right;
+      .icon-menu-closed, .icon-menu-open {
+        position: relative;
+        top: -1px;
+        margin-right: -2px;
+      }
+      .icon-menu-closed {
+        @extend .icon-white;
+        @extend .icon-chevron-right;
+      }
+      .icon-menu-open {
+        @extend .icon-chevron-down;
+      }
+      a#guides_menu {
+        @extend .btn;
+        // FIXME btn-primary not giving us the color we want
+        @extend .btn-success;
+        @include border-radius(5px);
+        padding: 9px 0;
+        width: 200px;
+        display: block;
+        line-height: normal;
+        font-family: $button_font_family;
+        font-size: 2em;
+        text-decoration: none;
+        text-align: center;
+        white-space: nowrap;
+        @include box-shadow(rgba(255,255,255,.35) 0 1px 0 0 inset, rgba(255,255,255,.15) 0 0 0 1px inset, rgba(0,0,0,.5) 1px 1px 4px -1px);
+      }
+      // the following section is for the modal menu dropdown styling
+      // FIXME use fluid grid for contents
+      #guides {
+        text-align: left;
+        @include border-radius();
+        //@include box-shadow;
+        @include single-box-shadow($palette_black_80trans, 0, 1px, 10px);
+        padding: 2em 2em 1.5em 2em;
+        top: 24px;
+        @extend .offset-gutter-right;
+        margin-right: -2px;
+        width: 640px;
+        background-color: $guide_dropdown_color;
+        position: absolute;
+        z-index: 10;
+        padding: 2em;
+        // styling for guide button when it has been pressed
+        .guides_menu {
+          text-decoration: none;
+          font-family: $button_font_family;
+          font-size: 2em;
+          float: right;
+          margin: -12px 2px 5px 0;
+          color: $guide_button_text_active_color;
+        }
+        dl {
+          width: 320px;
+          float: left;
+          text-decoration: none;
+          &:nth-of-type(3n) {
+            clear: left;
+          }
+        }
+        dd {
+          padding-left: 9px;
+          text-indent: -9px;
+          line-height: 1.3em;
+          margin-top: .3em;
+          margin-bottom: .4em;
+        }
+      }
+    }
+  }
+  #guide {
+    @extend .content-bumper;
+    border: 1px solid $light_border;
+    @include border-radius();
+    @include single-box-shadow(rgba(0,0,0,0.09), 0, 1px, 5px);
+  }
+  #content {
+    @include border-box;
+    @include span(9, true);
+    background-color: $guide_content_background_color;
+    @include border-radius(6px 0 0 6px);
+    padding: 0 $gridGutterWidth 1em $gridGutterWidth;
+    border-right: 1px solid $light_border;
+    margin-bottom: 0;
+    h2.group {
+      font-size: 2em;
+      line-height: 1.3em;
+    }
+    h2.group, .header {
+      padding: 10px $gridGutterWidth;
+      margin: 0 (-$gridGutterWidth);
+      border-bottom: 1px solid $light_border;
+    }
+    h2.group:first-child, .header {
+      background: $palette_5gray image-url("content_gradient.png") repeat-x;
+      @include border-radius(6px 0 0 0);
+    }
+    .header {
+      h2 {
+        line-height: 1.3em;
+        margin-bottom: 0.5em;
+      }
+      .authors {
+        font-size: 0.9em;
+        margin-bottom: 1.25em;
+        color: $guide_author_name_color;
+        border: 1px dotted $light_border;
+        @include border-radius(4px);
+        padding-left: 10px;
+        a:not(:hover) {
+          color: inherit;
+        }
+      }
+      ul {
+        padding-left: 0;
+        margin-left: 15px;
+        li {
+          font-weight: bold;
+          list-style: none;
+          font-size: .95em;
+          background: image-url("bullet_check.gif") no-repeat 3px 2px;
+          margin: .75em 0;
+          padding-left: 30px;
+        }
+      }
+    }
+    // headings in guide content
+    h3 {
+      font-size: 1.9em;
+      margin: .65em 0 .2em 0;
+    }
+    h4 {
+      font-size: 1.6em;
+      font-style: italic;
+      margin-top: 0.75em;
+    }
+    p, ul, table {
+      margin-bottom: 1em;
+    }
+    img {
+      max-width: 100%;
+    }
+    dl dt {
+      margin-top: 1em;
+    }
+    table {
+       border: 1px solid $light_border;
+       th {
+         background-color: $palette_cerulean;
+         color: $palette_white;
+         white-space: nowrap;
+       }
+    }
+  }
+  #sidebar {
+    @include border-box;
+    padding: 1em $gridGutterWidth 0 0;
+    @include span(3);
+    h3 {
+      font-family: $default_font_family;
+      font-size: 1.1em;
+      font-weight: normal;
+      margin: 0 0 1em -5px;
+      text-transform: uppercase;
+      color: $toc_text_color;
+      &.chapter_header {
+        background: image-url("chapters.png") no-repeat 0 10px;
+        padding: 5px 0 0 22px;
+      }
+    }
+    ol.chapters {
+      list-style: decimal outside;
+      color: $toc_text_color;
+      padding: 0;
+      margin-right: 0;
+      margin-left: -3px;
+      li {
+        margin: 1.5em;
+        margin-right: 0;
+        a {
+          color: $toc_link_color;
+          text-decoration: none;
+        }
+      }
+    }
+    ul.legend {
+      padding: 0;
+      margin: 0 0 0 -5px;
+      li {
+        list-style-type: none;
+        line-height: 1.5;
+        padding-left: 55px;
+        padding-top: 0;
+        margin: 0 0 1.5em 0;
+        display: block;
+        min-height: 40px;
+        background-repeat: no-repeat;
+        &.edit {
+          background-image: image-url("edit.png");
+        }
+        &.command {
+          background-image: image-url("command.png");
+        }
+      }
+    }
+  }
+}
+
 
 // Include responsive Bootstrap styles
 // @import "bootstrap-responsive";

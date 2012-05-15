@@ -4,12 +4,13 @@ author: JBoss Developer Framework
 jira_key: JDF
 ohloh_id: jbossdeveloperframework
 disqus: jdf
-show_debug: true
 website_source_repo: https://github.com/pmuir/jdf-site
 
-
 profiles:
-  development:
+  debug:
+    show_debug: true
+    base_url: http://localhost:4242
+  staging:
     base_url: http://people.redhat.com/~pmuir/jdfsite
     deploy:
       host: people.redhat.com 

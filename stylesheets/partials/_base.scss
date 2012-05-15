@@ -70,149 +70,19 @@ $palette_soft_red: rgba(232,77,44,1); //guide icon
 $palette_light_terra: rgba(166,64,51,1);
 $palette_terra: rgba(140,61,51,1);
 
-//Stylesheet color variable assignments
-
-$logo_font_color: $palette_white;
-$page_background_color: $palette_10gray;
-$light_border: $palette_26gray; //$palette_pale_lavender;
-$article_border: $palette_12gray;
-
-$h1_color: $palette_dark_purple;
-$h2_color: $palette_dark_purple;
-$h3_color: $palette_blue;
-$h4_color: $palette_60gray;
-$h5_color: $palette_80gray;
-$h6_color: $palette_80gray;
-$default_font_color: $palette_80gray;
-$text_photo_background_color: $palette_10gray;
-$link_color: $palette_orange;
-$link_hover_color: $palette_burnt_orange;
-//$inline_code_color: $palette_forest;
-$inline_code_color: rgba(0, 117, 8, .85);
-
-$banner_background_color: $palette_pitch_purple;
-$banner_link_color: $palette_10gray;
-//$banner_link_hover_color: $palette_grass; 
-$banner_link_hover_color: $palette_lime; 
-
-$intro_background_color: $palette_10gray;
-$home_header_background_color: $palette_white;
-$log_title_color: $palette_dark_purple;
-$log_detail_color: $palette_dark_purple;
-$cta_button_color: $palette_grass;
-$activity_header_color: $palette_dark_purple;
-$activity_background_color: $palette_white;
-$rally_color: $palette_cerulean;
-
-$invasion_tab_color: $palette_light_purple;
-$invasion_tab_border_color: $palette_dark_purple;
-$tweet_row_color: $palette_5gray;
-$blockquote_text_color: $palette_80gray;
-$blockquote_quote_color: $palette_40gray;
-$blockquote_citation_color: $palette_70gray;
-
-$guide_page_background_color: $palette_white;
-$guide_page_header_background_color: $palette_50gray;
-//$guide_button_text_active_color: $palette_40gray;
-$guide_button_text_active_color: rgb(91, 182, 91);
+// Site fonts
+$default_font_family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$button_font_family: 12px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 $guide_dropdown_color: $palette_white;
-$guide_author_name_color: $palette_60gray;
+$guide_button_text_active_color: rgb(91, 182, 91);
+$light_border: $palette_26gray; //$palette_pale_lavender;
 $guide_content_background_color: $palette_white;
+$guide_author_name_color: $palette_60gray;
 $toc_text_color: $palette_50gray;
 $toc_link_color: transparentize($palette_blue, .1);
 
-$info_box_background_color: rgb(50, 167, 75); // 80% mix w/ white of previous
-$important_box_background_color: rgb(253, 94, 40); //#fd5e28; //$palette_soft_red;
-//$warning_box_background_color: rgba(255, 202, 20); //#ffca14; //$palette_soft_yellow;
-//$warning_box_background_color: rgb(255, 212, 66); // 80% mix w/ white of previous
-$warning_box_background_color: rgb(250, 208, 71); // 5% desaturated of previous
-$command_box_background_color: $palette_25gray;
-$source_box_background_color: $palette_mid_yellow;
-$filetree_background_color: #f8f8f8; //$palette_pale_lavender;
 
-//$footer_base_color: #A4FF5C;
-$footer_base_color: rgb(169, 222, 124);
-$footer_header_color: $palette_80gray;
-$footer_link_color: $palette_80gray;
-$footer_text_color: $palette_70gray;
-$branding_background_color: $palette_white;
 
-// Font family settings
-$default_font_family: "DejaVu Sans", Verdana, sans-serif;
-$header_font_family: "Marvel", "Trebuchet MS", Arial, sans-serif;
-$nav_font_family: $header_font_family;
-$banner_font_family: $header_font_family;
-$button_font_family: $header_font_family;
-$fancy_font_family: Georgia, serif;
-// QUESTION do we need block fixed and inline fixed?
-// TODO apply fixed font to _prettify.scss
-$fixed_font_family: "DejaVu Sans Mono", "Droid Sans Mono", Menlo, Monaco, "Courier New", monospace;
-
-// Compass Settings
-
-//$support-for-original-webkit-gradients: false;
-
-$default-text-shadow-color: $palette_50gray_50trans;
-$default-text-shadow-h-offset: 1px;
-$default-text-shadow-v-offset: 1px;
-$default-text-shadow-blur: 1px;
-
-$default-border-radius: 5px;
-
-$default-box-shadow-color: $palette_50gray_50trans;
-$default-box-shadow-h-offset: 1px;
-$default-box-shadow-v-offset: 2px;
-$default-box-shadow-blur: 4px;
-
-$sprite-default-size: 60px;
-$sprite-image-default-width: $sprite-default-size;
-$sprite-image-default-height: $sprite-default-size;
-
-// Bootstrap settings
-
-//$gridColumns:     12;
-//$gridColumnWidth: 60px;
-//$gridGutterWidth: 20px;
-//$fluidGridColumnWidth: 4.255319149;
-
-$baseLineHeight:  24px; // FIXME we can't set 1.7 like we did w/ blueprint
-$baseFontFamily:  $default_font_family;
-$baseFontSize:    14px;
-$textColor:       $default_font_color;
-
-$linkColor:       $link_color;
-$linkColorHover:  $link_hover_color;
-
-$primaryButtonBackground: $cta_button_color;
-$hrBorder:                $light_border;
-
-$navbarBackground:          $banner_background_color;
-$navbarBackgroundHighlight: $palette_dark_purple;
-$navbarLinkBackgroundHover: transparent;
-$navbarLinkColor:           $banner_link_color;
-$navbarLinkColorHover:      $banner_link_hover_color;
-
-// Responsive size thresholds (can't reference in @media until sass 3.2)
-
-$phone_max_width: 480px;
-$p_tablet_max_width: 767px;
-$l_tablet_min_width: $p_tablet_max_width + 1px;
-$l_tablet_max_width: 979px;
-$s_desktop_min_width: $l_tablet_max_width + 1px;
-$w_desktop_min_width: 1200px;
-
-// Imports
-
-/*
- * Based on Bootstrap v2.0.2
- *
- * Copyright 2012 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Twitter Bootstrap CSS generated by bootstrap-sass,
- * a Sass-powered adaptation of Twitter Bootstrap.
- */
 @import "bootstrap";
 @import "bootstrap-responsive";
 @import "compass/reset/utilities"; // provides reset mixins like reset-focus
