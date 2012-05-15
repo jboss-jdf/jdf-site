@@ -5,6 +5,7 @@ jira_key: JDF
 ohloh_id: jbossdeveloperframework
 disqus: jdf
 show_debug: true
+website_source_repo: https://github.com/pmuir/jdf-site
 
 
 profiles:

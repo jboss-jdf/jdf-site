@@ -59,10 +59,15 @@ end
 
 module Awestruct
   module AsciiDocable
+
+    def render(context)
+      _render(raw_page_content, context.page.relative_source_path, site)
+    end
+
     def _render(content, relative_source_path, site)
       out_file=site.tmp_dir + '/asciidoc' + relative_source_path.gsub(/\.([^.]+)$/, '.html')
       FileUtils.mkdir_p(File.dirname(out_file))
-      cmd="asciidoc -s -b html5 -a pygments -a imagesdir='../' -o #{out_file} -"
+      cmd="asciidoc -b html5 -a pygments -a imagesdir='../' -o #{out_file} -"
       execute(cmd, content)
       File.open(out_file).read
     end

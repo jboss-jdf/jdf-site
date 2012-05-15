@@ -15,7 +15,6 @@ module Awestruct
         end
 
         def transform(transformers)
-          transformers << WrapHeaderAndAssignHeadingIds.new
         end
 
         def execute(site)
@@ -26,9 +25,9 @@ module Awestruct
               
               guide = OpenStruct.new
               page.guide = guide
+              page.layout = 'guide'
               site.engine.set_urls([page])
               guide.url = page.url
-              guide.title = page.title
               if page.description.nil?
                 page.description = page.guide_summary
               end
@@ -48,6 +47,7 @@ module Awestruct
 
               # NOTE page.content forces the source path to be rendered
               page_content = Nokogiri::HTML(page.content)
+              guide.title = page_content.css("h1").text
               chapters = []
 
               page_content.search('h2','//h2/a').each do |header_html|
@@ -56,6 +56,18 @@ module Awestruct
                 # FIXME we need a better way to generate link ids
                 chapter.link_id = header_html.attribute('id')
                 chapters << chapter
+              end
+
+              page.rendered_content = page_content.css('div#content').first
+
+              class << page
+                def render(context)
+                  self.rendered_content
+                end
+
+                def content
+                  self.rendered_content
+                end
               end
 
               # make "extra chapters" a setting of the extension?
@@ -113,31 +125,6 @@ module Awestruct
           end
           return languages.sort{|a,b| a.language.code <=> b.language.code }
         end
-      end
-
-      class WrapHeaderAndAssignHeadingIds
-      
-        def transform(site, page, rendered)
-          if page.guide
-            return rendered.gsub(/^<!DOCTYPE [^>]*>/, '<!DOCTYPE html>')
-          end
-          return rendered
-        end
-        
-        def get_depth(node)
-          depth = 0
-          p = node
-          while p.name != 'html'
-            depth += 1
-            p = p.parent
-          end
-          depth
-        end
-
-        def get_indent(depth, ts = '  ')
-          "#{ts * depth}"
-        end
-        
       end
 
       ##
