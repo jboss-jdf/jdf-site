@@ -123,6 +123,10 @@ body.guide {
     border: 1px solid $light_border;
     @include border-radius();
     @include single-box-shadow(rgba(0,0,0,0.09), 0, 1px, 5px);
+
+    #content {
+      padding-top: 1em;
+    }
   }
   #content {
     @include border-box;
