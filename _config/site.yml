@@ -11,7 +11,6 @@ profiles:
     show_debug: true
     base_url: http://localhost:4242
   staging:
-    base_url: http://people.redhat.com/~pmuir/jdfsite
+    base_url: http://jboss-developer-framework.github.com
     deploy:
-      host: people.redhat.com 
-      path: /home/remote/pmuir/public_html/jdfsite 
+      host: github_pages 
