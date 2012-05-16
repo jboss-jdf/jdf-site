@@ -64,7 +64,9 @@ module Awestruct
 
               if @suffix == 'asciidoc'
                 # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
-                page.rendered_content = page_content.css('div#content').first
+                guide_content = page_content.css('div#content').first 
+                guide_content['id'] = 'guide-content'
+                page.rendered_content = guide_content
                 # Extract authors
                 author = page_content.css('span#author').first
                 if author
