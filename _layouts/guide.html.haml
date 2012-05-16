@@ -11,7 +11,7 @@ layout: guide-base
       // TODO Link in to site identities
       = ' '.concat(page.guide.authors.map{|u| u} * ', ')
   - if page.guide.contributors
-    .authors<
+    .contributors<
       %strong= "Contributor#{page.guide.contributors.size > 1 ? 's' : ''}:"
       // TODO Link in to site identities
       = ' '.concat(page.guide.contributors.map{|u| u} * ', ')
