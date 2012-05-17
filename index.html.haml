@@ -1,59 +1,72 @@
 ---
-layout: base
-title: JBoss Developer Framework
+layout: landing
 ---
-.hero-unit
-  .row
+.hero-unit#frontpage-header-wrapper
+  .row.container#frontpage-header
     .span8
-      %img{ :src=>'http://design.jboss.org/jbossdeveloperframework/logo/final/jdf_logo_450px.png' }
-      %h1 What is jdf?
+      %img#jdf-logo{ :src=>"http://design.jboss.org/jbossdeveloperframework/logo/final/jdf_logo_450px.png" }
+      %h3 What is jdf?
       %p TODO
-    .span2
-      %ul.unstyled
+      %h4.cta 
+        %a{:href=>"#"}
+          LEARN MORE ABOUT JDF
+        |
+        %a{:href=>"#"}
+          GET STARTED NOW!
+    .span2#vertnav-wrapper
+      %ul#main-vert-nav
         %li Quickstarts
         %li 
           %a{:href=>"examples"} Examples
         %li Migration 
         %li 
           %a{:href=>"about"}About
-  .row  
-    .span10.cta
-      %p LEARN MORE ABOUT JDF | GET STARTED NOW!
-.row
-  .span6
-    %h1 Latest News
-    - site.posts.each do |post|
-      = partial('short_post.html.haml', {'parent'=>page, 'post'=>post, 'include_comments_count'=>post.equal?(site.posts.last)})
-  .span6
-    .spotlight
-      %h1 Spotlight
-      -# .slide required to fix IE bug in bootstrap < 2.1
-      #slideshow.carousel.slide
-        - site.spotlights.each do |spotlight|
-          - (1..spotlight.weight).each do |i|
-            .carousel-inner
-              .item
-                .container.layout-sample
-                  .headline
-                    %h2= spotlight.title
-                  .content= spotlight.content              
-      %a.carousel-control.left(href="#slideshow" data-slide="prev") &lsaquo;
-      %a.carousel-control.right(href="#slideshow" data-slide="next") &rsaquo;
-    %script $(function() { activateSlideshow() })
+      .sharethispadding
+        %span.st_sharethis_large
+        %span.st_facebook_large
+        %span.st_twitter_large
+        %span.st_linkedin_large
+        %span.st_email_large
+        %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
+        :javascript
+          stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
+.container
+  .row
+    .span5.section-heading
+      %h1 Latest News
+      - site.posts.each do |post|
+        = partial("short_post.html.haml", {"parent"=>page, "post"=>post, "include_comments_count"=>post.equal?(site.posts.last)})
+    .span5.offset1
+      .spotlight.section-heading
+        %h1 Spotlight
+        -# .slide required to fix IE bug in bootstrap < 2.1
+        #slideshow.carousel.slide
+          - site.spotlights.each do |spotlight|
+            - (1..spotlight.weight).each do |i|
+              .carousel-inner
+                .item
+                  .container.layout-sample
+                    .headline
+                      %h2= spotlight.title
+                    .content= spotlight.content              
+          %a.carousel-control.left(href="#slideshow" data-slide="prev") &lsaquo;
+          %a.carousel-control.right(href="#slideshow" data-slide="next") &rsaquo;
+      %script $(function() { activateSlideshow() })
 
-    %h1 Upcoming Events
-    %ul
-      - for session in site.sessions[0,3]
-        %li
-          %h3(style='line-height: 1; margin-bottom: 0;')
-            %a{:href=>session.event_url}= session.event
-          .event
-            %abbr= session.start_datetime.strftime('%b')
-            = session.start_datetime.strftime('%d') + ' : '
-            = session.event_location
-          %p<>
-            #{session.speaker_names.join(' and ')} will present:
-            %em 
-              %a{:href=>session.detail_url}= session.title
-    .more
-      %a(href='/events') View all events &raquo;
+      .section-heading
+        %h1 Upcoming Events
+        %ul
+          - for session in site.sessions[0,3]
+            %li
+              %h3(style="line-height: 1; margin-bottom: 0;")
+                %a{:href=>session.event_url}= session.event
+              .event
+                %abbr= session.start_datetime.strftime("%b")
+                = session.start_datetime.strftime("%d") + " : "
+                = session.event_location
+              %p<>
+                #{session.speaker_names.join(" and ")} will present:
+                %em 
+                  %a{:href=>session.detail_url}= session.title
+        .more
+          %a(href="/events") View all events &raquo;

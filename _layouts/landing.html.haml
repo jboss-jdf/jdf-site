@@ -13,9 +13,9 @@
       %link(rel='canonical'){:href=>site.url}
     %link(rel='alternate' type='application/atom+xml' href='/news/atom.xml' title='JBoss Developer Framework News Atom feed')
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'http://static.jboss.org/theme/css/awestruct/jbossdefault_wrapper.css', :media=>'screen, projection' }
-    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"#{site.base_url}/stylesheets/styles.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>'http://static.jboss.org/theme/css/awestruct/jbossdefault_content.css', :media=>'screen, projection' }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"#{site.base_url}/stylesheets/pygments.css", :media=>'screen, projection' }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"#{site.base_url}/stylesheets/styles.css" }
     /[if lt IE 9]
       %script{ :type=>'text/javascript', :src=>'//html5shim.googlecode.com/svn/trunk/html5.js' }
     %script{:type=>'text/javascript', :src=>'http://static.jboss.org/theme/js/tabzilla.js' }
@@ -27,37 +27,30 @@
 
   %body{:class=>page.body_class || nil}
     = remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
-    .container
-      - if page.title_link
-        %h1
-          %a{:href=>page.title_link}= page.header_title ? page.header_title : page.title
-      - else
-        %h1= page.header_title ? page.header_title : page.title
-    .container
-      ~ content
-      %hr
-      - if page.toTop
-        %a#toTop.visible-desktop(href='#') Top
+    ~ content
+    %hr
+    - if page.toTop
+      %a#toTop.visible-desktop(href='#') Top
+  :plain
+    <script>
+      $(function() {
+        $('html').addClass('ready');
+        activateToTopControl();
+      });
+    </script>
+  %script(src="#{site.base_url}/javascripts/prettify.js")
+  %script{:type=>'text/javascript', :src=>"#{site.base_url}/javascripts/site.js" }
+  - if page.bottom_javascripts
+    - page.bottom_javascripts.each do |javascript|
+      %script{:src=>javascript}
+  - if site.google_plusone
     :plain
       <script>
-        $(function() {
-          $('html').addClass('ready');
-          activateToTopControl();
-        });
+        (function() {
+          var po = document.createElement('script'); po.async = true; po.src = 'https://apis.google.com/js/plusone.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
       </script>
-    %script(src="#{site.base_url}/javascripts/prettify.js")
-    %script{:type=>'text/javascript', :src=>"#{site.base_url}/javascripts/site.js" }
-    - if page.bottom_javascripts
-      - page.bottom_javascripts.each do |javascript|
-        %script{:src=>javascript}
-    - if site.google_plusone
-      :plain
-        <script>
-          (function() {
-            var po = document.createElement('script'); po.async = true; po.src = 'https://apis.google.com/js/plusone.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-          })();
-        </script>
-    - if site.google_analytics
-      = google_analytics_async
-    = remotePartial('http://static.jboss.org/theme/includes/org_footer2.html')
+  - if site.google_analytics
+    = google_analytics_async
+  = remotePartial('http://static.jboss.org/theme/includes/org_footer2.html')
