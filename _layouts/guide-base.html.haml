@@ -7,13 +7,12 @@ layout: default
       .headline
         %h1= page.guide.title
         .directory
-          %a#guides_menu.guides_menu{:href=>'./'}
+          %button#guides_menu.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
             Guides Index
-            %i.icon-menu-closed
-          #guides{:style=>'display: none'}
+            %span.caret
+          #guides.dropdown-menu.pull-right{:style=>'display: none'}
             %a.guides_menu{:href=>'./'}
               Guides Index
-              %i.icon-menu-open
             %hr.clear
               - for guide in site.guides.each
                 %dd<
