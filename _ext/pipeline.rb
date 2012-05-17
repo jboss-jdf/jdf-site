@@ -51,6 +51,7 @@ Awestruct::Extensions::Pipeline.new do
 
   # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
   extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/guide', 'asciidoc')
+  extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', 'asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', 'md')
 
 
