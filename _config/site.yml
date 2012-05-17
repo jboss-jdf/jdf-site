@@ -11,6 +11,4 @@ profiles:
     show_debug: true
     base_url: http://localhost:4242
   staging:
-    base_url: http://jboss-developer-framework.github.com
-    deploy:
-      host: github_pages 
+    base_url: http://site-jdf.rhcloud.com
