@@ -26,7 +26,7 @@
         %script{:src=>javascript, :type=>'text/javascript'}
 
   %body{:class=>page.body_class || nil}
-    = remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
+    /= remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
     .secondary-header-wrapper
       .span4.offset1.secondary-header
         %a{:href=>"/"}
@@ -73,4 +73,4 @@
           })();
     - if site.google_analytics
       = google_analytics_async
-    = remotePartial('http://static.jboss.org/theme/includes/org_footer2.html')
+    /= remotePartial('http://static.jboss.org/theme/includes/org_footer2.html')

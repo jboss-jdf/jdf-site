@@ -46,7 +46,6 @@ module Awestruct
 
               # NOTE page.content forces the source path to be rendered
               page_content = Nokogiri::HTML(page.content)
-              guide.title = page_content.css("h1").first.text
               chapters = []
 
               page_content.css('h2').each do |header_html|
@@ -64,6 +63,7 @@ module Awestruct
 
               if @suffix == 'asciidoc'
                 # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
+                guide.title = page_content.css("h1").first.text
                 guide_content = page_content.css('div#content').first 
                 guide_content['id'] = 'guide-content'
                 page.rendered_content = guide_content
@@ -73,23 +73,34 @@ module Awestruct
                   guide.authors = [ author.text ]
                 end
               elsif @suffix == 'md'
-                # Markdown doesn't have an authors syntax, so all we can do is pray ;-)
-                # Look for a paragraph that contains Author: Name only
+                # Markdown doesn't have an metadata syntax, so all we can do is pray ;-)
+                # Look for a paragraph that contains tags, which we define by convention
                 # Remove if found
                 page_content.css('p').each do |p|
-                  if p.text
-                    author = p.text[/^(Author: )(.+)$/, 2]
-                    if author
-                      guide.authors = author.split(',').sort
-                      p.remove
-                    end
+                  authors = findMarkdownTag(p, 'Author')
+                  if authors
+                    guide.authors = authors
+                  end
+                  technologies = findMarkdownTag(p, 'Technologies')
+                  if technologies
+                    guide.technologies = technologies
+                  end
+                  level = findMarkdownTag(p, 'Level')
+                  if level
+                    guide.level = level
+                  end
+                  prerequisites = findMarkdownTag(p, 'Prerequisites')
+                  if prerequisites
+                    guide.prerequisites = prerequisites
                   end
                 end
                 # Strip out title
                 h1 = page_content.css('h1').first
                 if h1
+                  guide.title = h1.text
                   h1.remove
                 end
+                # TODO Strip out html and body
                 # rebuild links
                 page_content.css('a').each do |a|
                   # TDOO make this one regex with capture, but my brain is dead
@@ -204,6 +215,16 @@ module Awestruct
           changes << Change.new('UNTRACKED', 'You', Time.now, 'Not yet committed')
         end
         changes
+      end
+
+      def findMarkdownTag(p, tag)
+        if p.text
+          r = p.text[/^(#{tag}: )(.+)$/, 2]
+          if r
+            p.remove
+            return r.split(',').sort
+          end
+        end
       end
     end
   end
