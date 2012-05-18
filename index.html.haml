@@ -1,36 +1,34 @@
 ---
 layout: landing
 ---
-.hero-unit#frontpage-header-wrapper
-  .row.container#frontpage-header
-    .span8
-      %img#jdf-logo{ :src=>"http://design.jboss.org/jbossdeveloperframework/logo/final/jdf_logo_450px.png" }
-      %h3 What is jdf?
-      %p TODO
-      %h4.cta 
-        %a{:href=>"#"}
-          LEARN MORE ABOUT JDF
-        |
-        %a{:href=>"#"}
-          GET STARTED NOW!
-    .span2#vertnav-wrapper
-      %ul#main-vert-nav
-        %li Quickstarts
-        %li 
-          %a{:href=>"examples"} Examples
-        %li Migration 
-        %li 
-          %a{:href=>"about"}About
-      .sharethispadding
-        %span.st_sharethis_large
-        %span.st_facebook_large
-        %span.st_googleplus_large
-        %span.st_twitter_large
-        %span.st_linkedin_large
-        %span.st_email_large
-        %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
-        :javascript
-          stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
+  .container#frontpage-header
+    .row
+      .span8
+        %img#jdf-logo{ :src=>"http://design.jboss.org/jbossdeveloperframework/logo/final/jdf_logo_450px.png" }
+        %h3 What is jdf?
+        %p TODO
+        %h4.cta 
+          %a{:href=>"#"}
+            LEARN MORE ABOUT JDF
+          |
+          %a{:href=>"#"}
+            GET STARTED NOW!
+      .span2.offset1#vertnav-wrapper
+        %ul#main-vert-nav
+          %li Quickstarts
+          %li 
+            %a{:href=>"examples"} Examples
+          %li Migration 
+          %li 
+            %a{:href=>"about"}About
+        .sharethispadding
+          %span.st_sharethis_large
+          %span.st_facebook_large
+          %span.st_googleplus_large
+          %span.st_twitter_large
+          %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
+          :javascript
+            stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
 .container
   .row
     .span5.section-heading

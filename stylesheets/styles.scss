@@ -93,7 +93,9 @@
     a {
       color: #4a5d75;
       text-decoration: none;
-      text-shadow: white 1px 1px 0px;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -460,6 +462,56 @@ ul.contributors {
     @extend .well;
     strong {
       display: block;
+    }
+  }
+}
+
+/** Buzz **/
+.tweet {
+  margin-bottom: 3em;
+  padding: 2px;
+  .loading {
+    padding: 1.5em;
+    margin: 0;
+  }
+  .tweet_intro {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 0.5em;
+    margin: 0;
+  }
+  .tweet_outro {
+    padding: 0.5em;
+    margin: 0;
+    text-align: center;
+  }
+  ul.tweet_list {
+    list-style: none;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    .awesome, .epic {
+      text-transform: uppercase;
+    }
+    .tweet_odd {
+      background-color: $tweet_row_color;
+      @include border-radius(4px);
+    }
+    .tweet_even {
+    }
+    .tweet_avatar {
+      @include square(48px);
+      margin-right: .5em;
+      float: left;
+      img {
+        vertical-align: middle;
+        @include border-radius(2px);
+      }
+    }
+    li {
+      padding: 0.5em;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 }
