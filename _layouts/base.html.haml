@@ -29,7 +29,8 @@
     = remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
     .secondary-header-wrapper
       .span4.offset1.secondary-header
-        %img{:id=>"jdf logo", :src=>"/images/jdflogo_secondarypage.png", :width=>"240", :height=>"70"}
+        %a{:href=>"/"}
+          %img{:id=>"jdf logo", :src=>"/images/jdflogo_secondarypage.png", :width=>"240", :height=>"70"}
       .span3.offset5
         #secondary-vertnav-wrapper.vertnav-wrapper
           %ul#secondary-vert-nav
