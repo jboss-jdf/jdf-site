@@ -1,0 +1,12 @@
+div.vimeo {
+  #thumbs { overflow: auto; height: 298px; width: 300px; border: 1px solid #E7E7DE; padding: 0; }
+  #thumbs ul { list-style-type: none; margin: 0 10px 0; padding: 0 0 10px 0; }
+  #thumbs ul li { height: 75px; }
+
+  .thumb { border: 0; float: left; width: 100px; height: 75px; background: url(http://a.vimeocdn.com/thumbnails/defaults/default.75x100.jpg); margin-right: 10px; }
+
+  #embed { background-color: #E7E7DE; height: 280px; width: 504px; padding: 10px; }
+
+  #portrait { margin-right: 5px; max-width: 100px; }
+  #stats { clear: both; margin-bottom: 20px; }
+}

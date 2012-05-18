@@ -23,7 +23,7 @@
 
     - if page.javascripts
       - page.javascripts.each do |javascript|
-        %script{:src=>javascript}
+        %script{:src=>javascript, :type=>'text/javascript'}
 
   %body{:class=>page.body_class || nil}
     = remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
@@ -64,7 +64,7 @@
     %script{:type=>'text/javascript', :src=>"#{site.base_url}/javascripts/site.js" }
     - if page.bottom_javascripts
       - page.bottom_javascripts.each do |javascript|
-        %script{:type=>"text/javascript", :src=>javascript}
+        %script{:src=>javascript, :type=>'text/javascript'}
     - if site.google_plusone
       :javascript
           (function() {
