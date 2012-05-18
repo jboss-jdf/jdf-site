@@ -43,13 +43,12 @@ layout: landing
         -# .slide required to fix IE bug in bootstrap < 2.1
         #slideshow.carousel.slide
           - site.spotlights.each do |spotlight|
-            - (1..spotlight.weight).each do |i|
-              .carousel-inner
-                .item
-                  .container.layout-sample
-                    .headline
-                      %h2= spotlight.title
-                    .content= spotlight.content              
+            .carousel-inner
+              .item
+                .container.layout-sample
+                  .headline
+                    %h2= spotlight.title
+                  .content= spotlight.content              
           %a.carousel-control.left(href="#slideshow" data-slide="prev") &lsaquo;
           %a.carousel-control.right(href="#slideshow" data-slide="next") &rsaquo;
       %script $(function() { activateSlideshow() })
