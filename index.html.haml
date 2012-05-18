@@ -49,8 +49,8 @@ layout: landing
                   .content= spotlight.content              
           %a.carousel-control.left(href="#slideshow" data-slide="prev") &lsaquo;
           %a.carousel-control.right(href="#slideshow" data-slide="next") &rsaquo;
-      %script $(function() { activateSlideshow() })
-
+      :javascript 
+        $('.carousel').carousel()
       .section-heading
         %h1 Upcoming Events
         %ul
