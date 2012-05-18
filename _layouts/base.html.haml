@@ -28,33 +28,48 @@
   %body{:class=>page.body_class || nil}
     = remotePartial('http://static.jboss.org/theme/includes/org_header_topNav.html')
     .secondary-header-wrapper
-      .container.secondary-header
+      .span4.offset1.secondary-header
         %img{:id=>"jdf logo", :src=>"/images/jdflogo_secondarypage.png", :width=>"240", :height=>"70"}
+      .span3.offset5
+        #secondary-vertnav-wrapper.vertnav-wrapper
+          %ul#secondary-vert-nav
+            %li Quickstarts
+            %li 
+              %a{:href=>"examples"} Examples
+            %li Migration 
+            %li 
+              %a{:href=>"about"}About
+          .sharethispadding-secondary
+            %span.st_sharethis
+            %span.st_facebook
+            %span.st_googleplus
+            %span.st_twitter
+            %span.st_linkedin
+            %span.st_email
+            %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
+            :javascript
+              stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
     .container
       ~ content
       %hr
       - if page.toTop
         %a#toTop.visible-desktop(href='#') Top
-    :plain
-      <script>
+    :javascript
         $(function() {
           $('html').addClass('ready');
           activateToTopControl();
         });
-      </script>
-    %script(src="#{site.base_url}/javascripts/prettify.js")
+    %script(type="text/javascript" src="#{site.base_url}/javascripts/prettify.js")
     %script{:type=>'text/javascript', :src=>"#{site.base_url}/javascripts/site.js" }
     - if page.bottom_javascripts
       - page.bottom_javascripts.each do |javascript|
-        %script{:src=>javascript}
+        %script{:type=>"text/javascript", :src=>javascript}
     - if site.google_plusone
-      :plain
-        <script>
+      :javascript
           (function() {
             var po = document.createElement('script'); po.async = true; po.src = 'https://apis.google.com/js/plusone.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
           })();
-        </script>
     - if site.google_analytics
       = google_analytics_async
     = remotePartial('http://static.jboss.org/theme/includes/org_footer2.html')

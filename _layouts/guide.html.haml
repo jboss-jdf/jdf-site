@@ -41,19 +41,20 @@ layout: guide-base
       Share the Knowledge
   %p
     Find this guide useful?
-
-  %p.post_to_twitter
-    %a{ :href=> "http://twitter.com/home/?status=#{URI.escape("Just read the #jdf #{page.title} guide! Get yours. #{site.base_url}#{page.url}")}" }
-      %img{ :src=>"#{site.base_url}/images/post_to_twitter.png" }
-
-  .g-plusone{ 'data-size' => "tall" }
-
+    .sharethispadding
+      %span.st_sharethis_large
+      %span.st_facebook_large
+      %span.st_googleplus_large
+      %span.st_twitter_large
+      %span.st_linkedin_large
+      %span.st_email_large
+      %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
+      :javascript
+        stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
   %h4
     Feedback
-
   %p
     TODO
-
   - if page.guide.changes
     %h4 Recent Changelog
     %ul
