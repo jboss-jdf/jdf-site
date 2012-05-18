@@ -76,12 +76,12 @@ module Awestruct
                 # Markdown doesn't have an authors syntax, so all we can do is pray ;-)
                 # Look for a paragraph that contains Author: Name only
                 # Remove if found
-                page_content.css('p').each do |a|
-                  if a.text
-                    author = a.text[/^(Author: )(.+)$/, 2]
+                page_content.css('p').each do |p|
+                  if p.text
+                    author = p.text[/^(Author: )(.+)$/, 2]
                     if author
                       guide.authors = author.split(',').sort
-                      a.remove
+                      p.remove
                     end
                   end
                 end
@@ -94,7 +94,7 @@ module Awestruct
                 page_content.css('a').each do |a|
                   # TDOO make this one regex with capture, but my brain is dead
                   if a['href'] =~ /README.md/
-                    href='../' + a['href'][/^(.*README).md/, 1] + '/'
+                    href= a['href'][/^(.*)\/README.md/, 1] + '/'
                     if a['href'] =~ /#.*$/
                       href+= '#' + a['href'].match(/#(.*)$/)[1]
                     end

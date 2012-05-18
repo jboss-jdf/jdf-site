@@ -12,6 +12,7 @@ require_relative 'jira'
 require_relative 'external'
 require_relative 'guide'
 require_relative 'spotlight'
+require_relative 'moveup'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -37,6 +38,8 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Lanyrd::Export.new('/events/jdf.ics')
   extension Awestruct::Extensions::Posts.new( '/news', :posts ) 
   extension Awestruct::Extensions::Indexifier.new
+  # Must come after Indexifier
+  extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')
   extension Awestruct::Extensions::Atomizer.new( 
     :post, 
     '/news.atom',
