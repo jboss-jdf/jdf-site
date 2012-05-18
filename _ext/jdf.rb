@@ -66,9 +66,12 @@ module Awestruct
 
     def _render(content, relative_source_path, site)
       out_file=site.tmp_dir + '/asciidoc' + relative_source_path.gsub(/\.([^.]+)$/, '.html')
-      FileUtils.mkdir_p(File.dirname(out_file))
-      cmd="asciidoc -b html5 -a pygments -a imagesdir='../' -o #{out_file} -"
-      execute(cmd, content)
+      if !File.exists?(out_file)
+        FileUtils.mkdir_p(File.dirname(out_file))
+        cmd="asciidoc -b html5 -a pygments -a imagesdir='../' -o #{out_file} -"
+        execute(cmd, content)
+        puts "Rendering asciidoc #{relative_source_path}"
+      end
       File.open(out_file).read
     end
     
