@@ -13,6 +13,7 @@ require_relative 'external'
 require_relative 'guide'
 require_relative 'spotlight'
 require_relative 'moveup'
+require_relative 'remotePartial'
 
 
 Awestruct::Extensions::Pipeline.new do

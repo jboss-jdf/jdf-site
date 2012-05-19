@@ -51,7 +51,7 @@ end
 def tmp(parent, child)
   tmp_dir = File.join(parent, child)
   if !File.exist?tmp_dir
-    Dir.mkdir(tmp_dir)
+    FileUtils.mkdir_p(tmp_dir)
   end
   return tmp_dir
 end
