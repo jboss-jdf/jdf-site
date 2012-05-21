@@ -1,4 +1,7 @@
 div.vimeo {
+  margin-left: auto;
+  margin-right: auto;
+
   #thumbs { overflow: auto; height: 298px; width: 300px; border: 1px solid #E7E7DE; padding: 0; }
   #thumbs ul { list-style-type: none; margin: 0 10px 0; padding: 0 0 10px 0; }
   #thumbs ul li { height: 75px; }
@@ -9,4 +12,7 @@ div.vimeo {
 
   #portrait { margin-right: 5px; max-width: 100px; }
   #stats { clear: both; margin-bottom: 20px; }
+  .row {
+    margin-top: 1em;
+  }
 }

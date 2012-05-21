@@ -5,13 +5,19 @@ javascripts: [ /javascripts/vimeo.js ]
 
 %script{:type=>'text/javascript'}
   vimeo('#{page.vimeo_src}')
-%div.vimeo#wrapper
-  %div#embed
-  %div#summary
-  %div#thumbs
-    %ul
-
-%p 
-  View more videos from JBoss 
-  %a{:href=>'http://www.vimeo.com/jbossdeveloper'}on Vimeo
+.vimeo
+  .row#wrapper
+    .span6.offset1
+      %div#embed
+    .span4
+      %div#thumbs
+        %ul
+  .row
+    .span10.offset1
+      %div#summary
+  .row
+    .span10.offset1
+      %p 
+        View more videos from JBoss 
+        %a{:href=>'http://www.vimeo.com/jbossdeveloper'}on Vimeo
 
