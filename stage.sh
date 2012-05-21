@@ -17,7 +17,7 @@ if [ ! -d "$OPENSHIFT_DIR/.git" ]; then
     git clone $OPENSHIFT_REPO $OPENSHIFT_DIR
 fi
 
-cp -rf $DIR/_site/* $OPENSHIFT_DIR
+cp -rf $DIR/_site/* $OPENSHIFT_DIR/php
 
 cd $OPENSHIFT_DIR
 git add *
