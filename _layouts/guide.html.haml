@@ -50,6 +50,9 @@ layout: guide-base
     Feedback
   %p
     TODO
+  #comments
+  - if site.disqus
+    = page.disqus_comments
   - if page.guide.changes
     %h4 Recent Changelog
     %ul
