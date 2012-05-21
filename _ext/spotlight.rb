@@ -14,7 +14,7 @@ module Awestruct::Extensions
             :title=>page.title,
             :content=>page.content
           })
-          for i in 0..page.weight
+          for i in 1..page.weight
             spotlights << spotlight
           end
         end

@@ -1,6 +1,6 @@
 ---
-title: TicketMonster 
-weight: 1
+title: TicketMonster
+weight: 2
 ---
 
-BLAH
+[Check out TicketMonster](/examples/ticket-monster), our full stack example.

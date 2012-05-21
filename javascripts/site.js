@@ -25,12 +25,18 @@ function redirectToIndexPath() {
 }
 
 function activateSlideshow() {
-  var start = window.location.hash ? window.location.hash.replace('#', '') : 1;
-  if (start > 1) {
-    var items = $('#slideshow .item');
-    $(items[start - 1]).addClass('active');
-    $(items[0]).removeClass('active');
+  var start = window.location.hash ? window.location.hash.replace('#', '') : -1;
+  var items = $('#slideshow .item');
+  for (i in items) {
+    item = items[i];
+    $(item).removeClass('active');
+  } 
+  if (start < 0) {
+    var len = items.length;
+    var rand = Math.random();
+    start=Math.floor(rand * len) + 1;
   }
+  $(items[start - 1]).addClass('active');
   $('#slideshow').carousel({
     pause: ''
   })
