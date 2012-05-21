@@ -1,0 +1,17 @@
+---
+layout: default 
+javascripts: [ /javascripts/vimeo.js ]
+---
+
+%script{:type=>'text/javascript'}
+  vimeo('#{page.vimeo_src}')
+%div.vimeo#wrapper
+  %div#embed
+  %div#summary
+  %div#thumbs
+    %ul
+
+%p 
+  View more videos from JBoss 
+  %a{:href=>'http://www.vimeo.com/jbossdeveloper'}on Vimeo
+
