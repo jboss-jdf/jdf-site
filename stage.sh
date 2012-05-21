@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
 OPENSHIFT_REPO="ssh://f35451447e0d4bfbaf37c8a039bb5e6a@site-jdf.rhcloud.com/~/git/site.git/"
 OPENSHIFT_DIR=$DIR/_tmp/stage
 
