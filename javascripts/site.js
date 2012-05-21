@@ -25,17 +25,28 @@ function redirectToIndexPath() {
 }
 
 function activateSlideshow() {
-  var start = window.location.hash ? window.location.hash.replace('#', '') : -1;
+  var start = parseInt(window.location.hash ? window.location.hash.replace('#', '') : -1);
   var items = $('#slideshow .item');
-  for (i in items) {
+  var totalWeight = 0;
+  var choiceWeight = new Array();
+  for (var i = 0; i < items.length; i++) {
     item = items[i];
     $(item).removeClass('active');
-  } 
-  if (start < 0) {
-    var len = items.length;
-    var rand = Math.random();
-    start=Math.floor(rand * len) + 1;
+    choiceWeight[i] = parseInt($(item).attr('weight'));
+    totalWeight += choiceWeight[i];
   }
+
+  if (start < 0) {
+    var rand = Math.floor(Math.random() * totalWeight);
+    for (var i=0; i < choiceWeight.length; i++) {
+      if (rand < choiceWeight[i]) {
+        start = i + 1;
+        break;
+      }
+      rand -= choiceWeight[i];
+    }
+  }
+
   $(items[start - 1]).addClass('active');
   $('#slideshow').carousel({
     pause: ''

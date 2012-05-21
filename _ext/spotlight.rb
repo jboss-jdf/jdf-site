@@ -12,11 +12,10 @@ module Awestruct::Extensions
         if ( page.relative_source_path =~ /^#{@path_prefix}\// ) 
           spotlight = OpenStruct.new({
             :title=>page.title,
-            :content=>page.content
+            :content=>page.content,
+            :weight=>page.weight
           })
-          for i in 1..page.weight
-            spotlights << spotlight
-          end
+          spotlights << spotlight
         end
       end
       site.spotlights=spotlights.shuffle

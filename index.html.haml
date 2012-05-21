@@ -43,7 +43,7 @@ layout: landing
         #slideshow.carousel.slide
           - site.spotlights.each do |spotlight|
             .carousel-inner
-              .item
+              .item(weight="#{spotlight.weight}")
                 .container.layout-sample
                   .headline
                     %h2= spotlight.title
