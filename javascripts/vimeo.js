@@ -26,6 +26,7 @@ function setupGallery(videos) {
 
 function switchVideo(video) {
   $('#embed').html(unescape(video.html));
+  $('#summary').replaceWith('<div id="summary">' + video.description + '</div>'); 
 }
 
  
