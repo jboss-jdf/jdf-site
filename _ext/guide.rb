@@ -22,12 +22,15 @@ module Awestruct
 
         def execute(site)
           guides = []
-          
+          if ! site.guides
+            site.guides = {}
+          end
           site.pages.each do |page|
             if ( page.relative_source_path =~ /^#{@path_prefix}\/(?!index)/ && page.relative_source_path =~ /\.#{@suffix}$/)
               
               guide = OpenStruct.new
               page.guide = guide
+              guide.dir = page.relative_source_path[/^#{@path_prefix}\/([^\/]+)\/[^\/]+$/, 1]
               page.layout = @layout
               site.engine.set_urls([page])
               guide.url = page.url
@@ -77,22 +80,11 @@ module Awestruct
                 # Look for a paragraph that contains tags, which we define by convention
                 # Remove if found
                 page_content.css('p').each do |p|
-                  authors = findMarkdownTag(p, 'Author')
-                  if authors
-                    guide.authors = authors
-                  end
-                  technologies = findMarkdownTag(p, 'Technologies')
-                  if technologies
-                    guide.technologies = technologies
-                  end
-                  level = findMarkdownTag(p, 'Level')
-                  if level
-                    guide.level = level
-                  end
-                  prerequisites = findMarkdownTag(p, 'Prerequisites')
-                  if prerequisites
-                    guide.prerequisites = prerequisites
-                  end
+                  guide.authors ||= findMarkdownTag(p, 'Author')
+                  guide.technologies ||= findMarkdownTag(p, 'Technologies')
+                  guide.level ||= findMarkdownTag(p, 'Level')
+                  guide.summary ||= findMarkdownTag(p, 'Summary')
+                  guide.prerequisites ||= findMarkdownTag(p, 'Prerequisites')
                 end
                 # Strip out title
                 h1 = page_content.css('h1').first
@@ -112,18 +104,18 @@ module Awestruct
                     a['href'] = href
                   end
                 end
-                page.rendered_content=page_content
+                page.rendered_content=page_content.to_html
               end
 
               class << page
-                  def render(context)
-                    self.rendered_content
-                  end
-
-                  def content
-                    self.rendered_content
-                  end
+                def render(context)
+                  self.rendered_content
                 end
+
+                def content
+                  self.rendered_content
+                end
+              end
 
 
               # make "extra chapters" a setting of the extension?
@@ -147,10 +139,10 @@ module Awestruct
                 guide.language = site.languages.en
                 guides << guide
               end
+              page.guides = guides
             end
           end
-          
-          site.guides = guides
+          site.guides[@path_prefix] = guides
         end
 
         def findLanguages(page)

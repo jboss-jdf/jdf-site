@@ -14,6 +14,7 @@ require_relative 'guide'
 require_relative 'spotlight'
 require_relative 'moveup'
 require_relative 'remotePartial'
+require_relative 'qstoc'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -57,6 +58,9 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/guide', 'asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', 'asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', 'md')
+
+  # Must be after guides
+  extension Awestruct::Extensions::QSTOC.new('/quickstarts/jboss-as-quickstart')
 
 
   # Must be after all other extensions that might populate identities

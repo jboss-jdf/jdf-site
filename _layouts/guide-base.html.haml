@@ -14,7 +14,7 @@ layout: default
             %a.guides_menu{:href=>'./'}
               Guides Index
             %hr.clear
-              - for guide in site.guides.each
+              - for guide in page.guides.each
                 %dd<
                   %a{:href=>guide.url}= guide.title
                   - if guide.languages
