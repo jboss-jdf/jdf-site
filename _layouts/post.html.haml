@@ -1,9 +1,7 @@
 ---
-layout: news 
+layout: news
+title: jdf News 
 ---
-- page.site_title = 'JDF Blog'
-- page.header_title = page.site_title
-- page.title_link = '/news/'
 - page.body_class = 'news'
 - page.description = html_to_text(page.content).split("\n").first if !page.description
 = partial('post.html.haml', {'parent'=>page, 'post'=>page, 'include_comments'=>true})
