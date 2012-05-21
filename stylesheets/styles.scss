@@ -513,6 +513,42 @@ ul.contributors {
   }
 }
 
+/** Events **/
+.date {
+  display: block;
+  @include square(44px);
+  font-size: 24px;
+  line-height: 22px;
+  //font-family: $fancy_font_family;
+  font-weight: bold;
+  @include single-text-shadow();
+  text-align: center;
+  @include border-radius();
+  @include single-box-shadow(rgba(0,0,0,0.09), 0, 1px, 3px);
+  border: 1px solid $light_border;
+  background-color: $palette_white;
+  vertical-align: top;
+  float: left;
+  margin-right: 1em;
+  abbr {
+    display: block;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    @include geometry(44px, 13px);
+    color: $palette_white;
+    font-size: 10px;
+    text-transform: uppercase;
+    @include single-text-shadow();
+    line-height: 13px;
+    padding-top: 1px;
+    border-bottom: 1px solid $light_border;
+    @include border-radius(4px 4px 0 0);
+    background-color: $palette_terra;
+    @include background-image(linear-gradient($palette_light_terra, $palette_terra))
+  }
+}
+
 /** Common styles - could probably make this better with some sass functions, just C&P for now */
 a {
   color:#336699;

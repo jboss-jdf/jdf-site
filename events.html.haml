@@ -10,26 +10,31 @@ title: Events
   %a{:href=>"http://www.google.com/calendar/render?cid=#{site.base_url.gsub(':', '%3A')}/events/jdf.ics"} Google Calendar
   |
   %a{:href=>'jdf.ics'} Manual Setup
-#sessions
+#sessions.container
   - for session in site.sessions
     .session
-      .header
-        %h2.title
-          %a{:href=>session.detail_url}= session.title
-        .date= session.start_datetime.strftime('<abbr>%b</abbr> %d')
-        %p.meta
-          #{session.start_datetime.strftime('%a, %b %d, %Y - %I:%M%p')} to #{session.end_datetime.strftime('%I:%M%p')} #{session.timezone}
-          at
-          %a{:href=>session.event_url}= session.event
-          in #{session.event_location}
-      .body
-        = session.description
-      - if !session.speakers.empty?
-        %p.speakers
-          %strong Speakers:&#32;
-          - for speaker in session.speakers
-            %a{:href=>"http://lanyrd.com/profile/#{speaker['username']}/"}>= speaker['name']
-            = ',&#32;' unless speaker == session.speakers.last
+      .row
+        .span12
+          .date= session.start_datetime.strftime('<abbr>%b</abbr> %d')
+          .header
+            %h2.title
+              %a{:href=>session.detail_url}= session.title
+      .row
+        .span11.offset1
+          %p.meta
+            #{session.start_datetime.strftime('%a, %b %d, %Y - %I:%M%p')} to #{session.end_datetime.strftime('%I:%M%p')} #{session.timezone}
+            at
+            %a{:href=>session.event_url}= session.event
+            in #{session.event_location}
+      .row
+        .span11.offset1
+          = session.description
+          - if !session.speakers.empty?
+            %p.speakers
+              %strong Speakers:&#32;
+              - for speaker in session.speakers
+                %a{:href=>"http://lanyrd.com/profile/#{speaker['username']}/"}>= speaker['name']
+                = ',&#32;' unless speaker == session.speakers.last
 //%h2 Arquillian Roadies
 //%p Below are a list of upcoming speaking events for the members of the Arquillian team.
 //- site.identities.speakers.each do |identity|
