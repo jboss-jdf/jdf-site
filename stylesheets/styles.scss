@@ -89,11 +89,11 @@
     }
   }
 }
-.spotlight #slidshow {
-  .carousel-inner {
+#slideshow {
+  #slideshow-inner {
     height: 75px !important;
     min-height: 75px !important;
-    .item {
+    div[data-weight] {
       margin: 0 75px !important;
     }
   }

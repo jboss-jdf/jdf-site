@@ -41,9 +41,9 @@ layout: landing
         %h1 Spotlight
         -# .slide required to fix IE bug in bootstrap < 2.1
         #slideshow.carousel.slide
-          .carousel-inner
+          .carousel-inner#slideshow-inner
             - site.spotlights.each do |spotlight|
-              .item(weight="#{spotlight.weight}")
+              .item(data-weight="#{spotlight.weight}")
                 .layout-sample
                   .headline
                     %h2= spotlight.title
@@ -51,7 +51,9 @@ layout: landing
           %a.carousel-control.left(href="#slideshow" data-slide="prev") &lsaquo;
           %a.carousel-control.right(href="#slideshow" data-slide="next") &rsaquo;
       :javascript
-        $('.carousel').carousel()
+        $(function() {
+          activateSlideshow();
+        });
 
       .section-heading
         %h1 Upcoming Events

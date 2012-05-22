@@ -30,9 +30,9 @@ function activateSlideshow() {
   var totalWeight = 0;
   var choiceWeight = new Array();
   for (var i = 0; i < items.length; i++) {
-    item = items[i];
+    var item = items[i];
     $(item).removeClass('active');
-    choiceWeight[i] = parseInt($(item).attr('weight'));
+    choiceWeight[i] = parseInt($(item).attr('data-weight'));
     totalWeight += choiceWeight[i];
   }
 
@@ -48,15 +48,13 @@ function activateSlideshow() {
   }
 
   $(items[start - 1]).addClass('active');
-  $('#slideshow').carousel({
-    pause: ''
-  })
+  //$('#slideshow').carousel(start - 1);
+  $('#slideshow').carousel()
   .on('slid', function(e) {
     var $active = $('#slideshow').find('.active');
     var pos = $active.parent().children().index($active);
     window.location.hash = '#' + (pos + 1);
-  })
-  .carousel('pause');
+  });
 }
 
 function toggleGuideMenu(e) {
