@@ -1,7 +1,7 @@
 ---
 layout: default 
-javascripts: [ /javascripts/vimeo.js ]
 ---
+- page.javascripts=[ "#{site.base_url}/javascripts/vimeo.js" ]
 
 %script{:type=>'text/javascript'}
   vimeo('#{page.vimeo_src}')

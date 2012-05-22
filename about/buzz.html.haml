@@ -1,8 +1,8 @@
 ---
 layout: default 
 title: Buzz 
-javascripts: [ /javascripts/jquery-tweet.js ]
 ---
+- page.javascripts = [ "#{site.base_url}/javascripts/jquery-tweet.js" ]
 %h2
   Tweets mentioning
   %a(href='http://twitter.com/#!/search/%23jdf') #jdf
@@ -16,16 +16,15 @@ javascripts: [ /javascripts/jquery-tweet.js ]
         count: 10,
         template: "{avatar}{user} posted {time}:<br/>{text}",
         loading_text: "Loading tweets...",
-        //intro_text: 'Tweets mentioning <a href="https://twitter.com/#!/search/%23arquillian">#arquillian</a>',
-        outro_text: 'See more results for <a href="https://twitter.com/#!/search/%23jdf">#jdf</a> on twitter.com...'
+        intro_text: 'See more results for <a href="https://twitter.com/#!/search/%23jdf">#jdf</a> on twitter.com...'
       });
     });
 
-%h2 Reactions
+/%h2 Reactions
 
-//%blockquote
-//  %p Arquillian is one of the most interesting projects in the JBoss portfolio. Not only due to its technical merits, which abound, but also because it makes it easy to argue that JBoss "gets it right" when it comes to high quality open source software. It's a real solution to a real challenge: integration testing for Java applications. A new idea for solving an old problem. That has moved from a proof of concept to an entire ecosystem incredibly fast. Because it's community-driven. And easy to learn. So it's cool.
-//  %small
-//    %span.author Marius Bogoevici
-//    %a.source(href='https://community.jboss.org/blogs/weekly-editorial/2012/04/13/this-week-in-jboss-12-april-2012-people-at-work') JBoss Weekly: Apr 12, 2012
+/%blockquote
+/  %p Arquillian is one of the most interesting projects in the JBoss portfolio. Not only due to its technical merits, which abound, but also because it makes it easy to argue that JBoss "gets it right" when it comes to high quality open source software. It's a real solution to a real challenge: integration testing for Java applications. A new idea for solving an old problem. That has moved from a proof of concept to an entire ecosystem incredibly fast. Because it's community-driven. And easy to learn. So it's cool.
+/  %small
+/    %span.author Marius Bogoevici
+/    %a.source(href='https://community.jboss.org/blogs/weekly-editorial/2012/04/13/this-week-in-jboss-12-april-2012-people-at-work') JBoss Weekly: Apr 12, 2012
 
