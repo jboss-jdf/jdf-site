@@ -14,12 +14,12 @@
     %link(rel="alternate" type="application/atom+xml" href="/news/atom.xml" title="JBoss Developer Framework News Atom feed")
     %link{ :rel=>"stylesheet", :type=>"text/css", :href=>"http://static.jboss.org/theme/css/awestruct/jbossdefault_wrapper.css", :media=>"screen, projection" }
     %link{ :rel=>"stylesheet", :type=>"text/css", :href=>"http://static.jboss.org/theme/css/awestruct/jbossdefault_content.css", :media=>"screen, projection" }
-    %link{ :rel=>"stylesheet", :type=>"text/css", :href=>"#{site.base_url}/stylesheets/pygments.css", :media=>"screen, projection" }
     %link{ :rel=>"stylesheet", :type=>"text/css", :href=>"#{site.base_url}/stylesheets/styles.css" }
     /[if lt IE 9]
       %script{ :type=>"text/javascript", :src=>"//html5shim.googlecode.com/svn/trunk/html5.js" }
     %script{:type=>"text/javascript", :src=>"http://static.jboss.org/theme/js/tabzilla.js" }
     %script{:type=>"text/javascript", :src=>"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" }
+    %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
 
     - if page.javascripts
       - page.javascripts.each do |javascript|
@@ -39,7 +39,6 @@
               %span.st_facebook_large
               %span.st_googleplus_large
               %span.st_twitter_large
-              %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
               :javascript
                 stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
         .row#secondary-nav-wrapper
@@ -77,7 +76,6 @@
         $("html").addClass("ready");
         activateToTopControl();
       });
-    %script(type="text/javascript" src="#{site.base_url}/javascripts/prettify.js")
     %script{:type=>"text/javascript", :src=>"#{site.base_url}/javascripts/site.js" }
     - if page.bottom_javascripts
       - page.bottom_javascripts.each do |javascript|
