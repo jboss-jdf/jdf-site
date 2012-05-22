@@ -34,22 +34,39 @@
             %a{:href=>"/"}
               %img{:id=>"jdf logo", :src=>"/images/jdflogo_secondarypage.png", :width=>"240", :height=>"70"}
           .span3.offset5
-            #secondary-vertnav-wrapper.vertnav-wrapper
-              %ul#secondary-vert-nav
-                %li Quickstarts
-                %li 
-                  %a{:href=>"examples"} Examples
-                %li Migration 
-                %li 
-                  %a{:href=>"about"}About
-              .sharethispadding-secondary
-                %span.st_sharethis
-                %span.st_facebook
-                %span.st_googleplus
-                %span.st_twitter
-                %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
-                :javascript
-                  stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
+            .sharethispadding-secondary
+              %span.st_sharethis_large
+              %span.st_facebook_large
+              %span.st_googleplus_large
+              %span.st_twitter_large
+              %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
+              :javascript
+                stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
+        .row#secondary-nav-wrapper
+          .span6.offset4
+            %ul#secondary-nav
+              %li
+                %a{:href=>"/quickstarts", :class=>"tab #{'active' if page.relative_source_path =~ /^\/quickstarts/}"} Quickstarts
+              %li
+                %a{:href=>"/examples", :class=>"tab #{'active' if page.relative_source_path =~ /^\/examples/}"} Examples
+              %li
+                %a{:href=>"/migration", :class=>"tab #{'active' if page.relative_source_path =~ /^\/migration/}"} Migration
+              %li
+                %a{:href=>"/about", :class=>"tab #{'active' if page.relative_source_path =~ /^\/about/}"}About
+    .sub-sub-nav
+      .container
+        .row
+          .span10.offset1
+            -# These should be in ifs for each section, unless someone has a better way of doing this, it's late, brain not working well
+            %ul
+              %li
+                %a{:href=>"#"} Testing
+              %li
+                %a{:href=>"#"} Testing
+              %li
+                %a{:href=>"#"} Testing
+              %li
+                %a.last{:href=>"#"} Testing
     .container
       ~ content
       %hr

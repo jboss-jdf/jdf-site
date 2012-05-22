@@ -2,7 +2,7 @@
 @import "partials/vimeo";
 @import "partials/addons";
 
-// Main landing page
+/** Main landing page **/
 #frontpage-header-wrapper {
   background-image:url(../images/gradientbkg_frontpage.png);
   background-repeat: repeat-x;
@@ -12,11 +12,10 @@
   background-image:url(../images/watermark_frontpage.png);
   background-repeat:no-repeat;
   background-position-y: 50px;
-//  height: 380px;
   overflow: hidden;
 }
 
-/** Latest News */
+/* Latest News */
 .section-heading, .news-post {
   h1, h2 {
     font-weight: bold;
@@ -58,22 +57,12 @@
     }
   }
 }
-/* **************************** Vertical Navigation  ********************** */
-#secondary-vertnav-wrapper {
-  text-align: right;
-}
 #vertnav-wrapper, .vertnav-wrapper {
   width: 230px;
   float: left;
   .sharethispadding {
     float:left;
     margin-top: 10px;
-  }
-  #secondary-vert-nav {
-    margin: .25em 0px 0px 0px;
-    padding: 0;
-    border: 0;
-    font-size: 70%;
   }
   #main-vert-nav {
     margin: 100px 0px 0px 0px;
@@ -99,26 +88,81 @@
     }
   }
 }
-
-// TODO: will probably need this later
-#secondary_container #vertnav-wrapper ul#vert-nav {
-  margin: 30px 0px 0px 0px;
-  padding: 0;
-  border: 0;
-  font-size: 160%;
-} 
 /** End landing page */
 
 /** Secondary pages */
 .secondary-header-wrapper {
-  background-image:url(../images/gradientbkg_secondarypage.png);
+  @include background-image(linear-gradient(#afb1b3, #e6e7e8 45%));
+  $experimental-support-for-svg: true;
   background-repeat: repeat-x;
-  height: 100px;
   .secondary-header {
     background-image:url(../images/watermark_secondarypage.png);
     background-repeat:no-repeat;
-    height: 100px;
+    //height: 100px;
     padding-top: 15px;
+  }
+}
+
+.sharethispadding-secondary {
+  margin-top: 2em;
+}
+.sub-sub-nav {
+  margin-top: .5em;
+  margin-bottom: .5em;
+  ul {
+    list-style-image: none;
+    list-style-type: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    li {
+      display: inline;
+      a {
+        color: #4a5d75;
+        text-decoration: none;
+        float: left;
+        font-size: 110%;
+        font-weight: bold;
+        margin-right: 1em;
+        &:hover {
+          text-decoration: underline;
+        }
+        &:not(.last) {
+          padding-right: 1em;
+          border-right: #233345 thin solid;
+        }
+      }
+    }
+  }
+}
+#secondary-nav-wrapper {
+  position: relative;
+  float: right;
+  margin-right: 2em;
+  ul#secondary-nav {
+    list-style-image: none;
+    list-style-type: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    li {
+      display: inline;
+      a {
+        color: #4a5d75;
+        text-decoration: none;
+        float: left;
+        font-size: 130%;
+        font-weight: bold;
+        &:hover {
+          text-decoration: underline;
+        }
+        &.tab {
+          padding: 1em;
+        }
+        &.active {
+          background-color: white;
+          @include border-top-radius(5px);
+        }
+      }
+    }
   }
 }
 
