@@ -16,13 +16,10 @@ layout: landing
             GET STARTED NOW!
       .span2.offset1#vertnav-wrapper
         %ul#main-vert-nav
-          %li 
-            %a{:href=>"quickstarts"} Quickstarts
-          %li 
-            %a{:href=>"examples"} Examples
-          %li Migration 
-          %li 
-            %a{:href=>"about"}About
+          - site.nav.each do |key, nav|
+            %li
+              %a{:href=>"#{nav.url}" } #{nav.label}
+
         .sharethispadding
           %span.st_sharethis_large
           %span.st_facebook_large
