@@ -35,7 +35,16 @@ examples:
     contributing-guide:
       url: https://github.com/jboss-jdf/ticket-monster/blob/master/CONTRIBUTING.md
 migrations:
-about:
+  get-started:
+    seam2: 
+      label: Seam 2 -> Java EE 6
+      url: /migrations/seam2/open18_migration
+    spring: 
+      label: Spring -> Java EE 6
+    javaee5:
+      label: Java EE 5 -> Java EE 6
+  get-involved:
+bout:
   roadmap:
   buzz:
   press:
