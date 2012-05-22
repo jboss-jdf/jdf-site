@@ -5,18 +5,18 @@ title: Buzz
 - page.javascripts = [ "#{site.base_url}/javascripts/jquery-tweet.js" ]
 %h2
   Tweets mentioning
-  %a(href='http://twitter.com/#!/search/%23jdf') #jdf
+  %a(href='http://twitter.com/#!/search/%23jboss-jdf') #jboss-jdf
 
 .tweet
   :javascript
     $(function() {
       $(".tweet").tweet({
-        query: "#jdf",
+        query: "#jboss-jdf",
         avatar_size: 48,
         count: 10,
         template: "{avatar}{user} posted {time}:<br/>{text}",
         loading_text: "Loading tweets...",
-        intro_text: 'See more results for <a href="https://twitter.com/#!/search/%23jdf">#jdf</a> on twitter.com...'
+        intro_text: 'See more results for <a href="https://twitter.com/#!/search/%23jboss-jdf">#jboss-jdf</a> on twitter.com...'
       });
     });
 
