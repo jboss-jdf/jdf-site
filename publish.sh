@@ -29,10 +29,10 @@ clean_tmp() {
   rm -rf $DIR/_tmp
 }
 
-development() {
+sandbox() {
   clean_site
   echo "**** Generating site ****"
-  awestruct -Pdevelopment
+  awestruct -Psandbox
 
   if [ ! -d "$SANDBOX_CHECKOUT_DIR/.git" ]; then
     echo "**** Cloning OpenShift repo ****"
@@ -96,7 +96,7 @@ do
              exit
              ;;
          d)
-             development
+             sandbox
              exit
              ;;
          p)
