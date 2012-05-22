@@ -66,6 +66,9 @@ Awestruct::Extensions::Pipeline.new do
   # Must be after all other extensions that might populate identities
   extension Awestruct::Extensions::Identities::Cache.new
 
+  # Transformers
+  transformer Awestruct::Extensions::Minify.new
+
   helper Awestruct::Extensions::RemotePartial
   helper Awestruct::Extensions::Partial
   helper Awestruct::Extensions::PostsHelper

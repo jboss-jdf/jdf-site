@@ -10,5 +10,11 @@ profiles:
   debug:
     show_debug: true
     base_url: http://localhost:4242
+    minify: false
   staging:
     base_url: http://site-jdf.rhcloud.com
+    minify: false
+
+  production:
+    base_url: http://jboss.org/jdf
+    minify: true
