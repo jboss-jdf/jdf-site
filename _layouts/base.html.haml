@@ -19,8 +19,7 @@
       %script{ :type=>"text/javascript", :src=>"//html5shim.googlecode.com/svn/trunk/html5.js" }
     %script{:type=>"text/javascript", :src=>"http://static.jboss.org/theme/js/tabzilla.js" }
     %script{:type=>"text/javascript", :src=>"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" }
-    %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/button/buttons.js"}
-
+    %script{:type=>"text/javascript", :src=>"js"}
     - if page.javascripts
       - page.javascripts.each do |javascript|
         %script{:src=>javascript, :type=>'text/javascript'}
@@ -33,14 +32,6 @@
           .span4.secondary-header
             %a{:href=>"/"}
               %img{:id=>"jdf logo", :src=>"/images/jdflogo_secondarypage.png", :width=>"240", :height=>"70"}
-          .span3.offset5
-            .sharethispadding-secondary
-              %span.st_sharethis_large
-              %span.st_facebook_large
-              %span.st_googleplus_large
-              %span.st_twitter_large
-              :javascript
-                stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
         .row#secondary-nav-wrapper
           .span6.offset4
             %ul#secondary-nav
@@ -52,6 +43,12 @@
                 %a{:href=>"/migration", :class=>"tab #{'active' if page.relative_source_path =~ /^\/migration/}"} Migration
               %li
                 %a{:href=>"/about", :class=>"tab #{'active' if page.relative_source_path =~ /^\/about/}"}About
+          .span1
+            .sharethispadding-secondary
+              - if site.google_plusone
+                .g-plusone-slot
+                  .g-plusone{:data=>{:annotation=>'none'}}
+
     .sub-sub-nav
       .container
         .row

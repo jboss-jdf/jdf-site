@@ -9,7 +9,8 @@ profiles:
   staging:
     base_url: http://site-jdf.rhcloud.com
     minify: false
-
+    google_plusone: false
   production:
     base_url: http://jboss.org/jdf
     minify: true
+    google_plusone: true
