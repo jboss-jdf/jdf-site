@@ -1,0 +1,42 @@
+quickstarts:
+  get-started:
+    jboss-as-quickstart: 
+      label: Dive In
+      url: /quickstarts/jboss-as-quickstarts
+    guide: 
+      url: https://docs.jboss.org/author/display/AS71/Getting+Started+Developing+Applications+Guide
+    videos:
+    articles:
+  get-involved:
+    source-code:
+      url: http://github.com/jbossas/quickstart
+    issue-tracker:
+      url: http://github.com/jbossas/quickstart/issues
+    contributing-guide:
+      url: https://docs.jboss.org/author/display/AS71/Contributing+a+Quickstart
+examples:
+  get-started:
+    ticket-monster: 
+      label: Dive In
+      url: /examples/ticket-monster/guide/WhatIsTicketMonster
+    use: 
+      url: http://ticketmonster-jdf.rhcloud.com
+      label: Use the app
+    build:
+      label: Build the app
+      url: /examples/ticket-monster/guide/Introduction
+    videos:
+    articles:
+  get-involved:
+    source-code:
+      url: http://github.com/jboss-jdf/ticket-monster
+    issue-tracker:
+      url: http://github.com/jbossas/quickstart/issues
+    contributing-guide:
+      url: https://github.com/jboss-jdf/ticket-monster/blob/master/CONTRIBUTING.md
+migrations:
+about:
+  roadmap:
+  buzz:
+  press:
+  contributors:

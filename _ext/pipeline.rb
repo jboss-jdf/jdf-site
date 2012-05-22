@@ -15,6 +15,7 @@ require_relative 'spotlight'
 require_relative 'moveup'
 require_relative 'remotePartial'
 require_relative 'qstoc'
+require_relative 'nav'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -51,6 +52,8 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Tagger.new(:posts, '/news/index', '/news/tags', :per_page => 5)
   extension Awestruct::Extensions::TagCloud.new(:posts, '/news/tags/index.html')
   extension Awestruct::Extensions::Disqus.new
+
+  extension Awestruct::Extensions::Nav.new
 
   extension Awestruct::Extensions::Spotlight.new('/spotlights')
 
