@@ -54,12 +54,12 @@
               %ul
                 - page.subnav.children.each do |key, nav|
                   %li
-                    %a{:href=>"#{nav.url}", :class=>"#{'active' if page.relative_source_url =~ /^#{nav.url}/ }" } #{nav.label}
+                    %a{:href=>"#{nav.url}", :class=>"#{'active' if page.relative_source_path =~ /^#{nav.url}/ }" } #{nav.label}
                   - if nav.children
                     - nav.children.each do |subkey, subnav|
                       %li
                         %small
-                          %a{:href=>"#{subnav.url}", :class=>"#{'active' if page.relative_source_url =~ /^#{subnav.url}/ }" } #{subnav.label}
+                          %a{:href=>"#{subnav.url}", :class=>"#{'active' if page.relative_source_path =~ /^#{subnav.url}/ }" } #{subnav.label}
     .container
       ~ content
       %hr
