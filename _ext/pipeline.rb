@@ -26,7 +26,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::RestClientExtensions::EnableJsonConverter.new
   extension Awestruct::Extensions::Identities::Storage.new
   #Awestruct::Extensions::Jira::Project.new(self, 'JDF:12312221')
-  extension Awestruct::Extensions::Repository::Collector.new('jbossdeveloperframework', '5VW45kG4HftAMaI5GbjA', :observers => [github_collector])
+  extension Awestruct::Extensions::Repository::Collector.new('jboss-jdf', '5VW45kG4HftAMaI5GbjA', :observers => [github_collector])
   extension Awestruct::Extensions::Identities::Collect.new(github_collector)
   extension Awestruct::Extensions::Identities::Crawl.new(
     Identities::GitHub::Crawler.new,
