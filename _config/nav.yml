@@ -38,14 +38,13 @@ examples:
       url: https://github.com/jboss-jdf/ticket-monster/blob/master/CONTRIBUTING.md
 migrations:
   url: /migrations/get-started
-  get-started:
-    seam2: 
-      label: Seam 2 -> Java EE 6
-      url: /migrations/seam2/open18_migration
-    spring: 
-      label: Spring -> Java EE 6
-    javaee5:
-      label: Java EE 5 -> Java EE 6
+  seam2: 
+    label: Seam 2 -> Java EE 6
+    url: /migrations/seam2/open18_migration
+  spring: 
+    label: Spring -> Java EE 6
+  javaee5:
+    label: Java EE 5 -> Java EE 6
   get-involved:
 about:
   url: /about/roadmap
