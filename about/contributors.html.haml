@@ -1,7 +1,8 @@
 ---
-layout: default 
+layout: default
+site_title: Contributors 
 ---
-- page.title = "#{page.title} <small>#{site.identities.contributors().size}</small>"
+- page.title = "#{page.site_title} <small>#{site.identities.contributors().size}</small>"
 #content
   %ul.contributors
     - site.identities.contributors().sort_by{|c| c.commits * Order::DESC}.each do |contributor|

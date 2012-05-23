@@ -4,7 +4,7 @@
 %html
   %head
     %meta{ :charset=>"utf-8" }
-    %title= (page.title ? [page.title, page.site_title ? page.site_title : site.title] : [site.title, site.tagline]) * " &#183; "
+    %title= (page.title ? (page.site_title ? page.site_title : site.title) : site.title)
     %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0" }
     %meta(name="description"){:content=>page.description ? page.description : site.description}
     - if site.keywords
@@ -52,9 +52,11 @@
           .span10.offset1
             - if page.subnav
               %ul
+                - i = 0
                 - page.subnav.children.each do |key, nav|
+                  - i += 1
                   %li
-                    %a{:href=>"#{nav.url}", :class=>"#{'active' if page.relative_source_path =~ /^#{nav.url}/ }" } #{nav.label}
+                    %a{:href=>"#{nav.url}", :class=>"#{'active' if page.relative_source_path =~ /^#{nav.url}/ } #{'last' if i == (page.subnav.children.size)}" } #{nav.label}
                   - if nav.children
                     - nav.children.each do |subkey, subnav|
                       %li
