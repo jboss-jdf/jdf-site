@@ -16,6 +16,7 @@ require_relative 'moveup'
 require_relative 'remotePartial'
 require_relative 'qstoc'
 require_relative 'nav'
+require_relative 'roadmap'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -40,6 +41,8 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Lanyrd::Search.new('jdf')
   extension Awestruct::Extensions::Lanyrd::Export.new('/events/jdf.ics')
   extension Awestruct::Extensions::Posts.new( '/news', :posts ) 
+  extension Awestruct::Extensions::Roadmap.new( '/about/roadmaps' ) 
+
   extension Awestruct::Extensions::Indexifier.new
   # Must come after Indexifier
   extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')

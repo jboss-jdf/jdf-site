@@ -1,7 +1,39 @@
 ---
 layout: default
-title: JBoss Developer Framework Roadmap
+title: Roadmap
 ---
-.row
-  .span9
-    TODO
+.roadmap
+  - site.roadmaps.each do |roadmap|
+    .row
+      .span8
+        %div{:class => roadmap.released ? 'released' : ''}
+          %h2 jdf #{roadmap.version}
+          - if roadmap.tagline
+            .tagline
+              "#{roadmap.tagline}"
+          #{roadmap.content}
+      .span3
+        %dl
+          %dt Release Date
+          %dd 
+            #{roadmap.release_date.strftime('%d %B %Y')}
+            - if not roadmap.released
+              (Tentative)
+          - if roadmap.highlights.size > 0
+            %dt What's new
+            %dd
+              - roadmap.highlights.each do |highlight|
+                %li 
+                  - if highlight.url
+                    %a{:href=>"#{highlight.url}"} #{highlight.label}
+                  - else 
+                    #{highlight.label}
+          - if roadmap.downloads.size > 0
+            %dt Get it
+            %dd
+              - roadmap.downloads.each do |download|
+                %li
+                  - if download.url
+                    %a{:href=>"#{download.url}"} #{download.label}
+                  - else 
+                    #{download.label}
