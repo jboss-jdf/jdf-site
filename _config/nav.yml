@@ -1,4 +1,5 @@
 quickstarts:
+  url: /quickstarts/get-started
   get-started:
     jboss-as-quickstart: 
       label: Dive In
@@ -15,6 +16,7 @@ quickstarts:
     contributing-guide:
       url: https://docs.jboss.org/author/display/AS71/Contributing+a+Quickstart
 examples:
+  url: /examples/get-started
   get-started:
     ticket-monster: 
       label: Dive In
@@ -35,6 +37,7 @@ examples:
     contributing-guide:
       url: https://github.com/jboss-jdf/ticket-monster/blob/master/CONTRIBUTING.md
 migrations:
+  url: /migrations/get-started
   get-started:
     seam2: 
       label: Seam 2 -> Java EE 6
@@ -45,6 +48,7 @@ migrations:
       label: Java EE 5 -> Java EE 6
   get-involved:
 about:
+  url: /about/roadmap
   roadmap:
   buzz:
   press:
