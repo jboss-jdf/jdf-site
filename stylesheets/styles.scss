@@ -570,10 +570,9 @@ ul.contributors {
 /** Events **/
 .date {
   display: block;
-  @include square(44px);
-  font-size: 24px;
-  line-height: 22px;
-  //font-family: $fancy_font_family;
+  @include square(50px);
+  font-size: 22px;
+  line-height: 20px;
   font-weight: bold;
   @include single-text-shadow();
   text-align: center;
@@ -589,9 +588,9 @@ ul.contributors {
     margin-left: 0px;
     margin-top: 0px;
     margin-bottom: 1px;
-    @include geometry(44px, 13px);
+    @include geometry(50px, 13px);
     color: $palette_white;
-    font-size: 10px;
+    font-size: 12px;
     text-transform: uppercase;
     @include single-text-shadow();
     line-height: 13px;
@@ -601,21 +600,38 @@ ul.contributors {
     background-color: $palette_terra;
     @include background-image(linear-gradient($palette_light_terra, $palette_terra))
   }
+  .year {
+    display: block;
+    color: black;
+    font-size: 11px;
+    text-transform: uppercase;
+    position: relative;
+    top: -2px;
+  }
 }
 
 .roadmap {
-
+  h2 {
+    border-bottom: $palette_50gray thin ridge; 
+  } 
   .released {
     p, h1, h2, h3, h4, h5, h6, li, div {
       color: $palette_50gray;
     }
   }
-
+  dt {
+    margin: auto;
+  }
+  li {
+    list-style: none;
+  }
   .tagline {
     text-align: right;
     font-size: 17px;
   }
-
+  .release_info {
+    margin-top: 5em;
+  }
 }
 
 /** Common styles - could probably make this better with some sass functions, just C&P for now */

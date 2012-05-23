@@ -15,7 +15,7 @@ title: Events
     .session
       .row
         .span12
-          .date= session.start_datetime.strftime('<abbr>%b</abbr> %d')
+          .date= session.start_datetime.strftime('<abbr>%b</abbr> %d <div class="year">%Y</div>')
           .header
             %h2.title
               %a{:href=>session.detail_url}= session.title
