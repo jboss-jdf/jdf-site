@@ -34,6 +34,11 @@ stack:
   label: JBoss BOMs
   url: /stack/jboss-bom
 forums:
+  jdf-users:
+    label: jdf-users
+  jdf-dev:
+    label: jdf-dev
+  webchat:
 about:
   url: /about/roadmap
   roadmap:
