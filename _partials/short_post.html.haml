@@ -7,7 +7,7 @@
     .news-byline
       .news-date= page.post.date.strftime('<abbr>%b</abbr> %d') if !page.post.date.nil?
   .news-body
-    - if (page.post.content.length > 0)
+    - if (page.post.content.length > 50)
       - cut_at = page.post.content.index(/<pre[^>]*>/)
       - text = html_to_text(cut_at ? page.post.content[0, cut_at] : page.post.content)
       -# might want to use 'white-space: pre-line;' here
