@@ -29,6 +29,8 @@ layout: landing
       %h1 Latest News
       - site.posts.each do |post|
         = partial("short_post.html.haml", {"parent"=>page, "post"=>post, "include_comments_count"=>post.equal?(site.posts.last)})
+      .more
+        %a(href="/news") View all news &raquo;
     .span5.offset1
       .spotlight.section-heading
         -# .slide required to fix IE bug in bootstrap < 2.1
