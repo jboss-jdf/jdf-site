@@ -34,6 +34,7 @@ module Awestruct
               page.layout = @layout
               site.engine.set_urls([page])
               guide.url = page.url
+              #guide.source_repo = guide_repo(page)
               if page.description.nil?
                 page.description = page.guide_summary
               end
@@ -195,6 +196,14 @@ module Awestruct
         end
         return authors.sort{|a, b| b[1] <=> a[1]}.map{|x| x[0]}
       end
+
+      def guide_repo(page)
+        changes = []
+        page_dir = page.site.dir.match(/^(.*)(\/)$/)[1] + @path_prefix
+        rpath = page.source_path.match(/(#{page_dir})\/(.+)/)[2]
+        Git.open(page_dir).config('remote.origin.url')
+      end
+
 
       def page_changes(page, size)
         changes = []
