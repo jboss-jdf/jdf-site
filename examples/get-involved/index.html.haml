@@ -3,16 +3,22 @@ layout: default
 title: 'Get Involved'
 ---
 
-%p
-  Found a bug in an example? Missing a tutorial? Want to see your name in lights and contribute to the examples? Then you are in the right place!
 
-%ul
-  %li
-    %a{:href => 'http://github.com/jboss-jdf'}
-      Fork the examples on GitHub
-  %li
-    %a{:href => 'http://issues.jboss.org/browse/JDF'}
-      Report an issue
-  %li
-    %a{:href => 'https://github.com/jboss-jdf/ticket-monster/blob/master/CONTRIBUTING.md'}
-      Read the contributor's guide
+%script{ :src=>"http://www.ohloh.net/p/#{site.ohloh_id}/widgets/project_basic_stats.js" }
+
+:markdown
+  Found a bug in TicketMonster? Think there is a feature missing? 
+
+  Then you probably want to [report an issue](http://issues.jboss.org/browse/JDF).
+
+%p The TicketMonster source code is readily accessible. If you plan on contributing to the project, we encourage you to clone the repository and build the quickstarts. If you just want to browse the source, or track the latest activity, you can do so by visiting the <a href="http://github.com/jboss-jdf/ticket-monster">Git Repository</a> in your web browser.
+%p
+  %a(href='http://github.com/jboss-jdf/ticket-monster')
+    %img{:src=>'/images/octocat_social.png', :style=>'vertical-align: middle;'}
+  %strong<
+    Coding has become social!
+    %a(href='http://github.com/jboss-jdf/ticket-monster') Fork us!
+
+:markdown
+  You'll probably want to [read the contributor guide](https://github.com/jboss-jdf/ticket-monster/blob/master/CONTRIBUTING.md) as well!
+

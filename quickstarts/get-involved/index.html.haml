@@ -2,17 +2,21 @@
 layout: default
 title: 'Quickstarts: Get Involved'
 ---
+%script{ :src=>"http://www.ohloh.net/p/#{site.ohloh_id}/widgets/project_basic_stats.js" }
 
+:markdown
+  Found a bug in a quickstart? Think there is a quickstart missing?
+ 
+  Then you probably want to [report an issue](http://github.com/jbossas/quickstart/issues).
+
+%p The Quickstarts source code is readily accessible. If you plan on contributing to the project, we encourage you to clone the repository and build the quickstarts. If you just want to browse the source, or track the latest activity, you can do so by visiting the <a href="http://github.com/jbossas/quickstart">Git Repository</a> in your web browser.
 %p
-  Found a bug in a quickstart? Think there is quickstart missing? Want to see your name in lights and contribute a quickstart? Then you are in the right place!
+  %a(href='http://github.com/jbossas/quickstart')
+    %img{:src=>'/images/octocat_social.png', :style=>'vertical-align: middle;'}
+  %strong<
+    Coding has become social!
+    %a(href='http://github.com/jbossas/quickstart') Fork us!
 
-%ul
-  %li
-    %a{:href => 'http://github.com/jbossas/quickstart'}
-      Fork the quickstarts on github
-  %li
-    %a{:href => 'https://github.com/jbossas/quickstart/issues'}
-      Report an issue
-  %li
-    %a{:href => 'https://docs.jboss.org/author/display/AS71/Contributing+a+Quickstart'}
-      Read the contributor's guide
+:markdown
+  You'll probably want to [read the contributor guide](https://docs.jboss.org/author/display/AS71/Contributing+a+Quickstart) as well!
+

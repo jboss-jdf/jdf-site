@@ -679,6 +679,19 @@ ul.contributors {
 
 }
 
+// Ohloh widget
+body div.gadget {
+  float: right;
+  // FIXME margin-left should be pulled from .gutter-left
+  margin-left: 30px !important;
+  margin-bottom: 2em;
+  @include geometry(290px, 178px);
+  h3 {
+    font-size: 24px;
+    margin-bottom: 0.25em;
+  }
+}
+
 /** Common styles - could probably make this better with some sass functions, just C&P for now */
 a {
   color:#336699;
