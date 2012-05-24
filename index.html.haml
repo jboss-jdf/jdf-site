@@ -37,9 +37,7 @@ layout: landing
           .carousel-inner#slideshow-inner
             - site.spotlights.each do |spotlight|
               .item(data-weight="#{spotlight.weight}")
-                .headline
-                  %h2= spotlight.title
-                .content= spotlight.content              
+                = spotlight.content              
           %a.carousel-control.left(href="#slideshow" data-slide="prev") &lsaquo;
           %a.carousel-control.right(href="#slideshow" data-slide="next") &rsaquo;
       :javascript

@@ -641,9 +641,37 @@ ul.contributors {
   }
 
   .item {
-    background-color: $palette_10gray;
-    height: 239px;
+    border: 1px solid $palette_10gray;
+    height: 233px;
     padding: 2px;
+  }
+
+  .content {
+    height: 100%;
+  }
+  
+
+  .transparent-box {
+    background-color: $palette_10gray;
+    opacity: 0.88;
+    filter:alpha(opacity=88); /* For IE8 and earlier */
+    position: absolute; 
+    margin-bottom: 15px; 
+    margin-left: 10px; 
+    margin-right:10px; 
+    height:115px;
+    -moz-opacity:0.88;
+    border-radius: 4px;
+    border: 1px #BBB solid;
+    width: 295px;
+  }
+
+  .transparent-box-text {
+    position: absolute;
+    margin-left: 14px;
+    margin-right: 14px;
+    height: 105px;
+    margin-bottom: 19px;
   }
 
 }
