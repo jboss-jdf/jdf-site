@@ -8,3 +8,6 @@
 [submodule "migrations/seam2"]
 	path = migrations/seam2
 	url = git://github.com/seam/migration.git
+[submodule "stack/jboss-bom"]
+	path = stack/jboss-bom
+	url = git@github.com:jboss-jdf/jboss-bom.git
