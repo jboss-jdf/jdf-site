@@ -89,15 +89,6 @@
     }
   }
 }
-#slideshow {
-  #slideshow-inner {
-    height: 75px !important;
-    min-height: 75px !important;
-    div[data-weight] {
-      margin: 0 75px !important;
-    }
-  }
-}
 /** End landing page */
 
 /** Secondary pages */
@@ -610,6 +601,7 @@ ul.contributors {
   }
 }
 
+/**  Roadmap */
 .roadmap {
   h2 {
     border-bottom: $palette_50gray thin ridge; 
@@ -632,6 +624,28 @@ ul.contributors {
   .release_info {
     margin-top: 5em;
   }
+}
+
+/** Spotlight */
+
+.spotlight {
+
+  #slideshow {
+    #slideshow-inner {
+      height: 75px !important;
+      min-height: 239px !important;
+      div[data-weight] {
+        margin: 0 75px !important;
+      }
+    }
+  }
+
+  .item {
+    background-color: $palette_10gray;
+    height: 239px;
+    padding: 2px;
+  }
+
 }
 
 /** Common styles - could probably make this better with some sass functions, just C&P for now */
