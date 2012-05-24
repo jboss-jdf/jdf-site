@@ -5,15 +5,18 @@
 
 /** Main landing page **/
 #frontpage-header-wrapper {
-  background-image:url(../images/gradientbkg_frontpage.png);
+  @include background-image(linear-gradient(#afb1b3, #e6e7e8 45%));
+  $experimental-support-for-svg: true;
   background-repeat: repeat-x;
+  margin-bottom: 20px;
 }
 
 #frontpage-header {
   background-image:url(../images/watermark_frontpage.png);
   background-repeat:no-repeat;
-  background-position-y: 50px;
+  background-position-y: 5px;
   overflow: hidden;
+  padding: 40px;
 }
 
 /* Latest News */

@@ -5,7 +5,7 @@
     %h2.news-title
       %a{:href=>page.post.url}= page.post.post_title
     .news-byline
-      .news-date= page.post.date.strftime('<abbr>%b</abbr> %d') if !page.post.date.nil?
+      .date= page.post.date.strftime('<abbr>%b</abbr> %d <div class="year">%Y</div>') if !page.post.date.nil?
   .news-body
     - if (page.post.content.length > 50)
       - cut_at = page.post.content.index(/<pre[^>]*>/)
