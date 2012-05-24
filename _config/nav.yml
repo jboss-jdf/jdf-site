@@ -30,6 +30,7 @@ migrations:
   javaee5:
     label: Java EE 5 -> Java EE 6
   get-involved:
+forums:
 about:
   url: /about/roadmap
   roadmap:

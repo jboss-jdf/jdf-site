@@ -26,8 +26,7 @@ module Awestruct
             site.guides = {}
           end
           site.pages.each do |page|
-            if ( page.relative_source_path =~ /^#{@path_prefix}\/(?!index)/ && page.relative_source_path =~ /\.#{@suffix}$/)
-              
+            if ( page.relative_source_path =~ /^#{@path_prefix}\/.*#{@suffix}$/ )
               guide = OpenStruct.new
               page.guide = guide
               guide.dir = page.relative_source_path[/^#{@path_prefix}\/([^\/]+)\/[^\/]+$/, 1]

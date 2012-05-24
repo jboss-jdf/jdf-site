@@ -46,6 +46,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Indexifier.new
   # Must come after Indexifier
   extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')
+  extension Awestruct::Extensions::MoveUp.new('/stack/jboss-bom', 'README')
   extension Awestruct::Extensions::Atomizer.new( 
     :post, 
     '/news.atom',
@@ -61,9 +62,10 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Spotlight.new('/spotlights')
 
   # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
-  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/guide', 'asciidoc')
-  extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', 'asciidoc')
-  extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', 'md')
+  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/guide', '.asciidoc')
+  extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', '.asciidoc')
+  extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', 'README.md')
+  extension Awestruct::Extensions::Guide::Index.new('/stack/jboss-bom', 'README.md')
 
   # Must be after guides
   extension Awestruct::Extensions::QSTOC.new('/quickstarts/jboss-as-quickstart')
