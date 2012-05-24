@@ -9,12 +9,13 @@ module Awestruct
       class Index
         include Guide
         
-        def initialize(path_prefix, suffix, layout = 'guide', num_changes = 15, num_contrib_changes = -1)
+        def initialize(path_prefix, suffix, opts = {})
           @path_prefix = path_prefix
           @suffix = suffix
-          @num_changes = num_changes
-          @num_contrib_changes = num_contrib_changes
-          @layout = layout
+          @num_changes = opts[:num_changes] || 15
+          @num_contrib_changes = opts[:num_contrib_changes] || -1
+          @layout = opts[:layout] || 'guide'
+          @label = opts[:index_label] || 'Guides Index'
         end
 
         def transform(transformers)
@@ -36,6 +37,7 @@ module Awestruct
               if page.description.nil?
                 page.description = page.guide_summary
               end
+                guide.index_label = @label
               guide.summary = page.description
               
               # FIXME contributors should be listed somewhere on the page, but not automatically authors
@@ -63,7 +65,7 @@ module Awestruct
                 chapters << chapter
               end
 
-              if @suffix == 'asciidoc'
+              if @suffix =~ /asciidoc$/
                 # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
                 guide.title = page_content.css("h1").first.text
                 guide_content = page_content.css('div#content').first 
@@ -74,7 +76,7 @@ module Awestruct
                 if author
                   guide.authors = [ author.text ]
                 end
-              elsif @suffix == 'md'
+              elsif @suffix =~ /md$/
                 # Markdown doesn't have an metadata syntax, so all we can do is pray ;-)
                 # Look for a paragraph that contains tags, which we define by convention
                 # Remove if found

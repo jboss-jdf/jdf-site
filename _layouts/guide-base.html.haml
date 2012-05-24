@@ -8,11 +8,11 @@ layout: default
         %h1= page.guide.title
         .directory
           %button#guides_menu.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
-            Guides Index
+            #{page.guide.index_label}
             %span.caret
           #guides.dropdown-menu.pull-right{:style=>'display: none'}
             %a.guides_menu{:href=>'./'}
-              Guides Index
+              #{page.guide.index_label}
             %hr.clear
               - for guide in page.guides.each
                 %dd<

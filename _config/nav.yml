@@ -30,6 +30,9 @@ migrations:
   javaee5:
     label: Java EE 5 -> Java EE 6
   get-involved:
+stack:
+  label: JBoss BOMs
+  url: /stack/jboss-bom
 forums:
 about:
   url: /about/roadmap
