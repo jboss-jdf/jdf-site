@@ -21,7 +21,6 @@
       %script{ :type=>"text/javascript", :src=>"//html5shim.googlecode.com/svn/trunk/html5.js" }
     %script{:type=>"text/javascript", :src=>"http://static.jboss.org/theme/js/tabzilla.js" }
     %script{:type=>"text/javascript", :src=>"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" }
-    %script{:type=>"text/javascript", :src=>"js"}
     - if page.javascripts
       - page.javascripts.each do |javascript|
         %script{:src=>javascript, :type=>'text/javascript'}
