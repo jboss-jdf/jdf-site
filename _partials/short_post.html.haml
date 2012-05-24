@@ -7,6 +7,10 @@
     .news-byline
       .news-date= page.post.date.strftime('<abbr>%b</abbr> %d') if !page.post.date.nil?
   .news-body
-    ~ page.post.content
+    - if (page.post.content.length > 0)
+      - cut_at = page.post.content.index(/<pre[^>]*>/)
+      - text = html_to_text(cut_at ? page.post.content[0, cut_at] : page.post.content)
+      -# might want to use 'white-space: pre-line;' here
+      %p<= text[0..text.index(/[\.\!]( |$)/, [text.index(/[\.\!]( |$)/) + 1, text.length - 1].min)] + '...'
   .news-footer
     %a{:href=>page.post.url} Go to News Article

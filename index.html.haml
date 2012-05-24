@@ -31,7 +31,6 @@ layout: landing
         = partial("short_post.html.haml", {"parent"=>page, "post"=>post, "include_comments_count"=>post.equal?(site.posts.last)})
     .span5.offset1
       .spotlight.section-heading
-        %h1 Spotlight
         -# .slide required to fix IE bug in bootstrap < 2.1
         #slideshow.carousel.slide
           .carousel-inner#slideshow-inner
