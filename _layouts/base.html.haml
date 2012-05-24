@@ -49,7 +49,7 @@
       .container
         .row
           .span10.offset1
-            - if page.subnav
+            - if page.subnav.children
               %ul
                 - i = 0
                 - page.subnav.children.each do |key, nav|
