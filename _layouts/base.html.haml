@@ -33,18 +33,17 @@
           .span4.secondary-header
             %a{:href=>"#{site.base_url}"}
               %img{:id=>"jdf logo", :src=>"#{site.base_url}/images/jdflogo_secondarypage.png", :width=>"240", :height=>"70"}
-        .row#secondary-nav-wrapper
-          .span8.offset2
-            %ul#secondary-nav
-              - site.nav.each do |key, nav|
-                %li
-                  %a{:href=>"#{nav.url}", :class=>"tab #{'active' if key == page.top_nav  }" } #{nav.label}
-          .span1
+          .span1.offset7
             .sharethispadding-secondary
               - if site.google_plusone
                 .g-plusone-slot
                   .g-plusone{:data=>{:annotation=>'none'}}
-
+        .row#secondary-nav-wrapper
+          .span11
+            %ul#secondary-nav
+              - site.nav.each do |key, nav|
+                %li
+                  %a{:href=>"#{nav.url}", :class=>"tab #{'active' if key == page.top_nav  }" } #{nav.label} 
     .sub-sub-nav
       .container
         .row
