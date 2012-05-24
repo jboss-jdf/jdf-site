@@ -16,7 +16,7 @@ layout: default
             %hr.clear
               - for guide in page.guides.each
                 %dd<
-                  %a{:href=>guide.url}= guide.title
+                  %a{:href=>"#{site.base_url}#{guide.url}"}= guide.title
                   - if guide.languages
                     %br
                     %a{:href=>guide.url}<
