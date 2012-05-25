@@ -610,7 +610,7 @@ ul.contributors {
   h2 {
     border-bottom: $palette_50gray thin ridge; 
   } 
-  .released {
+  .not-released {
     p, h1, h2, h3, h4, h5, h6, li, div {
       color: $palette_50gray;
     }

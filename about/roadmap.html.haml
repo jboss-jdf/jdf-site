@@ -3,10 +3,10 @@ layout: default
 title: Roadmap
 ---
 .roadmap
-  - site.roadmaps.each do |roadmap|
+  - site.roadmaps.reverse_each do |roadmap|
     .row
       .span8
-        %div{:class => roadmap.released ? 'released' : ''}
+        %div{:class => roadmap.released ? '' : 'not-released'}
           %h2 jdf #{roadmap.version}
           - if roadmap.tagline
             .tagline
