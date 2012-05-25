@@ -2,11 +2,6 @@
 weight: 2
 ---
 
-.content(style="background: url('images/dualbrand_as7eap.png') no-repeat white 2px 5px;")
-  .transparent-box(style='bottom: 0; height: 145px;')
-  .transparent-box-text(style='bottom: 0; height: 125px;')
-    :markdown
-      JBoss AS Quickstarts
-      --------------------
-
-      Over 50 focused quickstarts show you how to address a use case or use an API. You'll see how to build a CRUD JAX-RS app, how to use distributed transactions and more...
+.content
+  %a(href="#{site.base_url}/quickstarts/get-started")
+    %img(src="#{site.base_url}/images/quickstarts-splash.png")
