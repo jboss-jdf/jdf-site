@@ -2,6 +2,7 @@
 @import "partials/vimeo";
 @import "partials/addons";
 @import "partials/pygments";
+@import "partials/asciidoc";
 
 /** Main landing page **/
 #frontpage-header-wrapper {
@@ -17,6 +18,14 @@
   background-position-y: 5px;
   overflow: hidden;
   padding: 40px;
+
+  .about {
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+  .cta {
+    margin-top:20px;
+  }
 }
 
 /* Latest News */
