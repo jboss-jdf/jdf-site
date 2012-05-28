@@ -62,7 +62,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Spotlight.new('/spotlights')
 
   # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
-  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/guide', '.asciidoc', :title => 'TicketMonster Tutorial')
+  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster', '.asciidoc', :title => 'TicketMonster Tutorial')
   extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', '.asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', 'README.md', :index_label => 'Quickstarts Index', :title => 'Quickstarts')
   extension Awestruct::Extensions::Guide::Index.new('/stack/jboss-bom', 'README.md', :index_label => 'BOMs Index', :title => 'JBoss BOMs')

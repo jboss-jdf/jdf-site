@@ -7,3 +7,6 @@
 [submodule "stack/jboss-bom"]
 	path = stack/jboss-bom
 	url = git@github.com:jboss-jdf/jboss-bom.git
+[submodule "examples/ticket-monster"]
+	path = examples/ticket-monster
+	url = git://github.com/jboss-jdf/ticket-monster.git

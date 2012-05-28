@@ -14,7 +14,7 @@ examples:
   url: /examples/get-started
   ticket-monster: 
     label: Guide
-    url: /examples/ticket-monster/guide/WhatIsTicketMonster
+    url: /examples/ticket-monster/tutorial/WhatIsTicketMonster
   videos:
     url: /examples/get-started/videos
   articles:
