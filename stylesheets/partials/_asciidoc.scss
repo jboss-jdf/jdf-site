@@ -81,6 +81,20 @@
     }
   }
 
+  table {
+       border: 1px solid $jdf_blue !important;
+       th {
+         background-color: $jdf_blue !important;
+         color: $palette_white;
+         white-space: nowrap;
+         border: 1px solid $jdf_blue !important;
+       }
+       td {
+         border: 1px solid $jdf_blue !important;
+       }
+    }
+
+
   #preamble {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
