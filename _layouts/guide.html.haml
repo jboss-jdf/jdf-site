@@ -1,11 +1,18 @@
 ---
 layout: default
 ---
+
+- page.body_class = 'guide'
+- page.toTop = 1
+- page.bottom_javascripts = [ "#{site.base_url}/javascripts/jquery-scroll.js", "http://w.sharethis.com/button/buttons.js" ]
+
 #main(role='main')
   #content-header
     .container
       .headline
-        %h1= page.guide.title
+        - if page.guide.parent_title
+          %h1= page.guide.parent_title
+        %h2= page.guide.title
         .directory
           %button#guides_menu.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
             #{page.guide.index_label}
@@ -24,38 +31,38 @@ layout: default
                     - for translation in guide.languages
                       %a{:href=>translation.url}<
                         %img.flag{:src=>translation.language.flag_icon, :rel=>'tooltip', :title=>"#{translation.language.display_name_local} (#{translation.language.code})"}
-      %script $(function() { activateGuideMenuControl() })
+          %script $(function() { activateGuideMenuControl() })
+        .row
+          .span9.metadata
+            .row
+              .span3
+                - if page.guide.authors
+                  %strong= "Author#{page.guide.authors.size > 1 ? 's' : ''}:"
+                  // TODO Link in to site identities
+                  = ' '.concat(page.guide.authors.map{|u| u} * ', ')
+              .span3
+                - if page.guide.contributors
+                  %strong= "Contributor#{page.guide.contributors.size > 1 ? 's' : ''}:"
+                  // TODO Link in to site identities
+                  = ' '.concat(page.guide.contributors.map{|u| u} * ', ')
+              .span3
+                %strong{:style=>"padding-left: #{page.guide.group || page.tags ? 10 : 0}px;"} Last Update:
+                = ' '.concat(page.guide.changes[0].date.strftime('%b %d, %Y'))
+            .row
+              .span3
+                - if page.guide.level
+                  %strong= "Level:"
+                  = ' '.concat(page.guide.level.map{|u| u} * ', ')
+              .span3
+                - if page.guide.technologies
+                  %strong= "Technologies:"
+                  = ' '.concat(page.guide.technologies.map{|u| u} * ', ')
+              .span3 
+                - if page.guide.prerequisites
+                  %strong= "Prerequisites:"
+                  = ' '.concat(page.guide.prerequisites.map{|u| u} * ', ')
   .container#guide
-
-    - page.body_class = 'guide'
-    - page.toTop = 1
-    - page.bottom_javascripts = [ "#{site.base_url}/javascripts/jquery-scroll.js", "http://w.sharethis.com/button/buttons.js" ]
     #content{:lang=>page.language ? page.language.code : nil}
-      - if page.guide.authors
-        .authors<
-          %strong= "Author#{page.guide.authors.size > 1 ? 's' : ''}:"
-          // TODO Link in to site identities
-          = ' '.concat(page.guide.authors.map{|u| u} * ', ')
-      - if page.guide.contributors
-        .contributors<
-          %strong= "Contributor#{page.guide.contributors.size > 1 ? 's' : ''}:"
-          // TODO Link in to site identities
-          = ' '.concat(page.guide.contributors.map{|u| u} * ', ')
-      - if page.guide.level
-        .level<
-          %strong= "Level:"
-          = ' '.concat(page.guide.level.map{|u| u} * ', ')
-      - if page.guide.technologies
-        .technologies<
-          %strong= "Technologies:"
-          = ' '.concat(page.guide.technologies.map{|u| u} * ', ')
-      - if page.guide.prerequisites
-        .prerequisites<
-          %strong= "Prerequisites:"
-          = ' '.concat(page.guide.prerequisites.map{|u| u} * ', ')
-      %br
-      %strong{:style=>"padding-left: #{page.guide.group || page.tags ? 10 : 0}px;"} Last Update:
-      = ' '.concat(page.guide.changes[0].date.strftime('%b %d, %Y'))
       ~ content
       %h2
         %a#share

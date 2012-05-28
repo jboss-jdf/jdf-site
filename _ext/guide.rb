@@ -16,6 +16,7 @@ module Awestruct
           @num_contrib_changes = opts[:num_contrib_changes] || -1
           @layout = opts[:layout] || 'guide'
           @label = opts[:index_label] || 'Guides Index'
+          @title = opts[:title] || nil
         end
 
         def transform(transformers)
@@ -38,8 +39,10 @@ module Awestruct
               if page.description.nil?
                 page.description = page.guide_summary
               end
-                guide.index_label = @label
+
+              guide.index_label = @label
               guide.summary = page.description
+              guide.parent_title = @title
 
               # FIXME contributors should be listed somewhere on the page, but not automatically authors
               # perhaps as little pictures like on github

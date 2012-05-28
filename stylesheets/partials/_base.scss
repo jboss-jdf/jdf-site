@@ -81,12 +81,14 @@ $guide_content_background_color: $palette_white;
 $guide_author_name_color: $palette_60gray;
 $toc_text_color: $palette_50gray;
 $toc_link_color: transparentize($palette_blue, .1);
-$h1_color: #C00;
-$h2_color: #424242;
-$h3_color: #424242;
-$h4_color: #424242;
-$h5_color: #424242;
-$h6_color: #424242;
+$jdf_red: #C00;
+$jdf_blue: #424242;
+$h1_color: $jdf_red;
+$h2_color: $jdf_blue;
+$h3_color: $jdf_blue;
+$h4_color: $jdf_blue;
+$h5_color: $jdf_blue;
+$h6_color: $jdf_blue;
 $fixed_font_family: Menlo, Monaco, 'Courier New', monospace;
 
 // Buzz
