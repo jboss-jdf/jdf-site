@@ -40,12 +40,9 @@ module Awestruct
               end
                 guide.index_label = @label
               guide.summary = page.description
-              
+
               # FIXME contributors should be listed somewhere on the page, but not automatically authors
               # perhaps as little pictures like on github
-
-              # Add the Contributors to Guide based on Git Commit history
-              guide.contributors = page_contributors(page, @num_contrib_changes)
 
               guide.changes = page_changes(page, @num_changes)
 
@@ -114,6 +111,9 @@ module Awestruct
                 end
                 page.rendered_content=page_content.to_html
               end
+
+              # Add the Contributors to Guide based on Git Commit history
+              guide.contributors = page_contributors(page, @num_contrib_changes, guide.authors)
 
               class << page
                 def render(context)
@@ -184,23 +184,25 @@ module Awestruct
       end
 
       ##
-      # Returns a Array of unique author.name's based on the Git commit history for the given page.
+      # Returns a Array of unique contributors.name's based on the Git commit history for the given page.
       # Assumes guides are brought in as submodules so opens git rooted in the page's dir
-      # The Array is ordered by number of commits done by the authors.
-      #
-      def page_contributors(page, size)
-        authors = Hash.new
+      # The Array is ordered by number of commits done by the contributors.
+      # Any authors are removed from the contributor list
+      def page_contributors(page, size, authors)
+        contributors = Hash.new
         page_dir = page.site.dir.match(/^(.*)(\/)$/)[1] + @path_prefix
         rpath = page.source_path.match(/(#{page_dir})\/(.+)/)[2]
         g = Git.open(page_dir)
         g.log(size == -1 ? nil : size).path(rpath).each do |c|
-          if authors[c.author.name]
-            authors[c.author.name] = authors[c.author.name] + 1
-          elsif
-            authors[c.author.name] = 1
+          if !authors || authors.count(c.author.name) == 0
+            if contributors[c.author.name]
+              contributors[c.author.name] = contributors[c.author.name] + 1
+            elsif
+              contributors[c.author.name] = 1
+            end
           end
         end
-        return authors.sort{|a, b| b[1] <=> a[1]}.map{|x| x[0]}
+        contributors.size == 0 ? nil : contributors.sort{|a, b| b[1] <=> a[1]}.map{|x| x[0]}
       end
 
       def guide_repo(page)
