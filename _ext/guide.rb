@@ -71,7 +71,8 @@ module Awestruct
                 guide.title = page_content.css("h1").first.text
                 guide_content = page_content.css('div#content').first 
                 guide_content['id'] = 'guide-content'
-                page.rendered_content = guide_content
+                guide_content['class'] = 'asciidoc'
+                page.rendered_content = guide_content.to_html
                 # Extract authors
                 author = page_content.css('span#author').first
                 if author
@@ -94,7 +95,12 @@ module Awestruct
                   guide.title = h1.text
                   h1.remove
                 end
-                # TODO Strip out html and body
+                # Strip out html and body
+                page_content = page_content.css('body').first
+                page_content.name = 'div'
+                page_content['id'] = 'guide-content'
+                page_content['class'] = 'markdown'
+
                 # rebuild links
                 page_content.css('a').each do |a|
                   # TDOO make this one regex with capture, but my brain is dead
