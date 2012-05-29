@@ -33,7 +33,7 @@ layout: landing
       - site.posts.each do |post|
         = partial("short_post.html.haml", {"parent"=>page, "post"=>post, "include_comments_count"=>post.equal?(site.posts.last)})
       .more
-        %a(href="/news") View all news &raquo;
+        %a(href="news") View all news &raquo;
     .span5.offset1
       .spotlight.section-heading
         -# .slide required to fix IE bug in bootstrap < 2.1
@@ -65,4 +65,4 @@ layout: landing
                 %em 
                   %a{:href=>session.detail_url}= session.title
         .more
-          %a(href="/events") View all events &raquo;
+          %a(href="events") View all events &raquo;
