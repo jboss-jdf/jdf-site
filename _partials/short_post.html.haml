@@ -3,7 +3,7 @@
 %article.news-post
   %header.news-header
     %h2.news-title
-      %a{:href=>page.post.url}= page.post.post_title
+      %a{:href=>"#{site.base_url}#{page.post.url}"}= page.post.post_title
     .news-byline
       .date= page.post.date.strftime('<abbr>%b</abbr> %d <div class="year">%Y</div>') if !page.post.date.nil?
   .news-body
