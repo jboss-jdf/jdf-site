@@ -342,7 +342,7 @@ body.guide {
       border-bottom: 1px solid $light_border;
     }
     h2.group:first-child, .header {
-      background: $palette_5gray image-url("content_gradient.png") repeat-x;
+      background: $palette_5gray url("../images/content_gradient.png") repeat-x;
       @include border-radius(6px 0 0 0);
     }
     .header {
@@ -368,7 +368,7 @@ body.guide {
           font-weight: bold;
           list-style: none;
           font-size: .95em;
-          background: image-url("bullet_check.gif") no-repeat 3px 2px;
+          background: url("../images/bullet_check.gif") no-repeat 3px 2px;
           margin: .75em 0;
           padding-left: 30px;
         }
@@ -414,7 +414,7 @@ body.guide {
       text-transform: uppercase;
       color: $toc_text_color;
       &.chapter_header {
-        background: image-url("chapters.png") no-repeat 0 10px;
+        background: url("../images/chapters.png") no-repeat 0 10px;
         padding: 5px 0 0 22px;
       }
     }
@@ -446,10 +446,10 @@ body.guide {
         min-height: 40px;
         background-repeat: no-repeat;
         &.edit {
-          background-image: image-url("edit.png");
+          background-image: url("../images/edit.png");
         }
         &.command {
-          background-image: image-url("command.png");
+          background-image: url("../images/command.png");
         }
       }
     }
