@@ -13,4 +13,4 @@
       -# might want to use 'white-space: pre-line;' here
       %p<= text[0..text.index(/[\.\!]( |$)/, [text.index(/[\.\!]( |$)/) + 1, text.length - 1].min)] + '...'
   .news-footer
-    %a{:href=>"#{site.base_url}#{page.post.url}} Go to News Article
+    %a{:href=>"#{site.base_url}#{page.post.url}"} Go to News Article
