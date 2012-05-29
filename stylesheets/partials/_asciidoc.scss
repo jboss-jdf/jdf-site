@@ -57,6 +57,12 @@
     padding: 0;
     background: none;
     border: none;
+    word-wrap: normal;
+    word-break: normal;
+
+  }
+  
+  span.monospaced, pre {
     white-space: pre;
     word-wrap: normal;
     word-break: normal;
