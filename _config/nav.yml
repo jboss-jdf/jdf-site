@@ -2,7 +2,6 @@ quickstarts:
   url: /quickstarts/get-started
   jboss-as-quickstart: 
     label: JBoss AS Quickstarts
-    url: /quickstarts/jboss-as-quickstarts
   guide: 
     url: http://docs.jboss.org/author/display/AS71/Getting+Started+Developing+Applications+Guide
   videos:
