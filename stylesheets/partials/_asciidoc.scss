@@ -260,9 +260,14 @@
     margin-bottom: 0;
     font-style: normal;
     color: navy;
+    margin-left:1em;
   }
   dd > *:first-child {
     margin-top: 0.1em;
+  }
+
+  dd {
+    margin-left: 3em;
   }
 
   ul, ol {

@@ -10,7 +10,7 @@ module Awestruct
         site.pages.each do |page|
           if ( page.inhibit_indexifier )
             # skip it!
-          elsif( page.output_path =~ /^#{@path_prefix}\/([0-9]+ - ).*\/index.html$/ )
+          elsif( page.output_path =~ /^#{@path_prefix}\/([0-9]+-).*\/index.html$/ )
             page.output_path = page.output_path.gsub( /#{$1}/, '' )
           end
         end
