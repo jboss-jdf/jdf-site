@@ -17,6 +17,7 @@ require_relative 'remotePartial'
 require_relative 'qstoc'
 require_relative 'nav'
 require_relative 'roadmap'
+require_relative 'ordernamefixer'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -44,9 +45,11 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Roadmap.new( '/about/roadmaps' ) 
 
   extension Awestruct::Extensions::Indexifier.new
-  # Must come after Indexifier
+  # Must come after Indexifier and before Guides
   extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')
   extension Awestruct::Extensions::MoveUp.new('/stack/jboss-bom', 'README')
+  extension Awestruct::Extensions::OrderNameFixer.new('/examples/ticket-monster/tutorial')
+
   extension Awestruct::Extensions::Atomizer.new( 
     :post, 
     '/news.atom',
@@ -69,7 +72,7 @@ Awestruct::Extensions::Pipeline.new do
 
   # Must be after guides
   extension Awestruct::Extensions::QSTOC.new('/quickstarts/jboss-as-quickstart')
-
+  
 
   # Must be after all other extensions that might populate identities
   extension Awestruct::Extensions::Identities::Cache.new
