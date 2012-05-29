@@ -68,7 +68,7 @@ module Awestruct
       out_file=site.tmp_dir + '/asciidoc' + relative_source_path.gsub(/\.([^.]+)$/, '.html')
       if !File.exists?(out_file)
         FileUtils.mkdir_p(File.dirname(out_file))
-        cmd="asciidoc -b html5 -a pygments -a icons -a iconsdir='#{site.base_dir}/images' -a imagesdir='../' -o '#{out_file}' -"
+        cmd="asciidoc -b html5 -a pygments -a icons -a iconsdir='#{site.base_url}/images' -a imagesdir='../' -o '#{out_file}' -"
         execute(cmd, content)
         puts "Processing asciidoc #{relative_source_path} -> #{out_file}"
       end
