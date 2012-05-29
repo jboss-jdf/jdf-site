@@ -29,6 +29,11 @@ clean_tmp() {
   rm -rf $DIR/_tmp
 }
 
+clean_asciidoc() {
+  echo "**** Cleaning _tmp/asciidoc  ****"
+  rm -rf $DIR/_tmp/asciidoc
+}
+
 sandbox() {
   clean_site
   echo "**** Generating site ****"
@@ -53,6 +58,7 @@ sandbox() {
 
 production() {
   clean_site
+  clean_asciidoc
   echo "**** Generating site ****"
   awestruct -Pproduction
 
@@ -64,6 +70,7 @@ production() {
 
 staging() {
   clean_site
+  clean_asciidoc
   echo "**** Generating site ****"
   awestruct -Pstaging
 
