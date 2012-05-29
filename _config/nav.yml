@@ -26,8 +26,10 @@ migrations:
     url: /migrations/seam2/open18_migration
   spring: 
     label: Spring -> Java EE 6
+    url: /migrations/get-started/spring
   javaee5:
     label: Java EE 5 -> Java EE 6
+    url: /migrations/get-started/javaee5
   get-involved:
 stack:
   label: JBoss BOMs
