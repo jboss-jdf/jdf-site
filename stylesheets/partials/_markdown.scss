@@ -1,0 +1,144 @@
+/* CSS for MarkDown */
+
+.markdown {
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+    padding-top: 0em;
+  }
+
+  .sect1 {
+    margin-bottom: 3em;
+
+  } 
+
+  h1, h2, h3 {
+    border-bottom: 2px solid silver;
+  }
+  h2 {
+  }
+  h3 {
+    float: left;
+    color: $jdf_blue;
+    font-size: 1.5em;
+  }
+  h3 + * {
+  clear: left;
+  }
+  h5 {
+    font-size: 1.3em;
+    color: $jdf_blue;
+  }
+
+  div.sectionbody {
+    margin-left: 0;
+  }
+
+  hr {
+    border: 1px solid silver;
+  }
+
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.6em;
+  }
+
+  ul, ol, li > p {
+    margin-top: 0;
+  }
+
+  ul > li {
+      list-style: none;
+    }
+
+  ul > li:before {
+    /* For a round bullet */
+    content:'\2022';
+    display: block;
+    position: relative;
+    max-width: 0px;
+    max-height: 0px;
+    left: -10px;
+    top: -0px;
+    color: #aaa;
+    }
+
+  code, tt, pre {
+    font-family: "Courier New", Courier, monospace;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    white-space: pre;
+    word-wrap: normal;
+    word-break: normal;
+  }
+
+  p > code,li > code {
+    background-color: #F7F7F9;
+    border: 1px solid #C1C1C1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 3px 0px 3px;
+    color: $jdf_red;
+  }
+
+  pre {
+    background-color: #F7F7F9;
+    border: 1px solid #C1C1C1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 3px 0px 3px;
+    code {
+      color: $jdf_red;
+    }
+  }
+
+  table {
+       border: 1px solid $jdf_blue !important;
+       th {
+         background-color: $jdf_blue !important;
+         color: $palette_white;
+         white-space: nowrap;
+         border: 1px solid $jdf_blue !important;
+       }
+       td {
+         border: 1px solid $jdf_blue !important;
+       }
+    }
+
+
+  dl {
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+  }
+  dt {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    font-style: normal;
+    color: navy;
+  }
+  dd > *:first-child {
+    margin-top: 0.1em;
+  }
+
+  ul, ol {
+   list-style-position: outside;
+  }
+ 
+  tfoot {
+    font-weight: bold;
+  }
+ 
+
+  thead, p.tableblock.header {
+    font-weight: bold;
+    color: #527bbd;
+  }
+  
+}
