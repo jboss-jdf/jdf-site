@@ -15,8 +15,6 @@ module Awestruct
           @num_changes = opts[:num_changes] || 15
           @num_contrib_changes = opts[:num_contrib_changes] || -1
           @layout = opts[:layout] || 'guide'
-          @label = opts[:index_label] || 'Guides Index'
-          @title = opts[:title] || nil
         end
 
         def transform(transformers)
@@ -27,130 +25,142 @@ module Awestruct
           if ! site.guides
             site.guides = {}
           end
+          metadata = site.guide_metadata[@path_prefix]
           site.pages.each do |page|
             if ( page.relative_source_path =~ /^#{@path_prefix}\/.*#{@suffix}$/ )
-              guide = OpenStruct.new
-              page.guide = guide
-              guide.dir = page.relative_source_path[/^#{@path_prefix}\/([^\/]+)\/[^\/]+$/, 1]
-              page.layout = @layout
-              site.engine.set_urls([page])
-              guide.url = page.url
-              #guide.source_repo = guide_repo(page)
-              if page.description.nil?
-                page.description = page.guide_summary
-              end
-
-              guide.index_label = @label
-              guide.summary = page.description
-              guide.parent_title = @title
-
-              # FIXME contributors should be listed somewhere on the page, but not automatically authors
-              # perhaps as little pictures like on github
-
-              guide.changes = page_changes(page, @num_changes)
-
-              # NOTE page.content forces the source path to be rendered
-              page_content = Nokogiri::HTML(page.content)
-              chapters = []
-
-              page_content.css('h2').each do |header_html|
-                chapter = OpenStruct.new
-                chapter.text = header_html.inner_html
-                # Some processors (e.g. asciidoc) kindly create anchors with ids :-)
-                chapter.link_id = header_html.attribute('id')
-                # Others (e.g. markdown) don't
-                if not chapter.link_id
-                  chapter.link_id = chapter.text.gsub(' ', '_').gsub('&#8217;', '_').gsub(/[\(\)\.!]/, '').gsub(/\?/, '').downcase
-                  header_html['id'] = chapter.link_id
+              name = page.relative_source_path[/^#{@path_prefix}\/.*\/([^\/]+)#{@suffix}$/, 1]
+              if !metadata || !metadata.guides || metadata.guides.count(name) > 0
+                guide = OpenStruct.new
+                guide.name = name
+                guide.metadata = metadata
+                page.guide = guide
+                guide.dir = page.relative_source_path[/^#{@path_prefix}\/([^\/]+)\/[^\/]+$/, 1]
+                guide.path_prefix = @path_prefix
+                page.layout = @layout
+                site.engine.set_urls([page])
+                guide.url = page.url
+                #guide.source_repo = guide_repo(page)
+                if page.description.nil?
+                  page.description = page.guide_summary
                 end
-                chapters << chapter
-              end
 
-              if @suffix =~ /asciidoc$/
-                # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
-                guide.title = page_content.css("h1").first.text
-                guide_content = page_content.css('div#content').first 
-                guide_content['id'] = 'guide-content'
-                guide_content['class'] = 'asciidoc'
-                page.rendered_content = guide_content.to_html
-                # Extract authors
-                author = page_content.css('span#author').first
-                if author
-                  guide.authors = [ author.text ]
-                end
-              elsif @suffix =~ /md$/
-                # Markdown doesn't have an metadata syntax, so all we can do is pray ;-)
-                # Look for a paragraph that contains tags, which we define by convention
-                # Remove if found
-                page_content.css('p').each do |p|
-                  guide.authors ||= findMarkdownTag(p, 'Author')
-                  guide.technologies ||= findMarkdownTag(p, 'Technologies')
-                  guide.level ||= findMarkdownTag(p, 'Level')
-                  guide.summary ||= findMarkdownTag(p, 'Summary')
-                  guide.prerequisites ||= findMarkdownTag(p, 'Prerequisites')
-                end
-                # Strip out title
-                h1 = page_content.css('h1').first
-                if h1
-                  guide.title = h1.text
-                  h1.remove
-                end
-                # Strip out html and body
-                page_content = page_content.css('body').first
-                page_content.name = 'div'
-                page_content['id'] = 'guide-content'
-                page_content['class'] = 'markdown'
+                guide.summary = page.description
 
-                # rebuild links
-                page_content.css('a').each do |a|
-                  # TDOO make this one regex with capture, but my brain is dead
-                  if a['href'] =~ /README.md/
-                    href= a['href'][/^(.*)\/README.md/, 1] + '/'
-                    if a['href'] =~ /#.*$/
-                      href+= '#' + a['href'].match(/#(.*)$/)[1]
+                # FIXME contributors should be listed somewhere on the page, but not automatically authors
+                # perhaps as little pictures like on github
+
+                guide.changes = page_changes(page, @num_changes)
+
+                # NOTE page.content forces the source path to be rendered
+                page_content = Nokogiri::HTML(page.content)
+                chapters = []
+
+                page_content.css('h2').each do |header_html|
+                  chapter = OpenStruct.new
+                  chapter.text = header_html.inner_html
+                  # Some processors (e.g. asciidoc) kindly create anchors with ids :-)
+                  chapter.link_id = header_html.attribute('id')
+                  # Others (e.g. markdown) don't
+                  if not chapter.link_id
+                    chapter.link_id = chapter.text.gsub(' ', '_').gsub('&#8217;', '_').gsub(/[\(\)\.!]/, '').gsub(/\?/, '').downcase
+                    header_html['id'] = chapter.link_id
+                  end
+                  chapters << chapter
+                end
+
+                if @suffix =~ /asciidoc$/
+                  # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
+                  guide.title = page_content.css("h1").first.text
+                  guide_content = page_content.css('div#content').first 
+                  guide_content['id'] = 'guide-content'
+                  guide_content['class'] = 'asciidoc'
+                  page.rendered_content = guide_content.to_html
+                  # Extract authors
+                  author = page_content.css('span#author').first
+                  if author
+                    guide.authors = [ author.text ]
+                  end
+                elsif @suffix =~ /md$/
+                  # Markdown doesn't have an metadata syntax, so all we can do is pray ;-)
+                  # Look for a paragraph that contains tags, which we define by convention
+                  # Remove if found
+                  page_content.css('p').each do |p|
+                    guide.authors ||= findMarkdownTag(p, 'Author')
+                    guide.technologies ||= findMarkdownTag(p, 'Technologies')
+                    guide.level ||= findMarkdownTag(p, 'Level')
+                    guide.summary ||= findMarkdownTag(p, 'Summary')
+                    guide.prerequisites ||= findMarkdownTag(p, 'Prerequisites')
+                  end
+                  # Strip out title
+                  h1 = page_content.css('h1').first
+                  if h1
+                    guide.title = h1.text
+                    h1.remove
+                  end
+                  # Strip out html and body
+                  page_content = page_content.css('body').first
+                  page_content.name = 'div'
+                  page_content['id'] = 'guide-content'
+                  page_content['class'] = 'markdown'
+
+                  # rebuild links
+                  page_content.css('a').each do |a|
+                    # TDOO make this one regex with capture, but my brain is dead
+                    if a['href'] =~ /README.md/
+                      href= a['href'][/^(.*)\/README.md/, 1] + '/'
+                      if a['href'] =~ /#.*$/
+                        href+= '#' + a['href'].match(/#(.*)$/)[1]
+                      end
+                      a['href'] = href
                     end
-                    a['href'] = href
+                  end
+                  page.rendered_content=page_content.to_html
+                end
+
+                # Add the Contributors to Guide based on Git Commit history
+                guide.contributors = page_contributors(page, @num_contrib_changes, guide.authors)
+
+                class << page
+                  def render(context)
+                    self.rendered_content
+                  end
+
+                  def content
+                    self.rendered_content
                   end
                 end
-                page.rendered_content=page_content.to_html
-              end
 
-              # Add the Contributors to Guide based on Git Commit history
-              guide.contributors = page_contributors(page, @num_contrib_changes, guide.authors)
 
-              class << page
-                def render(context)
-                  self.rendered_content
+                # make "extra chapters" a setting of the extension?
+                chapter = OpenStruct.new
+                chapter.text = 'Share the Knowledge'
+                chapter.link_id = 'share'
+                chapters << chapter
+
+                guide.chapters = chapters
+
+                page_languages = findLanguages(page)
+                page.languages = page_languages if page_languages.size > 0
+
+                guide.languages = page.languages
+
+                # only add the main guide to the guide index (i.e., it doesn't have a locale suffix)
+                if !(page.relative_source_path =~ /.*_[a-z]{2}(_[a-z]{2})?\..*/)
+                  guide.group = page.guide_group
+                  guide.order = if page.guide_order then page.guide_order else 100 end
+                  # default guide language is english
+                  guide.language = site.languages.en
+                  
+                  if guide.metadata && guide.metadata.guides
+                    # Guide metadata exists, which specifies ordering
+                    i = metadata.guides.index(guide.name)
+                    guides[i] = guide
+                  else
+                    guides << guide
+                  end
                 end
-
-                def content
-                  self.rendered_content
-                end
+                page.guides = guides
               end
-
-
-              # make "extra chapters" a setting of the extension?
-              chapter = OpenStruct.new
-              chapter.text = 'Share the Knowledge'
-              chapter.link_id = 'share'
-              chapters << chapter
-
-              guide.chapters = chapters
-
-              page_languages = findLanguages(page)
-              page.languages = page_languages if page_languages.size > 0
-
-              guide.languages = page.languages
-
-              # only add the main guide to the guide index (i.e., it doesn't have a locale suffix)
-              if !(page.relative_source_path =~ /.*_[a-z]{2}(_[a-z]{2})?\..*/)
-                guide.group = page.guide_group
-                guide.order = if page.guide_order then page.guide_order else 100 end
-                # default guide language is english
-                guide.language = site.languages.en
-                guides << guide
-              end
-              page.guides = guides
             end
           end
           site.guides[@path_prefix] = guides

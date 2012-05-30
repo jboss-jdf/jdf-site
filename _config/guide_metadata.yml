@@ -1,0 +1,23 @@
+ticket-monster:
+  title: TicketMonster Tutorial
+  index_label: Tutorials
+  prefix: /examples/ticket-monster
+  version: 1.0.0.M2
+  alternate_formats:
+    pdf:
+    epub:    
+  guides: [WhatIsTicketMonster, Introduction, DataPersistence, BusinessLogic, UserFrontEnd, AdminJSF, DashboardGWT]
+jboss-as-quickstart:
+  title: Quickstarts
+  index_label: Quickstarts Index
+  prefix: /quickstarts/jboss-as-quickstart
+  version: 7.1.1.CR2 
+  github_org: jbossas
+  github_repo: quickstart
+migration:
+  prefix: /migrations/seam2
+bom:
+  prefix: /stack/jboss-bom
+  title: JBoss BOMs
+  index_label: BOMs Index
+  version: 1.0.0.CR1

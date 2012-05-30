@@ -8,7 +8,19 @@ title: 'Examples: Get Started'
 
   Apart from being a demo, Ticket Monster provides an already existing application structure that you can grab and use for trying out your use cases, testing your own ideas, or, if you so wish, contribute back to the community with extensions.
 
-  * [Dive straight in](../ticket-monster/tutorial/WhatIsTicketMonster)
+  Tutorial
+  --------  
+
+%ol
+  - for guide in site.guides['/examples/ticket-monster']
+    %li<
+      %a{:href=>"#{site.base_url}#{guide.url}"}= guide.title
+
+:markdown
+
+  More Resources
+  --------------
+
   * [Use the app on OpenShift](http://ticketmonster-jdf.rhcloud.com)
   * [Take your first steps to build the app](../ticket-monster/tutorial/Introduction)
   * [Watch and learn](videos)

@@ -59,21 +59,21 @@ function activateSlideshow() {
 }
 
 function toggleGuideMenu(e) {
-  $menu = $('#guides');
+  $menu = $(e.data.menu_id);
   if ($menu.css('display') == 'none') {
     $menu.css('display', 'block');
-    $('body').on('click', toggleGuideMenu);
+    $('body').on('click', {menu_id: e.data.menu_id}, toggleGuideMenu);
     return false;
   } else {
     $menu.css('display', 'none');
     $('body').unbind('click');
     // honor a click on a navigation link
-    return $(e.target).closest('#guides dd').length > 0 ? true : false;
+    return $(e.target).closest(e.data.menu_id + ' dd').length > 0 ? true : false;
   }
 }
 
-function activateGuideMenuControl() {
-  $('#guides_menu, .guides_menu').on('click', toggleGuideMenu);
+function activateMenuControl(button_id, menu_id) {
+  $(button_id).on('click', {menu_id: menu_id}, toggleGuideMenu);
 }
 
 function activateScrollingToc(sections) {

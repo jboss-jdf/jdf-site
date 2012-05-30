@@ -255,7 +255,7 @@ body.guide {
       .icon-menu-open {
         @extend .icon-chevron-down;
       }
-      a#guides_menu {
+      a.menu_btn {
         @extend .btn;
         // FIXME btn-primary not giving us the color we want
         @extend .btn-success;
@@ -273,7 +273,7 @@ body.guide {
       }
       // the following section is for the modal menu dropdown styling
       // FIXME use fluid grid for contents
-      #guides {
+      .menu_content {
         text-align: left;
         @include border-radius();
         //@include box-shadow;
@@ -288,7 +288,7 @@ body.guide {
         z-index: 10;
         padding: 2em;
         // styling for guide button when it has been pressed
-        .guides_menu {
+        .menu {
           text-decoration: none;
           font-family: $button_font_family;
           font-size: 2em;
@@ -310,6 +310,53 @@ body.guide {
           line-height: 1.3em;
           margin-top: .3em;
           margin-bottom: .4em;
+        }
+
+        .downloads {
+          .header {
+            position: relative;
+            .title {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+            }
+          }
+          
+          a {
+            display:inline;
+            padding: 0px 6px 0px 0px;
+          }
+
+          dl {
+            width: auto;
+          }
+          dt {
+            float: left;
+            clear: left;
+            width: 80px;
+            font-weight: bold;
+            margin: 0em;
+          }
+          dt:after {
+            content: ":";
+          }
+          dd {
+            margin: 0 0 0 85px;
+            padding: 0 0 0.5em 0;
+            text-indent: 0px;
+            line-height: 1.5em;
+            width: 100%;
+          }
+
+          ul {
+            display:inline;
+            list-style: none;
+            a:hover {
+              text-decoration: underline;
+              background: none;
+              color: black;
+            }
+          }
         }
       }
     }

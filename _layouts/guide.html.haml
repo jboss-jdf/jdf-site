@@ -10,16 +10,57 @@ layout: default
   #content-header
     .container
       .headline
-        - if page.guide.parent_title
-          %h1= page.guide.parent_title
+        - if page.guide.metadata.title
+          %h1= page.guide.metadata.title
+        .directory
+          %button#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
+            #{page.guide.metadata.downloads_label}
+            %span.caret
+          #downloads.menu_content.dropdown-menu.pull-right{:style=>'display: none'}
+            .downloads
+              .row.header
+                .span1
+                  %a{:href=>page.guide.metadata.github_repo_url}
+                    %img(src="#{site.base_url}/images/octocat_social.png" style='vertical-align: middle;')
+                  %a{:href=>page.guide.metadata.github_repo_url} Fork us! 
+                .span5.title
+                  %a.menu{:href=>'./'}
+                    #{page.guide.metadata.downloads_label}
+                  %hr.clear
+              .content
+                %dl
+                  %dt Version
+                  %dd= page.guide.metadata.version
+                  %dt Clone
+                  %dd
+                    %code= page.guide.metadata.clone_command
+                  %dt Browse
+                  %dd
+                    %a{:href=>page.guide.metadata.github_url}
+                      Source on Github
+                  %dt Download
+                  %dd
+                    %a{:href=>page.guide.metadata.github_source_zip}
+                      Zip
+                  -if page.guide.metadata.alternate_formats
+                    %dt Download guide as
+                    %dd
+                      %ul
+                        - page.guide.metadata.alternate_formats.each do |f|
+                          %li
+                            %a{:href=>f.download_url}= f.format
+
+                      
+                    
+          %script $(function() { activateMenuControl('#downloads_menu', '#downloads') })
         %h2= page.guide.title
         .directory
-          %button#guides_menu.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
-            #{page.guide.index_label}
+          %button#guides_menu.menu_btn.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
+            #{page.guide.metadata.index_label}
             %span.caret
-          #guides.dropdown-menu.pull-right{:style=>'display: none'}
-            %a.guides_menu{:href=>'./'}
-              #{page.guide.index_label}
+          #guides.menu_content.dropdown-menu.pull-right{:style=>'display: none'}
+            %a.menu{:href=>'./'}
+              #{page.guide.metadata.index_label}
             %hr.clear
               - for guide in page.guides.each
                 %dd<
@@ -31,7 +72,7 @@ layout: default
                     - for translation in guide.languages
                       %a{:href=>translation.url}<
                         %img.flag{:src=>translation.language.flag_icon, :rel=>'tooltip', :title=>"#{translation.language.display_name_local} (#{translation.language.code})"}
-          %script $(function() { activateGuideMenuControl() })
+          %script $(function() { activateMenuControl('#guides_menu', '#guides') })
         .row
           .span9.metadata
             .row
