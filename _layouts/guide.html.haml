@@ -13,45 +13,6 @@ layout: default
         - if page.guide.metadata.title
           %h1= page.guide.metadata.title
         .directory
-          %button#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
-            #{page.guide.metadata.downloads_label}
-            %span.caret
-          #downloads.menu_content.dropdown-menu.pull-right{:style=>'display: none'}
-            .downloads
-              .row.header
-                .span1
-                  %a{:href=>page.guide.metadata.github_repo_url}
-                    %img(src="#{site.base_url}/images/octocat_social.png" style='vertical-align: middle;')
-                  %a{:href=>page.guide.metadata.github_repo_url} Fork us! 
-                .span5.title
-                  %a.menu{:href=>'./'}
-                    #{page.guide.metadata.downloads_label}
-                  %hr.clear
-              .content
-                %dl
-                  %dt Version
-                  %dd= page.guide.metadata.version
-                  %dt Clone
-                  %dd
-                    %code= page.guide.metadata.clone_command
-                  %dt Browse
-                  %dd
-                    %a{:href=>page.guide.metadata.github_url}
-                      Source on Github
-                  %dt Download
-                  %dd
-                    %a{:href=>page.guide.metadata.github_source_zip}
-                      Zip
-                  -if page.guide.metadata.alternate_formats
-                    %dt Download guide as
-                    %dd
-                      %ul
-                        - page.guide.metadata.alternate_formats.each do |f|
-                          %li
-                            %a{:href=>f.download_url}= f.format
-
-                      
-                    
           %script $(function() { activateMenuControl('#downloads_menu', '#downloads') })
         %h2= page.guide.title
         .directory
@@ -141,6 +102,39 @@ layout: default
     - if page.guide
       #sidebar
         #toc
+          .btn-group{:style=>"width:136px"}
+            %button#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
+              #{page.guide.metadata.downloads_label}
+              %span.caret 
+            #downloads.menu_content.dropdown-menu.pull-right{:style=>'display: none; width: 575px; padding: 1em'}
+              .downloads
+                .row.header
+                  .span1
+                    %a{:href=>page.guide.metadata.github_repo_url}
+                      %img(src="#{site.base_url}/images/octocat_social.png" style='vertical-align: middle;')
+                    %a{:href=>page.guide.metadata.github_repo_url} Fork us! 
+                  .span5.title
+                    %a.menu{:href=>'./'}
+                      #{page.guide.metadata.downloads_label}
+                    %hr.clear
+                .content
+                  %strong Version
+                  = page.guide.metadata.version
+                  %br/
+                  %strong Clone
+                  %code= page.guide.metadata.clone_command
+                  %br/
+                  %strong Browse
+                  %a{:href=>page.guide.metadata.github_url} Source on Github
+                  %strong Download
+                  %a{:href=>page.guide.metadata.github_source_zip} Zip
+                  -if page.guide.metadata.alternate_formats
+                    %br/
+                    %strong Download guide as
+                    %ul
+                      - page.guide.metadata.alternate_formats.each do |f|
+                        %li
+                          %a{:href=>f.download_url}= f.format
           %h3.chapter_header Section
           %ol.chapters
             - page.guide.chapters.each do |chapter|
