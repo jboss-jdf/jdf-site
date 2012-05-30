@@ -152,6 +152,14 @@
   position: relative;
   float: right;
   margin-right: 2em;
+  .navbar {
+    float: right;
+    margin-bottom: -1px;
+    .navbar-inner {
+      background: none;
+      @include box-shadow(initial);
+    }
+  }
   ul#secondary-nav {
     list-style-image: none;
     list-style-type: none;

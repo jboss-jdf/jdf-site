@@ -21,6 +21,7 @@
       %script{ :type=>"text/javascript", :src=>"//html5shim.googlecode.com/svn/trunk/html5.js" }
     %script{:type=>"text/javascript", :src=>"http://static.jboss.org/theme/js/tabzilla.js" }
     %script{:type=>"text/javascript", :src=>"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" }
+    %script{:type=>"text/javascript", :src=>"http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.3/bootstrap.min.js" }
     - if page.javascripts
       - page.javascripts.each do |javascript|
         %script{:src=>javascript, :type=>'text/javascript'}
@@ -41,10 +42,18 @@
                   .g-plusone{:data=>{:annotation=>'none'}}
         .row#secondary-nav-wrapper
           .span11
-            %ul#secondary-nav
-              - site.nav.each do |key, nav|
-                %li
-                  %a{:href=>"#{nav.url}", :class=>"tab #{'active' if key == page.top_nav  }" } #{nav.label} 
+            .navbar
+              .navbar-inner
+                .container
+                  %a{:class=>"btn btn-navbar", :data=>{:toggle=>"collapse", :target=>".nav-collapse"}}
+                    %span.icon-bar
+                    %span.icon-bar
+                    %span.icon-bar
+                  .nav-collapse
+                    %ul.nav#secondary-nav
+                      - site.nav.each do |key, nav|
+                        %li
+                          %a{:href=>"#{nav.url}", :class=>"tab #{'active' if key == page.top_nav  }" } #{nav.label}
     .sub-sub-nav
       .container
         .row
