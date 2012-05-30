@@ -287,15 +287,6 @@ body.guide {
         position: absolute;
         z-index: 10;
         padding: 2em;
-        // styling for guide button when it has been pressed
-        .menu {
-          text-decoration: none;
-          font-family: $button_font_family;
-          font-size: 2em;
-          float: right;
-          margin: -12px 2px 5px 0;
-          color: $guide_button_text_active_color;
-        }
         dl {
           width: 320px;
           float: left;
@@ -360,6 +351,15 @@ body.guide {
         }
       }
     }
+  }
+  // styling for guide button when it has been pressed
+  a.menu {
+    text-decoration: none;
+    font-family: $button_font_family;
+    font-size: 2em;
+    float: right;
+    margin: -12px 2px 5px 0;
+    color: $guide_button_text_active_color;
   }
   #guide {
     @extend .content-bumper;
@@ -500,9 +500,33 @@ body.guide {
         }
       }
     }
+    .dl-horizontal dt {
+      margin: initial;
+    }
+    .dl-horizontal dd {
+      a {
+        padding-left: initial;
+        color: $palette_blue;
+        &:hover {
+          text-decoration: underline;
+          background-color: none !important;
+        }
+      }
+      ul {
+        list-style: none;
+        position: relative;
+        top: -1em;
+        li {
+          a {
+            &:hover {
+              background: white !important;
+            }
+          }
+        }
+      }
+    }
   }
 }
-
 
 // Include responsive Bootstrap styles
 @import "bootstrap-responsive";
