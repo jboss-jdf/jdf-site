@@ -29,7 +29,7 @@ module Awestruct
           site.pages.each do |page|
             if ( page.relative_source_path =~ /^#{@path_prefix}\/.*#{@suffix}$/ )
               name = page.relative_source_path[/^#{@path_prefix}\/.*\/([^\/]+)#{@suffix}$/, 1]
-              if !metadata || !metadata.guides || metadata.guides.count(name) > 0
+              if !metadata || !metadata.guides || metadata.guides.key?(name)
                 guide = OpenStruct.new
                 guide.name = name
                 guide.metadata = metadata
@@ -153,8 +153,9 @@ module Awestruct
                   
                   if guide.metadata && guide.metadata.guides
                     # Guide metadata exists, which specifies ordering
-                    i = metadata.guides.index(guide.name)
-                    guides[i] = guide
+                    v = metadata.guides[guide.name]
+                    guides[v.position] = guide
+                    guide.summary = v.summary
                   else
                     guides << guide
                   end

@@ -6,7 +6,21 @@ ticket-monster:
   alternate_formats:
     pdf:
     epub:    
-  guides: [WhatIsTicketMonster, Introduction, DataPersistence, BusinessLogic, UserFrontEnd, AdminJSF, DashboardGWT]
+  guides: 
+    WhatIsTicketMonster:
+      summary: 
+    Introduction:
+      summary: Setup your project, leveraging Eclipse via JBoss Developer Studio, touching on JPA, JAX-RS, HTML5 and jQuery Mobile to get you started on using Java EE6 and JBoss.
+    DataPersistence:
+      summary: Learn how to build the persistence layer for an application, and how to test it
+    BusinessLogic:
+      summary: Learn how to design and implement the business layer of an application and how to make it usable by various front-ends
+    UserFrontEnd:
+      summary: Learn how to build the user interface in desktop and mobile version
+    AdminJSF: 
+      summary: Leverage JBoss Forge for rapid application development using JSF 2 and RichFaces 4
+    DashboardGWT:
+      summary: JBoss Errai and Google Web Toolkit are used to create an executive dashboard to monitor business performance - watch ticket sales in happen real-time.
 jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index

@@ -777,6 +777,24 @@ ul.contributors {
 
 }
 
+// Get Started Examples
+
+.example-get-started-toc {
+
+  p {
+    margin-bottom: 0px;
+  }
+
+  li {
+    margin-bottom:10px;
+  }
+
+  .summary {
+    margin-left:15px;
+  }
+
+}
+
 // Ohloh widget
 body div.gadget {
   float: right;

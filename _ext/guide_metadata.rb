@@ -46,6 +46,19 @@ module Awestruct
               end
             end
 
+            # build guide metadata
+            guides_hash = s.guides
+            s.guides = guides_hash ? {} : nil
+            if guides_hash
+              guides_hash.each_with_index do |(k1, v1), index|
+                guide = OpenStruct.new(v1)
+                guide.name = k1
+                guide.position = index
+                # add conventions
+                s.guides[guide.name.to_s] = guide
+              end
+            end
+
             guide_metadata[s.prefix] = s
           end
           site.guide_metadata = guide_metadata

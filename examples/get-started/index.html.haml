@@ -11,10 +11,13 @@ title: 'Examples: Get Started'
   Tutorial
   --------  
 
-%ol
+%ol.example-get-started-toc
   - for guide in site.guides['/examples/ticket-monster']
     %li<
-      %a{:href=>"#{site.base_url}#{guide.url}"}= guide.title
+      %p
+        %a{:href=>"#{site.base_url}#{guide.url}"}= guide.title
+      - if guide.summary
+        %p.summary= guide.summary
 
 :markdown
 
