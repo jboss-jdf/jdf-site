@@ -27,7 +27,8 @@
         %script{:src=>javascript}
 
   %body{:class=>page.body_class || nil}
-    = remotePartial("http://static.jboss.org/theme/includes/org_header_topNav.html")
+    .visible-desktop
+      = remotePartial("http://static.jboss.org/theme/includes/org_header_topNav.html")
     ~ content
     %hr
     - if page.toTop
