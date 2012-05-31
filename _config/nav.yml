@@ -1,5 +1,6 @@
 quickstarts:
   url: /quickstarts/get-started
+  description: Quickstarts are tightly focused, showing you one API or one use case.
   jboss-as-quickstart: 
     label: JBoss AS Quickstarts
   guide: 
@@ -11,6 +12,7 @@ quickstarts:
   get-involved:
 examples:
   url: /examples/get-started
+  description: JBoss Developer framework comes with TicketMonster, a moderately complex application that demonstrates how to build modern applications using JBoss web technologies.
   ticket-monster: 
     label: Guide
     url: /examples/ticket-monster/tutorial/WhatIsTicketMonster
@@ -33,6 +35,7 @@ migrations:
   get-involved:
 stack:
   label: JBoss BOMs
+  description: The JBoss BOMs provide a recommended stack of dependencies, consumbable by Maven, Ivy or Gradle.
   url: /stack/jboss-bom
 forums:
   jdf-users:

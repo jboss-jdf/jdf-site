@@ -1,5 +1,6 @@
 ---
 layout: landing
+javascripts: [/javascripts/bootstrap-popover.js, /javascripts/bootstrap-tooltip.js]
 ---
 #frontpage-header-wrapper
   .container#frontpage-header
@@ -16,8 +17,10 @@ layout: landing
         %ul#main-vert-nav
           - site.nav.each do |key, nav|
             %li
-              %a{:href=>"#{nav.url}" } #{nav.label}
-
+              %a{:id=>nav.label.gsub(' ', '_'), :href=>nav.url, :title=>nav.label, :"data-content"=>nav.description}= nav.label
+              - if nav.description
+                :javascript
+                  $('##{nav.label.gsub(' ', '_')}').popover( {placement: 'left'} );
         .sharethispadding
           %span.st_sharethis_large
           %span.st_facebook_large
