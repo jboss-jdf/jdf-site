@@ -63,6 +63,11 @@ layout: default
                 - if page.guide.prerequisites
                   %strong= "Prerequisites:"
                   = ' '.concat(page.guide.prerequisites.map{|u| u} * ', ')
+            .row
+              .span3
+                - if page.guide.metadata.alternate_formats
+                  %strong Download:
+                  = ' '.concat(page.guide.metadata.alternate_formats.map{|u| "<a href='#{u.download_url}'>#{u.format}</a>"} * ', ')
   .container#guide
     #content{:lang=>page.language ? page.language.code : nil}
       ~ content
@@ -131,11 +136,7 @@ layout: default
                     %dd
                       %ul.unstyled
                         %li{:style=>"float:left"}
-                          %a{:href=>page.guide.metadata.github_source_zip} Zip
-                        -if page.guide.metadata.alternate_formats
-                          - page.guide.metadata.alternate_formats.each do |f|
-                            %li{:style=>"float:left"}
-                              %a{:href=>f.download_url, :style=>"float:left"}= f.format
+                          %a{:href=>page.guide.metadata.github_source_zip} Source zip
           %h3.chapter_header Section
           %ol.chapters
             - page.guide.chapters.each do |chapter|
