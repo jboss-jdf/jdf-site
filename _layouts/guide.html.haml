@@ -63,11 +63,11 @@ layout: default
                 - if page.guide.prerequisites
                   %strong= "Prerequisites:"
                   = ' '.concat(page.guide.prerequisites.map{|u| u} * ', ')
-            .row
-              .span3
-                - if page.guide.metadata.alternate_formats
-                  %strong Download:
-                  = ' '.concat(page.guide.metadata.alternate_formats.map{|u| "<a href='#{u.download_url}'>#{u.format}</a>"} * ', ')
+          .span2.alternate_formats
+            - if page.guide.metadata.alternate_formats
+              - page.guide.metadata.alternate_formats.each do |f|
+                %a{:href=>f.download_url, :title=>"Download #{f.format}"}
+                  %img(src="#{site.base_url}/images/#{f.format}_icon.png" alt="#{f.format}")
   .container#guide
     #content{:lang=>page.language ? page.language.code : nil}
       ~ content

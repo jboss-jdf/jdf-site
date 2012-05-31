@@ -228,6 +228,16 @@ body.guide {
       @extend .page-header;
       border-bottom: none;
       padding-bottom: 0px;
+
+      .alternate_formats {
+        float: right;
+        text-align: right;
+        img {
+          width: 30px;
+          padding: 3px 7px;
+        }
+      }
+
     }
     h1 {
       font-size: 3em; // FIXME make a variable
