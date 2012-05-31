@@ -106,6 +106,16 @@
     }
   }
 }
+
+.cta a.btn {
+  font-weight: bold;
+  color: black;
+  @include background-image(linear-gradient(white, green));
+  &:hover, &:active {
+    @include background-image(linear-gradient(green, green));
+    color: white;
+  }
+}
 /** End landing page */
 
 /** Secondary pages */
