@@ -1,24 +1,51 @@
 ---
 layout: default
 title: 'Quickstarts: Get Started'
+javascripts: [ /javascripts/jquery-datatables.js ]
 ---
 
-%p
+:markdown
   JBoss Developer Framework ships with a number of quickstarts that show you how to get started with a variety of technologies in JBoss AS. You'll find out how to write a web application using the latest Java EE technologies like CDI and JAX-RS. How to write client libraries to talk to JBoss AS using web services, JMS or EJB. How to set up a distributed transaction, and how to recover from a transaction failure. And much, much more.
 
-%p 
   Quickstarts are very focused - they demonstrate on a single API (e.g. JAX-RS) or a single use case (write a web-app with CRUD).
 
-%ul
-  %li
-    %a{:href => '../jboss-as-quickstart'}
-      Dive straight in
-  %li
-    %a{:href => 'https://docs.jboss.org/author/display/AS71/Getting+Started+Developing+Applications+Guide'}
-      Read the guide (web-app focused)
-  %li
-    %a{:href => 'videos'}
-      Watch and learn
-  %li
-    %a{:href => 'articles'}
-      Read how the community is using the Quickstarts
+  Available Quickstarts
+  ---------------------
+
+%table#quickstart-toc.table.table-condensed.quickstart-toc-table
+  %thead
+    %tr
+      %th Quickstart Name
+      %th Technologies
+      %th Description
+      %th Experience
+      %th Prerequisites
+  %tbody
+    - site.guides['/quickstarts/jboss-as-quickstart'].each do |guide|
+      - if guide.dir
+        %tr
+          %td
+            %a{:href => site.base_url + guide.url, :title=> guide.dir}= guide.dir
+          %td= guide.technologies ? guide.technologies.join(', ') : '' 
+          %td= guide.summary ? guide.summary.join(', ') : ''
+          %td= guide.level ? guide.level.join(', ') : ''
+          %td= guide.prerequisites ? guide.prerequisites.join(', ') : ''
+
+:javascript
+  $(document).ready(function() {
+    $('#quickstart-toc')
+      .dataTable({
+        "bPaginate": false,
+        "aaSorting": [[ 0, "asc" ]]
+      });
+  } );
+
+:markdown
+  More Resources
+  --------------
+    
+  * [Dive straight in](../jboss-as-quickstart)
+  * [Read the guide](https://docs.jboss.org/author/display/AS71/Getting+Started+Developing+Applications+Guide)
+  * [Watch and learn](videos)
+  * [Read how the community is using the Quickstarts](articles)
+      
