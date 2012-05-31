@@ -148,6 +148,16 @@
     }
   }
 }
+@media(min-width: 320px) and (max-width: 940px) {
+  ul#secondary-nav {
+    li {
+      display: block !important;
+      a:hover {
+        background: none !important;
+      }
+    }
+  }
+}
 #secondary-nav-wrapper {
   position: relative;
   float: right;
