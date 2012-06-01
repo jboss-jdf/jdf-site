@@ -1,3 +1,14 @@
+examples:
+  url: /examples/get-started
+  description: JBoss Developer framework comes with TicketMonster, a moderately complex application that demonstrates how to build modern applications using JBoss web technologies.
+  ticket-monster: 
+    label: Guide
+    url: /examples/ticket-monster/tutorial/WhatIsTicketMonster
+  videos:
+    url: /examples/get-started/videos
+  articles:
+    url: /examples/get-started/articles
+  get-involved:
 quickstarts:
   url: /quickstarts/get-started
   description: Quickstarts are tightly focused, showing you one API or one use case.
@@ -9,17 +20,6 @@ quickstarts:
     url: /quickstarts/get-started/videos
   articles:
     url: /quickstarts/get-started/articles
-  get-involved:
-examples:
-  url: /examples/get-started
-  description: JBoss Developer framework comes with TicketMonster, a moderately complex application that demonstrates how to build modern applications using JBoss web technologies.
-  ticket-monster: 
-    label: Guide
-    url: /examples/ticket-monster/tutorial/WhatIsTicketMonster
-  videos:
-    url: /examples/get-started/videos
-  articles:
-    url: /examples/get-started/articles
   get-involved:
 migrations:
   url: /migrations/get-started
