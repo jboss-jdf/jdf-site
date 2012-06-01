@@ -43,6 +43,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Lanyrd::Search.new('jdf')
   extension Awestruct::Extensions::Lanyrd::Export.new('/events/jdf.ics')
   extension Awestruct::Extensions::Posts.new( '/news', :posts ) 
+  extension Awestruct::Extensions::Posts.new( '/migrations/war-stories', :war_stories )
   extension Awestruct::Extensions::Roadmap.new( '/about/roadmaps' ) 
 
   extension Awestruct::Extensions::Indexifier.new
@@ -59,6 +60,9 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Paginator.new(:posts, '/news/index', :per_page => 5)
   extension Awestruct::Extensions::Tagger.new(:posts, '/news/index', '/news/tags', :per_page => 5)
   extension Awestruct::Extensions::TagCloud.new(:posts, '/news/tags/index.html')
+  extension Awestruct::Extensions::Paginator.new(:war_stories, '/migrations/war-stories/index', :per_page => 5)
+  extension Awestruct::Extensions::Tagger.new(:war_stories, '/migrations/war-stories/index', '/migrations/war-stories/tags', :per_page => 5)
+  extension Awestruct::Extensions::TagCloud.new(:war_stories, '/migrations/war-stories/tags/index.html')
   extension Awestruct::Extensions::Disqus.new
 
   extension Awestruct::Extensions::Nav.new

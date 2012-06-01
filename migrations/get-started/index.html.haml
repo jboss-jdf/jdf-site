@@ -9,3 +9,13 @@ title: 'Migrating to Java EE 6'
   * [Seam 2 -> Java EE 6](../seam2/open18_migration)
   * [Spring -> Java EE 6](spring)
   * [Java EE 5 -> Java EE 6](javaee5)
+
+  War Stories
+  -----------
+
+  We invite users of the JBoss stack to share their migration stories.
+
+- site.war_stories.each do |post|
+  = partial("short_post.html.haml", {"parent"=>page, "post"=>post, "include_comments_count"=>post.equal?(site.war_stories.last)})
+.more
+  %a(href="news") View all news &raquo;
