@@ -25,11 +25,11 @@ module Awestruct
             s.github_url ||=  "#{s.github_repo_url}/tree/#{s.git_branch}"
 
             # Default basic info
-            s.index_label = "Guides Index"
-            s.downloads_label = "Get the source"
+            s.index_label ||= "Guides Index"
+            s.downloads_label ||= "Get the source"
 
             # Alternate formats conventions
-            s.alternate_formats_base_url = "http://download.jboss.org/jdf/#{s.version}"
+            s.alternate_formats_base_url ||= "http://download.jboss.org/jdf/#{s.version}"
 
             # build alternate formats
             af_hash = s.alternate_formats
@@ -37,10 +37,10 @@ module Awestruct
             if af_hash
               af_hash.each do |k1, v1|
                 af = OpenStruct.new(v1)
-                af.format = k1
+                af.format ||= k1
                 
                 # add conventions
-                af.download_url = "#{s.alternate_formats_base_url}/#{s.module}-#{s.version}.#{af.format}"
+                af.download_url ||= "#{s.alternate_formats_base_url}/#{s.module}-#{s.version}.#{af.format}"
 
                 s.alternate_formats << af
               end
