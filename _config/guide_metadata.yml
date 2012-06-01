@@ -30,6 +30,8 @@ jboss-as-quickstart:
   github_repo: quickstart
 migration:
   prefix: /migrations/seam2
+  version: 1.0.0.Final
+  github_org: seam
 bom:
   prefix: /stack/jboss-bom
   title: JBoss BOMs
