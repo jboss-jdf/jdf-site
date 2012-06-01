@@ -53,7 +53,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::OrderNameFixer.new('/examples/ticket-monster/tutorial')
 
   extension Awestruct::Extensions::Atomizer.new( 
-    :post, 
+    :posts, 
     '/news.atom',
     :feed_title=>'jdf News' 
   )
