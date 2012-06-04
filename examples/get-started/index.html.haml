@@ -3,29 +3,45 @@ layout: default
 title: 'Examples: Get Started'
 ---
 
-:markdown
-  JBoss Developer framework comes with TicketMonster, a moderately complex application that demonstrates how to build modern applications using JBoss web technologies. You can try using it, download it, fork it on GitHub and learn more about it from the accompanying tutorial.
+.row.examples
+  .span8
+    :markdown
+      JBoss Developer framework comes with TicketMonster, a moderately complex application that demonstrates how to build modern applications using JBoss web technologies. You can try using it, download it, fork it on GitHub and learn more about it from the accompanying tutorial.
 
-  Apart from being a demo, Ticket Monster provides an already existing application structure that you can grab and use for trying out your use cases, testing your own ideas, or, if you so wish, contribute back to the community with extensions.
+      Apart from being a demo, Ticket Monster provides an already existing application structure that you can grab and use for trying out your use cases, testing your own ideas, or, if you so wish, contribute back to the community with extensions.
 
-  Tutorial
-  --------  
+      Tutorial
+      --------  
 
-%ol.example-get-started-toc
-  - for guide in site.guides['/examples/ticket-monster']
-    %li<
-      %p
-        %a{:href=>"#{site.base_url}#{guide.url}"}= guide.title
-      - if guide.summary
-        %p.summary= guide.summary
+    %ol.example-get-started-toc
+      - for guide in site.guides['/examples/ticket-monster']
+        %li<
+          %p
+            %a{:href=>"#{site.base_url}#{guide.url}"}= guide.title
+          - if guide.summary
+            %p.summary= guide.summary
 
-:markdown
+    :markdown
 
-  More Resources
-  --------------
+      More Resources
+      --------------
 
-  * [Use the app on OpenShift](http://ticketmonster-jdf.rhcloud.com)
-  * [Take your first steps to build the app](../ticket-monster/tutorial/Introduction)
-  * [Watch and learn](videos)
-  * [Read how the community is using TicketMonster](articles)
+      * [Use the app on OpenShift](http://ticketmonster-jdf.rhcloud.com)
+      * [Take your first steps to build the app](../ticket-monster/tutorial/Introduction)
+      * [Watch and learn](videos)
+      * [Read how the community is using TicketMonster](articles)
+
+  .span4
+    .splash
+      .content
+        %iframe(src="http://player.vimeo.com/video/42670606?loop=1&autoplay=1" width="320" height="240" frameborder="0")
+    .splash
+      .content
+        %iframe(src="http://player.vimeo.com/video/42670606" width="320" height="240" frameborder="0")
+    .splash
+      %a(href="http://ticketmonster-jdf.rhcloud.com" title="Use TicketMonster on OpenShift")
+        .content
+          %img(src="#{site.base_url}/images/ticket-monster-splash-2.png")
+        .title
+          %h5 Use TicketMonster on OpenShift
       

@@ -944,3 +944,31 @@ h6 {
     background:white;
   }
 }
+
+.examples {
+
+  .splash {
+    width: 322px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    border: 1px solid $light_border;
+    @include border-radius(3px);
+    background: $palette_5gray url("../images/content_gradient.png") repeat-x;
+
+    .title {
+      text-align: center;
+    }
+
+    .content {
+      width: 320px;
+      height: 240px;
+      margin: 1px;
+    }
+
+    img {
+      display: block;
+    }
+  }
+
+}
