@@ -61,24 +61,22 @@ module Awestruct
   module AsciiDocable
 
     def render(context)
-      _render(raw_page_content, context.page.relative_source_path, site)
+      _render(context.page.source_path, site)
     end
 
-    def _render(content, relative_source_path, site)
+    def _render(source_path, site)
       out_file=site.tmp_dir + '/asciidoc' + relative_source_path.gsub(/\.([^.]+)$/, '.html')
       if !File.exists?(out_file)
         FileUtils.mkdir_p(File.dirname(out_file))
-        cmd="asciidoc -b html5 -a pygments -a icons -a iconsdir='#{site.base_url}/images' -a imagesdir='../' -o '#{out_file}' -"
-        execute(cmd, content)
         puts "Processing asciidoc #{relative_source_path} -> #{out_file}"
+        cmd="asciidoc -b html5 -a pygments -a icons -a iconsdir='#{site.base_url}/images' -a imagesdir='../' -o '#{out_file}' #{source_path}"
+        execute(cmd)
       end
       File.open(out_file).read
     end
     
-    def execute(command, target)
+    def execute(command)
       Open3.popen3(command) do |stdin, stdout, stderr|
-        stdin.puts target
-        stdin.close
         stderr.gets
         stdout.gets
       end
