@@ -35,8 +35,8 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Identities::Crawl.new(
     Identities::GitHub::Crawler.new,
     Identities::Gravatar::Crawler.new,
-    Identities::Confluence::Crawler.new('https://docs.jboss.org/author', :auth_file => '.jboss-auth',
-        :identity_search_keys => ['name', 'username'], :assign_username_to => 'jboss_username'),
+    #Identities::Confluence::Crawler.new('https://docs.jboss.org/author', :auth_file => '.jboss-auth',
+    #    :identity_search_keys => ['name', 'username'], :assign_username_to => 'jboss_username'),
     Identities::JBossCommunity::Crawler.new
   )
 
