@@ -26,8 +26,8 @@ title: 'Quickstarts: Get Started'
           %td
             %a{:href => site.base_url + guide.url, :title=> guide.dir}= guide.dir
           %td= guide.technologies ? guide.technologies.join(', ') : '' 
-          %td= guide.summary ? guide.summary.join(', ') : ''
-          %td= guide.level ? guide.level.join(', ') : ''
+          %td= guide.summary ? guide.summary : ''
+          %td= guide.level ? guide.level : ''
           %td= guide.prerequisites ? guide.prerequisites.join(', ') : ''
 
 :javascript

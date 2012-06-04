@@ -85,11 +85,11 @@ module Awestruct
                   # Look for a paragraph that contains tags, which we define by convention
                   # Remove if found
                   page_content.css('p').each do |p|
-                    guide.authors ||= findMarkdownTag(p, 'Author')
-                    guide.technologies ||= findMarkdownTag(p, 'Technologies')
-                    guide.level ||= findMarkdownTag(p, 'Level')
-                    guide.summary ||= findMarkdownTag(p, 'Summary')
-                    guide.prerequisites ||= findMarkdownTag(p, 'Prerequisites')
+                    guide.authors ||= find_split(p, 'Author')
+                    guide.technologies ||= find_split(p, 'Technologies')
+                    guide.level ||= find(p, 'Level')
+                    guide.summary ||= find(p, 'Summary')
+                    guide.prerequisites ||= find_split(p, 'Prerequisites')
                   end
                   # Strip out title
                   h1 = page_content.css('h1').first
@@ -241,15 +241,23 @@ module Awestruct
         changes
       end
 
-      def findMarkdownTag(p, tag)
+      def find(p, tag)
         if p.text
           r = p.text[/^(#{tag}: )(.+)$/, 2]
           if r
             p.remove
-            return r.split(',').sort
+            return r 
           end
         end
       end
+
+      def find_split(p, tag)
+        s = find(p, tag)
+        if s
+          return s.split(',').sort 
+        end
+      end
+
     end
   end
 end

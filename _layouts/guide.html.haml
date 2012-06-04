@@ -54,7 +54,7 @@ layout: default
               .span3
                 - if page.guide.level
                   %strong= "Level:"
-                  = ' '.concat(page.guide.level.map{|u| u} * ', ')
+                  = page.guide.level
               .span3
                 - if page.guide.technologies
                   %strong= "Technologies:"
