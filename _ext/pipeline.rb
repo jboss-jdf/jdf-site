@@ -19,6 +19,8 @@ require_relative 'nav'
 require_relative 'roadmap'
 require_relative 'ordernamefixer'
 require_relative 'guide_metadata'
+require_relative 'disqus'
+require_relative 'tag_cloud'
 
 
 Awestruct::Extensions::Pipeline.new do
