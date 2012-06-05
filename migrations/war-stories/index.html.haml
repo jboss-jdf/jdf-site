@@ -2,12 +2,12 @@
 layout: war_stories 
 title: Migration War Stories
 ---
-
-- for post in page.war_stories
-  = partial('post.html.haml', {'parent'=>page, 'post'=>post, 'include_comments_count'=>post.equal?(page.war_stories.last)})
-%ul.pager
-  %li.previous{:class=>('disabled' unless page.war_stories.next_page)}
-    %a{:href=>page.war_stories.next_page ? page.war_stories.next_page.url : '#'} &laquo; Older
-  %li.pages Page #{page.war_stories.current_page_index + 1} of #{page.war_stories.pages.size}
-  %li.next{:class=>('disabled' unless page.war_stories.previous_page)}
-    %a{:href=>page.war_stories.previous_page ? page.war_stories.previous_page.url : '#'} Newer &raquo;
+- if page.war_stories
+  - for post in page.war_stories
+    = partial('post.html.haml', {'parent'=>page, 'post'=>post, 'include_comments_count'=>post.equal?(page.war_stories.last)})
+  %ul.pager
+    %li.previous{:class=>('disabled' unless page.war_stories.next_page)}
+      %a{:href=>page.war_stories.next_page ? page.war_stories.next_page.url : '#'} &laquo; Older
+    %li.pages Page #{page.war_stories.current_page_index + 1} of #{page.war_stories.pages.size}
+    %li.next{:class=>('disabled' unless page.war_stories.previous_page)}
+      %a{:href=>page.war_stories.previous_page ? page.war_stories.previous_page.url : '#'} Newer &raquo;
