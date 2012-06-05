@@ -6,7 +6,7 @@ layout: news
 = partial('post.html.haml', {'parent'=>page, 'post'=>page, 'include_comments'=>true})
 %ul.pager
   %li.previous{:class=>('disabled' unless page.previous_post)}
-    %a{:href=>page.previous_post ? page.previous_post.url : '#'} &laquo; Previous
+    %a{:href=>page.previous_post ? site.base_url + page.previous_post.url : '#'} &laquo; Previous
   %li.pages Post #{site.posts.size - site.posts.index(page)} of #{site.posts.size}
   %li.next{:class=>('disabled' unless page.next_post)}
-    %a{:href=>page.next_post ? page.next_post.url : '#'} Next &raquo;
+    %a{:href=>page.next_post ? site.base_url + page.next_post.url : '#'} Next &raquo;
