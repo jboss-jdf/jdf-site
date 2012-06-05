@@ -32,7 +32,7 @@ migration:
   prefix: /migrations/seam2
   version: 1.0.0.Final
   github_org: seam
-bom:
+jboss-bom:
   prefix: /stack/jboss-bom
   title: JBoss BOMs
   index_label: BOMs Index
