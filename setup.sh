@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 GEMS="awestruct nokogiri json git vpim rest-client pygments.rb"
-EGGS="pygments"
+EGGS=("pygments" "yuicompressor")
 PORTS="asciidoc"
 RPMS=$PORTS
 
