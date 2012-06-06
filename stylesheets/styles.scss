@@ -827,6 +827,7 @@ ul.contributors {
   .item {
     border: 1px solid $palette_10gray;
     height: 233px;
+    width: 320px;
   }
 
   .content {
@@ -856,6 +857,13 @@ ul.contributors {
     margin-right: 14px;
     height: 105px;
     margin-bottom: 19px;
+  }
+
+  .fork-me {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
   }
 
 }
