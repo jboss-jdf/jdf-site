@@ -3,10 +3,39 @@ layout: news
 ---
 - page.body_class = 'news'
 - page.description = html_to_text(page.content).split("\n").first if !page.description
-= partial('post.html.haml', {'parent'=>page, 'post'=>page, 'include_comments'=>true})
-%ul.pager
-  %li.previous{:class=>('disabled' unless page.previous_post)}
-    %a{:href=>page.previous_post ? site.base_url + page.previous_post.url : '#'} &laquo; Previous
-  %li.pages Post #{site.posts.size - site.posts.index(page)} of #{site.posts.size}
-  %li.next{:class=>('disabled' unless page.next_post)}
-    %a{:href=>page.next_post ? site.base_url + page.next_post.url : '#'} Next &raquo;
+%article.post
+  %header.header
+    %h2.title
+      %a{:href=>site.base_url + page.url}= page.post_title
+    .byline
+      %img.avatar{:src=>site.identities.lookup(page.author).avatar_url(44)}
+      %span.author<
+        Posted by
+        - identity = site.identities.lookup(page.author)
+        - if identity
+          = identity.to_link
+        - else
+          = page.author
+      %span.dateinline on #{page.date.strftime('%b %d, %Y')}
+      - if site.disqus
+        %span.comments |#{page.disqus_comments_link}
+  .body
+    ~ page.content
+  .footer
+    %a{:href=>site.base_url + page.url} permalink
+    |
+    %i.icon-tags
+    tagged as
+    = tag_links(page.tags, ' ', 'tag')
+    %ul.pager
+      %li.previous{:class=>('disabled' unless page.previous_post)}
+        %a{:href=>page.previous_post ? site.base_url + page.previous_post.url : '#'} &laquo; Previous
+      %li.pages Post #{site.posts.size - site.posts.index(page)} of #{site.posts.size}
+      %li.next{:class=>('disabled' unless page.next_post)}
+        %a{:href=>page.next_post ? site.base_url + page.next_post.url : '#'} Next &raquo;
+    - if page.include_comments
+      #comments
+        - if site.disqus
+          = page.disqus_comments
+    - if (page.include_comments or page.include_comments_count) and site.disqus
+      = page.disqus_comments_count

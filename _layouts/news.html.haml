@@ -3,31 +3,27 @@ layout: default
 title: jdf News
 ---
 #content
-  %aside.pull-right#sidebar(role='complementary')
-    -#
-      - if !page.posts
-        .addthis_toolbox.addthis_default_style
-          %a.addthis_button_google_plusone{'g:plusone:size' => 'medium'}
-          %a.addthis_counter.addthis_button_tweet
-          %a.addthis_counter.addthis_pill_style
-    .subscribe
-      %h2.icon.news
-        %a(href='#{site.base_url}/news.atom') Subscribe to JDF News 
-      %p<
-        %em Get the latest information on features, releases and events.
-    %nav.latest
-      %h2 Latest Posts
-      %ul
-        - site.posts[0,5].each do |post|
-          %li
-            .title
-              %a{:href=>site.base_url + post.url}= post.post_title
-            .meta
-              = post.date.strftime('%b %d, %Y')
-    
-    %nav.tags
-      %h2 Tags
-      = site.posts_tag_cloud
-    - if site.disqus
-      = page.disqus_popular_posts
-  ~ content
+  .row
+    .span9
+      ~ content
+    .span3
+      %aside#sidebar(role='complementary')
+        .subscribe
+          %h2.icon.news
+            %a(href='#{site.base_url}/news.atom') Subscribe to JDF News
+          %p<
+            %em Get the latest information on features, releases and events.
+        %nav.latest
+          %h2 Latest Posts
+          %ul
+            - site.posts[0,5].each do |post|
+              %li
+                .title
+                  %a{:href=>site.base_url + post.url}= post.post_title
+                .meta
+                  = post.date.strftime('%b %d, %Y')
+        %nav.tags
+          %h2 Tags
+          = site.posts_tag_cloud
+        - if site.disqus
+          = page.disqus_popular_posts
