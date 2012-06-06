@@ -33,8 +33,8 @@ layout: news
       %li.pages Post #{site.posts.size - site.posts.index(page)} of #{site.posts.size}
       %li.next{:class=>('disabled' unless page.next_post)}
         %a{:href=>page.next_post ? site.base_url + page.next_post.url : '#'} Next &raquo;
-    #comments
-      - if site.disqus
-        = page.disqus_comments
-      - if site.disqus
-        = page.disqus_comments_count
+  #comments
+    - if site.disqus
+      = page.disqus_comments
+    - if site.disqus
+      = page.disqus_comments_count
