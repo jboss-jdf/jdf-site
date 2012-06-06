@@ -67,7 +67,7 @@ production() {
   echo "**** Publishing site to http://${PRODUCTION_URL} ****"
   rsync -Pqr --protocol=28 $DIR/_site/* ${JBORG_DIR}@${JBORG_REPO}/${PRODUCTION_DIR}
 
-  clean_site
+  shallow_clean
 }
 
 staging() {
@@ -78,7 +78,7 @@ staging() {
   echo "**** Publishing site to http://${STAGING_URL} ****"
   rsync -Pqr --protocol=28 $DIR/_site/* ${JBORG_DIR}@${JBORG_REPO}/${STAGING_DIR}
 
-  clean_site
+  shallow_clean
 }
 
 
