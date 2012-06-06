@@ -16,26 +16,29 @@ JBORG_REPO="filemgmt.jboss.org:www_htdocs"
 STAGING_URL="jboss.org/${JBORG_DIR}/stage"
 STAGING_DIR="${JBORG_DIR}/stage"
 
-PRODUCTION_URL="jboss.org/${PRODUCTION_DIR}"
 PRODUCTION_DIR="${JBORG_DIR}"
+PRODUCTION_URL="jboss.org/${PRODUCTION_DIR}"
 
-clean_site() {
-  echo "**** Cleaning _site  ****"
+shallow_clean() {
+  echo "**** Cleaning site  ****"
   rm -rf $DIR/_site
+  echo "**** Cleaning asciidoc cache  ****"
+  rm -rf $DIR/_tmp/asciidoc
 }
 
-clean_tmp() {
-  echo "**** Cleaning _tmp  ****"
-  rm -rf $DIR/_tmp
-}
-
-clean_asciidoc() {
-  echo "**** Cleaning _tmp/asciidoc  ****"
+deep_clean() {
+  echo "**** Cleaning site  ****"
+  rm -rf $DIR/_site
+  echo "**** Cleaning caches  ****"
+  rm -rf $DIR/_tmp/lanyrd
+  rm -rf $DIR/_tmp/remote_partial
+  rm -rf $DIR/_tmp/datacache
+  rm -rf $DIR/_tmp/restcache
   rm -rf $DIR/_tmp/asciidoc
 }
 
 sandbox() {
-  clean_site
+  deep_clean
   echo "**** Generating site ****"
   awestruct -Psandbox
 
@@ -57,8 +60,7 @@ sandbox() {
 }
 
 production() {
-  clean_site
-  clean_asciidoc
+  deep_clean
   echo "**** Generating site ****"
   awestruct -Pproduction
 
@@ -69,8 +71,7 @@ production() {
 }
 
 staging() {
-  clean_site
-  clean_asciidoc
+  deep_clean
   echo "**** Generating site ****"
   awestruct -Pstaging
 
@@ -91,10 +92,11 @@ OPTIONS:
    -d      Publish *sandbox* version of the site to http://${SANDBOX_URL}
    -s      Publish staging version of the site to http://${STAGING_URL}
    -p      Publish production version of the site to http://${PRODUCTION_URL}
+   -c      Clear out all caches
 EOF
 }
 
-while getopts "spd" OPTION
+while getopts "spdch" OPTION
 
 do
      case $OPTION in
@@ -108,6 +110,10 @@ do
              ;;
          p)
              production
+             exit
+             ;;
+         c)
+             deep_clean
              exit
              ;;
          h)
