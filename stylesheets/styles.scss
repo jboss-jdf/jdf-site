@@ -179,12 +179,12 @@
   .navbar {
     float: right;
     margin-bottom: -1px;
-    .navbar-inner {
+    > .navbar-inner {
       background: none;
-      @include box-shadow(initial);
+      @include box-shadow(none);
     }
   }
-  ul#secondary-nav {
+  #secondary-nav {
     list-style-image: none;
     list-style-type: none;
     white-space: nowrap;
@@ -358,7 +358,7 @@ body.guide {
       // FIXME use fluid grid for contents
       .menu_content {
         text-align: left;
-        @include border-radius();
+        @include border-radius(5px);
         //@include box-shadow;
         @include single-box-shadow($palette_black_80trans, 0, 1px, 10px);
         padding: 2em 2em 1.5em 2em;
@@ -447,7 +447,7 @@ body.guide {
   #guide {
     @extend .content-bumper;
     border: 1px solid $light_border;
-    @include border-radius();
+    @include border-radius(5px);
     @include single-box-shadow(rgba(0,0,0,0.09), 0, 1px, 5px);
 
     #content {
@@ -583,10 +583,10 @@ body.guide {
         }
       }
     }
-    .dl-horizontal dt {
-      margin: initial;
+    .dl-horizontal > dt {
+      margin: initial !important;
     }
-    .dl-horizontal dd {
+    .dl-horizontal > dd {
       a {
         padding-left: initial;
         color: $palette_blue;
@@ -751,7 +751,7 @@ ul.contributors {
   font-weight: bold;
   @include single-text-shadow();
   text-align: center;
-  @include border-radius();
+  @include border-radius(5px);
   @include single-box-shadow(rgba(0,0,0,0.09), 0, 1px, 3px);
   border: 1px solid $light_border;
   background-color: $palette_white;
