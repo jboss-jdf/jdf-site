@@ -5,9 +5,9 @@ ticket-monster:
   version: 1.0.0.Final
   alternate_formats:
     pdf:
-      download_url: http://www.jboss.org/jdf/guides/1.0/ticket-monster-1.0.0.Final.pdf
+      download_url: http://docs.jboss.org/jdf/1.0/ticket-monster-1.0.0.Final.pdf
     epub:
-      download_url: http://www.jboss.org/jdf/guides/1.0/ticket-monster-1.0.0.Final.epub
+      download_url: http://docs.jboss.org/jdf/1.0/ticket-monster-1.0.0.Final.epub
   guides: 
     WhatIsTicketMonster:
       summary: 
