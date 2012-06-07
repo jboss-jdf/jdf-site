@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-GEMS="awestruct nokogiri json git vpim rest-client pygments.rb"
+GEMS="hpricot awestruct nokogiri json git vpim rest-client pygments.rb"
 EGGS=("pygments" "yuicompressor")
 PORTS="asciidoc"
 RPMS=$PORTS
@@ -17,9 +17,7 @@ command_exists () {
 echo "**** Setting up necessary Gems, Eggs and [RPMs|Mac Ports] for the jdf site"
 
 echo "*** Gems"
-cmd="$SUDO gem install $GEMS $GEM_OPTIONS"
-echo $cmd
-$cmd
+$SUDO gem install $GEMS $GEM_OPTIONS
 
 e=${#EGGS[@]}
 ei=0
