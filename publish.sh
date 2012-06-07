@@ -56,7 +56,7 @@ sandbox() {
   git add *
   git commit -a -m"deploy"
   git push -f
-  clean_site
+  shallow_clean
 }
 
 production() {

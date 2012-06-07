@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Canonicalise the source dir, allow this script to be called anywhere
-DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 GEMS=("hpricot" "awestruct" "nokogiri" "json" "git" "vpim" "rest-client" "pygments.rb")
 EGGS=("pygments" "yuicompressor")
@@ -39,7 +41,7 @@ gi=0
 installed_gems=`gem list --local`
 while [ "$gi" -lt "$g" ]
 do
-  GEM=${#GEMS[gi]}
+  GEM=${GEMS[gi]}
   if [[ $installed_gems != *${GEM}* ]]
   then
     echo "** Installing $GEM"
