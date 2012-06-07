@@ -21,9 +21,14 @@ if [ -z "$ASCIIDOC_HOME" ]; then
     ASCIIDOC_HOME="$DIR/_tmp/asciidoc_home"
 fi
 
-command_exists () {
-    type "$1" &> /dev/null ;
+function command_exists {
+    command -v $1 >/dev/null 2>&1 || { echo "I $1 require but it's not installed. Aborting." >&2; exit 1; }
 }
+
+echo "**** Testing environment"
+
+command_exists tar
+command_exists curl
 
 echo "**** Setting up necessary Gems, Eggs and [RPMs|Mac Ports] for the jdf site"
 
