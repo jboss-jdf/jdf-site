@@ -17,7 +17,7 @@ command_exists () {
 echo "**** Setting up necessary Gems, Eggs and [RPMs|Mac Ports] for the jdf site"
 
 echo "*** Gems"
-cmd=$SUDO gem install $GEMS $GEM_OPTIONS
+cmd="$SUDO gem install $GEMS $GEM_OPTIONS"
 echo $cmd
 $cmd
 
