@@ -26,7 +26,7 @@ while [ "$ei" -lt "$e" ]
 do
   EGG=${EGGS[ei]}
   echo "** Installing $EGG"
-  $SUDO easy_install --upgrade $EGG
+  $SUDO easy_install --upgrade $EASY_INSTALL_OPTIONS $EGG
   ((ei++))
 done
 
