@@ -4,6 +4,7 @@ GEMS="awestruct nokogiri json git vpim rest-client pygments.rb"
 EGGS=("pygments" "yuicompressor")
 PORTS="asciidoc"
 RPMS=$PORTS
+SUDO="sudo"
 
 command_exists () {
     type "$1" &> /dev/null ;
@@ -12,7 +13,7 @@ command_exists () {
 echo "**** Setting up necessary Gems, Eggs and [RPMs|Mac Ports] for the jdf site"
 
 echo "*** Gems"
-sudo gem install $GEMS $GEM_OPTIONS
+$SUDO gem install $GEMS $GEM_OPTIONS
 
 e=${#EGGS[@]}
 ei=0
@@ -21,18 +22,18 @@ while [ "$ei" -lt "$e" ]
 do
   EGG=${EGGS[ei]}
   echo "** Installing $EGG"
-  sudo easy_install --upgrade $EGG
+  $SUDO easy_install --upgrade $EGG
   ((ei++))
 done
 
 if command_exists port
 then
   echo "*** Ports"
-  sudo port install $PORTS
+  $SUDO port install $PORTS
 fi
 
 if command_exists yum
 then
   echo "*** RPMs"
-  sudo yum install $RPMS
+  $SUDO yum install $RPMS
 fi
