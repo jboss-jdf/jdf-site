@@ -17,6 +17,19 @@ command_exists () {
 echo "**** Setting up necessary Gems, Eggs and [RPMs|Mac Ports] for the jdf site"
 
 echo "*** Gems"
+
+g=${#EGGS[@]}
+gi=0
+while [ "$gi" -lt "$g" ]
+do
+  GEM=${GEMS[gi]}
+  if gem list | grep -q $GEM
+  then
+    echo "** Installing $GEM"
+    $SUDO gem install $GEM $GEM_OPTIONS
+  fi
+  ((gi++))
+done
 $SUDO gem install $GEMS $GEM_OPTIONS
 
 e=${#EGGS[@]}
