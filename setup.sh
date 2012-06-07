@@ -2,8 +2,7 @@
 
 GEMS=("hpricot" "awestruct" "nokogiri" "json" "git" "vpim" "rest-client" "pygments.rb")
 EGGS=("pygments" "yuicompressor")
-PORTS="asciidoc"
-RPMS=$PORTS
+PACKAGES=("asciidoc")
 
 if [ -z "$SUDO" ]; then
     SUDO="sudo"
@@ -28,7 +27,7 @@ gi=0
 installed_gems=`gem list --local`
 while [ "$gi" -lt "$g" ]
 do
-  GEM=${GEMS[gi]}
+  GEM=${#GEMS[gi]}
   if [[ $installed_gems != *${GEM}* ]]
   then
     echo "** Installing $GEM"
@@ -48,14 +47,28 @@ do
   ((ei++))
 done
 
-if command_exists port
-then
-  echo "*** Ports"
-  $SUDO port install $PORTS
-fi
+echo "*** Packages"
 
-if command_exists yum
-then
-  echo "*** RPMs"
-  $SUDO yum install $RPMS
-fi
+pi=${#PACKAGES[@]}
+p=0
+while [ "$pi" -lt "$p" ]
+do
+  PACKAGE=${#PACKAGES[pi]}
+  # Nice big hack :-D
+  if ! command_exists $PACKAGE
+  then
+    if command_exists port
+    then
+      echo "** Installing $PACKAGE"
+      $SUDO port install $PACKAGE
+    fi
+
+    if command_exists yum
+    then
+      echo "** Installing $PACKAGE"
+      $SUDO yum install $PACKAGE
+    fi
+  fi
+  ((pi++))
+done
+
