@@ -58,7 +58,7 @@ do
   if ! [[ $installed_egs != *${EGG}* ]]
   then
     echo "** Installing $EGG"
-    $SUDO pip $EGG
+    $SUDO pip install $EGG
   fi
   ((ei++))
 done
