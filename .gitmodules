@@ -3,10 +3,10 @@
 	url = https://github.com/jbossas/quickstart.git 
 [submodule "migrations/seam2"]
 	path = migrations/seam2
-	url = git://github.com/seam/migration.git
+	url = https://github.com/seam/migration.git
 [submodule "stack/jboss-bom"]
 	path = stack/jboss-bom
-	url = git@github.com:jboss-jdf/jboss-bom.git
+	url = https://github.com/jboss-jdf/jboss-bom.git
 [submodule "examples/ticket-monster"]
 	path = examples/ticket-monster
-	url = git://github.com/jboss-jdf/ticket-monster.git
+	url = https://github.com/jboss-jdf/ticket-monster.git
