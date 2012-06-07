@@ -25,17 +25,17 @@ echo "*** Gems"
 
 g=${#EGGS[@]}
 gi=0
+installed_gems=`gem list --local`
 while [ "$gi" -lt "$g" ]
 do
   GEM=${GEMS[gi]}
-  if gem list | grep -q "${GEM}"
+  if [[ $installed_gems != *${GEM}* ]]
   then
     echo "** Installing $GEM"
     $SUDO gem install $GEM $GEM_OPTIONS
   fi
   ((gi++))
 done
-$SUDO gem install $GEMS $GEM_OPTIONS
 
 e=${#EGGS[@]}
 ei=0
