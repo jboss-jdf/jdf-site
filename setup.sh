@@ -5,7 +5,7 @@ EGGS=("pygments" "yuicompressor")
 PORTS="asciidoc"
 RPMS=$PORTS
 
-if [ -z "$DEST" ]; then
+if [ -z "$SUDO" ]; then
     SUDO="sudo"
 fi
 
