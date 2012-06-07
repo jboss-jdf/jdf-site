@@ -13,13 +13,23 @@ layout: landing
           %a.btn.btn-large.btn-success{:href=>'examples/get-started'}
             GET STARTED!
       .span2.offset1#vertnav-wrapper
+        :javascript
+          popover_placement = function() {
+            var offsetTop = $('#vertnav-wrapper').offset().top;
+            if (offsetTop >= 340)
+              return "top";
+            else if (offsetTop <= 340 && offsetTop >= 100)
+              return "right";
+            else
+              return "left";
+            };
         %ul#main-vert-nav
           - site.nav.each do |key, nav|
             %li
               %a{:id=>nav.label.gsub(' ', '_'), :href=>nav.url, :title=>nav.label, :"data-content"=>nav.description}= nav.label
               - if nav.description
                 :javascript
-                  $('##{nav.label.gsub(' ', '_')}').popover( {placement: 'left'} );
+                  $('##{nav.label.gsub(' ', '_')}').popover( {placement: popover_placement} );
         .sharethispadding
           %span.st_sharethis_large
           %span.st_facebook_large
@@ -36,7 +46,7 @@ layout: landing
       .more
         %a(href="news") View all news &raquo;
     .span5.offset1
-      .spotlight.section-heading
+      .spotlight.section-heading.visible-desktop
         -# .slide required to fix IE bug in bootstrap < 2.1
         #slideshow.carousel.slide
           .carousel-inner#slideshow-inner
