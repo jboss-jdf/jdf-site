@@ -204,8 +204,8 @@ module Awestruct
       # Any authors are removed from the contributor list
       def page_contributors(page, size, authors)
         contributors = Hash.new
-        page_dir = page.site.dir.match(/^(.*)(\/)$/)[1] + @path_prefix
-        rpath = page.source_path.match(/(#{page_dir})\/(.+)/)[2]
+        page_dir = page.site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         g = Git.open(page_dir)
         g.log(size == -1 ? nil : size).path(rpath).each do |c|
           if !authors || authors.count(c.author.name) == 0
@@ -221,16 +221,16 @@ module Awestruct
 
       def guide_repo(page)
         changes = []
-        page_dir = page.site.dir.match(/^(.*)(\/)$/)[1] + @path_prefix
-        rpath = page.source_path.match(/(#{page_dir})\/(.+)/)[2]
+        page_dir = page.site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         Git.open(page_dir).config('remote.origin.url')
       end
 
 
       def page_changes(page, size)
         changes = []
-        page_dir = page.site.dir.match(/^(.*)(\/)$/)[1] + @path_prefix
-        rpath = page.source_path.match(/(#{page_dir})\/(.+)/)[2]
+        page_dir = page.site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         g = Git.open(page_dir)
         g.log(size == -1 ? nil : size).path(rpath).each do |c|
           changes << Change.new(c.sha, c.author.name, c.author.date, c.message.split(/\n/)[0].chomp('.').capitalize)
