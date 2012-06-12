@@ -49,7 +49,7 @@ module Awestruct
                 # FIXME contributors should be listed somewhere on the page, but not automatically authors
                 # perhaps as little pictures like on github
 
-                guide.changes = page_changes(page, @num_changes)
+                guide.changes = page_changes(page, site, @num_changes)
 
                 # NOTE page.content forces the source path to be rendered
                 page_content = Nokogiri::HTML(page.content)
@@ -118,7 +118,7 @@ module Awestruct
                 end
 
                 # Add the Contributors to Guide based on Git Commit history
-                guide.contributors = page_contributors(page, @num_contrib_changes, guide.authors)
+                guide.contributors = page_contributors(page, site, @num_contrib_changes, guide.authors)
 
                 class << page
                   def render(context)
@@ -202,9 +202,9 @@ module Awestruct
       # Assumes guides are brought in as submodules so opens git rooted in the page's dir
       # The Array is ordered by number of commits done by the contributors.
       # Any authors are removed from the contributor list
-      def page_contributors(page, size, authors)
+      def page_contributors(page, site, size, authors)
         contributors = Hash.new
-        page_dir = page.site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        page_dir = site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
         rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         g = Git.open(page_dir)
         g.log(size == -1 ? nil : size).path(rpath).each do |c|
@@ -219,17 +219,17 @@ module Awestruct
         contributors.size == 0 ? nil : contributors.sort{|a, b| b[1] <=> a[1]}.map{|x| x[0]}
       end
 
-      def guide_repo(page)
+      def guide_repo(page, site)
         changes = []
-        page_dir = page.site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        page_dir = site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
         rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         Git.open(page_dir).config('remote.origin.url')
       end
 
 
-      def page_changes(page, size)
+      def page_changes(page, site, size)
         changes = []
-        page_dir = page.site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        page_dir = site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
         rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         g = Git.open(page_dir)
         g.log(size == -1 ? nil : size).path(rpath).each do |c|
