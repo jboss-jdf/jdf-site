@@ -23,16 +23,20 @@ if [ -z "$ASCIIDOC_HOME" ]; then
     ASCIIDOC_HOME="$DIR/_tmp/asciidoc_home"
 fi
 
-function command_exists {
-    command -v $1 >/dev/null 2>&1 || { echo "I $1 require but it's not installed. Aborting." >&2; exit 1; }
+command_exists () {
+    type "$1" &> /dev/null ;
 }
 
-echo "**** Testing environment"
-
-command_exists tar
-command_exists curl
+function require_command {
+    command -v $1 >/dev/null 2>&1 || { echo "I require $1 but it's not installed. Aborting." >&2; exit 1; }
+}
 
 echo "**** Setting up necessary Gems, Eggs and [RPMs|Mac Ports] for the jdf site"
+
+echo "*** Testing environment"
+
+require_command tar
+require_command curl
 
 echo "*** Gems"
 
@@ -52,7 +56,8 @@ done
 
 if ! command_exists "pip"
 then
-   $SUDO $EASY_INSTALL --upgrade $EASY_INSTALL_OPTIONS "pip"
+   echo "*** Setting up pip, the more modern Python egg installer"
+   $SUDO $EASY_INSTALL $EASY_INSTALL_OPTIONS pip
 fi
 
 installed_eggs=`pip freeze`
