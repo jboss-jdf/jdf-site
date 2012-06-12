@@ -204,7 +204,7 @@ module Awestruct
       # Any authors are removed from the contributor list
       def page_contributors(page, site, size, authors)
         contributors = Hash.new
-        page_dir = site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        page_dir = site.dir.to_s.match(/^(.*)([\/]?)$/)[1] + @path_prefix
         rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         g = Git.open(page_dir)
         g.log(size == -1 ? nil : size).path(rpath).each do |c|
@@ -221,7 +221,7 @@ module Awestruct
 
       def guide_repo(page, site)
         changes = []
-        page_dir = site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        page_dir = site.dir.to_s.match(/^(.*)([\/]?)$/)[1] + @path_prefix
         rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         Git.open(page_dir).config('remote.origin.url')
       end
@@ -229,7 +229,7 @@ module Awestruct
 
       def page_changes(page, site, size)
         changes = []
-        page_dir = site.dir.to_s.match(/^(.*)(\/)$/)[1] + @path_prefix
+        page_dir = site.dir.to_s.match(/^(.*)([\/]?)$/)[1] + @path_prefix
         rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
         g = Git.open(page_dir)
         g.log(size == -1 ? nil : size).path(rpath).each do |c|
