@@ -866,6 +866,49 @@ ul.contributors {
     border: 0;
   }
 
+  .spotlight-image {
+    
+    width:320px;
+    height:240px;
+    position:relative;
+
+    .main {
+      position:absolute;
+      left:0;
+      top:0;
+      width:320px;
+      height:240px;
+      display:block;	
+      z-index:500;
+    }
+
+    .forkme {
+      width:70px;
+      height:70px;
+      position:absolute;
+      top:0;
+      left:250px;
+      display:block;
+      z-index:1000;
+    }
+
+    .blue.rollover {
+      background:url(../images/forkme_blue_w_hover.png) no-repeat 0 0;	
+    }
+
+    .orange.rollover {
+      background:url(../images/forkme_orange_w_hover.png) no-repeat 0 0;	
+    }
+
+    .green.rollover {
+      background:url(../images/forkme_green_w_hover.png) no-repeat 0 0;	
+    }
+
+    .rollover:hover {
+      background-position:-70px 0px;	
+    }
+  }
+
 }
 
 // Get Started Examples
