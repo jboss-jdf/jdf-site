@@ -1,0 +1,123 @@
+---
+---
+  :markdown
+
+    ## General guidelines
+    
+    * Each example or quickstart should have a unique name, allowing easy identification
+    * A example or quickstart should have a simple build that the user can quickly understand. If using maven it should:
+      1. Not inherit from another POM
+      2. Import the various BOMs, either directly from a project, or from JBoss BOMs, to determine version numbers
+      3. Use the JBoss AS Maven Plugin to deploy the example
+    * The example or quickstart should be importable into JBoss Developer Studio/JBoss Tools and be deployable from there
+    * The example or quickstart should contain a `README.md` file, explaining:
+       * What the example or quickstart demonstrates
+       * How to build and deploy it
+       * How to access it, and what the user should expect to see
+       * How to to run the tests
+       * How to deploy it to OpenShift, if desired
+       * Any special requirements (e.g. different server profile, changes to default server config)
+    * The example or quickstart should be formatted using the JBoss AS profiles found at <https://github.com/jbossas/jboss-as/tree/master/ide-configs>
+
+    ### Licensing and Contributor Agreements
+    
+    JBoss Developer Framework is licensed under the Apache License 2.0, as we believe it is one of the most permissive Open Source license. This allows developers to easily make use of the code samples in JBoss Developer Framework. 
+
+    There is no need to sign a contributor agreement to contribute to JBoss Developer Framework. You just need to explicitly license any contribution under the AL 2.0. If you add any new files to JBoss Developer Framework, make sure to add the correct header. TODO add headers.
+
+    ## Quickstarts
+
+    If you want to contribute a quickstart, follow these steps:
+
+    1. Make sure you have reviewed the General Guidelines for JBoss Developer Framework.
+    2. A template quickstart provided, that contains prompts for the content of the README.md and pom.xml. The template is located `template/`.
+    3. Take a look at the quickstart ideas page (TODO link it), and put your name and email in the Owner/Email column and enter the date you hope to deliver the quickstart in the Target Date column.
+    4. Take a look at Maven POM Versions Checklist if you want to add dependencies to your project
+    5. Don't forget to update the `pom.xml` in the quickstart root directory. Add your quickstart to the 'modules' section.
+    6. Each quickstart should specify metadata, using the conventions layed down. This allows the jdf site to parse the metadata, and allow users to easily search the quickstarts. The template README contains more. TODO Check it does.
+    5. When your quickstart is ready for review, send a pull request to notify the JBoss Developer Framework team that your quickstart is ready for review. You can easily do this by clicking the 'Pull Request' at the top right side of your github page.
+
+    ### Testing the quickstarts
+
+    Most of the quickstarts require JBoss Enterprise Application Platform or JBoss AS only in standalone mode. Some require the "standalone-full" profile, some require XTS, some require Postgres and some require other quickstarts to be deployed. Profiles are used in the root POM to separate out these groups, allowing you to test the quickstarts easily. For example, to run those that require only standalone mode:
+
+        mvn clean install jboss-as:deploy jboss-as:undeploy -Parq-jbossas-remote -P-requires-postgres,-requires-full,-complex-dependencies,-requires-xts
+
+    Or, to run those only those quickstarts that require the full profile
+
+        mvn clean install jboss-as:deploy jboss-as:undeploy -Parq-jbossas-remote -P-requires-postgres,-default,-complex-dependencies,-requires-xts
+
+    And so on.
+
+    ### Quickstarts in other repositories
+
+    If your quickstarts are stored in another repository, you may wish to merge them in from there, rather than contribute them from source. If you plan to do this, discuss first with the JBoss AS Quickstarts team, as they will want to review all commits to *your* repo going forward.
+
+    To do this
+
+    1. Add the other repo as a remote
+        
+        git remote add -f <other repo> <other repo url>
+
+    2. Merge from the tag in the other repo that you wish to use. It is important to use a tag, to make tracking of history easier. We use a recursive merge strategy, always preferring changes from the other repo, in effect overwriting what we have locally.
+
+        git merge <tag> -s recursive -Xtheirs --no-commit
+
+    3. The merge is not committed, so any updates to the README.md and parent POM can be made. Having made these, perform the merge. We suggest updating the commit message to "Merge <Other Project Name> '<Tag>'".
+
+        git commit
+
+    4. Review and push to upstream
+
+        git push upstream HEAD:master
+
+    ### Kitchensink variants
+
+    There are multiple quickstarts based on the kitchensink example.  Each showcases different technologies and techniques including pure EE6, JSF, HTML5, and GWT.  
+
+    If you wish to contribute a kitchensink variant is it important that you follow the look and feel of the original so that useful comparisons can be made.  This does not mean that variants can not expand, and showcase additional functionality.  Multiple variants already do that.  These include mobile interfaces, push updates, and more.
+
+    Below are rules for the l&f of the variants:
+
+    * Follow the primary layout, style, and graphics of the original.
+    * Projects can have 3-4 lines directly under the AS/EAP banner in the middle section to describe what makes this variant different.  
+       * How projects use that space is up to them, but options include plain text, bullet points, etc....  
+    * Projects can have their logo in the left side of the banner.  
+    * The sidebar area can contain a section with links to the related projects, wiki, tutorials, etc...  
+       * This should be below any AS/EAP link areas.
+
+    If appropriate for the technology the application should expose RESTful endpoints following the example of the original kitchensink quickstart.  This should also include the RESTful links in the member table.
+
+    ### Markdown
+
+    The quickstarts use Redcarpet to process the markdown, the same processor used by GitHub. This builds on the basic markdown syntax, adding support for tables, code highlighting, relaxed code blocks etc). We add a couple of custom piece of markup - \[TOC\] which allows a table of contents, based on headings, to be added to any file, and [Quickstart-TOC], which adds in a table listing the quickstarts.
+
+    To render the quickstarts README's you will need, a working Ruby and Python install, with the various gems and eggs set up. The easiest way to do that is to use the `setup.sh` script provided, which will install the correct gems and eggs. TODO put this script somewhere better. TODO add redcarpet to the script
+
+    Just run
+
+       ./dist/release-utils.sh -m
+
+    To render all markdown files to HTML.
+
+    ### Release Process
+    --------------
+
+    1. Ensure you have Bash 3, and Ruby & gems set up, as described in the Markdown section
+    2. Make sure you have access to rsync files to `filemgmt.jboss.org/download_htdocs/jbossas`
+    3. Release the archetypes
+    4. Regenerate the quickstart based on archetypes
+
+            ./dist/release-utils.sh -r
+
+    5. Release
+
+            dist/release.sh -s <old snapshot version> -r <release version>
+
+    ## Examples
+
+    ### Tutorials
+
+    Each tutorial is contained in a `.asciidoc` file in the git repository of the example. To build the tutorial you'll need various gems and eggs. The best way to set up your environment is to use the `setup.sh` script. TODO Put this script somewhere better
+
+    Once you have installed AsciiDoc, you can build individual sections by invoking `asciidoc -b <output of choice> <section.txt>`. If you want to generate the whole tutorial as html, pdf and epub, you can call `./generate-guides.sh`.
