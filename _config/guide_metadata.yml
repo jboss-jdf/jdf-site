@@ -39,4 +39,4 @@ jboss-bom:
   prefix: /stack/jboss-bom
   title: JBoss BOMs
   index_label: BOMs Index
-  version: 1.0.0.Final
+  version: 1.0.1.CR1
