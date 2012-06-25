@@ -1,0 +1,6 @@
+.accordion-heading
+  %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion2" href="##{page.id}") #{page.title}
+  #license.accordion-body.collapse.in
+    .accordion-inner
+      = content
+

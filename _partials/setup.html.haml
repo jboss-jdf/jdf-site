@@ -1,0 +1,86 @@
+---
+---
+:markdown
+  ### Required accounts
+
+  JBoss Developer Framework uses a number of external services, a list of which follows. Usernames and passwords for these services are available on request to the project lead, if you have a good reason!
+
+  * <https://github.com/jboss-jdf>
+  * <https://en.gravatar.com/jbossjdf>
+  * <http://www.diigo.com/user/jboss-jdf>
+  * <https://www.ohloh.net/p/jboss-jdf>
+  * <http://openshift.redhat.com> (required to deploy updates to example apps, and to publish the sandbox jdf site)
+  * <https://lists.jboss.org/mailman/admin/jdf-dev/>
+  * <https://lists.jboss.org/mailman/admin/jdf-users>
+  * <http://docs.jboss.org/jdf> (required to publish example guides)
+  * <http://www.jboss.org/jdf> (required to stage and publish the jdf site)
+  * <http://repository.jboss.org/nexus> (required to publish builds to Maven)
+
+  You'll need access to some of these to perform releases.
+
+  #### Publishing builds to Maven
+
+  Some builds require you to publish artifacts to Maven:
+
+  1. You must have gpg set up and your key registered, as described at <http://www.sonatype.com/people/2010/01/how-to-generate-pgp-signatures-with-maven/>
+  2. You must provide a property `gpg.passphrase` in your `settings.xml` in the `release` profile e.g.
+
+          <profile>
+               <id>release</id>
+               <properties>
+                   <gpg.passphrase>myPassPhrase</gpg.passphrase>
+               </properties>
+          </profile>
+  3. You must have a JBoss Nexus account, configured with the server id in `settings.xml` with the id `jboss-releases-repository` e.g.
+
+          <server>
+              <id>jboss-releases-repository</id>
+              <username>myUserName</username>
+              <password>myPassword</password>
+          </server>
+
+
+  ### Tool required to build jdf
+
+  Unlike many Java frameworks, JBoss Developer Framework has adopted the best tools it can find, regardless of the language in which they are written. So you'll need an array of Rubygems, Python eggs and more to build the site and guides. A number of Bash scripts hold it all together.
+
+  You'll need Bash 3 to run the scripts.
+
+  Unfortunately, this setup isn't overly friendly to Windows developers. We're looking at ways to address this.
+
+  #### Quickstarts
+
+  The quickstarts use Redcarpet to process the markdown, the same processor used by GitHub. This builds on the basic markdown syntax, adding support for tables, code highlighting, relaxed code blocks etc). We add a couple of custom piece of markup - \[TOC\] which allows a table of contents, based on headings, to be added to any file, and [Quickstart-TOC], which adds in a table listing the quickstarts.
+
+  To render the quickstarts README's you will need, a working Ruby and Python install, with the various gems and eggs set up. The easiest way to get it all working is to use the `setup.sh` script provided, which will install the correct gems and eggs. TODO put this script somewhere better. TODO add redcarpet to the script.
+
+  Just run
+
+      ./dist/release-utils.sh -m
+
+  To render all markdown files to HTML.
+
+  #### Guides
+
+  The examples and migration guides use AsciiDoc.
+
+  To render the examples and migration guides, you'll need AsciiDoc, pygments and dblatex. The easiest way to get it all working is to use the `setup.sh` script provided, which will install the correct eggs, and AsciiDoc. TODO put this script somewhere better.
+
+  #### jdf site
+
+  The jdf site is built using awestruct, and requires a number of gems and eggs, as well as AsciiDoc. 
+
+  At the time of writing, the site requires the gems: hpricot, awestruct, nokogiri, json, git, vpim, rest-client and pygments.rb. It also requires the eggs: pygments  and yuicompressor. Check the `setup.sh` script for an up to date list. The easiest way to get it all working is to use the `setup.sh` script provided, which will install the correct gems and eggs.
+
+  Having got your environment correctly set up, run
+
+      awestruct -d
+
+  to run awestruct in development mode, and serve the site at <http://localhost:4242>. Note that current the jdf site doesn't work with awestruct 0.4.x.
+
+  When it comes to pushing changes, you can use the `publish.sh` script. There are three targets:
+
+  * `./publish.sh -d` will push the site to <http://site-jdf.rhcloud.com>, which we use as sandbox, for developing new features and sections for the site. You'll need access to the jdf OpenShift account, as described above.
+  * `./publish.sh -s` will push the site to <http://jboss.org/jdf/stage>, which use for staging changes to the site. Stage is normally reserved for verifying minor updates to the site, or for final verification before a major update. You'll need access to the jdf account on `filemgmt.jboss.org`.
+  * `./publish.sh -p` will push the site to <http://jboss.org/jdf>, the production site. You'll need access to the jdf account on `filemgmt.jboss.org`.
+

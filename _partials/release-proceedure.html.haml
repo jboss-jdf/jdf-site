@@ -1,0 +1,38 @@
+---
+---
+:markdown
+  Make sure you have set up your environment correctly to build the relevant project. Then, follow these steps:
+
+  ### Quickstarts
+
+  1. Make sure you have access to rsync files to `filemgmt.jboss.org/download_htdocs/jbossas`
+  2. Release the archetypes
+  3. Regenerate the quickstart based on archetypes
+         
+         ./dist/release-utils.sh -r
+
+  4. Release
+         
+         dist/release.sh -s <old snapshot version> -r <release version>
+
+     This will update the version number, commit and tag, build the distro zip and upload it to <download.jboss.org>. Then it will reset the version number back to the snapshot version number.
+
+  ### TicketMonster
+
+  TODO
+
+  ### JBoss BOMs
+
+  To release, simply run:  
+      
+      ./release.sh -s <old snapshot version> -r <release version>
+
+  This will  update the version number, commit and tag and publish the BOMs to the JBoss Maven repository, and prompt to close and promote the Maven Nexus staging repository. Then it will reset the version number back to the snapshot version number. The artifacts will be replicated to Maven central within 24 hours.
+
+  ### jdf site
+
+  To release, simply run:
+      
+      ./release.sh -s <old snapshot version> -r <release version>
+
+  This will  update the version number, commit and tag and publish the site to <http://jboss.org/jdf>. Then it will reset the version number back to the snapshot version number.
