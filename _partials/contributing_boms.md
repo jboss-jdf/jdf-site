@@ -7,7 +7,7 @@ If you want to contribute a new stack, in the form of a BOM, follow these guidel
 * Most BOMs build on the base Java EE stack, and as such, import it. This is reflected in the name of the BOM "jboss-javaee6-with-XXX".
 * The BOM should contain a `README.md` file, explaining:
    * What the stack described by the BOM includes 
-   * An example of it's usage
+   * An example of its usage
    * Any notes about plugins included in the stack
 * The BOM should be formatted using the JBoss AS profiles found at <https://github.com/jboss/ide-configs/tree/master/ide-configs>
 * When your BOM is ready for review, send a pull request.
