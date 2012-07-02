@@ -53,4 +53,4 @@ We also plan to add runtime compatilbity information, which will tell you the re
 
 ## Java EE stack
 
-The base Java EE stack is defined by the JBoss Spec project. you can [read more]().
+The base Java EE stack is defined by the [JBoss Spec project](https://github.com/jboss/jboss-javaee-specs). Each of the jdf stacks expands on the base Java EE stack.
