@@ -15,4 +15,5 @@
    * How to deploy it to OpenShift, if necessary
    * Any special requirements (e.g. different server profile, changes to default server config)
 * The sample project should be formatted using the JBoss AS profiles found at <https://github.com/jboss/ide-configs/tree/master/ide-configs>
+* When writing asciidoc, and using delimited blocks, we recommend making the block 72 characters wide
 
