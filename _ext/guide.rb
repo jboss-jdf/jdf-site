@@ -51,8 +51,8 @@ module Awestruct
 
                 guide.changes = page_changes(page, site, @num_changes)
 
-                # NOTE page.content forces the source path to be rendered
                 page_content = Nokogiri::HTML(page.content)
+
                 chapters = []
 
                 page_content.css('h2').each do |header_html|
@@ -68,68 +68,15 @@ module Awestruct
                   chapters << chapter
                 end
 
-                if @suffix =~ /asciidoc$/
-                  # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
-                  guide.title = page_content.css("h1").first.text
-                  guide_content = page_content.css('div#content').first 
-                  guide_content['id'] = 'guide-content'
-                  guide_content['class'] = 'asciidoc'
-                  page.rendered_content = guide_content.to_html
-                  # Extract authors
-                  author = page_content.css('span#author').first
-                  if author
-                    guide.authors = [ author.text ]
-                  end
-                elsif @suffix =~ /md$/
-                  # Markdown doesn't have an metadata syntax, so all we can do is pray ;-)
-                  # Look for a paragraph that contains tags, which we define by convention
-                  # Remove if found
-                  page_content.css('p').each do |p|
-                    guide.authors ||= find_split(p, 'Author')
-                    guide.technologies ||= find_split(p, 'Technologies')
-                    guide.level ||= find(p, 'Level')
-                    guide.summary ||= find(p, 'Summary')
-                    guide.prerequisites ||= find_split(p, 'Prerequisites')
-                  end
-                  # Strip out title
-                  h1 = page_content.css('h1').first
-                  if h1
-                    guide.title = h1.text
-                    h1.remove
-                  end
-                  # Strip out html and body
-                  page_content = page_content.css('body').first
-                  page_content.name = 'div'
-                  page_content['id'] = 'guide-content'
-                  page_content['class'] = 'markdown'
-
-                  # rebuild links
-                  page_content.css('a').each do |a|
-                    # TDOO make this one regex with capture, but my brain is dead
-                    if a['href'] =~ /README.md/
-                      href= a['href'][/^(.*)\/README.md/, 1] + '/'
-                      if a['href'] =~ /#.*$/
-                        href+= '#' + a['href'].match(/#(.*)$/)[1]
-                      end
-                      a['href'] = href
-                    end
-                  end
-                  page.rendered_content=page_content.to_html
-                end
+                guide.title = page.source_title 
+                guide.authors = page.source_authors
+                guide.technologies = page.source_technologies 
+                guide.level = page.source_level
+                guide.summary = page.source_summary
+                guide.prerequisites = page.source_prerequisites
 
                 # Add the Contributors to Guide based on Git Commit history
                 guide.contributors = page_contributors(page, site, @num_contrib_changes, guide.authors)
-
-                class << page
-                  def render(context)
-                    self.rendered_content
-                  end
-
-                  def content
-                    self.rendered_content
-                  end
-                end
-
 
                 # make "extra chapters" a setting of the extension?
                 chapter = OpenStruct.new
@@ -239,23 +186,6 @@ module Awestruct
           changes << Change.new('UNTRACKED', 'You', Time.now, 'Not yet committed')
         end
         changes
-      end
-
-      def find(p, tag)
-        if p.text
-          r = p.text[/^(#{tag}: )(.+)$/, 2]
-          if r
-            p.remove
-            return r 
-          end
-        end
-      end
-
-      def find_split(p, tag)
-        s = find(p, tag)
-        if s
-          return s.split(',').sort 
-        end
       end
 
     end

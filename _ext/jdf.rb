@@ -58,33 +58,134 @@ class Artifact
 end
 
 module Awestruct
-  module AsciiDocable
+  module Handlers
+    class AsciidocHandler
 
-    def render(context)
-      _render(context.page.source_path, site)
-    end
+      def rendered_content(context, with_layouts=true)
+        out_file="#{site.tmp_dir}/asciidoc#{relative_source_path.gsub(/\.([^.]+)$/, '.html')}"
+        if !File.exists?(out_file)
+          FileUtils.mkdir_p(File.dirname(out_file))
+          puts "Processing asciidoc #{relative_source_path} -> #{out_file}"
+          cmd="asciidoc -b html5 -a pygments -a icons -a iconsdir='#{site.base_url}/images' -a imagesdir='../' -o '#{out_file}' #{context.page.source_path}"
+          execute_shell(cmd)
+        end
+        output = File.open(out_file).read
 
-    def _render(source_path, site)
-      out_file=site.tmp_dir + '/asciidoc' + relative_source_path.gsub(/\.([^.]+)$/, '.html')
-      if !File.exists?(out_file)
-        FileUtils.mkdir_p(File.dirname(out_file))
-        puts "Processing asciidoc #{relative_source_path} -> #{out_file}"
-        cmd="asciidoc -b html5 -a pygments -a icons -a iconsdir='#{site.base_url}/images' -a imagesdir='../' -o '#{out_file}' #{source_path}"
-        execute(cmd)
+        extract_metadata(context.page, output)
+       
       end
-      File.open(out_file).read
-    end
-    
-    def execute(command)
-      Open3.popen3(command) do |stdin, stdout, stderr|
-        stderr.gets
-        stdout.gets
+
+      def extract_metadata(page, output)
+        html = Nokogiri::HTML(output)
+        # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
+        page.source_title = html.css("h1").first.text
+        guide_content = html.css('div#content').first 
+        guide_content['id'] = 'guide-content'
+        guide_content['class'] = 'asciidoc'
+        # Extract authors
+        author = html.css('span#author').first
+        if author
+          page.source_authors = [ author.text ]
+        end
+
+        guide_content.to_html
       end
-    rescue Errno::EPIPE
-      ""
+
     end
   end
 end
+
+module Awestruct
+  module Handlers
+    class MarkdownHandler
+
+      def rendered_content(context, with_layouts=true)
+        doc = RDiscount.new( delegate.rendered_content( context, with_layouts ) )
+        extract_metadata(context.page, doc.to_html)
+      end
+
+      def extract_metadata(page, output)
+        
+        html = Nokogiri::HTML(output)
+
+        # Strip out html and body
+        guide_content = html.css('body').first
+        guide_content.name = 'div'
+        guide_content['id'] = 'guide-content'
+        guide_content['class'] = 'markdown'
+
+        # Markdown doesn't have an metadata syntax, so all we can do is pray ;-)
+        # Look for a paragraph that contains tags, which we define by convention
+        # Remove if found
+        guide_content.css('p').each do |p|
+          extract(page, p, 'Author', true)
+          extract(page, p, 'Technologies', true)
+          extract(page, p, 'Level')
+          extract(page, p, 'Summary')
+          extract(page, p, 'Prerequisites', true)
+        end
+        
+        # Strip out title
+        h1 = guide_content.css('h1').first
+        if h1
+          page.source_title = h1.text
+          h1.remove
+        end
+
+        metadata = guide_content.css('p#metadata').remove
+
+        guide_content.css('h2').each do |header_html|
+          link_id = header_html.inner_html.gsub(' ', '_').gsub('&#8217;', '_').gsub(/[\(\)\.!]/, '').gsub(/\?/, '').downcase
+          header_html['id'] = link_id
+        end
+
+        # rebuild links
+        guide_content.css('a').each do |a|
+          # TDOO make this one regex with capture, but my brain is dead
+          if a['href'] =~ /README.md/
+            href= a['href'][/^(.*)\/README.md/, 1] + '/'
+            if a['href'] =~ /#.*$/
+              href+= '#' + a['href'].match(/#(.*)$/)[1]
+            end
+            a['href'] = href
+          end
+        end
+        
+        guide_content.to_html
+      end
+
+      def find(p, tag)
+        if p.text
+          r = p.text[/^(#{tag}: )(.+)$/, 2]
+          if r
+            p['id'] = 'metadata'
+            return r 
+          end
+        end
+      end
+
+      def extract(page, p, tag, split=false)
+        if split
+          s = find_split(p, tag)
+        else
+          s = find(p, tag)
+        end
+        if s
+          page.send("source_#{tag.downcase}=".to_sym, s)
+        end
+      end
+
+      def find_split(p, tag)
+        s = find(p, tag)
+        if s
+          return s.split(',').sort 
+        end
+      end
+
+    end
+  end
+end
+
 
 module Awestruct::Extensions::Repository::Visitors
   module Clone
