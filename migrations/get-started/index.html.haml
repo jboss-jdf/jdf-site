@@ -16,46 +16,124 @@ title: 'Migrating to Java EE 6'
 
   Having read the migration guides you now have some ideas about how to migrate, but how do you decide when to migrate?
 
-%table.table.table-bordered
-  %thead
-    %tr
-      %th
-        
-      %th Classic Seam 2
-      %th Seam 2 mixed with Java EE 6
-      %th(colspan="3") Full out Java EE 6
-  %tr
-    %td(rowspan="2")
-      %strong Scenario
-    %td(rowspan="2") You have a working application, and aren't looking to make significant changes right now.
-    %td(rowspan="2") You want to start taking advantage of features of Java EE 6, such as JSF 2, Bean Validaton or JPA 2. You don't want to undertake a full migration today.
-    %td(colspan="3") You've fallen head over heals for Java EE 6, and want to migrate your application today.
-  %tr
-    %td 
-      :markdown
-        You have all the features you need in Java EE 6, with a choice of HTML5, Errai, or RichFaces for the view layer. Take a look at [TicketMonster](#{site.base_url}/examples/get-started) to see what you can achieve!
-    %td 
-      :markdown
-        You have all the features you need in Java EE 6, [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) etc. and are happy living on the edge.
-    %td The features you need today aren't available
-  %tr
-    %td
-      %strong Recommendation
-    %td 
-      :markdown
-        Choose [Seam 2.2 on JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/). Subscription available.
-    %td 
-      :markdown 
-        Choose [Seam 2.3](http://seamframework.org) (Beta quality, community download) on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). No subscription for Seam 2.3 currently available from Red Hat.
-    %td
-      :markdown
-        Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available.
-    %td
-      :markdown
-        Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas), and add in what you need yourself. Only parts of the stack will be covered by a Red Hat subscription.
-    %td 
-      :markdown
-        Check the [JBoss Developer Framework roadmap](#{site.base_url}/about/roadmap) to see if the features you need will be added. Check the [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) roadmap to see if the features you need will be added. Let us know what your priorities are!
+
+%ul.nav.nav-tabs
+  %li.active
+    %a(href="#seam2" data-toggle="tab") Seam 2
+  %li
+    %a(href="#spring" data-toggle="tab") Spring
+  %li
+    %a(href="#javaee5" data-toggle="tab") Java EE 5
+
+%div.tab-content
+  %div.tab-pane.active#seam2
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th
+            
+          %th Classic Seam 2
+          %th Seam 2 mixed with Java EE 6
+          %th(colspan="3") Full out Java EE 6
+      %tr
+        %td(rowspan="2")
+          %strong Scenario
+        %td(rowspan="2") You have a working application, and aren't looking to make significant changes right now.
+        %td(rowspan="2") You want to start taking advantage of features of Java EE 6, such as JSF 2, Bean Validaton or JPA 2. You don't want to undertake a full migration today.
+        %td(colspan="3") You've fallen head over heals for Java EE 6, and want to migrate your application today.
+      %tr
+        %td 
+          :markdown
+            You have all the features you need in Java EE 6, with a choice of HTML5, Errai, or RichFaces for the view layer. Take a look at [TicketMonster](#{site.base_url}/examples/get-started) to see what you can achieve!
+        %td 
+          :markdown
+            You have all the features you need in Java EE 6, [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) etc. and are happy living on the edge.
+        %td The features you need today aren't available
+      %tr
+        %td
+          %strong Recommendation
+        %td 
+          :markdown
+            Choose [Seam 2.2 on JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/). Subscription available, [maintained until November 2016](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
+        %td 
+          :markdown 
+            Choose [Seam 2.3](http://seamframework.org) (Beta quality, community download) on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). No subscription for Seam 2.3 currently available from Red Hat.
+        %td
+          :markdown
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available, [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates)
+        %td
+          :markdown
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas), and add in what you need yourself. Only parts of the stack will be covered by a [Red Hat subscription](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
+        %td 
+          :markdown
+            Check the [JBoss Developer Framework roadmap](#{site.base_url}/about/roadmap) to see if the features you need will be added. Check the [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) roadmap to see if the features you need will be added. Let us know what your priorities are!
+    
+  %div.tab-pane#spring
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th
+          %th Classic Spring   
+          %th(colspan="2") Spring mixed with Java EE 6
+          %th(colspan="3") Full out Java EE 6
+      %tr
+        %td(rowspan="2")
+          %strong Scenario
+        %td(rowspan="2") You have a working application, and aren't looking to make significant changes right now.
+        %td(colspan="2" rowspan="2") You want to start taking advantage of features of the Java EE 6 programming model, such as CDI. You don't want to undertake a full migration today.
+        %td(colspan="3") You've fallen head over heals for Java EE 6, and want to migrate your application today.
+      %tr
+        %td 
+          :markdown
+            You have all the features you need in Java EE 6, with a choice of HTML5, Errai, or RichFaces for the view layer. Take a look at [TicketMonster](#{site.base_url}/examples/get-started) to see what you can achieve!
+        %td 
+          :markdown
+            You have all the features you need in Java EE 6, [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) etc. and are happy living on the edge.
+        %td The features you need today aren't available
+      %tr
+        %td
+          %strong Recommendation
+        %td 
+          :markdown
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015].
+        %td 
+          :markdown 
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Migrate portions of your application to Java EE 6 using the strategy outlined in the [migration guide](#{site.base_url}/migrations/get-started/spring). JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015].
+        %td 
+          :markdown 
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Allow Spring and CDI to interact via a bridge. DeltaSpike plans to add a bridge soon. JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015], no subscription for DeltaSpike available.
+        %td
+          :markdown
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available, [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates)
+        %td
+          :markdown
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas), and add in what you need yourself. Only parts of the stack will be covered by a [Red Hat subscription](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
+        %td 
+          :markdown
+            Check the [JBoss Developer Framework roadmap](#{site.base_url}/about/roadmap) to see if the features you need will be added. Check the [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) roadmap to see if the features you need will be added. Let us know what your priorities are!
+
+  %div.tab-pane#javaee5
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th
+            
+          %th Java EE 5
+          %th Full out Java EE 6
+      %tr
+        %td
+          %strong Scenario
+        %td You have a working application, and aren't looking to make significant changes right now.
+        %td You've fallen head over heals for Java EE 6, and want to migrate your application today.
+      %tr
+        %td
+          %strong Recommendation
+        %td 
+          :markdown
+            Java EE is backwards compatible, so your application should run on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Subscription available, [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
+        %td 
+          :markdown
+            Java EE 6 is a superset of Java EE 5 so choose [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available, [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates)
 
 - if site.war_stories && site.war_stories.size > 0
   :markdown
