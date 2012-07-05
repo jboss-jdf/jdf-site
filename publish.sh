@@ -38,7 +38,7 @@ deep_clean() {
 }
 
 sandbox() {
-  deep_clean
+  shallow_clean
   echo "**** Generating site ****"
   awestruct -Psandbox
 
