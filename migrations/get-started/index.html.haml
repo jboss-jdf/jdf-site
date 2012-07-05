@@ -11,11 +11,8 @@ title: 'Migrating to Java EE 6'
   * [Java EE 5 -> Java EE 6](javaee5)
     * [JBoss AS 5 or JBoss AS 6 -> JBoss AS 7](https://docs.jboss.org/author/display/AS71/How+do+I+migrate+my+application+from+AS5+or+AS6+to+AS7)
 
-  Ok, but when do I migrate?
-  --------------------------
-
-  Having read the migration guides you now have some ideas about how to migrate, but how do you decide when to migrate?
-
+  Ok, but what migration path should I take?
+  ------------------------------------------
 
 %ul.nav.nav-tabs
   %li.active
@@ -31,7 +28,6 @@ title: 'Migrating to Java EE 6'
       %thead
         %tr
           %th
-            
           %th Classic Seam 2
           %th Seam 2 mixed with Java EE 6
           %th(colspan="3") Full out Java EE 6
@@ -80,7 +76,7 @@ title: 'Migrating to Java EE 6'
         %td(rowspan="2")
           %strong Scenario
         %td(rowspan="2") You have a working application, and aren't looking to make significant changes right now.
-        %td(colspan="2" rowspan="2") You want to start taking advantage of features of the Java EE 6 programming model, such as CDI. You don't want to undertake a full migration today.
+        %td(rowspan="2") You want to start taking advantage of features of the Java EE 6 programming model, such as CDI. You don't want to undertake a full migration today.
         %td(colspan="3") You've fallen head over heals for Java EE 6, and want to migrate your application today.
       %tr
         %td 
@@ -95,19 +91,16 @@ title: 'Migrating to Java EE 6'
           %strong Recommendation
         %td 
           :markdown
-            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015].
+            Choose [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas) to [run your application](http://docs.redhat.com/docs/en-US/JBoss_Web_Framework_Kit/2-Beta/html/Spring_Developer_Guide/index.html). JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
         %td 
           :markdown 
-            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Migrate portions of your application to Java EE 6 using the strategy outlined in the [migration guide](#{site.base_url}/migrations/get-started/spring). JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015].
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Migrate portions of your application to Java EE 6 using the strategy outlined in the [migration guide](#{site.base_url}/migrations/get-started/spring). JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
         %td 
-          :markdown 
-            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Migrate portions of your application to Java EE 6 using the strategy outlined in the [migration guide](#{site.base_url}/migrations/get-started/spring), allowing Spring and CDI to interact via a bridge. DeltaSpike plans to add a bridge soon. JBoss Enterprise Application Platform 6 [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates), Spring 3.x [maintained until June 2015], no subscription for DeltaSpike available.
+          :markdown
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available, [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates)
         %td
           :markdown
-            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Fully migrate your application to Java EE 6 using the strategy outlined in the [migration guide](#{site.base_url}/migrations/get-started/spring). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available, [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates)
-        %td
-          :markdown
-            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Fully migrate your application to Java EE 6 using the strategy outlined in the [migration guide](#{site.base_url}/migrations/get-started/spring), and add in what you need yourself. Only parts of the stack will be covered by a [Red Hat subscription](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
+            Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). Add in what you need yourself. Only parts of the stack will be covered by a [Red Hat subscription](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates).
         %td 
           :markdown
             Check the [JBoss Developer Framework roadmap](#{site.base_url}/about/roadmap) to see if the features you need will be added. Check the [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) roadmap to see if the features you need will be added. Let us know what your priorities are!
