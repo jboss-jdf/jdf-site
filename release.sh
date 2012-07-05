@@ -36,9 +36,9 @@ release()
    $DIR/release-utils.sh -u -o $SNAPSHOTVERSION -n $RELEASEVERSION
    git commit -a -m "Prepare for $RELEASEVERSION release"
    git tag -a $RELEASEVERSION -m "Tag $RELEASEVERSION"
+   $DIR/publish.sh -p   
    $DIR/release-utils.sh -u -o $RELEASEVERSION -n $NEWSNAPSHOTVERSION
    git commit -a -m "Prepare for development of $NEWSNAPSHOTVERSION"
-   $DIR/publish.sh -p
 }
 
 SNAPSHOTVERSION="UNDEFINED"
