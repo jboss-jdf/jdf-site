@@ -11,6 +11,52 @@ title: 'Migrating to Java EE 6'
   * [Java EE 5 -> Java EE 6](javaee5)
     * [JBoss AS 5 or JBoss AS 6 -> JBoss AS 7](https://docs.jboss.org/author/display/AS71/How+do+I+migrate+my+application+from+AS5+or+AS6+to+AS7)
 
+  Ok, but when do I migrate?
+  --------------------------
+
+  Having read the migration guides you now have some ideas about how to migrate, but how do you decide when to migrate?
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+        
+      %th Classic Seam 2
+      %th Seam 2 mixed with Java EE 6
+      %th(colspan="3") Full out Java EE 6
+  %tr
+    %td(rowspan="2")
+      %strong Scenario
+    %td(rowspan="2") You have a working application, and aren't looking to make significant changes right now.
+    %td(rowspan="2") You want to start taking advantage of features of Java EE 6, such as JSF 2, Bean Validaton or JPA 2. You don't want to undertake a full migration today.
+    %td(colspan="3") You've fallen head over heals for Java EE 6, and want to migrate your application today.
+  %tr
+    %td 
+      :markdown
+        You have all the features you need in Java EE 6, with a choice of HTML5, Errai, or RichFaces for the view layer. Take a look at [TicketMonster](#{site.base_url}/examples/get-started) to see what you can achieve!
+    %td 
+      :markdown
+        You have all the features you need in Java EE 6, [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) etc. and are happy living on the edge.
+    %td The features you need today aren't available
+  %tr
+    %td
+      %strong Recommendation
+    %td 
+      :markdown
+        Choose [Seam 2.2 on JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/). Subscription available.
+    %td 
+      :markdown 
+        Choose (Seam 2.3)[http://seamframework.org] (Beta quality, community download) on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). No subscription for Seam 2.3 currently available from Red Hat.
+    %td
+      :markdown
+        Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available.
+    %td
+      :markdown
+        Choose Java EE 6 on [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas), and add in what you need yourself. Only parts of the stack will be covered by a Red Hat subscription.
+    %td 
+      :markdown
+        Check the [JBoss Developer Framework roadmap](#{site.base_url}/about/roadmap) to see if the features you need will be added. Check the [DeltaSpike](https://cwiki.apache.org/DeltaSpike/) roadmap to see if the features you need will be added. Let us know what your priorities are!
+
 - if site.war_stories && site.war_stories.size > 0
   :markdown
     War Stories
