@@ -21,92 +21,80 @@ module Awestruct
         end
 
         def execute(site)
+          # Initialize site.guides if not already set up
+          site.guides ||= {}
+
+          root_dir = site.dir.to_s.match(/^(.*[^\/?])([\/]?)$/)[1] + @path_prefix          
+
           guides = []
-          if ! site.guides
-            site.guides = {}
-          end
+
+          # Load any metadata parsed for this set of guides
           metadata = site.guide_metadata[@path_prefix]
+          
           site.pages.each do |page|
-            if ( page.relative_source_path =~ /^#{@path_prefix}\/.*#{@suffix}$/ )
-              name = page.relative_source_path[/^#{@path_prefix}\/.*\/([^\/]+)#{@suffix}$/, 1]
+            if ( page.relative_source_path =~ /^#{@path_prefix}\/?(.*?)([^\/]*)#{@suffix}$/ )
+              subdir = $1
+              name = $2
+              
               if !metadata || !metadata.guides || metadata.guides.key?(name)
+                # Note that calling page.content causes the source to be parsed and metadata extracted
+                # we need to do this early!
+                html = Nokogiri::HTML(page.content)                
+
                 guide = OpenStruct.new
-                guide.name = name
-                guide.metadata = metadata
+
+                # Attach the guide to the page, so we can reference it later
                 page.guide = guide
-                guide.dir = page.relative_source_path[/^#{@path_prefix}\/([^\/]+)\/[^\/]+$/, 1]
+
+                guide.name = name 
+                guide.metadata = metadata
+                guide.dir = subdir
                 guide.path_prefix = @path_prefix
+                guide.src_root = root_dir
+                guide.src_relative_path = guide.dir + page.guide.name + @suffix
+
                 page.layout = @layout
+
                 site.engine.set_urls([page])
                 guide.url = page.url
-                #guide.source_repo = guide_repo(page)
-                if page.description.nil?
-                  page.description = page.guide_summary
-                end
+               
+                # Extract metadata from git
+                guide.changes = page_changes(guide, @num_changes)
+                guide.contributors = page_contributors(guide, @num_contrib_changes, guide.authors)
 
-                guide.summary = page.description
-
-                # FIXME contributors should be listed somewhere on the page, but not automatically authors
-                # perhaps as little pictures like on github
-
-                guide.changes = page_changes(page, site, @num_changes)
-
-                page_content = Nokogiri::HTML(page.content)
-
-                chapters = []
-
-                page_content.css('h2').each do |header_html|
-                  chapter = OpenStruct.new
-                  chapter.text = header_html.inner_html
-                  # Some processors (e.g. asciidoc) kindly create anchors with ids :-)
-                  chapter.link_id = header_html.attribute('id')
-                  # Others (e.g. markdown) don't
-                  if not chapter.link_id
-                    chapter.link_id = chapter.text.gsub(' ', '_').gsub('&#8217;', '_').gsub(/[\(\)\.!]/, '').gsub(/\?/, '').downcase
-                    header_html['id'] = chapter.link_id
-                  end
-                  chapters << chapter
-                end
-
+                # Different formats use different metadata formats, so is extracted in a handler
                 guide.title = page.source_title 
                 guide.authors = page.source_authors
                 guide.technologies = page.source_technologies 
                 guide.level = page.source_level
                 guide.summary = page.source_summary
                 guide.prerequisites = page.source_prerequisites
+                
+                # Extract chapter info from the page
+                guide.chapters = []
 
-                # Add the Contributors to Guide based on Git Commit history
-                guide.contributors = page_contributors(page, site, @num_contrib_changes, guide.authors)
+                html.css('h2').each do |header_html|
+                  chapter = OpenStruct.new
+                  chapter.text = header_html.inner_html
+                  chapter.link_id = header_html.attribute('id')
+                  guide.chapters << chapter
+                end
 
                 # make "extra chapters" a setting of the extension?
                 chapter = OpenStruct.new
                 chapter.text = 'Share the Knowledge'
                 chapter.link_id = 'share'
-                chapters << chapter
+                guide.chapters << chapter
 
-                guide.chapters = chapters
-
-                page_languages = findLanguages(page)
-                page.languages = page_languages if page_languages.size > 0
-
-                guide.languages = page.languages
-
-                # only add the main guide to the guide index (i.e., it doesn't have a locale suffix)
-                if !(page.relative_source_path =~ /.*_[a-z]{2}(_[a-z]{2})?\..*/)
-                  guide.group = page.guide_group
-                  guide.order = if page.guide_order then page.guide_order else 100 end
-                  # default guide language is english
-                  guide.language = site.languages.en
-                  
-                  if guide.metadata && guide.metadata.guides
-                    # Guide metadata exists, which specifies ordering
-                    v = metadata.guides[guide.name]
-                    guides[v.position] = guide
-                    guide.summary = v.summary
-                  else
-                    guides << guide
-                  end
+                if guide.metadata && guide.metadata.guides
+                  # Guide metadata exists, which specifies ordering
+                  v = metadata.guides[guide.name]
+                  guides[v.position] = guide
+                  guide.summary = v.summary
+                else
+                  guides << guide
                 end
+                
                 page.guides = guides
               end
             end
@@ -114,34 +102,6 @@ module Awestruct
           site.guides[@path_prefix] = guides
         end
 
-        def findLanguages(page)
-          languages = []
-          base_page = page.source_path.gsub('.textile', '').gsub(@path_prefix, '').gsub(/\/.*\//, '')
-          #puts "Current Base Page #{base_page}"
-          Dir.entries(@path_prefix[1..-1]).each do |x|
-            if x =~ /(#{base_page})_([a-z]{2}(_[a-z]{2})?)\.(.*)/
-
-              trans_base_name = $1
-              trans_lang = $2
-              trans_postfix = $4
-              #puts "#{trans_base_name} #{trans_lang} #{trans_postfix}"
-
-              trans_page = page.site.pages.find{|e| e.source_path =~ /.*#{trans_base_name}_#{trans_lang}.#{trans_postfix}/}
-
-              trans_page.language_parent = page
-              trans_page.language = page.site.languages.send(trans_lang)
-              trans_page.language.code = trans_lang
-              if !trans_page.translators.nil?
-                trans_page.translators.each do |username|
-                  page.site.identities.lookup(username).translator = true
-                end
-              end
-
-              languages << trans_page
-            end
-          end
-          return languages.sort{|a,b| a.language.code <=> b.language.code }
-        end
       end
 
       ##
@@ -149,12 +109,10 @@ module Awestruct
       # Assumes guides are brought in as submodules so opens git rooted in the page's dir
       # The Array is ordered by number of commits done by the contributors.
       # Any authors are removed from the contributor list
-      def page_contributors(page, site, size, authors)
+      def page_contributors(guide, size, authors)
         contributors = Hash.new
-        page_dir = site.dir.to_s.match(/^(.*[^\/?])([\/]?)$/)[1] + @path_prefix
-        rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
-        g = Git.open(page_dir)
-        g.log(size == -1 ? nil : size).path(rpath).each do |c|
+        g = Git.open(guide.src_root)
+        g.log(size == -1 ? nil : size).path(guide.src_relative_path).each do |c|
           if !authors || authors.count(c.author.name) == 0
             if contributors[c.author.name]
               contributors[c.author.name] = contributors[c.author.name] + 1
@@ -166,20 +124,10 @@ module Awestruct
         contributors.size == 0 ? nil : contributors.sort{|a, b| b[1] <=> a[1]}.map{|x| x[0]}
       end
 
-      def guide_repo(page, site)
+      def page_changes(guide, size)
         changes = []
-        page_dir = site.dir.to_s.match(/^(.*[^\/?])([\/]?)$/)[1] + @path_prefix
-        rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
-        Git.open(page_dir).config('remote.origin.url')
-      end
-
-
-      def page_changes(page, site, size)
-        changes = []
-        page_dir = site.dir.to_s.match(/^(.*[^\/$])([\/]?)$/)[1] + @path_prefix
-        rpath = page.source_path.to_s.match(/(#{page_dir})\/(.+)/)[2]
-        g = Git.open(page_dir)
-        g.log(size == -1 ? nil : size).path(rpath).each do |c|
+        g = Git.open(guide.src_root)
+        g.log(size == -1 ? nil : size).path(guide.src_relative_path).each do |c|
           changes << Change.new(c.sha, c.author.name, c.author.date, c.message.split(/\n/)[0].chomp('.').capitalize)
         end
         if changes.length == 0
