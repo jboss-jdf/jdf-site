@@ -24,7 +24,7 @@ title: 'Quickstarts: Get Started'
       - if guide.dir
         %tr
           %td
-            %a{:href => site.base_url + guide.url, :title=> guide.dir}= guide.dir
+            %a{:href => site.base_url + guide.url, :title=> guide.name}= guide.name
           %td= guide.technologies ? guide.technologies.join(', ') : '' 
           %td= guide.summary ? guide.summary : ''
           %td= guide.level ? guide.level : ''
