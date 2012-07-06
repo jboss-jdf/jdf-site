@@ -141,13 +141,8 @@ module Awestruct
 
         # rebuild links
         guide_content.css('a').each do |a|
-          # TDOO make this one regex with capture, but my brain is dead
-          if a['href'] =~ /README.md/
-            href= a['href'][/^(.*)\/README.md/, 1] + '/'
-            if a['href'] =~ /#.*$/
-              href+= '#' + a['href'].match(/#(.*)$/)[1]
-            end
-            a['href'] = href
+          if a['href'] =~ /^(.*\/)README.md(.*)$/
+            a['href'] = $1 + $2
           end
         end
         
