@@ -8,8 +8,6 @@ require_relative 'repository'
 require_relative 'jdf'
 require_relative 'posts_helper'
 require_relative 'disqus_more'
-require_relative 'jira'
-require_relative 'external'
 require_relative 'guide'
 require_relative 'spotlight'
 require_relative 'moveup'
@@ -17,7 +15,6 @@ require_relative 'remotePartial'
 require_relative 'qstoc'
 require_relative 'nav'
 require_relative 'roadmap'
-require_relative 'ordernamefixer'
 require_relative 'guide_metadata'
 require_relative 'disqus'
 require_relative 'tag_cloud'
@@ -52,7 +49,6 @@ Awestruct::Extensions::Pipeline.new do
   # Must come after Indexifier and before Guides
   extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')
   extension Awestruct::Extensions::MoveUp.new('/stack/jboss-bom', 'README')
-  extension Awestruct::Extensions::OrderNameFixer.new('/examples/ticket-monster/tutorial')
 
   extension Awestruct::Extensions::Atomizer.new( 
     :posts, 
