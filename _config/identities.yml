@@ -11,6 +11,8 @@
   role: Marketing
 - github_id: lightguard
   role: Seam Migration Guru
+- github_id: rafabene
+  role: Stacks Maestro
 # Cannot resolve full names for the following accounts
 - github_id: jaikiran
   name: Jaikiran Pai
