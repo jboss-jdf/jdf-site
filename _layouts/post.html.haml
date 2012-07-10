@@ -13,12 +13,15 @@ layout: news
         Posted by
         - identity = site.identities.lookup(page.author)
         - if identity
-          = identity.to_link
+          %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + identity.github_id}}
+            = identity.name
         - else
           = page.author
       %span.dateinline on #{page.date.strftime('%b %d, %Y')}
       - if site.disqus
         %span.comments |#{page.disqus_comments_link}
+      - if identity
+        = partial('contributor_modal.html.haml', {'contributor'=>identity})
   .body
     ~ page.content
   .footer

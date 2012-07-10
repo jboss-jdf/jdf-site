@@ -57,19 +57,28 @@ module Awestruct
 
                 site.engine.set_urls([page])
                 guide.url = page.url
-               
-                # Extract metadata from git
-                guide.changes = page_changes(guide, @num_changes)
-                guide.contributors = page_contributors(guide, @num_contrib_changes, guide.authors)
 
                 # Different formats use different metadata formats, so is extracted in a handler
-                guide.title = page.source_title 
-                guide.authors = page.source_authors
+                guide.title = page.source_title
+                
+                if page.source_author
+                  puts page.relative_source_path + (page.source_author ? page.source_author.to_s : '')
+                  guide.authors = []
+                  page.source_author.each do |a|
+                    guide.authors << site.identities.lookup_by_name(a)
+                  end
+                  puts page.relative_source_path + (guide.authors ? guide.authors.to_s : '')
+                end
+
                 guide.technologies = page.source_technologies 
                 guide.level = page.source_level
                 guide.summary = page.source_summary
                 guide.prerequisites = page.source_prerequisites
-                
+               
+                # Extract metadata from git
+                guide.changes = page_changes(guide, site.identities, @num_changes)
+                guide.contributors = page_contributors(guide, site.identities, @num_contrib_changes, guide.authors)
+
                 # Extract chapter info from the page
                 guide.chapters = []
 
@@ -105,30 +114,34 @@ module Awestruct
       end
 
       ##
-      # Returns a Array of unique contributors.name's based on the Git commit history for the given page.
+      # Returns a Array of unique contributors.github_id's based on the Git commit history for the given page.
       # Assumes guides are brought in as submodules so opens git rooted in the page's dir
       # The Array is ordered by number of commits done by the contributors.
       # Any authors are removed from the contributor list
-      def page_contributors(guide, size, authors)
+      def page_contributors(guide, identities, size, authors)
         contributors = Hash.new
         g = Git.open(guide.src_root)
         g.log(size == -1 ? nil : size).path(guide.src_relative_path).each do |c|
-          if !authors || authors.count(c.author.name) == 0
-            if contributors[c.author.name]
-              contributors[c.author.name] = contributors[c.author.name] + 1
+          user = identities.lookup_by_email(c.author.email)
+          user = user ? user : c.author.name
+          if !authors || authors.count(user) == 0
+            if contributors[user]
+              contributors[user] = contributors[user] + 1
             elsif
-              contributors[c.author.name] = 1
+              contributors[user] = 1
             end
           end
         end
         contributors.size == 0 ? nil : contributors.sort{|a, b| b[1] <=> a[1]}.map{|x| x[0]}
       end
 
-      def page_changes(guide, size)
+      def page_changes(guide, identities, size)
         changes = []
         g = Git.open(guide.src_root)
         g.log(size == -1 ? nil : size).path(guide.src_relative_path).each do |c|
-          changes << Change.new(c.sha, c.author.name, c.author.date, c.message.split(/\n/)[0].chomp('.').capitalize)
+          user = identities.lookup_by_email(c.author.email)
+          user = user ? user : c.author.name
+          changes << Change.new(c.sha, user, c.author.date, c.message.split(/\n/)[0].chomp('.').capitalize)
         end
         if changes.length == 0
           changes << Change.new('UNTRACKED', 'You', Time.now, 'Not yet committed')

@@ -40,13 +40,26 @@ layout: default
               .span3
                 - if page.guide.authors
                   %strong= "Author#{page.guide.authors.size > 1 ? 's' : ''}:"
-                  // TODO Link in to site identities
-                  = ' '.concat(page.guide.authors.map{|u| u} * ', ')
-              .span3
+                  - page.guide.authors.each_with_index do |a, i|
+                    - if a
+                      = (i > 0 ? ' | ' : '')
+                      - if a.is_a? String
+                        = a
+                      - else
+                        %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + a.github_id}}
+                          = a.name
+
+              .span3 
                 - if page.guide.contributors
                   %strong= "Contributor#{page.guide.contributors.size > 1 ? 's' : ''}:"
-                  // TODO Link in to site identities
-                  = ' '.concat(page.guide.contributors.map{|u| u} * ', ')
+                  - page.guide.contributors.each_with_index do |a, i|
+                    - if a
+                      = (i > 0 ? ' | ' : '')                    
+                      - if a.is_a? String
+                        = a
+                      - else
+                        %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + a.github_id}}
+                          = a.name
               .span3
                 %strong{:style=>"padding-left: #{page.guide.group || page.tags ? 10 : 0}px;"} Last Update:
                 = ' '.concat(page.guide.changes[0].date.strftime('%b %d, %Y'))
@@ -68,6 +81,13 @@ layout: default
               - page.guide.metadata.alternate_formats.each do |f|
                 %a{:href=>f.download_url, :title=>"Download #{f.format}"}
                   %img(src="#{site.base_url}/images/#{f.format}_icon.png" alt="#{f.format}")
+  - if page.guide.authors
+    - page.guide.authors.each do |a|
+      = partial('contributor_modal.html.haml', {'contributor'=>a})
+  - if page.guide.contributors
+    - page.guide.contributors.each do |a|
+      = partial('contributor_modal.html.haml', {'contributor'=>a})
+ 
   .container#guide
     #content{:lang=>page.language ? page.language.code : nil}
       ~ content
@@ -100,10 +120,18 @@ layout: default
             %li
               #{change.date.strftime('%b %d, %Y')}:
               &= change.message
-              %em by #{change.author} 
+              - if change.author
+                - if change.author.is_a? String
+                  %em 
+                    = change.author
+                - else
+                  %em.modal-link{:data=>{:toggle=>'modal', :target=>'#' + change.author.github_id}}
+                    = change.author.name
         %p
           -# FIXME make me a function
           %a{:href=>"#{site.website_source_repo}/commits/master#{page.relative_source_path}"} See full history &raquo;
+        - page.guide.changes.each do |c|
+          = partial('contributor_modal.html.haml', {'contributor'=>c.author})
     - if page.guide
       #sidebar
         #toc

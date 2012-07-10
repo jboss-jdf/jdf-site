@@ -690,6 +690,30 @@ ul.contributors {
       display: block;
     }
   }
+
+}
+.contributor {
+  .modal-header {
+    ul {
+      right: 50px;
+      top: 20px;
+      position:absolute;
+    }
+    li {
+      img {
+        width: 11px;
+        height: 11px;
+        opacity: 0.625;
+        filter:alpha(opacity=62); /* For IE8 and earlier */
+      }
+      display: inline;
+      padding-right: 10px;
+    }
+  }
+}
+
+.modal-link {
+  color:#336699;  
 }
 
 /** Buzz **/

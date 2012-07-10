@@ -1,0 +1,31 @@
+---
+---
+.contributor
+  - if (page.contributor and not page.contributor.is_a? String)
+    %div.modal.hide{:id=>page.contributor.github_id}
+      .modal-header
+        %a.close{:data=>{:dismiss=>'modal'}}
+          %i.icon-remove
+        %h3
+          =page.contributor.name
+          %small= page.contributor.location
+        %ul
+          - if page.contributor.blog
+            %li
+              %a{:href=>page.contributor.blog} 
+                %img(src="#{site.base_url}/images/glyphicons/glyphicons_330_blog.png")
+          - if page.contributor.twitter
+            %li
+              %a{:href=>page.contributor.twitter.url} 
+                %img(src="#{site.base_url}/images/glyphicons/glyphicons_392_twitter.png")
+          %li
+            %a{:href=>page.contributor.github.profile_url}
+              %img(src="#{site.base_url}/images/glyphicons/glyphicons_381_github.png")
+      .modal-body.clearfix
+        %img.thumbnail{:src=>page.contributor.avatar_url(60), :alt=>page.contributor.name, :style=>'float: left; margin: 2px 10px 3px 0;'}
+        - if !page.contributor.bio.nil?
+          :markdown
+            #{page.contributor.bio}
+        - else
+          No bio available.
+

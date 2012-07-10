@@ -10,12 +10,15 @@
         Posted by
         - identity = site.identities.lookup(page.post.author)
         - if identity
-          = identity.to_link
+          %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + identity.github_id}}
+            = identity.name
         - else
-          = page.post.author
+          = page.author
       %span.dateinline on #{page.post.date.strftime('%b %d, %Y')}
       - if site.disqus
         %span.comments |#{page.post.disqus_comments_link}
+      - if identity
+        = partial('contributor_modal.html.haml', {'contributor'=>identity})        
   .body
     ~ page.post.content
   .footer
