@@ -1,6 +1,6 @@
 [submodule "quickstarts/jboss-as-quickstart"]
 	path = quickstarts/jboss-as-quickstart
-	url = https://github.com/jbossas/quickstart.git 
+	url = https://github.com/jboss-jdf/jboss-as-quickstart.git 
 [submodule "migrations/seam2"]
 	path = migrations/seam2
 	url = https://github.com/seam/migration.git

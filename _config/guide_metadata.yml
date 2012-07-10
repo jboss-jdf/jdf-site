@@ -28,9 +28,6 @@ jboss-as-quickstart:
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
   version: 7.1.1.Final 
-  github_org: jbossas
-  github_repo: quickstart
-  github_source_zip: http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-quickstarts-7.1.1.Final-dist.zip 
 migration:
   prefix: /migrations/seam2
   version: 1.0.0.Final
