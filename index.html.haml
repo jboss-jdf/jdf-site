@@ -41,7 +41,7 @@ layout: landing
   .row
     .span5.section-heading
       %h1 Latest News
-      - site.posts.each do |post|
+      - site.posts[0, 3].each do |post|
         %article.news-post
           %header.news-header
             %h2.news-title
