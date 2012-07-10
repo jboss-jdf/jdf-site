@@ -62,12 +62,10 @@ module Awestruct
                 guide.title = page.source_title
                 
                 if page.source_author
-                  puts page.relative_source_path + (page.source_author ? page.source_author.to_s : '')
                   guide.authors = []
                   page.source_author.each do |a|
                     guide.authors << site.identities.lookup_by_name(a)
                   end
-                  puts page.relative_source_path + (guide.authors ? guide.authors.to_s : '')
                 end
 
                 guide.technologies = page.source_technologies 
