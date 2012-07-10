@@ -41,7 +41,7 @@ update()
 {
    cd $DIR/
    echo "Updating versions from $OLDVERSION TO $NEWVERSION for all Java and XML files under $PWD"
-   perl -pi -e "s/version: ${OLDVERSION}/version: ${NEWVERSION}/g" `find . -name site.yml`
+   perl -pi -e "s/version: ${OLDVERSION}/version: ${NEWVERSION}/g" _config/site.yml 
 }
 
 OLDVERSION="1.0.0-SNAPSHOT"
