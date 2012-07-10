@@ -5,7 +5,7 @@ author: pmuir
 tags: [ boms ]
 ---
 
-An element of JBoss Developer Framework that we haven't explored so deeply is the [JBoss BOMs](#{site.base_url}stack/jboss-bom) project. The JBoss BOMs project is where we define the recommended and tested stacks that you can use. For example, if you want to use Hibernate Search in your application, you would want to use the `jboss-javaee-6.0-with-hibernate` [stack](#{site.base_url}stack/jboss-bom/jboss-javaee-6.0-with-hibernate), which adds Hibernate to the base Java EE stack.
+An element of JBoss Developer Framework that we haven't explored so deeply is the [JBoss BOMs](#{site.base_url}/stack/jboss-bom) project. The JBoss BOMs project is where we define the recommended and tested stacks that you can use. For example, if you want to use Hibernate Search in your application, you would want to use the `jboss-javaee-6.0-with-hibernate` [stack](#{site.base_url}/stack/jboss-bom/jboss-javaee-6.0-with-hibernate), which adds Hibernate to the base Java EE stack.
 
 We define the stacks using [Maven BOMs](maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) (or Bill of Materials), which you can easily import into your project, defining the versions of dependencies to use. For example, if you are using Maven:
 
