@@ -713,7 +713,12 @@ ul.contributors {
 }
 
 .modal-link {
-  color:#336699;  
+  color:#336699;
+  cursor: pointer;
+}
+
+.modal-link:hover {
+  text-decoration: underline;
 }
 
 /** Buzz **/
