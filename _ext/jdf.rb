@@ -85,7 +85,7 @@ module Awestruct
         # Extract authors
         author = html.css('span#author').first
         if author
-          page.source_authors = [ author.text ]
+          page.source_author = [ author.text ]
         end
 
         guide_content.to_html
