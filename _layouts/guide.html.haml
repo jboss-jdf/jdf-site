@@ -134,7 +134,7 @@ layout: default
           = partial('contributor_modal.html.haml', {'contributor'=>c.author})
     - if page.guide
       #sidebar
-        #toc
+        #toc{:style=>"width:266px"}
           .btn-group{:style=>"width:136px"}
             %button#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
               #{page.guide.metadata.downloads_label}
