@@ -88,6 +88,13 @@ module Awestruct
           page.source_author = [ author.text ]
         end
 
+        # rebuild links
+        guide_content.css('a').each do |a|
+          if a['href'] =~ /^#(\w*)-(\w*)$/
+            a['href'] = "../#{$1}/##{$1}-#{$2}"
+          end
+        end
+
         guide_content.to_html
       end
 
