@@ -128,14 +128,26 @@ title: 'Migrating to Java EE 6'
           :markdown
             Java EE 6 is a superset of Java EE 5 so choose [JBoss Enterprise Application Platform 6](http://www.redhat.com/products/jbossenterprisemiddleware/application-platform/) or [JBoss AS 7](http://jboss.org/jbossas). [JBoss Developer Framework](#{site.base_url}) provides a good resource to learn the stack. Subscription available, [maintained until June 2019](https://access.redhat.com/support/policy/updates/jboss_notes/#Life_cycle_dates)
 
-- if site.war_stories && site.war_stories.size > 0
-  :markdown
-    War Stories
-    -----------
+:markdown
+  War Stories
+  -----------
 
-    We invite users of the JBoss stack to share their migration stories.
+  We invite users of the JBoss stack to share their migration stories.
 
-  - site.war_stories.each do |post|
-    = partial("short_post.html.haml", {"parent"=>page, "post"=>post, "include_comments_count"=>post.equal?(site.war_stories.last)})
-  .more
-    %a(href="news") View all stories &raquo;
+- site.war_stories.each do |post|
+  %article.news-post
+    %header.news-header
+      %h2.news-title
+        %a{:href=>"#{site.base_url}#{post.url}"}= post.post_title
+      .news-byline
+        .date= post.date.strftime('<abbr>%b</abbr> %d <div class="year">%Y</div>') if !post.date.nil?
+    .news-body
+      - if (post.content.length > 50)
+        - cut_at = post.content.index(/<pre[^>]*>/)
+        - text = html_to_text(cut_at ? post.content[0, cut_at] : post.content)
+        -# might want to use 'white-space: pre-line;' here
+        %p<= text[0..text.index(/[\.\!]( |$)/, [text.index(/[\.\!]( |$)/) + 1, text.length - 1].min)] + '...'
+    .news-footer
+      %a{:href=>"#{site.base_url}#{post.url}"} Go to story
+.more
+  %a(href="news") View all stories &raquo;
