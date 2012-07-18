@@ -24,8 +24,9 @@ module Awestruct
           # Initialize site.guides if not already set up
           site.guides ||= {}
 
-          root_dir = site.dir.to_s.match(/^(.*[^\/?])([\/]?)$/)[1] + @path_prefix          
-
+          root_dir = site.dir.to_s.match(/^(.*[^\/?])([\/]?)$/)[1] + @path_prefix
+          git_root_dir = find_git_root(root_dir)
+          git_sub_dir = root_dir.gsub(/#{git_root_dir}[\/]?/, '')
           guides = []
 
           # Load any metadata parsed for this set of guides
@@ -39,7 +40,7 @@ module Awestruct
               if !metadata || !metadata.guides || metadata.guides.key?(name)
                 # Note that calling page.content causes the source to be parsed and metadata extracted
                 # we need to do this early!
-                html = Nokogiri::HTML(page.content)                
+                html = Nokogiri::HTML(page.content)
 
                 guide = OpenStruct.new
 
@@ -51,7 +52,9 @@ module Awestruct
                 guide.dir = subdir
                 guide.path_prefix = @path_prefix
                 guide.src_root = root_dir
+                guide.git_root = git_root_dir
                 guide.src_relative_path = guide.dir + page.guide.name + @suffix
+                guide.git_relative_path = git_sub_dir + (git_sub_dir.length > 0 ? "/" : "") + guide.src_relative_path
 
                 page.layout = @layout
 
@@ -118,8 +121,8 @@ module Awestruct
       # Any authors are removed from the contributor list
       def page_contributors(guide, identities, size, authors)
         contributors = Hash.new
-        g = Git.open(guide.src_root)
-        g.log(size == -1 ? nil : size).path(guide.src_relative_path).each do |c|
+        g = Git.open(guide.git_root)
+        g.log(size == -1 ? nil : size).path(guide.git_relative_path).each do |c|
           user = identities.lookup_by_email(c.author.email)
           user = user ? user : c.author.name
           if !authors || authors.count(user) == 0
@@ -135,8 +138,8 @@ module Awestruct
 
       def page_changes(guide, identities, size)
         changes = []
-        g = Git.open(guide.src_root)
-        g.log(size == -1 ? nil : size).path(guide.src_relative_path).each do |c|
+        g = Git.open(guide.git_root)
+        g.log(size == -1 ? nil : size).path(guide.git_relative_path).each do |c|
           user = identities.lookup_by_email(c.author.email)
           user = user ? user : c.author.name
           changes << Change.new(c.sha, user, c.author.date, c.message.split(/\n/)[0].chomp('.').capitalize)
@@ -145,6 +148,17 @@ module Awestruct
           changes << Change.new('UNTRACKED', 'You', Time.now, 'Not yet committed')
         end
         changes
+      end
+
+      def find_git_root(dir)
+        if File.directory?(dir)
+          if File.exists?(File.expand_path(".git", dir))
+            dir
+          else
+            dir = File.expand_path("../", dir)
+            find_git_root(dir)
+          end
+        end
       end
 
     end

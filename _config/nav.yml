@@ -14,8 +14,8 @@ quickstarts:
   description: Quickstarts are tightly focused, showing you one API or one use case.
   jboss-as-quickstart: 
     label: JBoss AS Quickstarts
-  guide: 
-    url: http://docs.jboss.org/author/display/AS71/Getting+Started+Developing+Applications+Guide
+  guide:
+    url: /quickstarts/jboss-as-quickstart/guide/Introduction/
   videos:
     url: /quickstarts/get-started/videos
   articles:

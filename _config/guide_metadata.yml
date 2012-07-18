@@ -28,6 +28,28 @@ jboss-as-quickstart:
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
   version: 7.1.1.Final 
+jboss-as-quickstart-guide:
+  title: Getting Started Developing Applications
+  index_label: Guides
+  prefix: /quickstarts/jboss-as-quickstart/guide
+  version: 7.1.1.Final
+  guides:
+    Introduction:
+      summary:
+    GettingStarted:
+      summary: Install the prerequisites such as JBoss Enterprise Application Platform or JBoss AS, and JBoss Developer Studio
+    HelloworldQuickstart: 
+      summary: Quickstart showing the use of CDI and Servlet
+    NumberguessQuickstart:
+      summary: Quickstart showing the use of CDI and JSF
+    GreeterQuickstart:
+      summary: Quickstart showing the use of CDI, JPA, EJB, JTA, and JSF
+    KitchensinkQuickstart:
+      summary: Quickstart showing the use of CDI, JSF, EJB, JTA, Bean Validation, JAX-RS and Arquillian
+    HelloworldOSGiQuickstart:
+      summary: Quickstart showing the use of OSGi
+    Archetype:
+      summary: Create your own application based on the Kitchensink Quickstart
 migration:
   prefix: /migrations/seam2
   version: 1.0.0.Final
