@@ -15,5 +15,12 @@
    * How to deploy it to OpenShift, if necessary
    * Any special requirements (e.g. different server profile, changes to default server config)
 * The sample project should be formatted using the JBoss AS profiles found at <http://github.com/jboss/ide-config/tree/master/>
+
+AsciiDoc
+~~~~~~~~
+
 * When writing asciidoc, and using delimited blocks, we recommend making the block 72 characters wide
+* Due to a (bad) interaction between the source code highlighter, and callouts, it is necessary to use comments in some types of source (e.g. Java). The comments can be removed by asciidoc when processed, by adding these snippets to the `[macros]` section of your system's `asciidoc.conf`:
+
+    [\\]?// &lt;(?P<index>\d+)&gt;=callout
 
