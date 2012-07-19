@@ -30,6 +30,13 @@ We're serious about quality in JBoss Developer Framework, and we are strict abou
     #quickstarts.accordion-body.collapse
       .accordion-inner
         =partial 'contributing_quickstarts.html.haml'
+  
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#war_story") Contributing a migration war story
+    #war_story.accordion-body.collapse
+      .accordion-inner
+        =partial 'war_story_guidelines.md'
 
   .accordion-group
     .accordion-heading
