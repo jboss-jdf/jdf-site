@@ -52,7 +52,7 @@ jboss-as-quickstart-guide:
       summary: Create your own application based on the Kitchensink Quickstart
 migration:
   prefix: /migrations/seam2
-  version: 1.0.0.Final
+  version: 1.0.5.Final
   github_org: seam
 jboss-bom:
   prefix: /stack/jboss-bom
