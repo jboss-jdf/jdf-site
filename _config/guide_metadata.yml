@@ -27,12 +27,12 @@ jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
-  version: 7.1.1.Final 
+  version: 7.1.2.M1 
 jboss-as-quickstart-guide:
   title: Getting Started Developing Applications
   index_label: Guides
   prefix: /quickstarts/jboss-as-quickstart/guide
-  version: 7.1.1.Final
+  version: 7.1.2.M1
   guides:
     Introduction:
       summary:
