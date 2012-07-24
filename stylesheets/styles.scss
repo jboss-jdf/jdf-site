@@ -531,6 +531,13 @@ body.guide {
          white-space: nowrap;
        }
     }
+
+    // Callout images
+    .colist {
+      td {
+        min-width: 12px;
+      }
+    }
   }
   #sidebar {
     @include border-box;
