@@ -27,9 +27,9 @@ title: JBoss BOMs
                   <dependencyManagement>
                     <dependencies>
                       <dependency>
-                        <groupId>org.jboss.spec</groupId>
-                            <artifactId>jboss-javaee-web-6.0-with-tools-</artifactId>
-                            <version>1.0.1.CR1</version>
+                        <groupId>#{bom.groupId}</groupId>
+                            <artifactId>#{bom.artifactId}</artifactId>
+                            <version>#{bom.recommendedVersion}</version>
                             <type>pom</scope>
                             <scope>import</scope>
                           </dependency>
