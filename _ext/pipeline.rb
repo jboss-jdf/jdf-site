@@ -18,6 +18,7 @@ require_relative 'roadmap'
 require_relative 'guide_metadata'
 require_relative 'disqus'
 require_relative 'tag_cloud'
+require_relative 'stacks'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -49,6 +50,7 @@ Awestruct::Extensions::Pipeline.new do
   # Must come after Indexifier and before Guides
   extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')
   extension Awestruct::Extensions::MoveUp.new('/stack/jboss-bom', 'README')
+  extension Awestruct::Extensions::MoveUp.new('/stack/plugin-jdf', 'README')
 
   extension Awestruct::Extensions::Atomizer.new( 
     :posts, 
@@ -66,6 +68,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Nav.new
 
   extension Awestruct::Extensions::Spotlight.new('/spotlights')
+  extension Awestruct::Extensions::Stacks.new('https://raw.github.com/jboss-jdf/jdf-stack/Beta2/stacks.yaml')
 
   # Needs to be before Guides
   extension Awestruct::Extensions::GuideMetadata.new  
@@ -75,6 +78,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', '.asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/stack/jboss-bom', '/README.md')
+  extension Awestruct::Extensions::Guide::Index.new('/stack/plugin-jdf', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart/guide', '.asciidoc')
 
   # Must be after guides

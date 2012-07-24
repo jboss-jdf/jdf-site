@@ -10,3 +10,6 @@
 [submodule "examples/ticket-monster"]
 	path = examples/ticket-monster
 	url = https://github.com/jboss-jdf/ticket-monster.git
+[submodule "stack/plugin-jdf"]
+	path = stack/plugin-jdf
+	url = git@github.com:jboss-jdf/plugin-jdf.git

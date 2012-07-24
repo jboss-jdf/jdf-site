@@ -1,0 +1,39 @@
+---
+layout: default
+title: JBoss BOMs
+---
+
+:markdown
+  The JBoss BOM's project provides Maven BOM files enhancing Jave EE 6 with deployment and test tooling. These files manage the version of the dependencies you use in your project, ensuring you always get a compatible stack.
+
+  A number of BOMs are provided, each of which address a specific use case. If your usage falls into a number of use cases, simply use all of the relevant BOMs.
+
+.stacks
+  .accordion#accordion
+    - site.stacks.availableBoms.each do |bom|
+      .accordion-group
+        .accordion-heading
+          %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="##{bom.object_id}") #{bom.name}
+        %div{:id => "#{bom.object_id}", :class => "accordion-body collapse" }
+          .accordion-inner
+            %strong Description: 
+            #{bom.description}
+            %h2 Usage
+            %p To use the BOM, import into your dependency management:
+            %pre
+              %code
+                :escaped
+                  
+                  <dependencyManagement>
+                    <dependencies>
+                      <dependency>
+                        <groupId>org.jboss.spec</groupId>
+                            <artifactId>jboss-javaee-web-6.0-with-tools-</artifactId>
+                            <version>1.0.1.CR1</version>
+                            <type>pom</scope>
+                            <scope>import</scope>
+                          </dependency>
+                      </dependencies>
+                  </dependencyManagement>
+                  .
+

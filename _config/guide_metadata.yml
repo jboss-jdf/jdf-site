@@ -59,3 +59,8 @@ jboss-bom:
   title: JBoss BOMs
   index_label: BOMs Index
   version: 1.0.1.CR1
+plugin-jdf:
+  prefix: /stack/plugin-jdf
+  title: JDF Plugin
+  index_label: JDF Plugin for Forge
+  version: 1.0.5.Final

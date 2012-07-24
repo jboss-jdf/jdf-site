@@ -978,6 +978,67 @@ body div.gadget {
   }
 }
 
+/**  Stacks */
+.stacks {
+  h2 {
+    border-bottom: $palette_50gray thin ridge; 
+  } 
+  .not-released {
+    p, h1, h2, h3, h4, h5, h6, li, div {
+      color: $palette_50gray;
+    }
+  }
+  dt {
+    margin: auto;
+  }
+  li {
+    list-style: none;
+  }
+  .tagline {
+    text-align: right;
+    font-size: 17px;
+  }
+  .release_info {
+    margin-top: 5em;
+  }
+
+  code, tt, pre {
+    font-family: "Courier New", Courier, monospace;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    white-space: pre;
+    word-wrap: normal;
+    word-break: normal;
+  }
+
+  p > code,li > code {
+    background-color: #F7F7F9;
+    border: 1px solid #C1C1C1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 3px 0px 3px;
+    color: $jdf_red;
+  }
+
+  pre {
+    background-color: #F7F7F9;
+    border: 1px solid #C1C1C1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 3px 0px 3px;
+    overflow-x: auto;
+    code {
+      color: $jdf_red;
+    }
+  }
+
+}
+
 /** Common styles - could probably make this better with some sass functions, just C&P for now */
 a {
   color:#336699;

@@ -31,7 +31,7 @@ module Awestruct
 
           # Load any metadata parsed for this set of guides
           metadata = site.guide_metadata[@path_prefix]
-          
+
           site.pages.each do |page|
             if ( page.relative_source_path =~ /^#{@path_prefix}\/?(.*?)([^\/]*)#{@suffix}$/ )
               subdir = $1
@@ -54,7 +54,11 @@ module Awestruct
                 guide.src_root = root_dir
                 guide.git_root = git_root_dir
                 guide.src_relative_path = guide.dir + page.guide.name + @suffix
-                guide.git_relative_path = git_sub_dir + (git_sub_dir.length > 0 ? "/" : "") + guide.src_relative_path
+                
+                #Remove the "/" - Git log does not work with /FILE.* on relative path
+                git_relative_path = (guide.src_relative_path.start_with?('/') ? guide.src_relative_path[1..-1] : guide.src_relative_path)
+
+                guide.git_relative_path = git_sub_dir + (git_sub_dir.length > 0 ? "/" : "") + git_relative_path
 
                 page.layout = @layout
 

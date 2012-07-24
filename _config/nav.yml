@@ -34,9 +34,15 @@ migrations:
     url: /migrations/get-started/javaee5
   get-involved:
 stack:
-  label: JBoss BOMs
-  description: The JBoss BOMs provide a recommended stack of dependencies, consumbable by Maven, Ivy or Gradle.
-  url: /stack/jboss-bom
+  label: JBoss Stacks
+  description: The JBoss Stacks provide a recommended stack of boms, archetypes and runtimes
+  url: /stack/boms
+  boms:
+    label: JBoss BOMs
+  plugin-jdf:
+    label: JDF Plugin
+#  runtimes:
+#  archetypes:
 forums:
   jdf-users:
     label: jdf-users
