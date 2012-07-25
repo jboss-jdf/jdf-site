@@ -41,7 +41,8 @@ stack:
     label: JBoss BOMs
   plugin-jdf:
     label: JDF Plugin
-#  runtimes:
+  runtimes:
+    label: Runtimes
 #  archetypes:
 forums:
   jdf-users:

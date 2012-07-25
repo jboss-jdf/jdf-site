@@ -1,0 +1,39 @@
+---
+layout: default
+title: 'JBoss Runtimes'
+---
+
+:markdown
+  JBoss Developer Framework gives you the possibility to choose your desired runtime/archtypes/bom combination.
+
+  ------------------------------------------
+
+
+
+%ul.nav.nav-tabs
+  - site.stacks.majorReleases.each_with_index do |mr, index|
+    %li{:class => index==0? "active" :  ""}
+      %a(href="##{mr.object_id}" data-toggle="tab") #{mr.name} #{mr.version}
+
+%div.tab-content
+  - site.stacks.majorReleases.each_with_index do |mr, index|
+    %div{:class => ["tab-pane", index==0?"active":""], :id=>"#{mr.object_id}"}
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th
+            %th Recommended Runtime
+            %th Default BOM
+            %th Default Archetype
+            %th Download URL
+        - mr.minorReleases.each do |minR|
+          %tr
+            %td 
+              %strong  #{minR.name} #{minR.version}
+            %td #{minR.recommendedRuntime.name}
+            %td 
+              %a{:href => "../boms"} #{minR.recommendedRuntime.defaultBom.name}
+            %td soon
+            %td 
+              %a{:href => "#{minR.recommendedRuntime.url}"} Download
+   
