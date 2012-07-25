@@ -2,7 +2,7 @@
 layout: default
 title: 'JBoss Runtimes'
 ---
-
+- page.javascripts = [ "#{site.base_url}/javascripts/jquery-datatables.js" ] 
 :markdown
   JBoss Developer Framework gives you the possibility to choose your desired runtime/archtypes/bom combination.
 
@@ -10,30 +10,104 @@ title: 'JBoss Runtimes'
 
 
 
-%ul.nav.nav-tabs
-  - site.stacks.majorReleases.each_with_index do |mr, index|
-    %li{:class => index==0? "active" :  ""}
-      %a(href="##{mr.object_id}" data-toggle="tab") #{mr.name} #{mr.version}
+%table.table.table-bordered#releases
+  %thead
+    %tr
+      %th Minor Releases
+      %th Suggested Runtime
+      %th Suggested BOM
+      %th Suggested Archetype
+      %th Download
+      %th.hidden Runtime ID
+  - site.stacks.minorReleases.each do |mr|
+    %tr
+      %td 
+        %strong  #{mr.name} #{mr.version}
+      %td #{mr.recommendedRuntime.name}
+      %td 
+        %a{:href => "../boms/##{mr.recommendedRuntime.defaultBom.name}"} #{mr.recommendedRuntime.defaultBom.name}
+      %td soon
+      %td 
+        %a{:href => "#{mr.recommendedRuntime.url}"}
+          %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
+      %td.hidden #{mr.object_id}
 
-%div.tab-content
-  - site.stacks.majorReleases.each_with_index do |mr, index|
-    %div{:class => ["tab-pane", index==0?"active":""], :id=>"#{mr.object_id}"}
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th
-            %th Recommended Runtime
-            %th Default BOM
-            %th Default Archetype
-            %th Download URL
-        - mr.minorReleases.each do |minR|
-          %tr
-            %td 
-              %strong  #{minR.name} #{minR.version}
-            %td #{minR.recommendedRuntime.name}
-            %td 
-              %a{:href => "../boms"} #{minR.recommendedRuntime.defaultBom.name}
-            %td soon
-            %td 
-              %a{:href => "#{minR.recommendedRuntime.url}"} Download
+-#
+  Create Tables for each Runtime 
+
+- site.stacks.minorReleases.each do |mr|
+  %table.hidden{:id=>"#bomDetails#{mr.object_id}", :class=>"table"}
+    %thead
+      %th Available Boms for #{mr.recommendedRuntime.name}
+      %th Recommended Bom version
+    - mr.recommendedRuntime.boms.each do |bom|
+      %tr
+        %td 
+          %a{:href=>"../boms/##{bom.name}"} #{bom.name}
+        %td 
+          %a{:href=>"../boms/##{bom.name}"} #{bom.recommendedVersion}
+
+:javascript
+
+  /* Formating function for row details */
+  function fnFormatDetails ( oTable, nTr )
+  {
+      var aData = oTable.fnGetData( nTr );
+      var sTableId = '#bomDetails'+ aData[6];
+      var sTable =  document.getElementById(sTableId).innerHTML;
+      var sOut = '<table class="table tableBordered" cellpadding="5" cellspacing="0" border="0" style="padding-left:20px;">';
+      sOut += sTable;
+      sOut += '</table>';
+       
+      return sOut;
+  }
    
+  $(document).ready(function() {
+      /*
+       * Insert a 'details' column to the table
+       */
+      var nCloneTh = document.createElement( 'th' );
+      var nCloneTd = document.createElement( 'td' );
+      nCloneTd.innerHTML = '<img src="#{site.base_url}/images/details_open.png">';
+      nCloneTd.className = "center";
+       
+      $('#releases thead tr').each( function () {
+          this.insertBefore( nCloneTh, this.childNodes[0] );
+      } );
+       
+      $('#releases tbody tr').each( function () {
+          this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+      } );
+       
+      /*
+      * Initialse DataTables, with no sorting on the 'details' column
+      */
+      var oTable = $('#releases').dataTable(  {
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": false,
+        "bInfo": false,
+        "bAutoWidth": false
+      });
+       
+      /* Add event listener for opening and closing details
+      * Note that the indicator for showing which row is open is not controlled by DataTables,
+      * rather it is done here
+      */
+      $('#releases tbody td img').live('click', function () {
+          var nTr = $(this).parents('tr')[0];
+          if ( oTable.fnIsOpen(nTr) )
+          {
+              /* This row is already open - close it */
+              this.src = "#{site.base_url}/images/details_open.png";
+              oTable.fnClose( nTr );
+          }
+          else
+          {
+              /* Open this row */
+              this.src = "#{site.base_url}/images/details_close.png";
+              oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+          }
+      } );
+  } );
