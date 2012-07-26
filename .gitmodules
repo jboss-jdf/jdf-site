@@ -4,9 +4,6 @@
 [submodule "migrations/seam2"]
 	path = migrations/seam2
 	url = https://github.com/seam/migration.git
-[submodule "stack/jboss-bom"]
-	path = stack/jboss-bom
-	url = https://github.com/jboss-jdf/jboss-bom.git
 [submodule "examples/ticket-monster"]
 	path = examples/ticket-monster
 	url = https://github.com/jboss-jdf/ticket-monster.git
