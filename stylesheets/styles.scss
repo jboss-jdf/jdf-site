@@ -987,23 +987,21 @@ body div.gadget {
   h2 {
     border-bottom: $palette_50gray thin ridge; 
   } 
-  .not-released {
-    p, h1, h2, h3, h4, h5, h6, li, div {
-      color: $palette_50gray;
-    }
-  }
+
+  .centered {
+    text-align: center;
+  }  
   dt {
     margin: auto;
   }
+
   li {
     list-style: none;
   }
+
   .tagline {
     text-align: right;
     font-size: 17px;
-  }
-  .release_info {
-    margin-top: 5em;
   }
 
   code, tt, pre {

@@ -1,51 +1,55 @@
 ---
 layout: default
-title: 'JBoss Runtimes'
+title: 'JBoss Stacks'
 ---
 - page.javascripts = [ "#{site.base_url}/javascripts/jquery-datatables.js" ] 
 :markdown
-  JBoss Developer Framework gives you the possibility to choose your desired runtime/archtypes/bom combination.
+  JBoss Stacks allows you to easily choose and use a stack of JBoss runtimes, frameworks and tools. 
+
+  The JBoss BOMs project allows you to easily  use your stack of choice. 
+
+  The JDF plugin allows you to easily add stacks to your project using Forge.
 
   ------------------------------------------
 
+.stacks
 
-
-%table.table.table-bordered#releases
-  %thead
-    %tr
-      %th Minor Releases
-      %th Suggested Runtime
-      %th Suggested BOM
-      %th Suggested Archetype
-      %th Download
-      %th.hidden Runtime ID
-  - site.stacks.minorReleases.each do |mr|
-    %tr
-      %td 
-        %strong  #{mr.name} #{mr.version}
-      %td #{mr.recommendedRuntime.name}
-      %td 
-        %a{:href => "../boms/##{mr.recommendedRuntime.defaultBom.name}"} #{mr.recommendedRuntime.defaultBom.name}
-      %td soon
-      %td 
-        %a{:href => "#{mr.recommendedRuntime.url}"}
-          %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
-      %td.hidden #{mr.object_id}
-
--#
-  Create Tables for each Runtime 
-
-- site.stacks.minorReleases.each do |mr|
-  %table.hidden{:id=>"#bomDetails#{mr.object_id}", :class=>"table"}
+  %table.table.table-bordered#releases
     %thead
-      %th Available Boms for #{mr.recommendedRuntime.name}
-      %th Recommended Bom version
-    - mr.recommendedRuntime.boms.each do |bom|
+      %tr
+        %th Release
+        %th Suggested Runtime
+        %th Suggested BOM
+        %th Suggested Archetype
+        %th Download
+        %th.hidden Runtime ID
+    - site.stacks.minorReleases.each do |mr|
       %tr
         %td 
-          %a{:href=>"../boms/##{bom.name}"} #{bom.name}
+          %strong  #{mr.name} #{mr.version}
+        %td #{mr.recommendedRuntime.name}
         %td 
-          %a{:href=>"../boms/##{bom.name}"} #{bom.recommendedVersion}
+          %a{:href => "../boms/##{mr.recommendedRuntime.defaultBom.name}"} #{mr.recommendedRuntime.defaultBom.name}
+        %td soon
+        %td.centered 
+          %a{:href => "#{mr.recommendedRuntime.url}"}
+            %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
+        %td.hidden #{mr.object_id}
+
+  -#
+    Create Tables for each Runtime 
+
+  - site.stacks.minorReleases.each do |mr|
+    %table.hidden{:id=>"#bomDetails#{mr.object_id}", :class=>"table"}
+      %thead
+        %th Available Boms for #{mr.recommendedRuntime.name}
+        %th Recommended Bom version
+      - mr.recommendedRuntime.boms.each do |bom|
+        %tr
+          %td 
+            %a{:href=>"../boms/##{bom.name}"} #{bom.name}
+          %td 
+            %a{:href=>"../boms/##{bom.name}"} #{bom.recommendedVersion}
 
 :javascript
 
@@ -69,7 +73,7 @@ title: 'JBoss Runtimes'
       var nCloneTh = document.createElement( 'th' );
       var nCloneTd = document.createElement( 'td' );
       nCloneTd.innerHTML = '<img src="#{site.base_url}/images/details_open.png">';
-      nCloneTd.className = "center";
+      nCloneTd.className = "centered";
        
       $('#releases thead tr').each( function () {
           this.insertBefore( nCloneTh, this.childNodes[0] );
