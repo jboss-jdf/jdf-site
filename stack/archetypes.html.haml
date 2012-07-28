@@ -1,0 +1,36 @@
+---
+layout: default
+title: Archetypes
+---
+
+%script{:type=>"text/javascript", :src=>"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.js" }
+
+.stacks
+  #accordion
+    - site.stacks.availableArchetypes.each do |archetype|
+      %h3
+        %a{:href=>"##{archetype.name}", :name=>"#{archetype.name}"} #{archetype.name}
+      .accordion-inner
+        %p
+        %h5 Usage
+        %p To use the archetype to generate a new project, you should run:
+        %pre
+          %code
+            = preserve do
+              :escaped
+                mvn archetype:generate \
+                -DarchetypeArtifactId=#{archetype.artifactId} \
+                -DarchetypeGroupId=#{archetype.groupId} \
+                -DarchetypeVersion=#{archetype.recommendedVersion} \
+        %p
+        %h5 Available Versions
+        %ul
+          - archetype.availableVersions.each do |v|
+            %li - #{v}
+                        
+  :javascript
+    $(document).ready(function() {
+      var bomNum = parseInt(window.location.hash.slice(1));
+      $('#accordion').accordion({  autoHeight: false, collapsible: true , navigation: true, active: false});
+    });
+

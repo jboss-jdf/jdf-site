@@ -43,7 +43,6 @@ stack:
     label: JDF Plugin
   stacks:
     label: JBoss Stacks
-#  archetypes:
 forums:
   jdf-users:
     label: jdf-users

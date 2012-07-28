@@ -23,14 +23,15 @@ module Awestruct
 	      request = Net::HTTP::Get.new(uri.request_uri)
 	      response = http.request(request)
 	      stacks_parsed = YAML.load(response.body)
-	      #TODO Mount Archetypes
+
 	      available_boms = mount_boms(stacks_parsed['availableBoms'])
 	      available_runtimes = mount_runtimes(stacks_parsed['availableRuntimes'])
+        available_archetypes = mount_archetypes(stacks_parsed['availableArchetypes'])
 	      minor_releases = mount_minor_releases(stacks_parsed['minorReleases'])
 	      major_releases = mount_major_releases(stacks_parsed['majorReleases'])
         stacks = JBoss::Stacks.new(
           available_boms,
-          nil,
+          available_archetypes,
           available_runtimes,
           major_releases,
           minor_releases
@@ -47,19 +48,18 @@ module Awestruct
           runtime_item['labels'],
           mount_boms(runtime_item['boms']),
           mount_bom(runtime_item['defaultBom']),
-          nil,
-          nil
-      	  #TODO Mount Archetypes
+          mount_archetype(runtime_item['defaultArchetype']),
+          mount_archetypes(runtime_item['archetypes'])
         )
       end     
 
       def mount_runtimes(runtimes)
-        availableRuntimes = []
+        available_runtimes = []
         runtimes.each do |runtime_item|
           runtime = mount_runtime(runtime_item)
-          availableRuntimes << runtime
+          available_runtimes << runtime
         end
-        return  availableRuntimes
+        return  available_runtimes
       end
  
       def mount_bom(bom_item)
@@ -75,12 +75,12 @@ module Awestruct
       end
 
       def mount_boms(boms)
-        availableBoms = []
+        available_boms = []
       	boms.each do |bom_item| 
       	  bom = mount_bom(bom_item)
-    	    availableBoms << bom
+    	    available_boms << bom
       	end
-      	return availableBoms
+      	return available_boms
       end
 
       def mount_major_release(major_release)
@@ -118,13 +118,34 @@ module Awestruct
         return minor_releases
       end
 
+      def mount_archetype(archetype)
+        JBoss::Archetype.new(
+          archetype['name'],
+          archetype['description'],
+          archetype['groupId'],
+          archetype['artifactId'],
+          archetype['recommendedVersion'],
+          archetype['availableVersions'],
+          archetype['labels']
+        )
+      end
+
+      def mount_archetypes(as)
+        available_archetypes = []
+        as.each do |as_item|
+          archetype = mount_archetype(as_item)
+          available_archetypes << archetype
+        end
+        return available_archetypes
+      end
+
     end #End Class
   end #End module Extensions
 end #End module Awestruct
 
 module JBoss
-   class Stacks
-	  attr_reader  :availableBoms, :availableArchetypes, :availableRuntimes, :majorReleases, :minorReleases
+  class Stacks
+    attr_reader  :availableBoms, :availableArchetypes, :availableRuntimes, :majorReleases, :minorReleases
 
 	  def initialize(availableBoms, availableArchetypes, availableRuntimes, majorReleases, minorReleases)
 		  @availableBoms = availableBoms
@@ -133,9 +154,9 @@ module JBoss
 		  @majorReleases = majorReleases
 		  @minorReleases = minorReleases
 	  end
-   end
+  end
 
-   class Bom
+  class Bom
 	  attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion, :availableVersions, :labels
 
 	  def initialize(name, description, groupId, artifactId, recommendedVersion, availableVersions, labels)
@@ -147,10 +168,10 @@ module JBoss
 		  @availableVersions = availableVersions
 		  @labels = labels
 	  end
-   end
+  end
 
-   class Runtime
-	  attr_reader :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes
+  class Runtime
+    attr_reader :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes
 	
 	  def initialize(name, version, type, url, labels, boms, defaultBom, defaultArchetype, archetypes)
 		  @name = name
@@ -163,9 +184,24 @@ module JBoss
 		  @defaultArchetype = defaultArchetype
 		  @archetypes = archetypes
 	  end
-   end
+  end
 
-   class MajorRelease
+  class Archetype
+    attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion, :availableVersions, :labels
+
+    def initialize(name, description, groupId, artifactId, recommendedVersion, availableVersions, labels)
+      @name = name
+      @description = description
+      @groupId = groupId
+      @artifactId = artifactId
+      @recommendedVersion = recommendedVersion
+      @availableVersions = availableVersions
+      @labels = labels
+    end
+
+  end
+
+  class MajorRelease
 	  attr_reader :name, :version, :recommendedRuntime, :minorReleases
 
 	  def initialize(name, version, recommendedRuntime, minorReleases)
@@ -174,9 +210,9 @@ module JBoss
 		  @recommendedRuntime = recommendedRuntime
 		  @minorReleases = minorReleases
 	  end
-   end 
+  end 
 
-   class MinorRelease
+  class MinorRelease
 	  attr_reader :name, :version, :recommendedRuntime
 
 	  def initialize(name, version, recommendedRuntime)
@@ -184,7 +220,7 @@ module JBoss
 		  @version = version
 		  @recommendedRuntime = recommendedRuntime
 	  end
-   end 
+  end 
 
 end
 
