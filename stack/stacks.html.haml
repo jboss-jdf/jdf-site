@@ -15,7 +15,7 @@ title: 'JBoss Stacks'
 
 .stacks
  
-  %table.table.table-bordered#runtimes
+  %table.table#runtimes
     %thead
       %tr
         %th Release
@@ -23,9 +23,7 @@ title: 'JBoss Stacks'
         %th Suggested BOM
         %th Suggested Archetype
         %th Download
-        %th Runtime ID
-        %th Subtable
-        %th Has Subtable
+        %th.hidden Runtime ID
     - site.stacks.minorReleases.each do |mr|
       %tr
         %td 
@@ -37,127 +35,91 @@ title: 'JBoss Stacks'
         %td.centered 
           %a{:href => "#{mr.recommendedRuntime.url}"}
             %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
-        %td #{mr.object_id}
-        %td mrData
-        %td true
+        %td.hidden #{mr.object_id}
 
     -# Create BOM Tables for each Runtime 
 
-  - site.stacks.minorReleases.each do |mr|
-    %table.table.table-bordered{:id => "mrData#{mr.object_id}"}
-      %thead
-        %tr
-          %th Valor
-          %th Hidden
-          %th Table Type
-      %tr
-        %td Available Boms for #{mr.recommendedRuntime.name} 
-        %td #{mr.object_id}
-        %td boms
-      %tr
-        %td Available Archetypes for #{mr.recommendedRuntime.name} 
-        %td #{mr.object_id}
-        %td archetypes
+  .hidden
+    - site.stacks.minorReleases.each do |mr|
+      %table{:id => "boms#{mr.object_id}", :class => "table table-bordered"}
+        %thead
+          %th Available Boms for #{mr.recommendedRuntime.name}
+          %th Recommended Bom version
+        - mr.recommendedRuntime.boms.each do |bom|
+          %tr
+            %td 
+              %a{:href=>"../boms/##{bom.name}"} #{bom.name}
+            %td 
+              %a{:href=>"../boms/##{bom.name}"} #{bom.recommendedVersion}
 
-    %table{:id=>"boms#{mr.object_id}"}
-      %thead
-        %th Available Boms for #{mr.recommendedRuntime.name}
-        %th Recommended Bom version
-      - mr.recommendedRuntime.boms.each do |bom|
-        %tr
-          %td 
-            %a{:href=>"../boms/##{bom.name}"} #{bom.name}
-          %td 
-            %a{:href=>"../boms/##{bom.name}"} #{bom.recommendedVersion}
-
-    %table{:id=>"archetypes#{mr.object_id}"}
-      %thead
-        %th Available Archetypes for #{mr.recommendedRuntime.name}
-        %th Recommended Archetype version
-      - mr.recommendedRuntime.archetypes.each do |archetype|
-        %tr
-          %td #{archetype.name}
-          %td #{archetype.recommendedVersion}
+      %table{:id=>"archetypes#{mr.object_id}", :class => "table table-bordered"}
+        %thead
+          %th Available Archetypes for #{mr.recommendedRuntime.name}
+          %th Recommended Archetype version
+        - mr.recommendedRuntime.archetypes.each do |archetype|
+          %tr
+            %td #{archetype.name}
+            %td #{archetype.recommendedVersion}
 
 :javascript
 
-  /* Formating function for row details */
-  function showDetails ( selector )
+   /* Formating function for row details */
+  function fnFormatDetails ( oTable, nTr )
   {
-      
-      var sTableBomContent =  document.getElementById(selector).outerHTML;
-      return sTableBomContent;
+      var aData = oTable.fnGetData( nTr );
+      var sTableBoms =  document.getElementById('boms'+ aData[6]).outerHTML;
+      var sTableArchetypes =  document.getElementById('archetypes'+ aData[6]).outerHTML;
+      return sTableBoms + sTableArchetypes;
   }
-
-  function initilizeRuntimeDetailsTable (parent, table, subtableIndex, index, hasSubTable) {
+   
+  $(document).ready(function() {
       /*
-       * Insert a '+' column to the table Runtimes
+       * Insert a 'details' column to the table
        */
       var nCloneTh = document.createElement( 'th' );
       var nCloneTd = document.createElement( 'td' );
       nCloneTd.innerHTML = '<img src="#{site.base_url}/images/details_open.png">';
       nCloneTd.className = "centered";
-      
-      var selectorTable = '#' +  (parent==null?'':parent + ' #')   + table ;
-
-      if (hasSubTable){
-        $(selectorTable + ' thead tr').each( function () {
-            this.insertBefore( nCloneTh, this.childNodes[0] );
-        } );
-         
-        $(selectorTable + ' tbody tr').each( function () {
-            this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
-        } );
-           
-        /*
-        * Initialse Runtime DataTables, with no sorting on the 'details' column
-        */
-        var oTable = $(selectorTable).dataTable(  {
-          "bPaginate": false,
-          "bLengthChange": false,
-          "bFilter": false,
-          "bSort": false,
-          "bInfo": false,
-          "bAutoWidth": false
-        });
-        
-        
-      
-        /* Add event listener for opening and closing runtime details
-        * Note that the indicator for showing which row is open is not controlled by DataTables,
-        * rather it is done here
-        */
-        $(selectorTable + ' > tbody > tr > td > img').live('click', function () {
-            var nTr = $(this).parents('tr')[0];
-            if ( oTable.fnIsOpen(nTr) )
-            {
-                /* Runtime row is already open - close it */
-                this.src = "#{site.base_url}/images/details_open.png";
-                oTable.fnClose( nTr );
-            }
-            else
-            {
-                /* Open this row */
-                this.src = "#{site.base_url}/images/details_close.png";
-                var aData = oTable.fnGetData( nTr );
-
-                var release = aData[index];
-                var tableType = aData[subtableIndex];
-                var hasSub = true;
-                if (tableType == 'boms' || tableType == 'archetypes'){
-                  hasSub = false;
-                }
-                var selector = tableType + aData[index];
-                oTable.fnOpen( nTr, showDetails(selector), 'stackDetails' );
-                initilizeRuntimeDetailsTable(table, selector, 3, 2, hasSub );
-            }
-        } );
-
-      }
-    }
-
-  $(document).ready(function() {
-        initilizeRuntimeDetailsTable(null, 'runtimes', 7, 6, true);
-  } );
+       
+      $('#runtimes thead tr').each( function () {
+          this.insertBefore( nCloneTh, this.childNodes[0] );
+      } );
+       
+      $('#runtimes tbody tr').each( function () {
+          this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+      } );
+       
+      /*
+      * Initialse DataTables, with no sorting on the 'details' column
+      */
+      var oTable = $('#runtimes').dataTable(  {
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": false,
+        "bInfo": false,
+        "bAutoWidth": false
+      });
+       
+      /* Add event listener for opening and closing details
+      * Note that the indicator for showing which row is open is not controlled by DataTables,
+      * rather it is done here
+      */
+      $('#runtimes tbody td img').live('click', function () {
+          var nTr = $(this).parents('tr')[0];
+          if ( oTable.fnIsOpen(nTr) )
+          {
+              /* This row is already open - close it */
+              this.src = "#{site.base_url}/images/details_open.png";
+              oTable.fnClose( nTr );
+          }
+          else
+          {
+              /* Open this row */
+              this.src = "#{site.base_url}/images/details_close.png";
+              oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+          }
+      } );
+  } );  
 
  
