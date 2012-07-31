@@ -1,0 +1,25 @@
+%p
+%br
+Unfortunately, Maven doesn't allow you to specify plugin versions this way. The readme for each BOM calls out any plugin versions you should use. For example, to use the plugins associated with "Java EE with Tools recommended by JBoss":
+%pre
+  %code
+    = preserve do
+      :escaped
+        <pluginManagement>
+          <plugins>
+              <!-- The Maven Surefire plugin tests your application. Here we ensure we are using a version compatible with Arquillian -->
+              <plugin>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>2.10</version>
+              </plugin>
+              <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
+              <!-- To use, set the JBOSS_HOME environment variable and run:
+                  mvn package jboss-as:deploy -->
+              <plugin>
+                  <groupId>org.jboss.as.plugins</groupId>
+                  <artifactId>jboss-as-maven-plugin</artifactId>
+                  <version>7.1.1.Final</version>
+              </plugin>
+          </plugins>
+      </pluginManagement>
+You'll need to take a look at the POM source in order to find the latest versions of plugins recommended.

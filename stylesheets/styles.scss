@@ -996,11 +996,20 @@ body div.gadget {
     cursor:pointer
   }
 
+  .simple_overlay a:hover{
+   cursor:pointer;
+  }
+
+  /* container for external content. uses vertical scrollbar, if needed */
+  div.contentWrap {
+    max-height: 440px;
+    overflow-y:auto;
+    padding: 20px;
+  }
+
   /* the overlayed element */
   .simple_overlay {
 
-    padding: 20px;
-   
     /* must be initially hidden */
     display:none;
  
@@ -1010,8 +1019,9 @@ body div.gadget {
     /* styling */
     background-color:#fff;
  
-    width:675px;
+    width:700px;
     min-height:200px;
+    max-height:490px;
     border:1px solid #666;
  
     /* CSS3 styling for latest browsers */

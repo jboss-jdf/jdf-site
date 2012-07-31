@@ -2,12 +2,23 @@ require 'net/http'
 require 'net/https'
 require 'yaml'
 
-# identacao
-# nomenclatura 
-# scopo das variaveis
-
 module Awestruct
   module Extensions
+    module StacksHelper
+
+      def get_label_content(array,label)
+        index = array.index(value);
+        content = nil;
+        array.each do |v|
+          if (v != nil)
+            content = v[label] ;
+          end
+        end
+        return content;
+      end
+
+    end
+
     class Stacks
 
       def initialize(stacks_source='')
@@ -168,6 +179,11 @@ module JBoss
 		  @availableVersions = availableVersions
 		  @labels = labels
 	  end
+  
+    def link_id
+      (@groupId + @artifactId + @recommendedVersion).gsub('.','').gsub('-','');
+    end
+
   end
 
   class Runtime
@@ -197,6 +213,11 @@ module JBoss
       @recommendedVersion = recommendedVersion
       @availableVersions = availableVersions
       @labels = labels
+    end
+
+  
+    def link_id
+      (@groupId + @artifactId + @recommendedVersion).gsub('.','').gsub('-','');
     end
 
   end

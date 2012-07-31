@@ -2,7 +2,7 @@
 layout: default
 title: 'JBoss Stacks'
 ---
-- page.javascripts = [ "#{site.base_url}/javascripts/jquery-datatables.js", "#{site.base_url}/javascripts/jquery.tools.min.js" ] 
+- page.javascripts = [ "#{site.base_url}/javascripts/jquery-datatables.js", "#{site.base_url}/javascripts/jquery.tools.min.js", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.js" ] 
 
 :markdown
   JBoss Stacks allows you to easily choose and use a stack of JBoss runtimes, frameworks and tools. 
@@ -30,9 +30,10 @@ title: 'JBoss Stacks'
           %strong  #{mr.name} #{mr.version}
         %td 
           #{mr.recommendedRuntime.name}
-        %td 
-          %a{:href => "../boms/##{mr.recommendedRuntime.defaultBom.name}"} #{mr.recommendedRuntime.defaultBom.name}
-        %td{:rel=>"##{mr.recommendedRuntime.defaultArchetype.artifactId}"} 
+        %td{:rel=>"##{mr.recommendedRuntime.defaultBom.link_id}"} 
+          .overlay_link
+            #{mr.recommendedRuntime.defaultBom.name} 
+        %td{:rel=>"##{mr.recommendedRuntime.defaultArchetype.link_id}"} 
           .overlay_link
             #{mr.recommendedRuntime.defaultArchetype.name}
         %td.centered
@@ -42,31 +43,69 @@ title: 'JBoss Stacks'
   
   -# Create Archetypes Table
   - site.stacks.availableArchetypes.each do |archetype|
-    %div{:id=>"#{archetype.artifactId}", :class=>"simple_overlay"}
-      %h2 #{archetype.name}
-      #{archetype.description}
-      %p
-      %br
-      To use the archetype to generate a new project, you should run:
-      %pre
-        %code
-          = preserve do
-            :escaped
-              mvn archetype:generate \
-                -DarchetypeGroupId=#{archetype.groupId} \
-                -DarchetypeArtifactId=#{archetype.artifactId} \
-                -DarchetypeVersion=#{archetype.recommendedVersion} \
-      
-      %p
-      %br
-      %h5 Available Versions
-      %ul
-      - archetype.availableVersions.each do |v|
-        %li - #{v}
-      %p
-      More information: See
-      %a{:href=>"#{site.base_url}/quickstarts/jboss-as-quickstart/guide/Archetype/"}  Getting Started Developing Applications
-   
+    %div{:id=>"#{archetype.link_id}", :class=>"simple_overlay"}
+      .contentWrap
+        %h2 #{archetype.name}
+        #{archetype.description}
+        %p
+        %br
+        To use the archetype to generate a new project, you should run:
+        %pre
+          %code
+            = preserve do
+              :escaped
+                mvn archetype:generate \
+                  -DarchetypeGroupId=#{archetype.groupId} \
+                  -DarchetypeArtifactId=#{archetype.artifactId} \
+                  -DarchetypeVersion=#{archetype.recommendedVersion} 
+        
+        %p
+        %br
+        %h5 Available Versions
+        %ul
+        - archetype.availableVersions.each do |v|
+          %li
+            %a{:onclick=>"change_archetype_version(this, $('##{archetype.link_id} pre code'));"} - #{v}
+            = '(Recommended)' unless archetype.recommendedVersion != v
+        %p
+        More information: See
+        %a{:href=>"#{site.base_url}/quickstarts/jboss-as-quickstart/guide/Archetype/"}  Getting Started Developing Applications
+
+  -# Create BOMs Table
+  - site.stacks.availableBoms.each do |bom|
+    %div{:id=>"#{bom.link_id}", :class=>"simple_overlay"}
+      .contentWrap
+        %h2 #{bom.name}
+        #{bom.description}
+        %p
+        %br
+        %p To use the BOM, import into your dependency management:
+        %pre
+          %code#example
+            = preserve do
+              :escaped
+                <dependencyManagement>
+                    <dependencies>
+                        <dependency>
+                            <groupId>#{bom.groupId}</groupId>
+                            <artifactId>#{bom.artifactId}</artifactId>
+                            <version>#{bom.recommendedVersion}</version>
+                            <type>pom</scope>
+                            <scope>import</scope>
+                        </dependency>
+                    </dependencies>
+                </dependencyManagement>
+        - if get_label_content(bom.labels,'jbossASPluginVersion') != nil
+          = partial('plugininfo.html.haml')
+        %p
+        %br
+        %h5 Available Versions
+        %ul
+          - bom.availableVersions.each do |v|
+            %li
+              %a{:onclick=>"change_bom_version(this, $('##{bom.link_id} #example'));"} - #{v} 
+              = '(Recommended)' unless bom.recommendedVersion != v
+    
 
   .hidden
     - site.stacks.minorReleases.each do |mr|
@@ -78,9 +117,9 @@ title: 'JBoss Stacks'
         - mr.recommendedRuntime.boms.each do |bom|
           %tr
             %td
-              %a{:href=>"../boms/##{bom.name}"} #{bom.name}
+              %a{:rel=>"##{bom.link_id}", :href=>"#"} #{bom.name}
             %td 
-              %a{:href=>"../boms/##{bom.name}"} #{bom.recommendedVersion}
+              %a{:rel=>"##{bom.link_id}", :href=>"#"} #{bom.recommendedVersion}
       -# Create Archetypes Table for each Runtime 
       %table{:id=>"archetypes#{mr.object_id}", :class => "table table-bordered"}
         %thead
@@ -89,12 +128,30 @@ title: 'JBoss Stacks'
         - mr.recommendedRuntime.archetypes.each do |archetype|
           %tr
             %td 
-              %a{:rel=>"##{archetype.artifactId}", :href=>"#"} #{archetype.name}
+              %a{:rel=>"##{archetype.link_id}", :href=>"#"} #{archetype.name}
             %td 
-              %a{:rel=>"##{archetype.artifactId}", :href=>"#"} #{archetype.recommendedVersion}
+              %a{:rel=>"##{archetype.link_id}", :href=>"#"} #{archetype.recommendedVersion}
 
 :javascript
 
+  function change_bom_version(origin, destination){
+    var newValue = origin.firstChild.data.substring(2);
+    var allContent = destination.text();
+    var start = allContent.indexOf('<version>') + '<version>'.length;
+    var end = allContent.indexOf('</version>');
+    var oldContent = allContent.substring(start,end);
+    var newContent = allContent.replace(oldContent, newValue);
+    destination.text(newContent);
+  }
+
+  function change_archetype_version(origin, destination){
+    var newValue = origin.firstChild.data.substring(2);
+    var allContent = destination.text();
+    var start = allContent.indexOf('-DarchetypeVersion=') + '-DarchetypeVersion='.length;
+    var oldContent = allContent.substring(start);
+    var newContent = allContent.replace(oldContent, newValue);
+    destination.text(newContent);
+  }
   $.easing.drop = function (x, t, b, c, d) {
       return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
   };
@@ -144,9 +201,11 @@ title: 'JBoss Stacks'
 
   $(document).ready(function() {
 
+      $('#accordion').accordion({ autoHeight: false, collapsible: true , navigation: true, active: false});      
+
       /*
-       * Insert a 'details' column to the table
-       */
+      * Insert a 'details' column to the table
+      */
       var nCloneTh = document.createElement( 'th' );
       var nCloneTd = document.createElement( 'td' );
       nCloneTd.innerHTML = '<img src="#{site.base_url}/images/details_open.png">';
