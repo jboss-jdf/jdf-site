@@ -2,7 +2,7 @@
 layout: default
 title: 'JBoss Stacks'
 ---
-- page.javascripts = [ "#{site.base_url}/javascripts/jquery-datatables.js", "#{site.base_url}/javascripts/jquery.tools.min.js", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.js" ] 
+- page.javascripts = [ "#{site.base_url}/javascripts/jquery-datatables.js", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.js" ] 
 
 :markdown
   JBoss Stacks allows you to easily choose and use a stack of JBoss runtimes, frameworks and tools. 
@@ -30,11 +30,11 @@ title: 'JBoss Stacks'
           %strong  #{mr.name} #{mr.version}
         %td 
           #{mr.recommendedRuntime.name}
-        %td{:rel=>"##{mr.recommendedRuntime.defaultBom.link_id}"} 
-          .overlay_link
+        %td
+          %a{:class=>"modal-link", :onclick=>"$('##{mr.recommendedRuntime.defaultBom.link_id}').modal('show')"}
             #{mr.recommendedRuntime.defaultBom.name} 
-        %td{:rel=>"##{mr.recommendedRuntime.defaultArchetype.link_id}"} 
-          .overlay_link
+        %td 
+          %a{:class=>"modal-link", :onclick=>"$('##{mr.recommendedRuntime.defaultArchetype.link_id}').modal('show')"}
             #{mr.recommendedRuntime.defaultArchetype.name}
         %td.centered
           %a{:href => "#{mr.recommendedRuntime.url}"}
@@ -43,9 +43,12 @@ title: 'JBoss Stacks'
   
   -# Create Archetypes Table
   - site.stacks.availableArchetypes.each do |archetype|
-    %div{:id=>"#{archetype.link_id}", :class=>"simple_overlay"}
-      .contentWrap
-        %h2 #{archetype.name}
+    %div.modal.hide{:id=>"#{archetype.link_id}"}
+      .modal-header
+        %a.close{:data=>{:dismiss=>'modal'}}
+          %i.icon-remove
+        %h3 #{archetype.name}
+      .modal-body.clearfix
         #{archetype.description}
         %p
         %br
@@ -73,9 +76,12 @@ title: 'JBoss Stacks'
 
   -# Create BOMs Table
   - site.stacks.availableBoms.each do |bom|
-    %div{:id=>"#{bom.link_id}", :class=>"simple_overlay"}
-      .contentWrap
-        %h2 #{bom.name}
+    %div.modal.hide{:id=>"#{bom.link_id}"}
+      .modal-header
+        %a.close{:data=>{:dismiss=>'modal'}}
+          %i.icon-remove
+        %h3 #{bom.name}
+      .modal-body.clearfix
         #{bom.description}
         %p
         %br
@@ -117,9 +123,11 @@ title: 'JBoss Stacks'
         - mr.recommendedRuntime.boms.each do |bom|
           %tr
             %td
-              %a{:rel=>"##{bom.link_id}", :href=>"#"} #{bom.name}
+              %a{:class=>"modal-link", :onclick=>"$('##{bom.link_id}').modal('show')"} 
+                #{bom.name}
             %td 
-              %a{:rel=>"##{bom.link_id}", :href=>"#"} #{bom.recommendedVersion}
+              %a{:class=>"modal-link", :onclick=>"$('##{bom.link_id}').modal('show')"} 
+                #{bom.recommendedVersion}
       -# Create Archetypes Table for each Runtime 
       %table{:id=>"archetypes#{mr.object_id}", :class => "table table-bordered"}
         %thead
@@ -127,10 +135,12 @@ title: 'JBoss Stacks'
           %th Recommended Archetype version
         - mr.recommendedRuntime.archetypes.each do |archetype|
           %tr
-            %td 
-              %a{:rel=>"##{archetype.link_id}", :href=>"#"} #{archetype.name}
-            %td 
-              %a{:rel=>"##{archetype.link_id}", :href=>"#"} #{archetype.recommendedVersion}
+            %td
+              %a{:class=>"modal-link", :onclick=>"$('##{archetype.link_id}').modal('show')"}
+                #{archetype.name}
+            %td
+              %a{:class=>"modal-link", :onclick=>"$('##{archetype.link_id}').modal('show')"}  
+                #{archetype.recommendedVersion}
 
 :javascript
 
@@ -152,43 +162,6 @@ title: 'JBoss Stacks'
     var newContent = allContent.replace(oldContent, newValue);
     destination.text(newContent);
   }
-  $.easing.drop = function (x, t, b, c, d) {
-      return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
-  };
-
-  $.tools.overlay.addEffect('drop', function(css, done) {
- 
-    // use Overlay API to gain access to crucial elements
-    var conf = this.getConf(),
-    overlay = this.getOverlay();
- 
-    // determine initial position for the overlay
-    if (conf.fixed)  {
-        css.position = 'fixed';
-    } else {
-        css.top += $(window).scrollTop();
-        css.left += $(window).scrollLeft();
-        css.position = 'absolute';
-    }
- 
-    // position the overlay and show it
-    overlay.css(css).show();
- 
-    // begin animating with our custom easing
-    overlay.animate(
-        { top: '+=55',  opacity: 1,  width: '+=20'}, 400, 'drop', done
-    );
- 
-    /* closing animation */
-  }, function(done) {
-      this.getOverlay().animate(
-          {top:'-=55', opacity:0, width:'-=20'}, 300, 'drop',
-          function() {
-              $(this).hide();
-              done.call();
-          });
-  });  
-
 
    /* Formating function for row details */
   function fnFormatDetails ( oTable, nTr )
@@ -201,9 +174,7 @@ title: 'JBoss Stacks'
 
   $(document).ready(function() {
 
-      $('#accordion').accordion({ autoHeight: false, collapsible: true , navigation: true, active: false});      
-
-      /*
+       /*
       * Insert a 'details' column to the table
       */
       var nCloneTh = document.createElement( 'th' );
@@ -248,16 +219,9 @@ title: 'JBoss Stacks'
               /* Open this row */
               this.src = "#{site.base_url}/images/details_close.png";
               oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
-             $('a[rel]').overlay({
-                effect: 'drop',
-                mask: '#789'
-              });
           }
       } );
-      $('td[rel]').overlay({
-          effect: 'drop',
-          mask: '#789'
-       });
+
   } );
 
 
