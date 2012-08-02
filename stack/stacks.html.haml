@@ -222,6 +222,11 @@ title: 'JBoss Stacks'
           }
       } );
 
-  } );
+      /* Open modal dialog based on url fragments */
+      if (location.hash) {
+        var id = location.hash
+        $(id).modal('show');
+      }
 
+  } );
 
