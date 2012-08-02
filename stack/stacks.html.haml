@@ -31,13 +31,13 @@ title: 'JBoss Stacks'
         %td 
           #{mr.recommendedRuntime.name}
         %td
-          %a{:class=>"modal-link", :onclick=>"$('##{mr.recommendedRuntime.defaultBom.link_id}').modal('show')"}
+          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultBom.link_id}"}
             #{mr.recommendedRuntime.defaultBom.name} 
         %td 
-          %a{:class=>"modal-link", :onclick=>"$('##{mr.recommendedRuntime.defaultArchetype.link_id}').modal('show')"}
+          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultArchetype.link_id}"}
             #{mr.recommendedRuntime.defaultArchetype.name}
         %td.centered
-          %a{:href => "#{mr.recommendedRuntime.url}"}
+          %a{:href => mr.recommendedRuntime.url}
             %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
         %td.hidden #{mr.object_id}
   
@@ -72,7 +72,7 @@ title: 'JBoss Stacks'
             = '(Recommended)' unless archetype.recommendedVersion != v
         %p
         More information: See
-        %a{:href=>"#{site.base_url}/quickstarts/jboss-as-quickstart/guide/Archetype/"}  Getting Started Developing Applications
+        %a(href="#{site.base_url}/quickstarts/jboss-as-quickstart/guide/Archetype/")  Getting Started Developing Applications
 
   -# Create BOMs Table
   - site.stacks.availableBoms.each do |bom|
@@ -123,10 +123,10 @@ title: 'JBoss Stacks'
         - mr.recommendedRuntime.boms.each do |bom|
           %tr
             %td
-              %a{:class=>"modal-link", :onclick=>"$('##{bom.link_id}').modal('show')"} 
+              %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom.link_id}"}
                 #{bom.name}
             %td 
-              %a{:class=>"modal-link", :onclick=>"$('##{bom.link_id}').modal('show')"} 
+              %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom.link_id}"}
                 #{bom.recommendedVersion}
       -# Create Archetypes Table for each Runtime 
       %table{:id=>"archetypes#{mr.object_id}", :class => "table table-bordered"}
@@ -136,10 +136,10 @@ title: 'JBoss Stacks'
         - mr.recommendedRuntime.archetypes.each do |archetype|
           %tr
             %td
-              %a{:class=>"modal-link", :onclick=>"$('##{archetype.link_id}').modal('show')"}
+              %a.modal-link{"data-toggle"=>"modal", :href=>archetype.link_id}
                 #{archetype.name}
             %td
-              %a{:class=>"modal-link", :onclick=>"$('##{archetype.link_id}').modal('show')"}  
+              %a.modal-link{"data-toggle"=>"modal", :href=>archetype.link_id}      
                 #{archetype.recommendedVersion}
 
 :javascript
