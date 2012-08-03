@@ -60,7 +60,9 @@ module Awestruct
           mount_boms(runtime_item['boms']),
           mount_bom(runtime_item['defaultBom']),
           mount_archetype(runtime_item['defaultArchetype']),
-          mount_archetypes(runtime_item['archetypes'])
+          mount_archetypes(runtime_item['archetypes']),
+          runtime_item['defaultArchetypeVersion'],
+          runtime_item['defaultBomVersion']
         )
       end     
 
@@ -188,8 +190,25 @@ module JBoss
 
   class Runtime
     attr_reader :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes
+
+
+    def defaultArchetypeVersion
+      if (@defaultArchetypeVersion == nil)
+        return @defaultArchetype['recommendedVersion'];
+      else
+        return @defaultArchetypeVersion;
+      end
+    end
+
+    def defaultBomVersion
+      if (@defaultBomVersion == nil)
+        return @defaultBom['recommendedVersion'];
+      else
+        return @defaultBomVersion;
+      end
+    end
 	
-	  def initialize(name, version, type, url, labels, boms, defaultBom, defaultArchetype, archetypes)
+	  def initialize(name, version, type, url, labels, boms, defaultBom, defaultArchetype, archetypes, defaultArchetypeVersion, defaultBomVersion)
 		  @name = name
 		  @version = version
 		  @type = type
@@ -199,6 +218,8 @@ module JBoss
 		  @defaultBom = defaultBom
 		  @defaultArchetype = defaultArchetype
 		  @archetypes = archetypes
+      @defaultArchetypeVersion = defaultArchetypeVersion
+      @defaultBomVersion = defaultBomVersion
 	  end
   end
 
