@@ -36,18 +36,56 @@ module Awestruct
 	      stacks_parsed = YAML.load(response.body)
 
 	      available_boms = mount_boms(stacks_parsed['availableBoms'])
+        available_bom_versions = mount_bom_versions(stacks_parsed['availableBomVersions'])
 	      available_runtimes = mount_runtimes(stacks_parsed['availableRuntimes'])
         available_archetypes = mount_archetypes(stacks_parsed['availableArchetypes'])
+        available_archetype_versions = mount_archetype_versions(stacks_parsed['availableArchetypeVersions'])
 	      minor_releases = mount_minor_releases(stacks_parsed['minorReleases'])
 	      major_releases = mount_major_releases(stacks_parsed['majorReleases'])
         stacks = JBoss::Stacks.new(
           available_boms,
+          available_bom_versions,
           available_archetypes,
+          available_archetype_versions,
           available_runtimes,
           major_releases,
           minor_releases
         )
       	site.stacks = stacks
+      end
+
+      def mount_archetype_version(version_item)
+        JBoss::ArchetypeVersion.new(
+          mount_archetype(version_item['archetype']),
+          version_item['version'],
+          version_item['labels']
+        )      
+      end
+
+      def mount_archetype_versions(archetype_versions_item)
+        archetype_versions = []
+        archetype_versions_item.each do |version_item|
+          archetype_version_item = mount_archetype_version(version_item)
+          archetype_versions << archetype_version_item
+        end
+        return archetype_versions
+      end
+
+      def mount_bom_version(version_item)
+        JBoss::BomVersion.new(
+          mount_bom(version_item['bom']),
+          version_item['version'],
+          version_item['labels']
+        )      
+      end
+
+      def mount_bom_versions(bom_versions_item)
+        bom_versions = []
+        bom_versions_item.each do |version_item|
+          bom_version_item = mount_bom_version(version_item)
+          bom_versions << bom_version_item
+        end
+        return bom_versions
       end
 
       def mount_runtime(runtime_item)
@@ -57,12 +95,10 @@ module Awestruct
           runtime_item['type'],
           runtime_item['url'], 
           runtime_item['labels'],
-          mount_boms(runtime_item['boms']),
-          mount_bom(runtime_item['defaultBom']),
-          mount_archetype(runtime_item['defaultArchetype']),
-          mount_archetypes(runtime_item['archetypes']),
-          runtime_item['defaultArchetypeVersion'],
-          runtime_item['defaultBomVersion']
+          mount_bom_versions(runtime_item['boms']),
+          mount_bom_version(runtime_item['defaultBom']),
+          mount_archetype_version(runtime_item['defaultArchetype']),
+          mount_archetype_versions(runtime_item['archetypes'])
         )
       end     
 
@@ -81,10 +117,8 @@ module Awestruct
           bom_item['description'], 
       	  bom_item['groupId'], 
           bom_item['artifactId'], 
-          bom_item['recommendedVersion'], 
-          bom_item['availableVersions'], 
-          bom_item['labels']
-	)
+          bom_item['recommendedVersion'] 
+    	)
       end
 
       def mount_boms(boms)
@@ -137,9 +171,7 @@ module Awestruct
           archetype['description'],
           archetype['groupId'],
           archetype['artifactId'],
-          archetype['recommendedVersion'],
-          archetype['availableVersions'],
-          archetype['labels']
+          archetype['recommendedVersion']
         )
       end
 
@@ -158,28 +190,43 @@ end #End module Awestruct
 
 module JBoss
   class Stacks
-    attr_reader  :availableBoms, :availableArchetypes, :availableRuntimes, :majorReleases, :minorReleases
+    attr_reader  :availableBoms, :availableBomVersions, :availableArchetypes, :availableArchetypeVersions, :availableRuntimes, :majorReleases, :minorReleases
 
-	  def initialize(availableBoms, availableArchetypes, availableRuntimes, majorReleases, minorReleases)
+	  def initialize(availableBoms, availableBomVersions, availableArchetypes, availableArchetypeVersions, availableRuntimes, majorReleases, minorReleases)
 		  @availableBoms = availableBoms
+      @availableBomVersions = availableBomVersions
 		  @availableArchetypes = availableArchetypes
+      @availableArchetypeVersions = availableArchetypeVersions
 		  @availableRuntimes = availableRuntimes
 		  @majorReleases = majorReleases
 		  @minorReleases = minorReleases
 	  end
   end
 
-  class Bom
-	  attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion, :availableVersions, :labels
+  class BomVersion
+    attr_reader :bom, :version, :labels
 
-	  def initialize(name, description, groupId, artifactId, recommendedVersion, availableVersions, labels)
+    def initialize(bom, version, labels)
+      @bom = bom
+      @version = version
+      @labels = labels
+    end
+
+    def link_id
+      (@bom.groupId + @bom.artifactId + @version).gsub('.','').gsub('-','');
+    end
+
+  end
+
+  class Bom
+	  attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion
+
+	  def initialize(name, description, groupId, artifactId, recommendedVersion)
 		  @name = name
 		  @description = description
 		  @groupId = groupId
 		  @artifactId = artifactId
 		  @recommendedVersion = recommendedVersion
-		  @availableVersions = availableVersions
-		  @labels = labels
 	  end
   
     def link_id
@@ -191,24 +238,7 @@ module JBoss
   class Runtime
     attr_reader :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes
 
-
-    def defaultArchetypeVersion
-      if (@defaultArchetypeVersion == nil)
-        return @defaultArchetype['recommendedVersion'];
-      else
-        return @defaultArchetypeVersion;
-      end
-    end
-
-    def defaultBomVersion
-      if (@defaultBomVersion == nil)
-        return @defaultBom['recommendedVersion'];
-      else
-        return @defaultBomVersion;
-      end
-    end
-	
-	  def initialize(name, version, type, url, labels, boms, defaultBom, defaultArchetype, archetypes, defaultArchetypeVersion, defaultBomVersion)
+	  def initialize(name, version, type, url, labels, boms, defaultBom, defaultArchetype, archetypes)
 		  @name = name
 		  @version = version
 		  @type = type
@@ -218,25 +248,35 @@ module JBoss
 		  @defaultBom = defaultBom
 		  @defaultArchetype = defaultArchetype
 		  @archetypes = archetypes
-      @defaultArchetypeVersion = defaultArchetypeVersion
-      @defaultBomVersion = defaultBomVersion
 	  end
   end
 
-  class Archetype
-    attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion, :availableVersions, :labels
+  class ArchetypeVersion
+    attr_reader :archetype, :version, :labels
 
-    def initialize(name, description, groupId, artifactId, recommendedVersion, availableVersions, labels)
+    def initialize(archetype, version, labels)
+      @archetype = archetype
+      @version = version
+      @labels = labels
+    end
+
+    def link_id
+      (@archetype.groupId + @archetype.artifactId + @version).gsub('.','').gsub('-','');
+    end
+
+  end
+
+  class Archetype
+    attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion
+
+    def initialize(name, description, groupId, artifactId, recommendedVersion)
       @name = name
       @description = description
       @groupId = groupId
       @artifactId = artifactId
       @recommendedVersion = recommendedVersion
-      @availableVersions = availableVersions
-      @labels = labels
     end
 
-  
     def link_id
       (@groupId + @artifactId + @recommendedVersion).gsub('.','').gsub('-','');
     end
@@ -265,5 +305,4 @@ module JBoss
   end 
 
 end
-
 
