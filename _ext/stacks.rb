@@ -213,7 +213,7 @@ module JBoss
     end
 
     def link_id
-      (@bom.groupId + @bom.artifactId + @version).gsub('.','').gsub('-','');
+      (@bom.groupId + @bom.artifactId).gsub('.','').gsub('-','');
     end
 
   end
@@ -230,7 +230,7 @@ module JBoss
 	  end
   
     def link_id
-      (@groupId + @artifactId + @recommendedVersion).gsub('.','').gsub('-','');
+      (@groupId + @artifactId).gsub('.','').gsub('-','');
     end
 
   end
@@ -261,7 +261,7 @@ module JBoss
     end
 
     def link_id
-      (@archetype.groupId + @archetype.artifactId + @version).gsub('.','').gsub('-','');
+      (@archetype.groupId + @archetype.artifactId).gsub('.','').gsub('-','');
     end
 
   end
@@ -278,7 +278,7 @@ module JBoss
     end
 
     def link_id
-      (@groupId + @artifactId + @recommendedVersion).gsub('.','').gsub('-','');
+      (@groupId + @artifactId).gsub('.','').gsub('-','');
     end
 
   end

@@ -41,7 +41,7 @@ title: 'JBoss Stacks'
             %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
         %td.hidden #{mr.object_id}
   
-  -# Create Archetypes Table
+  -# Create Archetypes Modal Panes
   - site.stacks.availableArchetypes.each do |archetype|
     %div.modal.hide{:id=>"#{archetype.link_id}"}
       .modal-header
@@ -75,7 +75,7 @@ title: 'JBoss Stacks'
         More information: See
         %a(href="#{site.base_url}/quickstarts/jboss-as-quickstart/guide/Archetype/")  Getting Started Developing Applications
 
-  -# Create BOMs Table
+  -# Create BOMs Modal Panes
   - site.stacks.availableBoms.each do |bom|
     %div.modal.hide{:id=>"#{bom.link_id}"}
       .modal-header
