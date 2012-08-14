@@ -66,3 +66,14 @@ We're serious about quality in JBoss Developer Framework, and we are strict abou
       .accordion-inner
         =partial 'release-proceedure.html.haml'
 
+:javascript
+
+  $(document).ready(function() {
+
+      /* Open modal dialog based on url fragments */
+      if (location.hash) {
+        var id = location.hash
+        $(id).collapse('show');
+      }
+
+  } );
