@@ -32,6 +32,7 @@ jboss-as-quickstart-guide:
   title: Getting Started Developing Applications
   index_label: Guides
   prefix: /quickstarts/jboss-as-quickstart/guide
+  github_repo: jboss-as-quickstart
   version: 7.1.2.M1
   guides:
     Introduction:
