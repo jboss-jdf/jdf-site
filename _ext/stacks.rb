@@ -7,7 +7,6 @@ module Awestruct
     module StacksHelper
 
       def get_label_content(array,label)
-        index = array.index(value);
         content = nil;
         array.each do |v|
           if (v != nil)

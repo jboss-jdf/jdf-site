@@ -62,6 +62,6 @@ jboss-bom:
   version: 1.0.1.CR1
 plugin-jdf:
   prefix: /stack/plugin-jdf
-  title: JDF Plugin
+  title: Forge Plugin
   index_label: JDF Plugin for Forge
-  version: 1.0.5.Final
+  version: 1.0.6.Final

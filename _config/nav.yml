@@ -38,9 +38,10 @@ stack:
   description: The JBoss Stacks provide a recommended stack of boms, archetypes and runtimes
   url: /stack/stacks
   plugin-jdf:
-    label: JDF Plugin
+    label: Forge Plugin
   stacks:
     label: JBoss Stacks
+  get-involved:
 forums:
   jdf-users:
     label: jdf-users
