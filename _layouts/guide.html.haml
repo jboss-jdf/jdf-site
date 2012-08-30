@@ -140,9 +140,9 @@ layout: default
       #sidebar
         #toc{:style=>"width:266px"}
           .btn-group{:style=>"width:136px"}
-            %button#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
-              #{page.guide.metadata.downloads_label}
-              %span.caret 
+            .cta
+              %a#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle.btn-success{:href=>'#', :data=>{:toggle=>'dropdown'}}
+                DOWNLOAD
             #downloads.menu_content.dropdown-menu.pull-right{:style=>'display: none; width: 670px;top:0px;padding-top:2em'}
               .downloads
                 .row.header

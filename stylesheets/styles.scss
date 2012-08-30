@@ -26,10 +26,12 @@
   }
   .cta {
     margin-top:20px;
-    .btn {
-      @include background-image(linear-gradient(white, green));
-      font-weight: bold;
-    }
+  }
+}
+.cta {
+  .btn {
+    @include background-image(linear-gradient(white, green));
+    font-weight: bold;
   }
 }
 
