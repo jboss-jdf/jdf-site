@@ -75,6 +75,18 @@ module Awestruct
        
       end
 
+      # Proofing our call to asciidoc for future versions
+      def execute_shell(command, input = nil)
+        Open3.popen3(command) do |stdin, stdout, stderr, thrd|
+          stdin.puts input unless input.nil?
+          stdin.close
+          SystemCallError.new("Error invoking #{command}, #{stderr.read}", thrd.value.exitstatus)
+          out = stdout.read
+        end
+      rescue Errno::EPIPE
+        ""
+      end
+
       def extract_metadata(page, output)
         html = Nokogiri::HTML(output)
         # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
