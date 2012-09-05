@@ -26,12 +26,12 @@
   }
   .cta {
     margin-top:20px;
+    font-weight: bold;
   }
 }
 .cta {
   .btn {
     @include background-image(linear-gradient(white, green));
-    font-weight: bold;
   }
 }
 
@@ -110,7 +110,6 @@
 }
 
 .cta a.btn {
-  font-weight: bold;
   color: black;
   @include background-image(linear-gradient(white, green));
   &:hover, &:active {

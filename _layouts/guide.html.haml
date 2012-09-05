@@ -139,10 +139,11 @@ layout: default
     - if page.guide
       #sidebar
         #toc{:style=>"width:266px"}
-          .btn-group{:style=>"width:136px"}
-            .cta
+          .btn-group
+            .cta{:style=>"text-align:center"}
               %a#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle.btn-success{:href=>'#', :data=>{:toggle=>'dropdown'}}
                 DOWNLOAD
+                %span.caret
             #downloads.menu_content.dropdown-menu.pull-right{:style=>'display: none; width: 670px;top:0px;padding-top:2em'}
               .downloads
                 .row.header
