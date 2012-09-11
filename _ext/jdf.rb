@@ -130,6 +130,7 @@ module Awestruct
           extract(page, p, 'Level')
           extract(page, p, 'Summary')
           extract(page, p, 'Prerequisites', true)
+          extract(page, p, 'Target Product', true)
         end
         
         # Strip out title
@@ -173,7 +174,7 @@ module Awestruct
           s = find(p, tag)
         end
         if s
-          page.send("source_#{tag.downcase}=".to_sym, s)
+          page.send("source_#{tag.downcase}=".sub(' ','_').to_sym, s)
         end
       end
 

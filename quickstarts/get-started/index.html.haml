@@ -18,6 +18,7 @@ title: 'Quickstarts: Get Started'
       %th Technologies
       %th Description
       %th Experience
+      %th Target Product
       %th Prerequisites
   %tbody
     - site.guides['/quickstarts/jboss-as-quickstart'].each do |guide|
@@ -28,6 +29,7 @@ title: 'Quickstarts: Get Started'
           %td= guide.technologies ? guide.technologies.join(', ') : '' 
           %td= guide.summary ? guide.summary : ''
           %td= guide.level ? guide.level : ''
+          %td= guide.target_product ? guide.target_product.join(', ') : ''
           %td= guide.prerequisites ? guide.prerequisites.join(', ') : ''
 
 :javascript

@@ -79,6 +79,7 @@ module Awestruct
                 guide.level = page.source_level
                 guide.summary = page.source_summary
                 guide.prerequisites = page.source_prerequisites
+                guide.target_product = page.source_target_product
                
                 # Extract metadata from git
                 guide.changes = page_changes(guide, site.identities, @num_changes)

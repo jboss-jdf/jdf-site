@@ -73,6 +73,10 @@ layout: default
                   %strong= "Technologies:"
                   = ' '.concat(page.guide.technologies.map{|u| u} * ', ')
               .span3 
+                - if page.guide.target_product
+                  %strong= "Target Product:"
+                  = ' '.concat(page.guide.target_product.map{|u| u} * ', ')
+              .span3 
                 - if page.guide.prerequisites
                   %strong= "Prerequisites:"
                   = ' '.concat(page.guide.prerequisites.map{|u| u} * ', ')
