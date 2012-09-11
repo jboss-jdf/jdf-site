@@ -31,10 +31,10 @@ title: 'JBoss Stacks'
         %td 
           #{mr.recommendedRuntime.name}
         %td
-          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultBom.link_id}"}
+          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultBom.bom.id}"}
             #{mr.recommendedRuntime.defaultBom.bom.name} 
         %td 
-          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultArchetype.link_id}"}
+          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultArchetype.archetype.id}"}
             #{mr.recommendedRuntime.defaultArchetype.archetype.name}
         %td.centered
           %a{:href => mr.recommendedRuntime.url}
@@ -43,7 +43,7 @@ title: 'JBoss Stacks'
   
   -# Create Archetypes Modal Panes
   - site.stacks.availableArchetypes.each do |archetype|
-    %div.modal.hide{:id=>"#{archetype.link_id}"}
+    %div.modal.hide{:id=>"#{archetype.id}"}
       .modal-header
         %a.close{:data=>{:dismiss=>'modal'}}
           %i.icon-remove
@@ -67,9 +67,9 @@ title: 'JBoss Stacks'
         %h5 Other versions of this Archetype
         %ul
         - site.stacks.availableArchetypeVersions.each do |av|
-          - if (av.archetype.link_id == archetype.link_id)
+          - if (av.archetype.id == archetype.id)
             %li
-              %a{:onclick=>"change_archetype_version(this, $('##{archetype.link_id} pre code'));"} - #{av.version}
+              %a{:onclick=>"change_archetype_version(this, $('##{archetype.id} pre code'));"} - #{av.version}
               = '(Recommended version for this Archetype)' unless archetype.recommendedVersion != av.version
         %p
         More information: See
@@ -77,7 +77,7 @@ title: 'JBoss Stacks'
 
   -# Create BOMs Modal Panes
   - site.stacks.availableBoms.each do |bom|
-    %div.modal.hide{:id=>"#{bom.link_id}"}
+    %div.modal.hide{:id=>"#{bom.id}"}
       .modal-header
         %a.close{:data=>{:dismiss=>'modal'}}
           %i.icon-remove
@@ -97,23 +97,23 @@ title: 'JBoss Stacks'
                             <groupId>#{bom.groupId}</groupId>
                             <artifactId>#{bom.artifactId}</artifactId>
                             <version>#{bom.recommendedVersion}</version>
-                            <type>pom</scope>
+                            <type>pom</type>
                             <scope>import</scope>
                         </dependency>
                     </dependencies>
                 </dependencyManagement>
         - site.stacks.availableBomVersions.each do |bv|
-          - if (bv.link_id == bom.link_id)
-            - if get_label_content(bv.labels,'jbossASPluginVersion') != nil
+          - if (bv.bom.id == bom.id)
+            - if bv.labels['jbossASPluginVersion'] != nil
               = partial('plugininfo.html.haml')
         %p
         %br
         %h5 Other Versions of this BOM
         %ul
           - site.stacks.availableBomVersions.each do |bv|
-            - if (bv.bom.link_id == bom.link_id)
+            - if (bv.bom.id == bom.id)
               %li
-                %a{:onclick=>"change_bom_version(this, $('##{bom.link_id} #example'));"} - #{bv.version} 
+                %a{:onclick=>"change_bom_version(this, $('##{bom.id} #example'));"} - #{bv.version} 
                 = '(Recommended version for this BOM)' unless bom.recommendedVersion != bv.version
     
 
@@ -127,10 +127,10 @@ title: 'JBoss Stacks'
         - mr.recommendedRuntime.boms.each do |bom_version|
           %tr
             %td
-              %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.link_id}"}
+              %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.id}"}
                 #{bom_version.bom.name}
             %td 
-              %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.link_id}"}
+              %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.id}"}
                 #{bom_version.version}
       -# Create Archetypes Table for each Runtime 
       %table{:id=>"archetypes#{mr.object_id}", :class => "table table-bordered"}
@@ -140,10 +140,10 @@ title: 'JBoss Stacks'
         - mr.recommendedRuntime.archetypes.each do |archetype_version|
           %tr
             %td
-              %a.modal-link{"data-toggle"=>"modal", :href=>"##{archetype_version.archetype.link_id}"}
+              %a.modal-link{"data-toggle"=>"modal", :href=>"##{archetype_version.archetype.id}"}
                 #{archetype_version.archetype.name}
             %td
-              %a.modal-link{"data-toggle"=>"modal", :href=>"##{archetype_version.archetype.link_id}"}      
+              %a.modal-link{"data-toggle"=>"modal", :href=>"##{archetype_version.archetype.id}"}      
                 #{archetype_version.version}
 
 :javascript

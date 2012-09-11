@@ -67,7 +67,7 @@ module Awestruct
           FileUtils.mkdir_p(File.dirname(out_file))
           puts "Processing asciidoc #{relative_source_path} -> #{out_file}"
           cmd="asciidoc -b html5 -a pygments -a icons -a iconsdir='#{site.base_url}/images' -a imagesdir='../' -o '#{out_file}' #{context.page.source_path}"
-          execute_shell(cmd)
+          `#{cmd} `
         end
         output = File.open(out_file).read
 

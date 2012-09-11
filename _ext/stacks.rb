@@ -4,20 +4,6 @@ require 'yaml'
 
 module Awestruct
   module Extensions
-    module StacksHelper
-
-      def get_label_content(array,label)
-        content = nil;
-        array.each do |v|
-          if (v != nil)
-            content = v[label] ;
-          end
-        end
-        return content;
-      end
-
-    end
-
     class Stacks
 
       def initialize(stacks_source='')
@@ -55,6 +41,7 @@ module Awestruct
 
       def mount_archetype_version(version_item)
         JBoss::ArchetypeVersion.new(
+          version_item['id'],
           mount_archetype(version_item['archetype']),
           version_item['version'],
           version_item['labels']
@@ -72,6 +59,7 @@ module Awestruct
 
       def mount_bom_version(version_item)
         JBoss::BomVersion.new(
+          version_item['id'],
           mount_bom(version_item['bom']),
           version_item['version'],
           version_item['labels']
@@ -89,10 +77,13 @@ module Awestruct
 
       def mount_runtime(runtime_item)
         JBoss::Runtime.new(
+          runtime_item['id'],
           runtime_item['name'],
           runtime_item['version'],
           runtime_item['type'],
           runtime_item['url'], 
+          runtime_item['downloadUrl'],
+          runtime_item['license'],
           runtime_item['labels'],
           mount_bom_versions(runtime_item['boms']),
           mount_bom_version(runtime_item['defaultBom']),
@@ -112,6 +103,7 @@ module Awestruct
  
       def mount_bom(bom_item)
         JBoss::Bom.new(
+          bom_item['id'],
           bom_item['name'],  
           bom_item['description'], 
       	  bom_item['groupId'], 
@@ -165,13 +157,17 @@ module Awestruct
       end
 
       def mount_archetype(archetype)
-        JBoss::Archetype.new(
-          archetype['name'],
-          archetype['description'],
-          archetype['groupId'],
-          archetype['artifactId'],
-          archetype['recommendedVersion']
-        )
+        if (archetype != nil)
+          JBoss::Archetype.new(
+            archetype['id'],
+            archetype['name'],
+            archetype['description'],
+            archetype['groupId'],
+            archetype['artifactId'],
+            archetype['recommendedVersion'],
+            mount_archetype(archetype['blank'])
+          )
+        end
       end
 
       def mount_archetypes(as)
@@ -203,24 +199,22 @@ module JBoss
   end
 
   class BomVersion
-    attr_reader :bom, :version, :labels
+    attr_reader :id, :bom, :version, :labels
 
-    def initialize(bom, version, labels)
+    def initialize(id, bom, version, labels)
+      @id = id
       @bom = bom
       @version = version
       @labels = labels
     end
 
-    def link_id
-      (@bom.groupId + @bom.artifactId).gsub('.','').gsub('-','');
-    end
-
   end
 
   class Bom
-	  attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion
+	  attr_reader :id, :name, :description, :groupId, :artifactId, :recommendedVersion
 
-	  def initialize(name, description, groupId, artifactId, recommendedVersion)
+	  def initialize(id, name, description, groupId, artifactId, recommendedVersion)
+      @id = id
 		  @name = name
 		  @description = description
 		  @groupId = groupId
@@ -228,20 +222,19 @@ module JBoss
 		  @recommendedVersion = recommendedVersion
 	  end
   
-    def link_id
-      (@groupId + @artifactId).gsub('.','').gsub('-','');
-    end
-
   end
 
   class Runtime
-    attr_reader :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes
+    attr_reader :id, :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes, :downloadUrl, :license
 
-	  def initialize(name, version, type, url, labels, boms, defaultBom, defaultArchetype, archetypes)
+	  def initialize(id, name, version, type, url, downloadUrl, license, labels, boms, defaultBom, defaultArchetype, archetypes)
+      @id = id
 		  @name = name
 		  @version = version
 		  @type = type
 		  @url = url
+      @downloadUrl = downloadUrl
+      @license = license
 		  @labels = labels
 		  @boms = boms
 		  @defaultBom = defaultBom
@@ -251,33 +244,28 @@ module JBoss
   end
 
   class ArchetypeVersion
-    attr_reader :archetype, :version, :labels
+    attr_reader :id, :archetype, :version, :labels
 
-    def initialize(archetype, version, labels)
+    def initialize(id, archetype, version, labels)
+      @id = id
       @archetype = archetype
       @version = version
       @labels = labels
     end
 
-    def link_id
-      (@archetype.groupId + @archetype.artifactId).gsub('.','').gsub('-','');
-    end
-
   end
 
   class Archetype
-    attr_reader :name, :description, :groupId, :artifactId, :recommendedVersion
+    attr_reader :id, :name, :description, :groupId, :artifactId, :recommendedVersion, :blank
 
-    def initialize(name, description, groupId, artifactId, recommendedVersion)
+    def initialize(id, name, description, groupId, artifactId, recommendedVersion, blank)
+      @id = id
       @name = name
       @description = description
       @groupId = groupId
       @artifactId = artifactId
       @recommendedVersion = recommendedVersion
-    end
-
-    def link_id
-      (@groupId + @artifactId).gsub('.','').gsub('-','');
+      @blank = blank
     end
 
   end
