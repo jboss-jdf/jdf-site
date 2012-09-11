@@ -13,8 +13,10 @@ SANDBOX_CHECKOUT_DIR=$DIR/_tmp/sandbox
 JBORG_DIR="jdf"
 JBORG_REPO="filemgmt.jboss.org:www_htdocs"
 
-STAGING_URL="jboss.org/${JBORG_DIR}/stage"
-STAGING_DIR="${JBORG_DIR}/stage"
+# TODO Back After 2.0.0 Release STAGING_URL="jboss.org/${JBORG_DIR}/stage"
+# TODO Back After 2.0.0 Release STAGING_DIR="${JBORG_DIR}/stage"
+STAGING_URL="jboss.org/${JBORG_DIR}/2.0.0"
+STAGING_DIR="${JBORG_DIR}/2.0.0"
 
 PRODUCTION_DIR="${JBORG_DIR}"
 PRODUCTION_URL="jboss.org/${PRODUCTION_DIR}"
