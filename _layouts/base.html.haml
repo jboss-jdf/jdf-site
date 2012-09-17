@@ -20,6 +20,8 @@
       %script{ :type=>"text/javascript", :src=>"//html5shim.googlecode.com/svn/trunk/html5.js" }
     %script{:type=>"text/javascript", :src=>"http://static.jboss.org/theme/js/tabzilla.js" }
     %script{:type=>"text/javascript", :src=>"http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" }
+    :javascript
+      window.jQuery || document.write( '<script src="#{site.base_url}javascripts/jquery-1.7.2.min.js"><\/script>' )
     %script{:type=>"text/javascript", :src=>"http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.3/bootstrap.min.js" }
     - if page.javascripts
       - page.javascripts.each do |javascript|
