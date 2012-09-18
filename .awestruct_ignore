@@ -1,3 +1,7 @@
 */*.jar
 **/*.jar
 **/*.java
+**/*.css
+**/*.js
+stylesheets/*
+javascripts/*
