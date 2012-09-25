@@ -35,13 +35,9 @@
 
   2. Merge from the tag in the other repo that you wish to use. It is important to use a tag, to make tracking of history easier. We use a recursive merge strategy, always preferring changes from the other repo, in effect overwriting what we have locally.
 
-         git merge <tag> -s recursive -Xtheirs --no-commit
+         git merge <tag> -s recursive -Xtheirs -m "Merge <Other repository name> '<Tag>'"
 
-  3. The merge is not committed, so any updates to the README.md and parent POM can be made. Having made these, perform the merge. We suggest updating the commit message to "Merge &lt;Other Project Name&gt; '&lt;Tag&gt;'".
-
-         git commit
-
-  4. Review and push to upstream
+  3. Review and push to upstream
 
          git push upstream HEAD:master
 
