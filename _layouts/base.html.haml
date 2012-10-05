@@ -26,6 +26,7 @@
     - if page.javascripts
       - page.javascripts.each do |javascript|
         %script{:src=>javascript, :type=>'text/javascript'}
+    = google_analytics
 
   %body{:class=>page.body_class || nil}
     .visible-desktop

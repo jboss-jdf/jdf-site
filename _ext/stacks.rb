@@ -12,13 +12,15 @@ module Awestruct
 
       def execute(site)
         uri = URI(@stacks_source)
-       	http = Net::HTTP.new(uri.host, uri.port)
+      	http = Net::HTTP.new(uri.host, uri.port)
 	      http.use_ssl = true
 	      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 	      http.start 
 	      request = Net::HTTP::Get.new(uri.request_uri)
-	      response = http.request(request)
-	      stacks_parsed = YAML.load(response.body)
+        response = http.request(request)
+        stacks_parsed = nil
+#debug stacks        File.open('/home/rafael/projetos/jdf/jdf-stack/stacks.yaml') { |yf| stacks_parsed = YAML::load( yf ) }
+        stacks_parsed = YAML.load(response.body)
 
 	      available_boms = mount_boms(stacks_parsed['availableBoms'])
         available_bom_versions = mount_bom_versions(stacks_parsed['availableBomVersions'])
