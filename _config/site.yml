@@ -6,18 +6,16 @@ ohloh_id: jboss-jdf
 disqus: jdf
 website_source_repo: https://github.com/jboss-jdf/jdf-site
 irc_transcripts: http://transcripts.jboss.org/channel/irc.freenode.org/%23jboss-jdf/
-version: 1.0.6-1.Final
+version: 1.0.6-2.Final
 profiles:
   development:
     base_url: http://localhost:4242
     minify: false
     google_plusone: false
-    google_analytics: UA-10656779-1
   sandbox:
     base_url: http://site-jdf.rhcloud.com
     minify: false
     google_plusone: false
-    google_analytics: UA-10656779-1
   production:
     base_url: http://jboss.org/jdf
     minify: true
@@ -27,4 +25,3 @@ profiles:
     base_url: http://jboss.org/jdf/stage
     minify: true
     google_plusone: false
-    google_analytics: UA-10656779-1
