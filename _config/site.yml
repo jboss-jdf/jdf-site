@@ -12,12 +12,10 @@ profiles:
     base_url: http://localhost:4242
     minify: false
     google_plusone: false
-    google_analytics: UA-10656779-1
   sandbox:
     base_url: http://site-jdf.rhcloud.com
     minify: false
     google_plusone: false
-    google_analytics: UA-10656779-1
   production:
     base_url: http://jboss.org/jdf
     minify: true
@@ -27,4 +25,3 @@ profiles:
     base_url: http://jboss.org/jdf/2.0.0
     minify: true
     google_plusone: false
-    google_analytics: UA-10656779-1
