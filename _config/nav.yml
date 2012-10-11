@@ -41,6 +41,8 @@ stack:
     label: Forge Plugin
   stacks:
     label: JBoss Stacks
+  stacks-client:
+    label: JBoss Stacks Client
   get-involved:
 forums:
   jdf-users:

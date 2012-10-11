@@ -10,3 +10,6 @@
 [submodule "stack/plugin-jdf"]
 	path = stack/plugin-jdf
 	url = git@github.com:jboss-jdf/plugin-jdf.git
+[submodule "stack/stacks-client"]
+	path = stack/stacks-client
+	url = git@github.com:jboss-jdf/jdf-stacks-client.git

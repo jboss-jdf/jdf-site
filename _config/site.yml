@@ -6,7 +6,7 @@ ohloh_id: jboss-jdf
 disqus: jdf
 website_source_repo: https://github.com/jboss-jdf/jdf-site
 irc_transcripts: http://transcripts.jboss.org/channel/irc.freenode.org/%23jboss-jdf/
-version: 2.0.0.CR1
+version: 2.0.0.CR2
 profiles:
   development:
     base_url: http://localhost:4242

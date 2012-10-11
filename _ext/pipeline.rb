@@ -49,7 +49,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Indexifier.new
   # Must come after Indexifier and before Guides
   extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')
-  extension Awestruct::Extensions::MoveUp.new('/stack/jboss-bom', 'README')
+  extension Awestruct::Extensions::MoveUp.new('/stack/stacks-client', 'README')
   extension Awestruct::Extensions::MoveUp.new('/stack/plugin-jdf', 'README')
 
   extension Awestruct::Extensions::Atomizer.new( 
@@ -77,7 +77,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster', '.asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', '.asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', '/README.md')
-  extension Awestruct::Extensions::Guide::Index.new('/stack/jboss-bom', '/README.md')
+  extension Awestruct::Extensions::Guide::Index.new('/stack/stacks-client', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/stack/plugin-jdf', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart/guide', '.asciidoc')
 
