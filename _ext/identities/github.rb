@@ -141,9 +141,28 @@ module Identities
     end
 
     class Crawler
+
+      def initialize(opts = {})
+        @auth_file = opts[:auth_file]
+        @credentials = nil
+      end
+
       PROFILE_URL_TEMPLATE = 'https://api.github.com/users/%s'
       def enhance(identity)
         identity.extend(IdentityHelper)
+      end
+
+      def get_credentials()
+        if @credentials.nil?
+          @credentials = false
+          if !@auth_file.nil?
+            if File.exist? @auth_file
+              @credentials = File.read(@auth_file)
+            elsif Pathname.new(@auth_file).relative? and File.exist? File.join(ENV['HOME'], @auth_file)
+              @credentials = File.read(File.join(ENV['HOME'], @auth_file))
+            end
+          end
+        end
       end
 
       def crawl(identity)
@@ -159,7 +178,9 @@ module Identities
           return
         end
 
-        data = RestClient.get url, :accept => 'application/json'
+        get_credentials()
+        url = url.gsub(/^(https?:\/\/)/, '\1' + @credentials.chomp + '@')
+        data = RestClient.get url, :accept => 'application/json' 
         identity.github_id = data['login'].downcase
         identity.username = identity.github_id
         identity.github = OpenStruct.new if identity.github.nil?

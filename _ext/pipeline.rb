@@ -30,10 +30,12 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::RestClientExtensions::EnableJsonConverter.new
   extension Awestruct::Extensions::Identities::Storage.new
   #Awestruct::Extensions::Jira::Project.new(self, 'JDF:12312221')
-  extension Awestruct::Extensions::Repository::Collector.new('jboss-jdf', '5VW45kG4HftAMaI5GbjA', :observers => [github_collector])
+  # You need to have the file $HOME/.github-auth containing username:password on one line
+  extension Awestruct::Extensions::Repository::Collector.new('jboss-jdf', '5VW45kG4HftAMaI5GbjA', :observers => [github_collector], :auth_file => '.github-auth')
   extension Awestruct::Extensions::Identities::Collect.new(github_collector)
   extension Awestruct::Extensions::Identities::Crawl.new(
-    Identities::GitHub::Crawler.new,
+    # You need to have the file $HOME/.github-auth containing username:password on one line
+    Identities::GitHub::Crawler.new(:auth_file => '.github-auth'),
     Identities::Gravatar::Crawler.new,
     #Identities::Confluence::Crawler.new('https://docs.jboss.org/author', :auth_file => '.jboss-auth',
     #    :identity_search_keys => ['name', 'username'], :assign_username_to => 'jboss_username'),

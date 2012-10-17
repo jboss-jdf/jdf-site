@@ -14,6 +14,20 @@ module Awestruct
           @ohloh_api_key = ohloh_api_key
           @use_data_cache = opts[:use_data_cache] || true
           @observers = opts[:observers] || []
+          @auth_file = opts[:auth_file]
+        end
+
+        def get_credentials()
+          if @credentials.nil?
+            @credentials = false
+            if !@auth_file.nil?
+              if File.exist? @auth_file
+                @credentials = File.read(@auth_file)
+              elsif Pathname.new(@auth_file).relative? and File.exist? File.join(ENV['HOME'], @auth_file)
+                @credentials = File.read(File.join(ENV['HOME'], @auth_file))
+              end
+            end
+          end
         end
 
         def execute(site)
@@ -78,7 +92,10 @@ module Awestruct
           @repositories.map {|r|
             r.owner if r.host == 'github.com'
           }.uniq.each {|org_name|
-            org_repos_data = RestClient.get "https://api.github.com/orgs/#{org_name}/repos", :accept => 'application/json'
+            get_credentials()
+            url = "https://api.github.com/orgs/#{org_name}/repos"
+            url = url.gsub(/^(https?:\/\/)/, '\1' + @credentials.chomp + '@')
+            org_repos_data = RestClient.get url, :accept => 'application/json'
             @repositories.each {|r|
               #repo_data = org_repos_data.select {|c| r.owner == org_name and r.host == 'github.com' and c['name'] == r.path}
               repo_data = org_repos_data.select {|c| r.clone_url.eql? c['git_url']}
