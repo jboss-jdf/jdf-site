@@ -1,7 +1,7 @@
 ticket-monster:
   title: TicketMonster Tutorial
   index_label: Tutorials
-  prefix: /examples/ticket-monster
+  prefix: /examples/ticket-monster/tutorial
   version: 2.0.0.M3
   alternate_formats:
     pdf:

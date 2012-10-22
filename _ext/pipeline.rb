@@ -76,7 +76,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::GuideMetadata.new  
 
   # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
-  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster', '.asciidoc')
+  extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/tutorial', '.asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', '.asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/stack/stacks-client', '/README.md')
