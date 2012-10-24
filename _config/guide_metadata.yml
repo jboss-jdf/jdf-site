@@ -2,12 +2,12 @@ ticket-monster:
   title: TicketMonster Tutorial
   index_label: Tutorials
   prefix: /examples/ticket-monster/tutorial
-  version: 2.0.0.M3
+  version: 2.0.1.Final
   alternate_formats:
     pdf:
-      download_url: http://docs.jboss.org/jdf/1.0/ticket-monster-1.0.5.Final.pdf
+      download_url: http://docs.jboss.org/jdf/2.0/ticket-monster-2.0.1.Final.pdf
     epub:
-      download_url: http://docs.jboss.org/jdf/1.0/ticket-monster-1.0.5.Final.epub
+      download_url: http://docs.jboss.org/jdf/2.0/ticket-monster-2.0.1.Final.epub
   guides: 
     WhatIsTicketMonster:
       summary: 
@@ -27,13 +27,13 @@ jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
-  version: jdf-2.0.0.CR3
+  version: jdf-2.0.0.Final
 jboss-as-quickstart-guide:
   title: Getting Started Developing Applications
   index_label: Guides
   prefix: /quickstarts/jboss-as-quickstart/guide
   github_repo: jboss-as-quickstart
-  version: jdf-2.0.0.CR3
+  version: jdf-2.0.0.Final
   guides:
     Introduction:
       summary:
