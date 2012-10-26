@@ -106,6 +106,7 @@ title: 'JBoss Stacks'
           - if (bv.bom.id == bom.id)
             - if bv.labels['jbossASPluginVersion'] != nil
               = partial('plugininfo.html.haml')
+              - break
         %p
         %br
         %h5 Other Versions of this BOM
