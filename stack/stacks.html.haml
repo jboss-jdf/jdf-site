@@ -132,15 +132,15 @@ title: 'JBoss Stacks'
       .modal-header
         %a.close{:data=>{:dismiss=>'modal'}}
           %i.icon-remove
-        %h3 Matrix for #{mr.recommendedRuntime.name}
+        %h3 Component Matrix for #{mr.recommendedRuntime.name}
         .modal-body.clearfix
           :markdown
-            Sometimes you will need to debug JBoss Application Server sources. In most cases you can use the JBoss Tools feature called JBoss Sources Lookup. To demonstrate the use of this plugin take a look on following [screencast](http://screencast.com/t/i6k9hzkjViOs).
+            If you need to debug JBoss Application Server sources then you can use _JBoss Sources Lookup_ in JBoss Tools as demonstrated in this [screencast](http://screencast.com/t/i6k9hzkjViOs).
           %p
           %br
-          If you need to debug some other internal components (JSF impl for example) you can add the specified Impl version to application pom.xml.
+          Alternatively, you can use Maven to obtain the internal components. For example:
           %br
-          First import JBoss AS pom.xml
+          First, we import the JBoss AS parent POM to manage dependency versions:
           %br
           %pre
             %code#example
@@ -160,7 +160,7 @@ title: 'JBoss Stacks'
 
           %br
           %p
-          The you can add the specified dependency to you pom.xml
+          Then, we add a dependency on the relevant artifact:
           %br
           %pre
             %code#example
@@ -169,13 +169,13 @@ title: 'JBoss Stacks'
                   <dependency>
                       <groupId>com.sun.faces</groupId>
                       <artifactId>jsf-impl</artifactId>
-                      <version>${version.javax.faces.jsf-impl}</version>
                       <scope>provided</scope>
                   </dependency>
           %p
           %br
-          To discover what's the right implementation version used on a specific Runtime, you can consult the 
-          %a{:href=>mr.recommendedRuntime.labels['pom'],:target=>"_blank"} #{mr.recommendedRuntime.name} pom.xml
+          The 
+          %a{:href=>mr.recommendedRuntime.labels['pom'],:target=>"_blank"} parent POM 
+          version always matches the version of application server you are using.
 
   .hidden
     - site.stacks.minorReleases.each do |mr|
