@@ -23,6 +23,7 @@ title: 'JBoss Stacks'
         %th Suggested BOM
         %th Suggested Archetype
         %th Download
+        %th Component Matrix
         %th.hidden Runtime ID
     - site.stacks.minorReleases.each do |mr|
       %tr
@@ -37,8 +38,16 @@ title: 'JBoss Stacks'
           %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultArchetype.archetype.id}"}
             #{mr.recommendedRuntime.defaultArchetype.archetype.name}
         %td.centered
-          %a{:href => mr.recommendedRuntime.url}
-            %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
+          - if mr.recommendedRuntime.downloadUrl != nil
+            %a{:href => mr.recommendedRuntime.downloadUrl}
+              %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_181_download_alt.png"}
+          - if mr.recommendedRuntime.downloadUrl == nil
+            %a{:href => mr.recommendedRuntime.url}
+              %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_329_web_browser.png"}
+        %td 
+          - if mr.recommendedRuntime.labels['pom'] != nil
+            %a.modal-link{"data-toggle"=>"modal", :href=>"#pom_#{mr.recommendedRuntime.id}"}
+              %img{:src=>"#{site.base_url}/images/glyphicons/glyphicons_023_cogwheels.png"}
         %td.hidden #{mr.object_id}
   
   -# Create Archetypes Modal Panes
@@ -117,6 +126,56 @@ title: 'JBoss Stacks'
                 %a{:onclick=>"change_bom_version(this, $('##{bom.id} #example'));"} - #{bv.version} 
                 = '(Recommended version for this BOM)' unless bom.recommendedVersion != bv.version
     
+  -# Create POM modal
+  - site.stacks.minorReleases.each do |mr|
+    %div.modal.hide{:id=>"pom_#{mr.recommendedRuntime.id}"}
+      .modal-header
+        %a.close{:data=>{:dismiss=>'modal'}}
+          %i.icon-remove
+        %h3 Matrix for #{mr.recommendedRuntime.name}
+        .modal-body.clearfix
+          :markdown
+            Sometimes you will need to debug JBoss Application Server sources. In most cases you can use the JBoss Tools feature called JBoss Sources Lookup. To demonstrate the use of this plugin take a look on following [screencast](http://screencast.com/t/i6k9hzkjViOs).
+          %p
+          %br
+          If you need to debug some other internal components (JSF impl for example) you can add the specified Impl version to application pom.xml.
+          %br
+          First import JBoss AS pom.xml
+          %br
+          %pre
+            %code#example
+              = preserve do
+                :escaped
+                  <dependencyManagement>
+                  . . .
+                    <dependency>
+                        <groupId>#{mr.recommendedRuntime.groupId}</groupId>
+                        <artifactId>#{mr.recommendedRuntime.artifactId}</artifactId>
+                        <version>#{mr.recommendedRuntime.version}</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                    </dependency>
+                  . . .
+                  </dependencyManagement>
+
+          %br
+          %p
+          The you can add the specified dependency to you pom.xml
+          %br
+          %pre
+            %code#example
+              = preserve do
+                :escaped
+                  <dependency>
+                      <groupId>com.sun.faces</groupId>
+                      <artifactId>jsf-impl</artifactId>
+                      <version>${version.javax.faces.jsf-impl}</version>
+                      <scope>provided</scope>
+                  </dependency>
+          %p
+          %br
+          To discover what's the right implementation version used on a specific Runtime, you can consult the 
+          %a{:href=>mr.recommendedRuntime.labels['pom'],:target=>"_blank"} #{mr.recommendedRuntime.name} pom.xml
 
   .hidden
     - site.stacks.minorReleases.each do |mr|
@@ -172,8 +231,8 @@ title: 'JBoss Stacks'
   function fnFormatDetails ( oTable, nTr )
   {
       var aData = oTable.fnGetData( nTr );
-      var sTableBoms =  document.getElementById('boms'+ aData[6]).outerHTML;
-      var sTableArchetypes =  document.getElementById('archetypes'+ aData[6]).outerHTML;
+      var sTableBoms =  document.getElementById('boms'+ aData[7]).outerHTML;
+      var sTableArchetypes =  document.getElementById('archetypes'+ aData[7]).outerHTML;
       return sTableBoms + sTableArchetypes;
   }
 
@@ -184,7 +243,7 @@ title: 'JBoss Stacks'
       */
       var nCloneTh = document.createElement( 'th' );
       var nCloneTd = document.createElement( 'td' );
-      nCloneTd.innerHTML = '<img src="#{site.base_url}/images/details_open.png">';
+      nCloneTd.innerHTML = '<img id="open_icon" src="#{site.base_url}/images/details_open.png">';
       nCloneTd.className = "centered";
        
       $('#runtimes thead tr').each( function () {
@@ -211,7 +270,7 @@ title: 'JBoss Stacks'
       * Note that the indicator for showing which row is open is not controlled by DataTables,
       * rather it is done here
       */
-      $('#runtimes tbody td img').live('click', function () {
+      $('#open_icon').live('click', function () {
           var nTr = $(this).parents('tr')[0];
           if ( oTable.fnIsOpen(nTr) )
           {

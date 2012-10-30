@@ -81,6 +81,8 @@ module Awestruct
         JBoss::Runtime.new(
           runtime_item['id'],
           runtime_item['name'],
+          runtime_item['groupId'],
+          runtime_item['artifactId'],
           runtime_item['version'],
           runtime_item['type'],
           runtime_item['url'], 
@@ -227,11 +229,13 @@ module JBoss
   end
 
   class Runtime
-    attr_reader :id, :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes, :downloadUrl, :license
+    attr_reader :id, :name, :version, :type, :url, :labels, :boms, :defaultBom, :defaultArchetype, :archetypes, :downloadUrl, :license, :groupId, :artifactId
 
-	  def initialize(id, name, version, type, url, downloadUrl, license, labels, boms, defaultBom, defaultArchetype, archetypes)
+	  def initialize(id, name, groupId, artifactId, version, type, url, downloadUrl, license, labels, boms, defaultBom, defaultArchetype, archetypes)
       @id = id
 		  @name = name
+      @groupId = groupId
+      @artifactId = artifactId
 		  @version = version
 		  @type = type
 		  @url = url
