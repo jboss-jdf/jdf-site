@@ -88,3 +88,11 @@
   * `./publish.sh -s` will push the site to <http://jboss.org/jdf/stage>, which use for staging changes to the site. Stage is normally reserved for verifying minor updates to the site, or for final verification before a major update. You'll need access to the jdf account on `filemgmt.jboss.org`.
   * `./publish.sh -p` will push the site to <http://jboss.org/jdf>, the production site. You'll need access to the jdf account on `filemgmt.jboss.org`.
 
+  ### Notifying releases
+
+  All release scripts notifies through email or opens a Jira issue. You must have a configured local SMTP server so the scripts can make this notification
+
+  On Linux you can install it running:
+
+      sudo yum install sendmail
+
