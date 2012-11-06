@@ -28,10 +28,10 @@
   2. You must provide a property `gpg.passphrase` in your `settings.xml` in the `release` profile e.g.
 
           <profile>
-               <id>release</id>
-               <properties>
-                   <gpg.passphrase>myPassPhrase</gpg.passphrase>
-               </properties>
+                <id>release</id>
+                <properties>
+                    <gpg.passphrase>myPassPhrase</gpg.passphrase>
+                </properties>
           </profile>
   3. You must have a JBoss Nexus account, configured with the server id in `settings.xml` with the id `jboss-releases-repository` e.g.
 
@@ -41,6 +41,11 @@
               <password>myPassword</password>
           </server>
 
+  4. Add `org.sonatype.plugins` plugin group to your `settings.xml` so nexus plugin can be available for publishing scripts.
+
+          <pluginGroups>
+              <pluginGroup>org.sonatype.plugins</pluginGroup>
+          </pluginGroups>
 
   ### Tool required to build jdf
 
