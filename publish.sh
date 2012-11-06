@@ -13,8 +13,7 @@ SANDBOX_CHECKOUT_DIR=$DIR/_tmp/sandbox
 # EAP team email subject
 EAP_SUBJECT="JDF site released at \${PRODUCTION_URL}"
 # EAP team email To ?
-#EAP_EMAIL_TO="jdf-dev@lists.jboss.org"
-EAP_EMAIL_TO="rafabene@gmail.com"
+EAP_EMAIL_TO="jdf-dev@lists.jboss.org"
 EAP_EMAIL_FROM="\"JDF Publish Script\" <benevides@redhat.com>"
 
 JBORG_DIR="jdf"
