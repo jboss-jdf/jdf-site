@@ -10,6 +10,12 @@ SANDBOX_SSH_USERNAME="f35451447e0d4bfbaf37c8a039bb5e6a"
 SANDBOX_REPO="ssh://${SANDBOX_SSH_USERNAME}@${SANDBOX_URL}/~/git/site.git/"
 SANDBOX_CHECKOUT_DIR=$DIR/_tmp/sandbox
 
+# EAP team email subject
+EAP_SUBJECT="JDF site released at \${PRODUCTION_URL}"
+# EAP team email To ?
+EAP_EMAIL_TO="jdf-dev@lists.jboss.org"
+EAP_EMAIL_FROM="\"JDF Publish Script\" <benevides@redhat.com>"
+
 JBORG_DIR="jdf"
 JBORG_REPO="filemgmt.jboss.org:www_htdocs"
 
@@ -20,6 +26,20 @@ STAGING_DIR="${JBORG_DIR}/2.0.0"
 
 PRODUCTION_DIR="${JBORG_DIR}"
 PRODUCTION_URL="jboss.org/${PRODUCTION_DIR}"
+
+notifyEmail()
+{
+   echo "***** Performing JDF site release notifications"
+   echo "*** Notifying JDF dev list"
+   subject=`eval echo $EAP_SUBJECT`
+   echo "Email from: " $EAP_EMAIL_FROM
+   echo "Email to: " $EAP_EMAIL_TO
+   echo "Subject: " $subject
+   # send email using /bin/mail
+   echo "See \$subject :-)" | /usr/bin/env mail -r "$EAP_EMAIL_FROM" -s "$subject" "$EAP_EMAIL_TO"
+
+}
+
 
 shallow_clean() {
   echo "**** Cleaning site  ****"
@@ -70,6 +90,8 @@ production() {
   rsync -Pqr --protocol=28 $DIR/_site/* ${JBORG_DIR}@${JBORG_REPO}/${PRODUCTION_DIR}
 
   shallow_clean
+
+  notifyEmail
 }
 
 staging() {
