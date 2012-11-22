@@ -96,5 +96,8 @@ Awestruct::Extensions::Pipeline.new do
   helper Awestruct::Extensions::Partial
   helper Awestruct::Extensions::PostsHelper
   helper Awestruct::Extensions::GoogleAnalytics
+
+  # Generate a sitemap.xml
+  extension Awestruct::Extensions::Sitemap.new
 end
 
