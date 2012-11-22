@@ -99,6 +99,7 @@ module Awestruct
         if author
           page.source_author = [ author.text ]
         end
+        page.source_summary = first_x_words(guide_content.css('p').first.text, 25, '').gsub("\n", '')
 
         # rebuild links
         guide_content.css('a').each do |a|
@@ -108,6 +109,10 @@ module Awestruct
         end
 
         guide_content.to_html
+      end
+
+      def first_x_words(str,n=20,finish='&hellip;')
+        str.split(' ')[0,n].inject{|sum,word| sum + ' ' + word} + finish
       end
 
     end

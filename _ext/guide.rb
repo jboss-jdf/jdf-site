@@ -73,11 +73,15 @@ module Awestruct
                   page.source_author.each do |a|
                     guide.authors << site.identities.lookup_by_name(a)
                   end
+                  if !guide.authors.empty? && guide.authors[0] != nil
+                    page.author = guide.authors[0].github_id
+                  end
                 end
 
                 guide.technologies = page.source_technologies 
                 guide.level = page.source_level
                 guide.summary = page.source_summary
+                page.description = guide.summary 
                 guide.prerequisites = page.source_prerequisites
                 guide.target_product = page.source_target_product
                

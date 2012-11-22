@@ -1,6 +1,7 @@
 # author is used in the atom feed
 title: JBoss Developer Framework
 author: JBoss Developer Framework
+description: JBoss Developer Framework shows you how to write applications using JBoss technologies. Learn how to write an application suitable for mobile. Learn how to use the Java EE 6 API with JBoss AS. Learn how to add the power of CDI to your browser.
 jira_key: JDF
 ohloh_id: jboss-jdf
 disqus: jdf
