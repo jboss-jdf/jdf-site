@@ -107,6 +107,13 @@ staging() {
   shallow_clean
 }
 
+clear_staging() {
+  echo "**** Removing staging site from http://${STAGING_URL}"
+  rm -rf _site
+  mkdir _site
+  rsync -Pqr --protocol=28 --delete $DIR/_site/ ${JBORG_DIR}@${JBORG_REPO}/${STAGING_DIR}
+}
+
 
 usage() {
   cat << EOF
@@ -119,10 +126,11 @@ OPTIONS:
    -s      Publish staging version of the site to http://${STAGING_URL}
    -p      Publish production version of the site to http://${PRODUCTION_URL}
    -c      Clear out all caches
+   -r      Remove the staging version of the site from http://${STAGING_URL} - please do this after using staging
 EOF
 }
 
-while getopts "spdch" OPTION
+while getopts "spdchr" OPTION
 
 do
      case $OPTION in
@@ -130,6 +138,11 @@ do
              staging
              exit
              ;;
+         r)
+             clear_staging
+             exit
+             ;;
+
          d)
              sandbox
              exit
