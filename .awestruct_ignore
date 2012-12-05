@@ -3,12 +3,15 @@
 **/*.java
 **/pom.xml
 **/*.fsh
+**/*.sh
 **/LICENSE.txt
 **/CONTRIBUTING.md
+**/WriterGuidelines.md
 **/SERVICES.md
 **/*.properties
 **/*.cheatsheet.xml
 examples/ticket-monster/demo/**
+examples/ticket-monster/**/README.md
 examples/ticket-monster/ticket-monster/**
 examples/ticket-monster/cordova/**
 examples/*/dist/**
