@@ -15,6 +15,7 @@ module Awestruct::Extensions
             :weight=>page.weight
           })
           spotlights << spotlight
+          page.output_path = page.output_path.gsub(/\.html$/, '.txt')           
         end
       end
       site.spotlights = spotlights

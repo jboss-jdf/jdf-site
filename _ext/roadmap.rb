@@ -47,6 +47,7 @@ module Awestruct
               end
             end
             roadmaps << roadmap
+            page.output_path = page.output_path.gsub(/\.html$/, '.txt') 
           end
         end
         roadmaps = roadmaps.sort_by{|each| [each.release_date ] }.reverse
