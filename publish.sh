@@ -85,7 +85,7 @@ production() {
   awestruct -Pproduction
 
   echo "**** Publishing site to http://${PRODUCTION_URL} ****"
-  rsync -Pqr --protocol=28 $DIR/_site/* ${JBORG_DIR}@${JBORG_REPO}/${PRODUCTION_DIR}
+  rsync -Pqr --protocol=28 --delete-after $DIR/_site/* ${JBORG_DIR}@${JBORG_REPO}/${PRODUCTION_DIR}
 
   shallow_clean
   
@@ -102,7 +102,7 @@ staging() {
   awestruct -Pstaging
 
   echo "**** Publishing site to http://${STAGING_URL} ****"
-  rsync -Pqr --protocol=28 $DIR/_site/* ${JBORG_DIR}@${JBORG_REPO}/${STAGING_DIR}
+  rsync -Pqr --protocol=28 --delete-after $DIR/_site/* ${JBORG_DIR}@${JBORG_REPO}/${STAGING_DIR}
 
   shallow_clean
 }
