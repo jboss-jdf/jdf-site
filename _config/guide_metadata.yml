@@ -2,12 +2,12 @@ ticket-monster:
   title: TicketMonster Tutorial
   index_label: Tutorials
   prefix: /examples/ticket-monster/tutorial
-  version: 2.0.1.Final
+  version: 2.0.8.Final
   alternate_formats:
     pdf:
-      download_url: http://docs.jboss.org/jdf/2.0/ticket-monster-2.0.1.Final.pdf
+      download_url: http://docs.jboss.org/jdf/2.0/ticket-monster-2.0.8.Final.pdf
     epub:
-      download_url: http://docs.jboss.org/jdf/2.0/ticket-monster-2.0.1.Final.epub
+      download_url: http://docs.jboss.org/jdf/2.0/ticket-monster-2.0.8.Final.epub
   guides: 
     WhatIsTicketMonster:
       summary: 
