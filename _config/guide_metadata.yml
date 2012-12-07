@@ -23,6 +23,8 @@ ticket-monster:
       summary: Leverage JBoss Forge for rapid application development using JSF 2 and RichFaces 4
     DashboardGWT:
       summary: JBoss Errai and Google Web Toolkit are used to create an executive dashboard to monitor business performance - watch ticket sales in happen real-time.
+    HybridUI:
+      summary: Learn how to create hybrid mobile versions of the application with Apache Cordova
 jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
