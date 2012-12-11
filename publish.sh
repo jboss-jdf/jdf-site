@@ -13,8 +13,7 @@ SANDBOX_CHECKOUT_DIR=$DIR/_tmp/sandbox
 # team email subject
 EMAIL_SUBJECT="JDF site released at \${PRODUCTION_URL}"
 # EAP team email To ?
-#EMAIL_TO="jdf-dev@lists.jboss.org"
-EMAIL_TO="rafabene@gmail.com"
+EMAIL_TO="jdf-dev@lists.jboss.org"
 EMAIL_FROM="\"JDF Publish Script\" <benevides@redhat.com>"
 
 JBORG_DIR="jdf"
@@ -133,11 +132,10 @@ OPTIONS:
    -p      Publish production version of the site to http://${PRODUCTION_URL}
    -c      Clear out all caches
    -r      Remove the staging version of the site from http://${STAGING_URL} - please do this after using staging
-   -e      Test email
 EOF
 }
 
-while getopts "spdchre" OPTION
+while getopts "spdchr" OPTION
 
 do
      case $OPTION in
@@ -164,10 +162,6 @@ do
              ;;
          h)
              usage
-             exit
-             ;;
-         e)
-             notify_email
              exit
              ;;
          [?])
