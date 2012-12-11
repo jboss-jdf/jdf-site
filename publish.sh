@@ -40,7 +40,7 @@ notify_email()
    if [[ "$unamestr" == 'Linux' ]]; then
      echo "See \$subject :-)" | /usr/bin/env mail -r "$EMAIL_FROM" -s "$subject" "$EMAIL_TO"
    else
-     printf "Subject: $subject \n Sess \$subject:)" | /usr/bin/env sendmail -f "$EMAIL_FROM" "$EMAIL_TO"
+     printf "Subject: $subject\nSee \$subject:)" | /usr/bin/env sendmail -f "$EMAIL_FROM" "$EMAIL_TO"
    fi
 }
 
