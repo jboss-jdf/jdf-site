@@ -13,7 +13,8 @@ SANDBOX_CHECKOUT_DIR=$DIR/_tmp/sandbox
 # team email subject
 EMAIL_SUBJECT="JDF site released at \${PRODUCTION_URL}"
 # EAP team email To ?
-EMAIL_TO="jdf-dev@lists.jboss.org"
+#EMAIL_TO="jdf-dev@lists.jboss.org"
+EMAIL_TO="rafabene@gmail.com"
 EMAIL_FROM="\"JDF Publish Script\" <benevides@redhat.com>"
 
 JBORG_DIR="jdf"
@@ -25,7 +26,8 @@ STAGING_DIR="${JBORG_DIR}/stage"
 PRODUCTION_DIR="${JBORG_DIR}"
 PRODUCTION_URL="jboss.org/${PRODUCTION_DIR}"
 
-notifyEmail()
+
+notify_email()
 {
    echo "***** Performing JDF site release notifications"
    echo "*** Notifying JDF dev list"
@@ -34,8 +36,12 @@ notifyEmail()
    echo "Email to: " $EMAIL_TO
    echo "Subject: " $subject
    # send email using /bin/mail
-   echo "See \$subject :-)" | /usr/bin/env mail -r "$EMAIL_FROM" -s "$subject" "$EMAIL_TO"
-
+   unamestr=`uname`
+   if [[ "$unamestr" == 'Linux' ]]; then
+     echo "See \$subject :-)" | /usr/bin/env mail -r "$EMAIL_FROM" -s "$subject" "$EMAIL_TO"
+   else
+     printf "Subject: $subject \n Sess \$subject:)" | /usr/bin/env sendmail -f "$EMAIL_FROM" "$EMAIL_TO"
+   fi
 }
 
 
@@ -91,7 +97,7 @@ production() {
   
   read -p "Do you want to send release notifcations to $EMAIL_TO[y/N]? " yn
   case $yn in
-      [Yy]* ) notifyEmail;;
+      [Yy]* ) notify_email;;
       * ) exit;
   esac
 }
@@ -127,10 +133,11 @@ OPTIONS:
    -p      Publish production version of the site to http://${PRODUCTION_URL}
    -c      Clear out all caches
    -r      Remove the staging version of the site from http://${STAGING_URL} - please do this after using staging
+   -e      Test email
 EOF
 }
 
-while getopts "spdchr" OPTION
+while getopts "spdchre" OPTION
 
 do
      case $OPTION in
@@ -157,6 +164,10 @@ do
              ;;
          h)
              usage
+             exit
+             ;;
+         e)
+             notify_email
              exit
              ;;
          [?])
