@@ -34,13 +34,8 @@ notify_email()
    echo "Email from: " $EMAIL_FROM
    echo "Email to: " $EMAIL_TO
    echo "Subject: " $subject
-   # send email using /bin/mail
-   unamestr=`uname`
-   if [[ "$unamestr" == 'Linux' ]]; then
-     echo "See \$subject :-)" | /usr/bin/env mail -r "$EMAIL_FROM" -s "$subject" "$EMAIL_TO"
-   else
-     printf "Subject: $subject\nSee \$subject:)" | /usr/bin/env sendmail -f "$EMAIL_FROM" "$EMAIL_TO"
-   fi
+   # send email using sendmail
+   printf "Subject: $subject\nSee \$subject :)\n" | /usr/bin/env sendmail -f "$EMAIL_FROM" "$EMAIL_TO"
 }
 
 
