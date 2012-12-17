@@ -1,10 +1,12 @@
 ---
-layout: default
+layout: base 
 ---
 
 - page.body_class = 'guide'
 - page.toTop = 1
 - page.bottom_javascripts = [ "#{site.base_url}/javascripts/jquery-scroll.js", "http://w.sharethis.com/button/buttons.js" ]
+- page.description = page.guide.meta
+- page.title = page.guide.title
 
 #main(role='main')
   #content-header

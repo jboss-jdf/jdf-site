@@ -81,10 +81,17 @@ module Awestruct
                 guide.technologies = page.source_technologies 
                 guide.level = page.source_level
                 guide.summary = page.source_summary
-                page.description = guide.summary 
                 guide.prerequisites = page.source_prerequisites
                 guide.target_product = page.source_target_product
-               
+              
+                guide.meta = page.guide.summary  
+                if guide.technologies
+                  guide.meta += ". Technologies covered include".concat(guide.technologies.map{|u| u} * ', ')
+                end
+                if guide.level
+                  guide.meta += ". Aimed at " + guide.level.downcase + " users."
+                end
+
                 # Extract metadata from git
                 guide.changes = page_changes(guide, site.identities, @num_changes)
                 guide.contributors = page_contributors(guide, site.identities, @num_contrib_changes, guide.authors)
