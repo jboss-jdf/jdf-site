@@ -57,5 +57,7 @@ about:
   press:
   contributors:
   contributing:
-    label: Contribute to jdf
+    label: Contribute to jdf-site
+  contributingold:
+    label: Contribute OLD
   site:

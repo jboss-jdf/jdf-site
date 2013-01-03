@@ -1,0 +1,80 @@
+---
+layout: default 
+title: Contributing to JBoss Developer Framework
+description: Learn how to contribute to JBoss Developer Framework. JBoss Developer Framework shows you how to write applications using JBoss technologies.
+---
+
+If you are interested in contributing to any of the projects that make up JBoss Developer Framework (quickstarts, examples, BOMs, migration guides, tools), then read on!
+
+We're serious about quality in JBoss Developer Framework, and we are strict about good quality code and documentation. But don't let that you put that off! If you follow this guide, then you should be in good shape :-)
+
+.accordion#accordion
+
+   
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#samples") General guidelines for sample projects
+    #samples.accordion-body.collapse
+      .accordion-inner
+        =partial 'general_guidelines.md'
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#setup") Setting up your environment
+    #setup.accordion-body.collapse
+      .accordion-inner
+        =partial 'setup.html.haml'
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#quickstarts") Contributing a quickstart
+    #quickstarts.accordion-body.collapse
+      .accordion-inner
+        =partial 'contributing_quickstarts.html.haml'
+  
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#war_story") Contributing a migration war story
+    #war_story.accordion-body.collapse
+      .accordion-inner
+        =partial 'war_story_guidelines.md'
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#examples") Contributing an example
+    #examples.accordion-body.collapse
+      .accordion-inner
+        =partial 'contributing_examples.md'
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#boms") Contributing a BOM
+    #boms.accordion-body.collapse
+      .accordion-inner
+        =partial 'contributing_boms.md'
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#license") License Information and Contributor Agreement
+    #license.accordion-body.collapse
+      .accordion-inner
+        =partial 'licensing.html.haml'
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#releases") Release procedures
+    #releases.accordion-body.collapse
+      .accordion-inner
+        =partial 'release-proceedure.html.haml'
+
+:javascript
+
+  $(document).ready(function() {
+
+      /* Open modal dialog based on url fragments */
+      if (location.hash) {
+        var id = location.hash
+        $(id).collapse('show');
+      }
+
+  } );
