@@ -13,3 +13,9 @@
 [submodule "stack/stacks-client"]
 	path = stack/stacks-client
 	url = git@github.com:jboss-jdf/jdf-stacks-client.git
+[submodule "stack/jboss-bom"]
+	path = stack/jboss-bom
+	url = git@github.com:rafabene/jboss-bom.git
+[submodule "stack/jboss-as-archetype"]
+	path = stack/jboss-as-archetype
+	url = https://github.com/rafabene/jboss-as-archetype

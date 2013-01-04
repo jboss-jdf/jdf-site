@@ -1,0 +1,59 @@
+---
+layout: default 
+title: Contributing to JBoss Developer Framework Stacks
+---
+
+.accordion#accordion
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#bom") Contribute with a BOM
+    #bom.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          #{include_remote_file("https://raw.github.com/rafabene/jboss-bom/JDF-168/CONTRIBUTING.md")}
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#archetype") Contribute with a Archetype
+    #archetype.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          #{include_remote_file("https://raw.github.com/rafabene/jboss-as-archetype/JDF-168/CONTRIBUTING.md")}
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#stacks") Contribute with Stacks Index
+    #stacks.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          #{include_remote_file("https://raw.github.com/rafabene/jdf-stack/JDF-168/CONTRIBUTING.md")}
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#stacksclient") Contribute with Stacks Client
+    #stacksclient.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          #{include_file("stack/stacks-client/CONTRIBUTING.md")}
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#plugin") Contribute with Plugin JDF
+    #plugin.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          #{include_file("stack/plugin-jdf/CONTRIBUTING.md")}
+
+
+:javascript
+
+  $(document).ready(function() {
+
+      /* Open modal dialog based on url fragments */
+      if (location.hash) {
+        var id = location.hash
+        $(id).collapse('show');
+      }
+
+  } );

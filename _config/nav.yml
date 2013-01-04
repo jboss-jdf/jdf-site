@@ -9,6 +9,7 @@ examples:
   articles:
     url: /examples/get-started/articles
   get-involved:
+  contributing:
 quickstarts:
   url: /quickstarts/get-started
   description: Quickstarts are tightly focused, showing you one API or one use case.
@@ -21,6 +22,7 @@ quickstarts:
   articles:
     url: /quickstarts/get-started/articles
   get-involved:
+  contributing:
 migrations:
   url: /migrations/get-started
   seam2: 
@@ -33,6 +35,7 @@ migrations:
     label: Java EE 5 -> Java EE 6
     url: /migrations/get-started/javaee5
   get-involved:
+  contributing:
 stack:
   label: JBoss Stacks
   description: The JBoss Stacks provide a recommended stack of boms, archetypes and runtimes
@@ -44,6 +47,7 @@ stack:
   stacks-client:
     label: JBoss Stacks Client
   get-involved:
+  contributing: 
 forums:
   jdf-users:
     label: jdf-users
@@ -58,6 +62,4 @@ about:
   contributors:
   contributing:
     label: Contribute to jdf-site
-  contributingold:
-    label: Contribute OLD
   site:
