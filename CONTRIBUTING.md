@@ -1,12 +1,37 @@
 Hacking on the JDF site
 =======================
 
+Basic Steps
+-----------
+
+To contribute with jdf-site, clone your own fork instead of cloning the main jdf-site repository, commit your work on topic branches and make pull requests. In detail:
+
+1. [Fork](https://github.com/jboss-jdf/jdf-site/fork_select) the project.
+
+2. Clone your fork (`git@github.com:<your-username>/jdf-site.git`).
+
+3. Add an `upstream` remote (`git remote add upstream https://github.com/jboss-jdf/jdf-site`).
+
+4. Get the latest changes from upstream (e.g. `git pull upstream master`).
+
+5. Create a new topic branch to contain your feature, change, or fix (`git checkout -b <topic-branch-name>`).
+
+6. Commit your changes to your topic branch.
+
+7. Push your topic branch up to your fork (`git push origin  <topic-branch-name>`).
+
+8. [Open a Pull Request](http://help.github.com/send-pull-requests/) with a clear title and description.
+
+If you don't have the Git client (`git`), get it from: <http://git-scm.com/>
+
+
+Setup your environment
+----------------------
+
 The JDF site is built using [awestruct](http://awestruct.org/), and requires a number of gems and eggs, as well as AsciiDoc (8.6.x).
 
 To setup the environment you need to follow these steps. *Certify to use the correct versions*.
 
-Setup your environment
-----------------------
 
 1. Install Ruby *1.9.X*
 
@@ -85,25 +110,4 @@ _NOTE_: You can also run:
 
 This will update the version number (step 3), commit and tag and publish the site to <http://jboss.org/jdf> (step 4). Then it will reset the version number back to the snapshot version number.
 
-Basic Steps
------------
 
-To contribute with jdf-site, clone your own fork instead of cloning the main jdf-site repository, commit your work on topic branches and make pull requests. In detail:
-
-1. [Fork](https://github.com/jboss-jdf/jdf-site/fork_select) the project.
-
-2. Clone your fork (`git@github.com:<your-username>/jdf-site.git`).
-
-3. Add an `upstream` remote (`git remote add upstream https://github.com/jboss-jdf/jdf-site`).
-
-4. Get the latest changes from upstream (e.g. `git pull upstream master`).
-
-5. Create a new topic branch to contain your feature, change, or fix (`git checkout -b <topic-branch-name>`).
-
-6. Commit your changes to your topic branch.
-
-7. Push your topic branch up to your fork (`git push origin  <topic-branch-name>`).
-
-8. [Open a Pull Request](http://help.github.com/send-pull-requests/) with a clear title and description.
-
-If you don't have the Git client (`git`), get it from: <http://git-scm.com/>
