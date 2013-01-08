@@ -12,7 +12,6 @@ require_relative 'guide'
 require_relative 'spotlight'
 require_relative 'moveup'
 require_relative 'remotePartial'
-require_relative 'helper'
 require_relative 'qstoc'
 require_relative 'nav'
 require_relative 'roadmap'
@@ -97,8 +96,6 @@ Awestruct::Extensions::Pipeline.new do
   helper Awestruct::Extensions::Partial
   helper Awestruct::Extensions::PostsHelper
   helper Awestruct::Extensions::GoogleAnalytics
-
-  helper Awestruct::Extensions::Helper
 
   # Generate a sitemap.xml
   extension Awestruct::Extensions::Sitemap.new
