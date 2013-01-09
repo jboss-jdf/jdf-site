@@ -6,6 +6,24 @@
 @import "partials/markdown";
 
 /** Main landing page **/
+
+#tabnav ul li#tabnav-search input {
+    -moz-transition: all 0.2s linear 0s;
+    background: none repeat scroll 0 0 #6B7C86;
+    border: 1px solid #5C6C75;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius:15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px; 
+    border-radius:15px 15px 15px 15px;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.02) inset;
+    color: #484848;
+    padding: 2px 4px;
+    width: 100%;
+    z-index:103; /* this is higher then the dropmenudiv */
+    position:relative;
+    background: url(https://static.jboss.org/theme/images/common/ico_searcharrow-dark.png) no-repeat top right #6b7c86;	
+}
+
 #frontpage-header-wrapper {
   @include background-image(linear-gradient(#afb1b3, #e6e7e8 45%));
   $experimental-support-for-svg: true;
