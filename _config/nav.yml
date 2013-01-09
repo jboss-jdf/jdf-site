@@ -22,7 +22,6 @@ quickstarts:
   articles:
     url: /quickstarts/get-started/articles
   get-involved:
-  contributing:
 migrations:
   url: /migrations/get-started
   seam2: 
