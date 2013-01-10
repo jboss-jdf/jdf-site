@@ -1,38 +1,92 @@
 ---
-layout: default
-title: 'JBoss Stacks: Get Involved'
-description: Contribute to JBoss Stacks. JBoss Stacks allows you to easily choose and use a stack of JBoss runtimes, frameworks and tools.
+layout: getinvolved
 ---
-%script{ :src=>"http://www.ohloh.net/p/#{site.ohloh_id}/widgets/project_basic_stats.js" }
+- page.title = 'Get Involved with JBoss Stacks'
+- page.bomguide = 'https://raw.github.com/rafabene/jboss-bom/JDF-168/CONTRIBUTING.md'
+- page.archetypeguide = 'https://raw.github.com/rafabene/jboss-as-archetype/JDF-168/CONTRIBUTING.md'
+- page.stacksguide = 'https://raw.github.com/rafabene/jdf-stack/JDF-168/CONTRIBUTING.md'
+- page.stacksclientguide = 'https://raw.github.com/rafabene/jdf-stacks-client/JDF-168/CONTRIBUTING.md'
+- page.pluginjdfguide = 'https://raw.github.com/rafabene/plugin-jdf/JDF-168/CONTRIBUTING.md'
 
-:markdown
-  Found a bug on some of JBoss Stacks item ? Think there is a BOM/Archetype/Stack missing?
- 
-  Then you probably want to [report an issue](https://github.com/jboss-jdf/jdf-stack/issues).
+:css
+  .accordion {
+    width: 70%;
+   }
 
-  The information about the Stacks is readily accessible. The JBoss Stacks is mantained in a YAML file available at [JBoss Stacks repo](https://github.com/jboss-jdf/jdf-stack/blob/master/stacks.yaml). For better compreending the file format, JDF provides [this diagram](https://raw.github.com/jboss-jdf/jdf-stack/master/fileformat.png) that represents the lastest file format version.
+  .accordion-heading {
+    font-size: 15px;
+  }
+  /** Reset padding **/
+  .expander {
+    padding: 0px;
+    padding-top: 30px;
+  }
 
-  If you plan on contributing to the project, we encourage you to clone the one of the JBoss Stacs item repositories.
-  If you just want to browse the sources or track the latest activity, you can do so by visiting on of the project repositories:
-
-    - [JDF Forge Plugin](https://github.com/jboss-jdf/plugin-jdf)
-
-    - [JBoss Stacks Repository](https://github.com/jboss-jdf/jdf-stack)
-
-    - [JBoss Stacks Client API](https://github.com/jboss-jdf/jdf-stacks-client)
-
-    - [JBoss BOMs](https://github.com/jboss-jdf/jboss-bom)
-
-    - [JBoss Archetypes](https://github.com/jboss-jdf/jboss-as-archetype)
-
-
+%br(style="clear: left;")
+.expander(href="#")
+  %strong
+    Don't forget to read the Contributing Guide bellow
 %p
-  %a(href='http://github.com/jbossas/quickstart')
-    %img(src="#{site.base_url}/images/octocat_social.png" style='vertical-align: middle;')
-  %strong<
-    Coding has become social!
-    %a(href='https://github.com/jboss-jdf/jdf-stack') Fork us!
+.accordion#accordion
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#bom") Contribute with a BOM
+    #bom.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          ![Note](../../images/note.png)This Contributing Guide was generated from <#{page.bomguide}>
+          - - -
+          #{remotePartial(page.bomguide)}
 
-:markdown
-  You'll probably want to [read the contributor guide](#{site.base_url}/about/contributing) as well!
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#archetype") Contribute with a Archetype
+    #archetype.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          ![Note](../../images/note.png)This Contributing Guide was generated from <#{page.archetypeguide}>
+          - - -
+          #{remotePartial(page.archetypeguide)}
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#stacks") Contribute with Stacks Index
+    #stacks.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          ![Note](../../images/note.png)This Contributing Guide was generated from <#{page.stacksguide}>
+          - - -
+          #{remotePartial(page.stacksguide)}
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#stacksclient") Contribute with Stacks Client
+    #stacksclient.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          ![Note](../../images/note.png)This Contributing Guide was generated from <#{page.stacksclientguide}>
+          - - -
+          #{remotePartial(page.stacksclientguide)}
+
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle(data-toggle="collapse" data-parent="#accordion" href="#plugin") Contribute with Plugin JDF
+    #plugin.accordion-body.collapse
+      .accordion-inner
+        :markdown
+          ![Note](../../images/note.png)This Contributing Guide was generated from <#{page.pluginjdfguide}>
+          - - -
+          #{remotePartial(page.pluginjdfguide)}
+
+:javascript
+
+  $(document).ready(function() {
+
+      /* Open modal dialog based on url fragments */
+      if (location.hash) {
+        var id = location.hash
+        $(id).collapse('show');
+      }
+
+  } );'
 

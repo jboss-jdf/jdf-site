@@ -8,3 +8,5 @@ If you want to contribute an example, follow these guidelines:
 * Take a look at Maven POM Versions Checklist if you want to add dependencies to your project
 * When your quickstart is ready for review, let the JBoss Developer Framework team know on the [dev list](#{site.base_url}/forums/jdf-dev).
 
+The TicketMonster source code is readily accessible. If you plan on contributing to the project, we encourage you to clone the repository and build the quickstarts. If you just want to browse the source, or track the latest activity, you can do so by visiting the [Git Repository](http://github.com/jboss-jdf/ticket-monster) in your web browser.
+

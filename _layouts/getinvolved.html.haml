@@ -1,26 +1,28 @@
 ---
-layout: getinvolvedbase
+layout: default
 title: 'Get Involved'
-guide: 'Define the Guide URL'
 ---
 - page.javascripts=["#{site.base_url}/javascripts/simple-expand.min.js" ]
 
-%br(style="clear: left;")
+:css
 
-.expand-container
-  %a.expander(href="#")
-    %strong
-      Don't forget to read the Contributing Guide
-  .content(style="display:none; ")
-    ~ content
-    %p
-    :markdown
-      ![Note](../../images/note.png)This Contributing Guide was generated from <#{page.guide}>
-      - - -
-      #{remotePartial("#{page.guide}")}
+  iframe{
+    float: right;
+  }
 
-%br(style="clear: both;")
+%hr
 
-:javascript
-  $('.expand-container').simpleexpand({'hideMode': 'fadeToggle'});
+%script{ :src=>"http://www.ohloh.net/p/#{site.ohloh_id}/widgets/project_basic_stats.js" }
+
+.leftpane(style="float: left;")
+  :markdown
+    Found a bug? Think there is something missing? Then you probably want to [report an issue](https://issues.jboss.org/browse/JDF).
+
+  %a(href='https://github.com/jboss-jdf')
+    %img(src="#{site.base_url}/images/octocat_social.png" style='vertical-align: middle;')
+  %strong
+    Coding has become social!
+    %a(href='https://github.com/jboss-jdf') Fork us!
+
+~ content
 
