@@ -1,0 +1,26 @@
+---
+layout: default
+title: 'Get Involved'
+---
+:css
+
+  iframe{
+    float: right;
+  }
+
+%hr
+
+%script{ :src=>"http://www.ohloh.net/p/#{site.ohloh_id}/widgets/project_basic_stats.js" }
+
+.leftpane(style="float: left;")
+  :markdown
+    Found a bug? Think there is something missing? Then you probably want to [report an issue](https://issues.jboss.org/browse/JDF).
+
+  %a(href='https://github.com/jboss-jdf')
+    %img(src="#{site.base_url}/images/octocat_social.png" style='vertical-align: middle;')
+  %strong
+    Coding has become social!
+    %a(href='https://github.com/jboss-jdf') Fork us!
+
+~ content
+
