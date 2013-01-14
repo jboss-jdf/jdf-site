@@ -43,18 +43,18 @@ To setup the environment you need to follow these steps. *Certify to use the cor
 
 3. Install a Javascript GEM Runtime. 
 
-    - A list of available Runtimes can be found here: <https://github.com/sstephenson/execjs>
+ - A list of available Runtimes can be found here: <https://github.com/sstephenson/execjs>
 
             gem install *a-javascript-runtime*
 
 4. Install ASCIIDOC *8.6.x*
 
-    - Version `8.6.x` can be found [here](http://www.methods.co.nz/asciidoc/INSTALL.html)
+ - Version `8.6.x` can be found [here](http://www.methods.co.nz/asciidoc/INSTALL.html)
 
 5. Install Python Eggs
 
-    - pygments
-    - For Linux:
+ - pygments
+ - For Linux:
 
             sudo yum install python-pygments
 
@@ -109,5 +109,4 @@ _NOTE_: You can also run:
     ./release.sh -s <old snapshot version> -r <release version>
 
 This will update the version number (step 3), commit and tag and publish the site to <http://jboss.org/jdf> (step 4). Then it will reset the version number back to the snapshot version number.
-
 
