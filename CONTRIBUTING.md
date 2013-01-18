@@ -28,7 +28,7 @@ Here are the steps in detail:
 
         git checkout -b <topic-branch-name> upstream/master
 
-6. Contribute new code or make changes to existing files. Make sure that you follow the General Guidelines below.
+6. Contribute new code or make changes to existing files. 
 
 7. Commit your changes to your local topic branch. You must use `git add filename` for every file you create or change.
 
