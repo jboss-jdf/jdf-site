@@ -56,7 +56,7 @@ To setup the environment you need to follow these steps. *Certify to use the cor
 
 2. Install Ruby GEMs
 
-        gem install awestruct hpricot nokogiri json git vpim rest-client pygments.rb 
+        gem install awestruct hpricot nokogiri json git vpim rest-client pygments.rb rb-inotify
 
 3. Install a Javascript GEM Runtime. 
 

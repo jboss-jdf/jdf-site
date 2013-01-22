@@ -19,8 +19,8 @@ EMAIL_FROM="\"JDF Publish Script\" <benevides@redhat.com>"
 JBORG_DIR="jdf"
 JBORG_REPO="filemgmt.jboss.org:www_htdocs"
 
-STAGING_URL="jboss.org/${JBORG_DIR}/stage"
-STAGING_DIR="${JBORG_DIR}/stage"
+STAGING_URL="jboss.org/${JBORG_DIR}/2.1.0"
+STAGING_DIR="${JBORG_DIR}/2.1.0"
 
 PRODUCTION_DIR="${JBORG_DIR}"
 PRODUCTION_URL="jboss.org/${PRODUCTION_DIR}"

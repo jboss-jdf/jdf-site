@@ -70,7 +70,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Nav.new
 
   extension Awestruct::Extensions::Spotlight.new('/spotlights')
-  extension Awestruct::Extensions::Stacks.new('https://raw.github.com/jboss-jdf/jdf-stack/1.0.0.Final/stacks.yaml')
+  extension Awestruct::Extensions::Stacks.new('https://raw.github.com/jboss-jdf/jdf-stack/jdf-2.1/stacks.yaml')
 
   # Needs to be before Guides
   extension Awestruct::Extensions::GuideMetadata.new  
