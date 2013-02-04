@@ -2,6 +2,8 @@ ticket-monster:
   title: TicketMonster Tutorial
   index_label: Tutorials
   prefix: /examples/ticket-monster/tutorial
+  git_submodule_prefix: /examples/ticket-monster
+  website_source_repo: https://github.com/jboss-jdf/ticket-monster
   version: 2.0.9.Final
   alternate_formats:
     pdf:
@@ -29,11 +31,15 @@ jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
+  git_submodule_prefix: /quickstarts/jboss-as-quickstart
+  website_source_repo: https://github.com/jboss-jdf/jboss-as-quickstart
   version: jdf-2.0.0.Final
 jboss-as-quickstart-guide:
   title: Getting Started Developing Applications
   index_label: Guides
   prefix: /quickstarts/jboss-as-quickstart/guide
+  git_submodule_prefix: /quickstarts/jboss-as-quickstart
+  website_source_repo: https://github.com/jboss-jdf/jboss-as-quickstart
   github_repo: jboss-as-quickstart
   version: jdf-2.0.0.Final
   guides:
@@ -55,15 +61,21 @@ jboss-as-quickstart-guide:
       summary: Create your own application based on the Kitchensink Quickstart
 migration:
   prefix: /migrations/seam2
+  git_submodule_prefix: /migrations/seam2
+  website_source_repo: https://github.com/seam/migration
   version: 1.0.5.Final
   github_org: seam
 plugin-jdf:
   prefix: /stack/plugin-jdf
+  git_submodule_prefix: stack/plugin-jdf
+  website_source_repo: https://github.com/jboss-jdf/plugin-jdf
   title: Forge Plugin
   index_label: JDF Plugin for Forge
   version: 1.0.0.Final
 stacks-client:
   prefix: /stack/stacks-client
+  git_submodule_prefix: /stack/stacks-client
+  website_source_repo: https://github.com/jboss-jdf/jdf-stacks-client
   title: JBoss Stacks Client
   index_label: JBoss Stacks Client
-  version: 1.0.0.Final
+  version: 1.0.1.Final

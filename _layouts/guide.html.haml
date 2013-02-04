@@ -135,7 +135,8 @@ layout: base
                     = change.author.name
         %p
           -# FIXME make me a function
-          %a{:href=>"#{site.website_source_repo}/commits/master#{page.relative_source_path}"} See full history &raquo;
+          - page.git_page_source = page.relative_source_path.to_s.sub(page.guide.metadata.git_submodule_prefix,'')
+          %a{:href=>"#{page.guide.metadata.website_source_repo}/commits/#{page.guide.metadata.version}#{page.git_page_source}"} See full history &raquo;
         - page.guide.changes.each do |c|
           = partial('contributor_modal.html.haml', {'contributor'=>c.author})
     - if page.guide
