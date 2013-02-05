@@ -29,13 +29,13 @@ jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
-  version: jdf-2.0.0.Final
+  version: jdf-2.0.1.Final
 jboss-as-quickstart-guide:
   title: Getting Started Developing Applications
   index_label: Guides
   prefix: /quickstarts/jboss-as-quickstart/guide
   github_repo: jboss-as-quickstart
-  version: jdf-2.0.0.Final
+  version: jdf-2.0.1.Final
   guides:
     Introduction:
       summary:
@@ -66,4 +66,4 @@ stacks-client:
   prefix: /stack/stacks-client
   title: JBoss Stacks Client
   index_label: JBoss Stacks Client
-  version: 1.0.0.Final
+  version: 1.0.1.Final
