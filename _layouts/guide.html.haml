@@ -10,13 +10,13 @@ layout: base
 
 #main(role='main')
   #content-header
-    .container
+    .container{:itemscope=>'', :itemtype=>'http://schema.org/Article'}
       .headline
         - if page.guide.metadata.title
-          %h1= page.guide.metadata.title
+          %h1{:itemprop=>'alternativeHeadline'}= page.guide.metadata.title
         .directory
           %script $(function() { activateMenuControl('#downloads_menu', '#downloads') })
-        %h2= page.guide.title
+        %h2{:itemprop=>'name'}= page.guide.title
         .directory
           %button#guides_menu.menu_btn.btn.btn-large.dropdown-toggle{:href=>'./', :data=>{:toggle=>'dropdown'}}
             #{page.guide.metadata.index_label}
@@ -48,7 +48,7 @@ layout: base
                       - if a.is_a? String
                         = a
                       - else
-                        %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + a.github_id}}
+                        %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + a.github_id}, :itemprop=>'author'}
                           = a.name
 
               .span3 
@@ -60,11 +60,12 @@ layout: base
                       - if a.is_a? String
                         = a
                       - else
-                        %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + a.github_id}}
+                        %span.modal-link{:data=>{:toggle=>'modal', :target=>'#' + a.github_id}, :itemprop=>'contributor'}
                           = a.name
               .span3
-                %strong{:style=>"padding-left: #{page.guide.group || page.tags ? 10 : 0}px;"} Last Update:
-                = ' '.concat(page.guide.changes[0].date.strftime('%b %d, %Y'))
+                %strong{:style=>"padding-left: #{page.guide.group || page.tags ? 10 : 0}px;"} 
+                  Last Update:
+                  %span{:itemprop=>'dateModified'}= ' '.concat(page.guide.changes[0].date.strftime('%b %d, %Y'))
             .row
               .span3
                 - if page.guide.level
@@ -73,11 +74,12 @@ layout: base
               .span3
                 - if page.guide.technologies
                   %strong= "Technologies:"
-                  = ' '.concat(page.guide.technologies.map{|u| u} * ', ')
+                  = ' <span itemprop="about">'.concat(page.guide.technologies.map{|u| u} * '</span>, <span itemprop="about">').concat('</span>')
               .span3 
                 - if page.guide.target_product
                   %strong= "Target Product:"
                   = ' '.concat(page.guide.target_product.map{|u| u} * ', ')
+                  = ' <span itemprop="about">'.concat(page.guide.target_product.map{|u| u} * '</span>, <span itemprop="about">').concat('</span>')
               .span3 
                 - if page.guide.prerequisites
                   %strong= "Prerequisites:"
@@ -95,7 +97,7 @@ layout: base
       = partial('contributor_modal.html.haml', {'contributor'=>a})
  
   .container#guide
-    #content{:lang=>page.language ? page.language.code : nil}
+    #content{:lang=>page.language ? page.language.code : nil, :itemprop=>'articleBody'}
       ~ content
       %h2
         %a#share
@@ -160,7 +162,7 @@ layout: base
                 .content
                   %dl.dl-horizontal
                     %dt Version
-                    %dd= page.guide.metadata.version
+                    %dd{:itemprop=>'version'}= page.guide.metadata.version
                     %dt Clone
                     %dd 
                       %code= page.guide.metadata.clone_command
