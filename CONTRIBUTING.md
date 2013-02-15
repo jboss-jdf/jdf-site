@@ -70,12 +70,13 @@ To setup the environment you need to follow these steps. *Certify to use the cor
 
 5. Install Python Eggs
 
-    - pygments
-    - For Linux:
+    You'll need python eggs installed, which often isn't available on OS installs of python. Google to find out how to install it
 
-            sudo yum install python-pygments
+6. Install pygments
 
-6. JDF site uses Github API to obtain some data. Due to Github Rate Limiting, it's required that you create a file `$HOME/.github-auth` containing `username:password` on one line.
+            sudo easy_install pygments
+
+7. JDF site uses Github API to obtain some data. Due to Github Rate Limiting, it's required that you create a file `$HOME/.github-auth` containing `username:password` on one line.
 
 Running the site locally
 ------------------------
