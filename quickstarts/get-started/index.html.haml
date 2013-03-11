@@ -3,14 +3,46 @@ layout: default
 title: 'Quickstarts: Get Started'
 description: Get started using the quickstarts. JBoss Developer Framework shows you how to write applications using JBoss technologies.
 ---
+- page.body_class = 'guide'
 - page.javascripts = [ "#{site.base_url}/javascripts/jquery-datatables.js" ] 
+
 :markdown
   JBoss Developer Framework ships with a number of quickstarts that show you how to get started with a variety of technologies in JBoss AS. You'll find out how to write a web application using the latest Java EE technologies like CDI and JAX-RS. How to write client libraries to talk to JBoss AS using web services, JMS or EJB. How to set up a distributed transaction, and how to recover from a transaction failure. And much, much more.
 
   Quickstarts are very focused - they demonstrate on a single API (e.g. JAX-RS) or a single use case (write a web-app with CRUD).
 
-  Available Quickstarts
-  ---------------------
+%script $(function() { activateMenuControl('#downloads_menu', '#downloads') })
+.btn-group
+  .cta{:style=>"text-align:right;"}
+    %a#downloads_menu.menu_btn.btn.btn-large.dropdown-toggle.btn-success{:href=>'#', :data=>{:toggle=>'dropdown'}}
+      DOWNLOAD
+      %span.caret
+  #downloads.menu_content.dropdown-menu.pull-right{:style=>'display: none; width: 670px;top:0px;padding-top:2em'}
+    .downloads
+      .row.header
+        .span1
+          %a{:href=>site.guide_metadata['/quickstarts/jboss-as-quickstart'].github_repo_url}
+            %img(src="#{site.base_url}/images/octocat_social.png" style='vertical-align: middle;')
+          %a{:href=>site.guide_metadata['/quickstarts/jboss-as-quickstart'].github_repo_url} Fork us! 
+        .span6
+          %a.menu{:href=>'./'}
+            #{site.guide_metadata['/quickstarts/jboss-as-quickstart'].downloads_label}
+          %hr.clear
+      .content
+        %dl.dl-horizontal
+          %dt Version
+          %dd{:itemprop=>'version'}= site.guide_metadata['/quickstarts/jboss-as-quickstart'].version
+          %dt Clone
+          %dd 
+            %code= site.guide_metadata['/quickstarts/jboss-as-quickstart'].clone_command
+          %dt Browse
+          %dd
+            %a{:href=>site.guide_metadata['/quickstarts/jboss-as-quickstart'].github_url, :style=>"display:inline;padding:initial"} Source on Github
+          %dt Download
+          %dd
+            %a{:href=>site.guide_metadata['/quickstarts/jboss-as-quickstart'].github_source_zip, :style=>"display:inline;padding:initial"} Source zip
+
+%h2 Available Quickstarts
 
 %table#quickstart-toc.table.table-condensed.quickstart-toc-table
   %thead
