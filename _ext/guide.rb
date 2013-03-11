@@ -96,6 +96,19 @@ module Awestruct
                 guide.changes = page_changes(guide, site.identities, @num_changes)
                 guide.contributors = page_contributors(guide, site.identities, @num_contrib_changes, guide.authors)
 
+                #collect peoble (authors, contributos, committers) that acted on this guide
+                people = []
+                if (guide.authors)
+                  people += guide.authors.dup
+                end
+                if (guide.contributors)
+                  people += guide.contributors.dup
+                end
+                guide.changes.each do |change|
+                  people << change.author
+                end
+                guide.people = people.uniq
+
                 # Extract chapter info from the page
                 guide.chapters = []
 

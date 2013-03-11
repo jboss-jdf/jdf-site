@@ -89,11 +89,8 @@ layout: base
               - page.guide.metadata.alternate_formats.each do |f|
                 %a{:href=>f.download_url, :title=>"Download #{f.format}"}
                   %img(src="#{site.base_url}/images/#{f.format}_icon.png" alt="#{f.format}")
-  - if page.guide.authors
-    - page.guide.authors.each do |a|
-      = partial('contributor_modal.html.haml', {'contributor'=>a})
-  - if page.guide.contributors
-    - page.guide.contributors.each do |a|
+  - if page.guide.people
+    - page.guide.people.each do |a|
       = partial('contributor_modal.html.haml', {'contributor'=>a})
  
   .container#guide
@@ -138,8 +135,6 @@ layout: base
         %p
           -# FIXME make me a function
           %a{:href=>"#{page.guide.metadata.github_repo_url}/commits/#{page.guide.metadata.version}/#{page.guide.git_relative_path}"} See full history &raquo;
-        - page.guide.changes.each do |c|
-          = partial('contributor_modal.html.haml', {'contributor'=>c.author})
     - if page.guide
       #sidebar
         #toc{:style=>"width:266px"}
