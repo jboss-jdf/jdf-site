@@ -40,9 +40,11 @@ module Identities
       end
 
       def collect(identities)
+        get_credentials()
         visited = []
         @repositories.each do |r|
           url = CONTRIBUTORS_URL_TEMPLATE % [ r.owner, r.path ]
+          url = url.gsub(/^(https?:\/\/)/, '\1' + @credentials.chomp + '@')
           contributors = RestClient.get url, :accept => 'application/json'
           contributors.each do |acct|
             github_id = acct['login'].downcase
@@ -74,7 +76,6 @@ module Identities
         end
 
         if !@teams.nil?
-          get_credentials()
           if @credentials
             @teams.each do |team|
               url = TEAM_MEMBERS_URL_TEMPLATE % team[:id]

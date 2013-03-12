@@ -68,7 +68,7 @@ module Awestruct
                 :host => URI(git_url).host,
                 :type => 'git',
                 # QUESTION should this be html_url??
-                :http_url => git_url.chomp('.git').sub('git://', 'https://'),
+                :http_url => git_url.chomp('.git').sub('git://', 'https://api.').sub('.com/','.com/repos/'),
                 :clone_url => git_url
               })
               @repositories << repository
@@ -126,8 +126,11 @@ module Awestruct
           # use sample commits to get the github_id for each author
           rekeyed_index = {}
           site.git_author_index.each do |email, author|
-            commit_data = RestClient.get(author.sample_commit_url, :accept => 'application/json')
-            github_id = commit_data['commit']['author']['login'].to_s.downcase
+            url = author.sample_commit_url.gsub(/^(https?:\/\/)/, '\1' + @credentials.chomp + '@')
+            commit_data = RestClient.get(url, :accept => 'application/json')
+            #if github author is null (not a github user), use the commiter login, else unknown
+            github_id = commit_data['author']? commit_data['author']['login'] : (commit_data['committer']? commit_data['committer']['login'] : 'unknown')
+            github_id = github_id.to_s.downcase
             if github_id.empty?
               match = site.github_mapping.find{|candidate| candidate.email.eql? author.email}
               if match

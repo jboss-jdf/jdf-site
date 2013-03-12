@@ -24,7 +24,7 @@ require_relative 'stacks'
 Awestruct::Extensions::Pipeline.new do
 
   # You need to have the file $HOME/.github-auth containing username:password on one line
-  github_collector = Identities::GitHub::Collector.new()
+  github_collector = Identities::GitHub::Collector.new(:auth_file => '.github-auth')
 
   extension Awestruct::Extensions::RestClientExtensions::EnableGetCache.new
   extension Awestruct::Extensions::RestClientExtensions::EnableJsonConverter.new

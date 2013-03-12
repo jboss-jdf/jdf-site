@@ -271,7 +271,7 @@ module Awestruct::Extensions::Repository::Visitors
             :email => e.email,
             :name => e.name,
             :sample_commit_sha => e.sha,
-            :sample_commit_url => RepositoryHelpers.build_commit_url(repository, e.sha, 'json'),
+            :sample_commit_url => RepositoryHelpers.build_commit_url(repository, e.sha),
             :commits => 0,
             :repositories => []
           })
@@ -294,8 +294,8 @@ module Awestruct::Extensions::Repository::Visitors
       end
     end
 
-    def self.build_commit_url(repository, sha, ext)
-      repository.http_url + '/commit/' + sha + '.' + ext
+    def self.build_commit_url(repository, sha)
+      repository.http_url + '/commits/' + sha
     end
   end
 
