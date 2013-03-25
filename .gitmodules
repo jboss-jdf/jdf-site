@@ -19,3 +19,6 @@
 [submodule "stack/jboss-as-archetype"]
 	path = stack/jboss-as-archetype
 	url = https://github.com/rafabene/jboss-as-archetype
+[submodule "quickstarts/qstools"]
+	path = quickstarts/qstools
+	url = git@github.com:jboss-jdf/qstools.git

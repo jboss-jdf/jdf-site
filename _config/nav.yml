@@ -21,6 +21,9 @@ quickstarts:
   articles:
     url: /quickstarts/get-started/articles
   get-involved:
+  qstools:
+    label: QS Tools
+    url: /quickstarts/qstools
 migrations:
   url: /migrations/get-started
   seam2: 
