@@ -7,7 +7,7 @@ ohloh_id: jboss-jdf
 disqus: jdf
 website_source_repo: https://github.com/jboss-jdf/jdf-site
 irc_transcripts: http://transcripts.jboss.org/channel/irc.freenode.org/%23jboss-jdf/
-version: 2.1.0.Final
+version: 2.1.1.Final
 profiles:
   development:
     base_url: http://localhost:4242
@@ -26,7 +26,7 @@ profiles:
     google_analytics: UA-10656779-1
     noindex: false
   staging:
-    base_url: http://jboss.org/jdf/2.1.0
+    base_url: http://jboss.org/jdf/staging
     minify: true
     google_plusone: false
     noindex: true
