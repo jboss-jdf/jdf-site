@@ -71,4 +71,4 @@ qstools:
   prefix: /quickstarts/qstools
   title: QS Tools
   index_label: QSTools
-  version: 0.0.2-SNAPSHOT
+  version: 1.0.0.CR1

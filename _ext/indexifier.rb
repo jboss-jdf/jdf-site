@@ -1,3 +1,6 @@
+#Monkey patch to the original Indexifier: 
+#Pull Request: https://github.com/awestruct/awestruct/pull/269
+
 module Awestruct
   module Extensions
     class Indexifier

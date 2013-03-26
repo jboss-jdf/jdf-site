@@ -22,6 +22,7 @@ require_relative 'stacks'
 require_relative 'maven'
 
 #Use monkey patch until indexifier with ignorepath be incorporated (maybe awestruct 0.5.1 or 0.5.2)
+#Pull Request: https://github.com/awestruct/awestruct/pull/269
 require_relative 'indexifier'
 
 
