@@ -67,3 +67,8 @@ stacks-client:
   title: JBoss Stacks Client
   index_label: JBoss Stacks Client
   version: 1.0.1.Final
+qstools:
+  prefix: /quickstarts/qstools
+  title: QS Tools
+  index_label: QSTools
+  version: 1.0.0.CR1

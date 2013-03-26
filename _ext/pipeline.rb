@@ -19,6 +19,11 @@ require_relative 'guide_metadata'
 require_relative 'disqus'
 require_relative 'tag_cloud'
 require_relative 'stacks'
+require_relative 'maven'
+
+#Use monkey patch until indexifier with ignorepath be incorporated (maybe awestruct 0.5.1 or 0.5.2)
+#Pull Request: https://github.com/awestruct/awestruct/pull/269
+require_relative 'indexifier'
 
 
 Awestruct::Extensions::Pipeline.new do
@@ -48,9 +53,12 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Posts.new( '/migrations/war-stories', :war_stories )
   extension Awestruct::Extensions::Roadmap.new( '/about/roadmaps' ) 
 
-  extension Awestruct::Extensions::Indexifier.new
+  #This Monkey Patch should be included on awestruct 0.5.1 or 0.5.2
+  extension Awestruct::Extensions::Indexifier.new(['target/site'])
+
   # Must come after Indexifier and before Guides
   extension Awestruct::Extensions::MoveUp.new('/quickstarts/jboss-as-quickstart', 'README')
+  extension Awestruct::Extensions::MoveUp.new('/quickstarts/qstools', 'README')
   extension Awestruct::Extensions::MoveUp.new('/stack/stacks-client', 'README')
   extension Awestruct::Extensions::MoveUp.new('/stack/plugin-jdf', 'README')
 
@@ -81,10 +89,13 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/stack/stacks-client', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/stack/plugin-jdf', '/README.md')
+  extension Awestruct::Extensions::Guide::Index.new('/quickstarts/qstools', '/README.md')
   extension Awestruct::Extensions::Guide::Index.new('/quickstarts/jboss-as-quickstart/guide', '.asciidoc')
 
   # Must be after guides
   extension Awestruct::Extensions::QSTOC.new('/quickstarts/jboss-as-quickstart')
+
+  extension Awestruct::Extensions::Maven.new('/quickstarts/qstools')
 
   # Must be after all other extensions that might populate identities
   extension Awestruct::Extensions::Identities::Cache.new
