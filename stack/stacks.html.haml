@@ -15,7 +15,6 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
   ------------------------------------------
 
 .stacks
-
   %table.table.table-bordered#runtimes
     %thead
       %tr
@@ -30,11 +29,13 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
       %tr
         %td 
           %strong  #{mr.name} #{mr.version}
-        %td 
-          #{mr.recommendedRuntime.name}
+        %td{:rel=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"tooltip":""}", :title=>"This is a Early Access Runtime"}
+          #{mr.recommendedRuntime.name} 
+          %span{:class=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"highlighted":""}"}
+            #{mr.recommendedRuntime.labels['EarlyAccess']?"(Early Access)":""}
         %td
           %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultBom.bom.id}"}
-            #{mr.recommendedRuntime.defaultBom.bom.name} 
+            #{mr.recommendedRuntime.defaultBom.bom.name}
         %td 
           %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultArchetype.archetype.id}"}
             #{mr.recommendedRuntime.defaultArchetype.archetype.name}
@@ -190,9 +191,11 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
             %td
               %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.id}"}
                 #{bom_version.bom.name}
-            %td 
+            %td{:rel=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"tooltip":""}", :title=>"This is a Early Access BOM Version"}
               %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.id}"}
                 #{bom_version.version}
+                %span{"class"=>"#{bom_version.labels['EarlyAccess']?"highlighted":""}"}
+                  #{bom_version.labels['EarlyAccess']?"(Early Access)":""}
       -# Create Archetypes Table for each Runtime 
       %table{:id=>"archetypes#{mr.object_id}", :class => "table table-bordered"}
         %thead
@@ -239,7 +242,9 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
 
   $(document).ready(function() {
 
-       /*
+     activateTooltips();
+
+     /*
       * Insert a 'details' column to the table
       */
       var nCloneTh = document.createElement( 'th' );
@@ -284,6 +289,7 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
               /* Open this row */
               this.src = "#{site.base_url}/images/details_close.png";
               oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+              activateTooltips();
           }
       } );
 
