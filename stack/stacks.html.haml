@@ -29,7 +29,7 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
       %tr
         %td 
           %strong  #{mr.name} #{mr.version}
-        %td{:rel=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"tooltip":""}", :title=>"This is a Early Access Runtime"}
+        %td{:rel=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"tooltip":""}", :title=>"This is an Early Access Runtime"}
           #{mr.recommendedRuntime.name} 
           %span{:class=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"highlighted":""}"}
             #{mr.recommendedRuntime.labels['EarlyAccess']?"(Early Access)":""}
@@ -191,7 +191,7 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
             %td
               %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.id}"}
                 #{bom_version.bom.name}
-            %td{:rel=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"tooltip":""}", :title=>"This is a Early Access BOM Version"}
+            %td{:rel=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"tooltip":""}", :title=>"This is an Early Access BOM Version"}
               %a.modal-link{"data-toggle"=>"modal", :href=>"##{bom_version.bom.id}"}
                 #{bom_version.version}
                 %span{"class"=>"#{bom_version.labels['EarlyAccess']?"highlighted":""}"}
