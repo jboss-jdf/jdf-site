@@ -42,19 +42,23 @@ module Awestruct
       end
 
       def mount_archetype_version(version_item)
-        JBoss::ArchetypeVersion.new(
-          version_item['id'],
-          mount_archetype(version_item['archetype']),
-          version_item['version'],
-          version_item['labels']
-        )      
+        if (version_item)
+          JBoss::ArchetypeVersion.new(
+            version_item['id'],
+            mount_archetype(version_item['archetype']),
+            version_item['version'],
+            version_item['labels']
+          )      
+       end
       end
 
       def mount_archetype_versions(archetype_versions_item)
         archetype_versions = []
-        archetype_versions_item.each do |version_item|
-          archetype_version_item = mount_archetype_version(version_item)
-          archetype_versions << archetype_version_item
+        if (archetype_versions_item)
+          archetype_versions_item.each do |version_item|
+            archetype_version_item = mount_archetype_version(version_item)
+            archetype_versions << archetype_version_item
+          end
         end
         return archetype_versions
       end

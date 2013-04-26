@@ -37,8 +37,10 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
           %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultBom.bom.id}"}
             #{mr.recommendedRuntime.defaultBom.bom.name}
         %td 
-          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultArchetype.archetype.id}"}
-            #{mr.recommendedRuntime.defaultArchetype.archetype.name}
+          -# JPP Doesn't have defaultArchetype
+          - if mr.recommendedRuntime.defaultArchetype 
+            %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultArchetype.archetype.id}"}
+              #{mr.recommendedRuntime.defaultArchetype.archetype.name}
         %td.centered
           - if mr.recommendedRuntime.downloadUrl != nil
             %a{:href => mr.recommendedRuntime.downloadUrl}
@@ -198,9 +200,10 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
                   #{bom_version.labels['EarlyAccess']?"(Early Access)":""}
       -# Create Archetypes Table for each Runtime 
       %table{:id=>"archetypes#{mr.object_id}", :class => "table table-bordered"}
-        %thead
-          %th Available Archetypes for #{mr.recommendedRuntime.name}
-          %th Archetype version
+        - if (mr.recommendedRuntime.archetypes.size > 0)
+          %thead
+            %th Available Archetypes for #{mr.recommendedRuntime.name}
+            %th Archetype version
         - mr.recommendedRuntime.archetypes.each do |archetype_version|
           %tr
             %td
