@@ -90,8 +90,8 @@ layout: base
                 %a{:href=>f.download_url, :title=>"Download #{f.format}"}
                   %img(src="#{site.base_url}/images/#{f.format}_icon.png" alt="#{f.format}")
   - if page.guide.people
-    - page.guide.people.each do |a|
-      = partial('contributor_modal.html.haml', {'contributor'=>a})
+    - page.guide.people.each do |p|
+      = partial('contributor_modal.html.haml', {'contributor'=>p, 'author' => (( p and not p.is_a? String) ? (p.github_id == page.author) : '') })
  
   .container#guide
     #content{:lang=>page.language ? page.language.code : nil, :itemprop=>'articleBody'}

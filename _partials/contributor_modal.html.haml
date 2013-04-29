@@ -12,7 +12,8 @@
         %ul
           - if page.contributor.google
             %li
-              %a{:href=>page.contributor.google.url, :itemprop=>'url'} 
+              - href = page.contributor.google.url + (page.author ? '?rel=author' : '')
+              %a{:href=>href, :itemprop=>'url'} 
                 %img(src="#{site.base_url}/images/glyphicons/glyphicons_382_google_plus.png")
           - if page.contributor.blog
             %li
