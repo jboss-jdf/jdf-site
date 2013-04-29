@@ -13,6 +13,11 @@ description: Contributors to JBoss Developer Framework. JBoss Developer Framewor
           %img{:src=>contributor.avatar_url(140), :alt=>contributor.name, :data=>{:toggle=>'modal', :target=>'#' + contributor.github_id}}
           %ul
             %li
+              - if !contributor.google.nil?
+                %a{:href=>contributor.google.url} G+
+              - else
+                %span G+
+            %li
               - if contributor.blog
                 %a{:href=>contributor.blog} Blog
               - else

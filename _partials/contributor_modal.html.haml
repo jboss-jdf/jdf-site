@@ -10,6 +10,10 @@
           %span{:itemprop=>'name'}= page.contributor.name
           %small{:itemprop=>'homeLocation'}=  page.contributor.location
         %ul
+          - if page.contributor.google
+            %li
+              %a{:href=>page.contributor.google.url, :itemprop=>'url'} 
+                %img(src="#{site.base_url}/images/glyphicons/glyphicons_382_google_plus.png")
           - if page.contributor.blog
             %li
               %a{:href=>page.contributor.blog, :itemprop=>'url'} 
