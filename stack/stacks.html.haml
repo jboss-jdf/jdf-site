@@ -187,9 +187,10 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
     - site.stacks.minorReleases.each do |mr|
       -# Create BOM Table for each Runtime 
       %table{:id => "boms#{mr.object_id}", :class => "table table-bordered"}
-        %thead
-          %th Available Boms for #{mr.recommendedRuntime.name}
-          %th Bom version
+        - if (mr.recommendedRuntime.archetypes.size > 0)
+          %thead
+            %th Available Boms for #{mr.recommendedRuntime.name}
+            %th Bom version
         - mr.recommendedRuntime.boms.each do |bom_version|
           %tr
             %td
