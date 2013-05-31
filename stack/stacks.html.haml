@@ -34,8 +34,10 @@ description: JBoss Stacks allows you to easily choose and use a stack of JBoss r
           %span{:class=>"#{mr.recommendedRuntime.labels['EarlyAccess']?"highlighted":""}"}
             #{mr.recommendedRuntime.labels['EarlyAccess']?"(Early Access)":""}
         %td
-          %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultBom.bom.id}"}
-            #{mr.recommendedRuntime.defaultBom.bom.name}
+          -# JPP Doesn't have defaultBom
+          - if mr.recommendedRuntime.defaultBom
+            %a.modal-link{"data-toggle"=>"modal", :href=>"##{mr.recommendedRuntime.defaultBom.bom.id}"}
+              #{mr.recommendedRuntime.defaultBom.bom.name}
         %td 
           -# JPP Doesn't have defaultArchetype
           - if mr.recommendedRuntime.defaultArchetype 

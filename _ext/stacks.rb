@@ -64,19 +64,23 @@ module Awestruct
       end
 
       def mount_bom_version(version_item)
-        JBoss::BomVersion.new(
-          version_item['id'],
-          mount_bom(version_item['bom']),
-          version_item['version'],
-          version_item['labels']
-        )      
+        if (version_item)
+          JBoss::BomVersion.new(
+            version_item['id'],
+            mount_bom(version_item['bom']),
+            version_item['version'],
+            version_item['labels']
+          )      
+        end
       end
 
       def mount_bom_versions(bom_versions_item)
         bom_versions = []
-        bom_versions_item.each do |version_item|
-          bom_version_item = mount_bom_version(version_item)
-          bom_versions << bom_version_item
+        if (bom_versions_item)
+          bom_versions_item.each do |version_item|
+            bom_version_item = mount_bom_version(version_item)
+            bom_versions << bom_version_item
+          end
         end
         return bom_versions
       end
