@@ -24,51 +24,58 @@ Here are the steps in detail:
 
         git fetch upstream
 
-5. Create a new topic branch to contain your features, changes, or fixes.
+5. Import the `examples/ticket-monster`, `migrations/seam2`, `quickstarts/jboss-as-quickstart`, `stack/plugin-jdf`,and `stack/stacks-client` submodules.
+
+        git submodule init
+        git submodule update
+
+6. Create a new topic branch to contain your features, changes, or fixes.
 
         git checkout -b <topic-branch-name> upstream/master
 
-6. Contribute new code or make changes to existing files. 
+7. Contribute new code or make changes to existing files. 
 
-7. Commit your changes to your local topic branch. You must use `git add filename` for every file you create or change.
+8. Test your changes to the site. See [Running the site locally](#running-the-site-locally) or [Running the site on Sandbox](#runng-the-site-on-sandbox) below for instructions.
+
+9. Commit your changes to your local topic branch. You must use `git add filename` for every file you create or change.
 
         git add <changed-filename>
         git commit -m `Description of change...`
 
-8. Push your local topic branch to your github forked repository. This will create a branch on your Git fork repository with the same name as your local topic branch name.
+10. Push your local topic branch to your github forked repository. This will create a branch on your Git fork repository with the same name as your local topic branch name.
 
         git push origin HEAD            
 
-9. Browse to the <topic-branch-name> branch on your forked Git repository and [open a Pull Request](http://help.github.com/send-pull-requests/). Give it a clear title and description.
+11. Browse to the <topic-branch-name> branch on your forked Git repository and [open a Pull Request](http://help.github.com/send-pull-requests/). Give it a clear title and description.
 
 
-Setup your environment
-----------------------
+Set up your environment
+-----------------------
 
 The JDF site is built using [awestruct](http://awestruct.org/), and requires a number of gems and eggs, as well as AsciiDoc (8.6.x).
 
 To setup the environment you need to follow these steps. *Certify to use the correct versions*.
 
-
 1. Install Ruby *1.9.X*
 
     For RHEL you can use this [spec](https://github.com/lnxchk/ruby-1.9.3-rpm)
 
-2. Install Ruby GEMs
+2. Install Ruby GEMs. If the version is noted, you must use that version.
 
         gem install awestruct --version 0.4.7
         gem install hpricot nokogiri json git vpim rest-client pygments.rb rb-inotify execjs
         gem install --version '~> 0.9.1' rb-fsevent
 
-
 3. Install a Javascript GEM Runtime. 
-
     - A list of available Runtimes can be found here: <https://github.com/sstephenson/execjs>
+    - For example:
 
             gem install *a-javascript-runtime*
+       - or -
+       
+            gem install therubyracer
 
-4. Install ASCIIDOC *8.6.x*
-
+4. Install ASCIIDOC *8.6.x* or later.  _Note: Older versions do not work._
     - Version `8.6.x` can be found [here](http://www.methods.co.nz/asciidoc/INSTALL.html)
 
 5. Install Python Eggs
@@ -81,6 +88,7 @@ To setup the environment you need to follow these steps. *Certify to use the cor
 
 7. JDF site uses Github API to obtain some data. Due to Github Rate Limiting, it's required that you create a file `$HOME/.github-auth` containing `username:password` on one line.
 
+
 Running the site locally
 ------------------------
 
@@ -89,6 +97,7 @@ Having got your environment correctly set up, on jdf-site root, run:
       awestruct -d
 
 to run awestruct in development mode, and serve the site at <http://localhost:4242>.
+
 
 Running the site on Sandbox
 ---------------------------
