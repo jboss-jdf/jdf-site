@@ -2,12 +2,12 @@ ticket-monster:
   title: TicketMonster Tutorial
   index_label: Tutorials
   prefix: /examples/ticket-monster/tutorial
-  version: 2.1.2.Final
+  version: 2.1.3.Final
   alternate_formats:
     pdf:
-      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.2.Final.pdf
+      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.3.Final.pdf
     epub:
-      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.2.Final.epub
+      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.3.Final.epub
   guides: 
     WhatIsTicketMonster:
       summary: 
@@ -25,6 +25,8 @@ ticket-monster:
       summary: JBoss Errai and Google Web Toolkit are used to create an executive dashboard to monitor business performance - watch ticket sales in happen real-time.
     HybridUI:
       summary: Learn how to create hybrid mobile versions of the application with Apache Cordova
+    DataGrid:
+      summary: Learn how to use a data grid in the application with JBoss Data Grid
 jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
