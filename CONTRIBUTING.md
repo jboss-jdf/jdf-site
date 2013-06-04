@@ -35,7 +35,7 @@ Here are the steps in detail:
 
 7. Contribute new code or make changes to existing files. 
 
-8. Test your changes to the site. See [Running the site locally](#running-the-site-locally) or [Running the site on Sandbox](#runng-the-site-on-sandbox) below for instructions.
+8. Test your changes to the site. See [Running the site locally](#running-the-site-locally) or [Running the site on Sandbox](#running-the-site-on-sandbox) below for instructions.
 
 9. Commit your changes to your local topic branch. You must use `git add filename` for every file you create or change.
 
