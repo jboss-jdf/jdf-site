@@ -6,11 +6,11 @@ layout: getinvolved
 
 %br(style="clear: left;")
 
-.expand-container
-  %a.expander(href="#")
+.expand-container.collapsed
+  %a.expander{href => "#", "data-toggle" => "collapse", "data-target" => ".content"}
     %strong
       Don't forget to read the Contributing Guide
-  .content(style="display:none; ")
+  .content.collapse
     ~ content
     %p
     :markdown
@@ -21,4 +21,11 @@ layout: getinvolved
 %br(style="clear: both;")
 
 :javascript
-  $('.expand-container').simpleexpand({'hideMode': 'fadeToggle'});
+  $('.expand-container').on('show',function() {
+    $(this).addClass('expanded');
+    $(this).removeClass('collapsed');
+  });
+  $('.expand-container').on('hide',function() {
+    $(this).addClass('collapsed');
+    $(this).removeClass('expanded');
+  });
