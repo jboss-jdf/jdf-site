@@ -1,6 +1,7 @@
 require_relative 'restclient_extensions'
 require 'rexml/document'
 require 'uri'
+require 'cgi'
 
 module Awestruct
   module Extensions
@@ -94,7 +95,7 @@ module Awestruct
           }.uniq.each {|org_name|
             get_credentials()
             url = "https://api.github.com/orgs/#{org_name}/repos"
-            url = url.gsub(/^(https?:\/\/)/, '\1' + @credentials.chomp + '@')
+            url = url.gsub(/^(https?:\/\/)/, '\1' + CGI::escape(@credentials.chomp.split(':')[0]) + ':' + CGI::escape(@credentials.chomp.split(':')[1]) + '@')
             org_repos_data = RestClient.get url, :accept => 'application/json'
             @repositories.each {|r|
               #repo_data = org_repos_data.select {|c| r.owner == org_name and r.host == 'github.com' and c['name'] == r.path}
@@ -126,7 +127,7 @@ module Awestruct
           # use sample commits to get the github_id for each author
           rekeyed_index = {}
           site.git_author_index.each do |email, author|
-            url = author.sample_commit_url.gsub(/^(https?:\/\/)/, '\1' + @credentials.chomp + '@')
+            url = author.sample_commit_url.gsub(/^(https?:\/\/)/, '\1' + CGI::escape(@credentials.chomp.split(':')[0]) + ':' + CGI::escape(@credentials.chomp.split(':')[1]) + '@')
             commit_data = RestClient.get(url, :accept => 'application/json')
             #if github author is null (not a github user), use the commiter login, else unknown
             github_id = commit_data['author']? commit_data['author']['login'] : (commit_data['committer']? commit_data['committer']['login'] : 'unknown')
