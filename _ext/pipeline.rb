@@ -20,6 +20,7 @@ require_relative 'disqus'
 require_relative 'tag_cloud'
 require_relative 'stacks'
 require_relative 'maven'
+require 'bootstrap-sass'
 
 #Use monkey patch until indexifier with ignorepath be incorporated (maybe awestruct 0.5.2)
 #Pull Request: https://github.com/awestruct/awestruct/pull/269

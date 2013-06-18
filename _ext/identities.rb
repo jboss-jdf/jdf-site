@@ -33,6 +33,11 @@ module Awestruct::Extensions::Identities
       attr_accessor :loaded
 
       def lookup(username, create = false)
+        # TODO: find a better way to do this
+        # Because this is the generic lookup, let's try everything else first
+        #identity = lookup_by_name(username) || lookup_by_contributor(username) || lookup_by_github_id(username) || lookup_by_twitter_username(username) || lookup_by_email(username) 
+        #return identity if identity
+
         return nil if username.nil?
         identity = self.find {|e| username.eql? e.username} ||
             self.find {|e| username.eql? e.jboss_username}

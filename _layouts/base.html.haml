@@ -9,8 +9,9 @@
     %meta(name="description"){:content=>page.description ? page.description : site.description}
     - if site.keywords
       %meta(name="keywords"){:content=>site.keywords}
-    - if page.author
-      %meta(name="author"){:content=>site.identities.lookup(page.author).name}
+    -#
+      - if page.author
+        %meta(name="author"){:content=>site.identities.lookup(page.author).name}
     - if site.noindex
       %meta(name="robots" content="noindex")
     - if site.url
