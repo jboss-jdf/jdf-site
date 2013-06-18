@@ -1,3 +1,5 @@
+require 'cgi'
+
 module Identities
   module GitHub
     CONTRIBUTORS_URL_TEMPLATE = 'https://api.github.com/repos/%s/%s/contributors'
@@ -134,7 +136,7 @@ module Identities
 
       # credentials increases rate limit from 60/hr to 1,500/hr and, in certain cases, are required to access the data
       def with_credentials(url)
-        get_credentials() ? url.sub(/^(https?:\/\/)/, '\1' + @credentials.chomp + '@') : url
+        get_credentials() ? url.sub(/^(https?:\/\/)/, '\1' + CGI::escape(@credentials.chomp.split(':')[0]) + ':' + CGI::escape(@credentials.chomp.split(':')[1]) + '@') : url
       end
 
       def get_credentials()
