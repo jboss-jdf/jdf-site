@@ -1,3 +1,4 @@
+require 'hpricot'
 require 'vpim/icalendar'
 require_relative 'vpim_patch'
 

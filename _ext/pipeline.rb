@@ -21,15 +21,18 @@ require_relative 'tag_cloud'
 require_relative 'stacks'
 require_relative 'maven'
 
-#Use monkey patch until indexifier with ignorepath be incorporated (maybe awestruct 0.5.1 or 0.5.2)
+#Use monkey patch until indexifier with ignorepath be incorporated (maybe awestruct 0.5.2)
 #Pull Request: https://github.com/awestruct/awestruct/pull/269
 require_relative 'indexifier'
 
 
 Awestruct::Extensions::Pipeline.new do
 
+  # GitHub API calls should be wrapped with credentials to up limit
+  github_auth = Identities::GitHub::Auth.new('.github-auth')
+  
   # You need to have the file $HOME/.github-auth containing username:password on one line
-  github_collector = Identities::GitHub::Collector.new(:auth_file => '.github-auth')
+  github_collector = Identities::GitHub::Collector.new(:auth => github_auth)
 
   extension Awestruct::Extensions::RestClientExtensions::EnableGetCache.new
   extension Awestruct::Extensions::RestClientExtensions::EnableJsonConverter.new
@@ -40,7 +43,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Identities::Collect.new(github_collector)
   extension Awestruct::Extensions::Identities::Crawl.new(
     # You need to have the file $HOME/.github-auth containing username:password on one line
-    Identities::GitHub::Crawler.new(:auth_file => '.github-auth'),
+    Identities::GitHub::Crawler.new(:auth => github_auth),
     Identities::Gravatar::Crawler.new,
     #Identities::Confluence::Crawler.new('https://docs.jboss.org/author', :auth_file => '.jboss-auth',
     #    :identity_search_keys => ['name', 'username'], :assign_username_to => 'jboss_username'),
@@ -53,7 +56,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Posts.new( '/migrations/war-stories', :war_stories )
   extension Awestruct::Extensions::Roadmap.new( '/about/roadmaps' ) 
 
-  #This Monkey Patch should be included on awestruct 0.5.1 or 0.5.2
+  #This Monkey Patch should be included on awestruct 0.5.2
   extension Awestruct::Extensions::Indexifier.new(['target/site'])
 
   # Must come after Indexifier and before Guides
