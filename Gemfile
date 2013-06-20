@@ -15,13 +15,14 @@
 
 source "https://rubygems.org"
 
-gem 'awestruct', '0.5.1'
-#gem 'bootstrap-sass', '= 2.0.3.1'
+gem 'awestruct', '0.5.2'
+gem 'bootstrap-sass'
+gem 'rdiscount', '~> 2.0.7', :platforms => [:ruby]
 gem 'htmlcompressor'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'vpim'
 gem 'redcarpet'
 gem 'asciidoctor'
+gem 'coderay', '~> 1.0.9'
 gem 'rb-fsevent', '~> 0.9'
-gem 'hpricot'

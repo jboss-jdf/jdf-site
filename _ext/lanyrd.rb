@@ -1,4 +1,3 @@
-require 'hpricot'
 require 'vpim/icalendar'
 require_relative 'vpim_patch'
 
@@ -60,7 +59,7 @@ module Awestruct::Extensions::Lanyrd
       
       pages = []
       
-      page1 = Hpricot(getOrCache(File.join(@lanyrd_tmp, "search-#{@term}-1.html"), search_url))
+      page1 = Nokogiri::HTML(getOrCache(File.join(@lanyrd_tmp, "search-#{@term}-1.html"), search_url))
       pages << page1
       
       extract_pages(page1, pages)
@@ -80,7 +79,7 @@ module Awestruct::Extensions::Lanyrd
           if a
             pageinated_url = "#{@base}#{a.attributes['href']}"
         
-            pageX = Hpricot(getOrCache(File.join(@lanyrd_tmp, "search-#{@term}-#{a.inner_text}.html"), pageinated_url))
+            pageX = Nokogiri::HTML(getOrCache(File.join(@lanyrd_tmp, "search-#{@term}-#{a.inner_text}.html"), pageinated_url))
             pages << pageX
           end
         end
@@ -97,8 +96,8 @@ module Awestruct::Extensions::Lanyrd
         session.title = event_link.inner_text
         
         session_detail_url = "#{@base}#{event_link.attributes['href']}"
-        session.slug = event_link.attributes['href'].split('/').last
-        session_detail = Hpricot(getOrCache(File.join(@lanyrd_tmp, "session-#{session.slug}.html"), session_detail_url))
+        session.slug = event_link.attributes['href'].to_s.split('/').last
+        session_detail = Nokogiri::HTML(getOrCache(File.join(@lanyrd_tmp, "session-#{session.slug}.html"), session_detail_url))
         session.updated = File.mtime(File.join(@lanyrd_tmp, "session-#{session.slug}.html"))
         
         session_meta_node = session_detail.at('div[@class=session-meta]')

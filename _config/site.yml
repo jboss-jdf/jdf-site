@@ -8,6 +8,16 @@ disqus: jdf
 website_source_repo: https://github.com/jboss-jdf/jdf-site
 irc_transcripts: http://transcripts.jboss.org/channel/irc.freenode.org/%23jboss-jdf/
 version: 2.1.4.Final
+
+asciidoctor:
+  :backend: html5
+  :attributes:
+    idprefix: ''
+    idseparator: '-'
+    imagesdir: ../
+    source-highlighter: coderay
+    coderay-css: style
+    
 profiles:
   development:
     base_url: http://localhost:4242

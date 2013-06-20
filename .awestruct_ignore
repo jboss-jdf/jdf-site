@@ -13,12 +13,13 @@
 examples/ticket-monster/demo/**
 examples/ticket-monster/**/README.md
 examples/ticket-monster/tutorial/ticket-monster.asciidoc
-examples/ticket-monster/ticket-monster/**
+examples/ticket-monster/tutorial/target/*
 examples/ticket-monster/cordova/**
 examples/*/dist/**
 migrations/seam2/open18_java_ee_6/**
 migrations/seam2/open18_seam2/**
 migrations/seam2/dist/**
+migrations/seam2/README.rst
 quickstarts/jboss-as-quickstart/**/src/**
 quickstarts/jboss-as-quickstart/dist/**
 quickstarts/jboss-as-quickstart/kitchensink-cordova/android/**

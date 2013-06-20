@@ -11,27 +11,20 @@ require_relative 'disqus_more'
 require_relative 'guide'
 require_relative 'spotlight'
 require_relative 'moveup'
-require_relative 'remotePartial'
 require_relative 'qstoc'
 require_relative 'nav'
 require_relative 'roadmap'
 require_relative 'guide_metadata'
-require_relative 'disqus'
 require_relative 'tag_cloud'
 require_relative 'stacks'
 require_relative 'maven'
 require 'bootstrap-sass'
 
-#Use monkey patch until indexifier with ignorepath be incorporated (maybe awestruct 0.5.2)
-#Pull Request: https://github.com/awestruct/awestruct/pull/269
-require_relative 'indexifier'
-
-
 Awestruct::Extensions::Pipeline.new do
 
   # GitHub API calls should be wrapped with credentials to up limit
   github_auth = Identities::GitHub::Auth.new('.github-auth')
-  
+
   # You need to have the file $HOME/.github-auth containing username:password on one line
   github_collector = Identities::GitHub::Collector.new(:auth => github_auth)
 
@@ -57,7 +50,6 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::Posts.new( '/migrations/war-stories', :war_stories )
   extension Awestruct::Extensions::Roadmap.new( '/about/roadmaps' ) 
 
-  #This Monkey Patch should be included on awestruct 0.5.2
   extension Awestruct::Extensions::Indexifier.new(['target/site'])
 
   # Must come after Indexifier and before Guides
@@ -83,11 +75,10 @@ Awestruct::Extensions::Pipeline.new do
 
   extension Awestruct::Extensions::Spotlight.new('/spotlights')
   extension Awestruct::Extensions::Stacks.new('https://raw.github.com/jboss-jdf/jdf-stack/1.0.0.Final/stacks.yaml')
-  
 
   # Needs to be before Guides
-  extension Awestruct::Extensions::GuideMetadata.new  
-
+  extension Awestruct::Extensions::GuideMetadata.new
+    
   # Needs to be after Indexifier to get the linking correct; second argument caps changelog per guide
   extension Awestruct::Extensions::Guide::Index.new('/examples/ticket-monster/tutorial', '.asciidoc')
   extension Awestruct::Extensions::Guide::Index.new('/migrations/seam2', '.asciidoc')
@@ -107,7 +98,6 @@ Awestruct::Extensions::Pipeline.new do
 
   # Transformers
   transformer Awestruct::Extensions::Minify.new
-
   helper Awestruct::Extensions::RemotePartial
   helper Awestruct::Extensions::Partial
   helper Awestruct::Extensions::PostsHelper
