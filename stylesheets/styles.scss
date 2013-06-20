@@ -199,6 +199,7 @@
     float: right;
     margin-bottom: -1px;
     > .navbar-inner {
+      border: none;
       background: none;
       @include box-shadow(none);
     }
@@ -293,6 +294,31 @@
 
 // Guides
 
+code {
+  white-space: pre-wrap;
+}
+
+.btn-group {
+  position: relative;
+  display: block;
+  /* IE7 inline-block hack */
+  *zoom: 1;
+  font-size: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  *margin-left: .3em;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #333333;
+  white-space: nowrap;
+}
+
 body.guide {
   #content-header {
     & > .container {
@@ -344,7 +370,7 @@ body.guide {
     .directory {
       display: inline-block;
       float: right;
-      @extend .gutter-right;
+      @extend .gutter-right !optional;
       .icon-menu-closed, .icon-menu-open {
         position: relative;
         top: -1px;
@@ -382,7 +408,7 @@ body.guide {
         @include single-box-shadow($palette_black_80trans, 0, 1px, 10px);
         padding: 2em 2em 1.5em 2em;
         top: 24px;
-        @extend .offset-gutter-right;
+        @extend .offset-gutter-right !optional;
         margin-right: -2px;
         width: 640px;
         background-color: $guide_dropdown_color;
@@ -464,7 +490,7 @@ body.guide {
     color: $guide_button_text_active_color;
   }
   #guide {
-    @extend .content-bumper;
+    @extend .content-bumper !optional;
     border: 1px solid $light_border;
     @include border-radius(5px);
     @include single-box-shadow(rgba(0,0,0,0.09), 0, 1px, 5px);
@@ -525,8 +551,9 @@ body.guide {
     }
     // headings in guide content
     h3 {
-      font-size: 1.9em;
       margin: .65em 0 .2em 0;
+      border-bottom: none;
+      font-style: italic;
     }
     h4 {
       font-size: 1.6em;
@@ -1077,7 +1104,7 @@ body div.gadget {
     text-align: right;
     font-size: 17px;
   }
-
+  
   code, tt, pre {
     font-family: "Courier New", Courier, monospace;
     font-size: inherit;
@@ -1088,6 +1115,7 @@ body div.gadget {
     white-space: pre;
     word-wrap: normal;
     word-break: normal;
+    
   }
 
   p > code,li > code {

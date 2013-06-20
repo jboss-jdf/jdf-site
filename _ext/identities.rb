@@ -33,22 +33,14 @@ module Awestruct::Extensions::Identities
       attr_accessor :loaded
 
       def lookup(username, create = false)
+        if (username.include? ',')
+          usernames = username.split(',')
+          usernames.each{|u| return lookup(u.strip)}
+        end
         # TODO: find a better way to do this
         # Because this is the generic lookup, let's try everything else first
-        #identity = lookup_by_name(username) || lookup_by_contributor(username) || lookup_by_github_id(username) || lookup_by_twitter_username(username) || lookup_by_email(username) 
-        #return identity if identity
-
-        return nil if username.nil?
-        identity = self.find {|e| username.eql? e.username} ||
-            self.find {|e| username.eql? e.jboss_username}
-        if create and identity.nil?
-          identity = OpenStruct.new({:username => username}) 
-          if block_given?
-            yield identity
-          end
-          self << identity
-        end
-        identity
+        identity = lookup_by_name(username) || lookup_by_github_id(username) || lookup_by_twitter_username(username) 
+        return identity if identity
       end
   
       def lookup_by_name(name, create = false)

@@ -9,9 +9,8 @@
     %meta(name="description"){:content=>page.description ? page.description : site.description}
     - if site.keywords
       %meta(name="keywords"){:content=>site.keywords}
-    -#
-      - if page.author
-        %meta(name="author"){:content=>site.identities.lookup(page.author).name}
+    - if page.author
+      %meta(name="author"){:content=>site.identities.lookup(page.author).name}
     - if site.noindex
       %meta(name="robots" content="noindex")
     - if site.url
@@ -19,6 +18,8 @@
     %link(rel="alternate" type="application/atom+xml" href="/news.atom" title="JBoss Developer Framework News Atom feed")
     %link{ :rel=>"stylesheet", :type=>"text/css", :href=>"http://static.jboss.org/theme/css/awestruct/jbossdefault_wrapper.css", :media=>"screen, projection" }
     %link{ :rel=>"stylesheet", :type=>"text/css", :href=>"#{site.base_url}/stylesheets/styles.css" }
+    %style
+      - ::CodeRay::Encoders[:html]::CSS.new(:default).stylesheet
     /[if lt IE 9]
       %script{ :type=>"text/javascript", :src=>"//html5shim.googlecode.com/svn/trunk/html5.js" }
     %script{:type=>"text/javascript", :src=>"http://static.jboss.org/theme/js/tabzilla.js" }

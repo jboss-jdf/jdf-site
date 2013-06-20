@@ -62,31 +62,10 @@ To setup the environment you need to follow these steps. *Certify to use the cor
 
 2. Install Ruby GEMs. If the version is noted, you must use that version.
 
-        gem install awestruct --version 0.4.7
-        gem install hpricot nokogiri json git vpim rest-client pygments.rb rb-inotify execjs
-        gem install --version '~> 0.9.1' rb-fsevent
+        gem install rake bundle
+        rake setup
 
-3. Install a Javascript GEM Runtime. 
-    - A list of available Runtimes can be found here: <https://github.com/sstephenson/execjs>
-    - For example:
-
-            gem install *a-javascript-runtime*
-       - or -
-       
-            gem install therubyracer
-
-4. Install ASCIIDOC *8.6.x* or later.  _Note: Older versions do not work._
-    - Version `8.6.x` can be found [here](http://www.methods.co.nz/asciidoc/INSTALL.html)
-
-5. Install Python Eggs
-
-    You'll need python eggs installed, which often isn't available on OS installs of python. Google to find out how to install it
-
-6. Install pygments
-
-            sudo easy_install pygments
-
-7. JDF site uses Github API to obtain some data. Due to Github Rate Limiting, it's required that you create a file `$HOME/.github-auth` containing `username:password` on one line.
+3. JDF site uses Github API to obtain some data. Due to Github Rate Limiting, it's required that you create a file `$HOME/.github-auth` containing `username:password` on one line.
 
 
 Running the site locally
@@ -94,13 +73,13 @@ Running the site locally
 
 Having got your environment correctly set up, on jdf-site root, run:
 
-      awestruct -d
+      rake
 
 to run awestruct in development mode, and serve the site at <http://localhost:4242>.
 
 
-Running the site on Sandbox
----------------------------
+Publishing the site on Sandbox
+-------------------------------
 
 1. Contact the project lead, and ask for access to the jdf account on OpenShift. Add your ssh key.
 

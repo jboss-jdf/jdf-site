@@ -38,10 +38,18 @@ module Awestruct
               name = $2
               
               if !metadata || !metadata.guides || metadata.guides.key?(name)
-                # Note that calling page.content causes the source to be parsed and metadata extracted
-                # we need to do this early!
+                # Note that calling page.content causes the source to be parsed
                 html = Nokogiri::HTML(page.content)
 
+                #extract metadata from different formats
+                if ( page.content_syntax == :asciidoc )
+                  page.modified_content = extract_metadata_from_asciidoc(page, html)
+                elsif (page.content_syntax == :markdown)
+                  page.modified_content = extract_metadata_from_markdown(page, html)
+                else
+                  page.modified_content = page.content
+                end
+                
                 guide = OpenStruct.new
 
                 # Attach the guide to the page, so we can reference it later
@@ -65,8 +73,8 @@ module Awestruct
                 site.engine.set_urls([page])
                 guide.url = page.url
 
-                # Different formats use different metadata formats, so is extracted in a handler
-                guide.title = page.source_title
+                # Different formats use different metadata formats
+                guide.title = page.title ? page.title : page.source_title
                 
                 if page.source_author
                   guide.authors = []
@@ -77,13 +85,12 @@ module Awestruct
                     page.author = guide.authors[0].github_id
                   end
                 end
-
                 guide.technologies = page.source_technologies 
                 guide.level = page.source_level
                 guide.summary = page.source_summary
                 guide.prerequisites = page.source_prerequisites
                 guide.target_product = page.source_target_product
-              
+
                 guide.meta = page.guide.summary  
                 if guide.technologies
                   guide.meta += ". Technologies covered include".concat(guide.technologies.map{|u| u} * ', ')
@@ -140,9 +147,108 @@ module Awestruct
           end
           site.guides[@path_prefix] = guides
         end
+        
+        def extract_metadata_from_asciidoc(page, content)
+          # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
+          page.source_title = page.title
+          guide_content = content.css('body').first 
+          guide_content['id'] = 'content'
+          guide_content['class'] = 'asciidoc'
 
+          # Extract authors
+          author = page.author
+          if author
+            page.source_author = [ author ]
+          end
+          page.source_summary = first_x_words(guide_content.css('p').first.text, 25, '').gsub("\n", '')
+
+          # rebuild links
+          guide_content.css('a').each do |a|
+            if a['href'] =~ /^#(\w*)-(\w*)$/
+              a['href'] = "../#{$1}/##{$1}-#{$2}"
+            end
+          end
+
+          guide_content.to_html
+        end
+
+        def first_x_words(str,n=20,finish='&hellip;')
+          str.split(' ')[0,n].inject{|sum,word| sum + ' ' + word} + finish
+        end
+
+        def extract_metadata_from_markdown(page, content)
+
+          # Strip out html and body
+          guide_content = content.css('body').first
+          guide_content.name = 'div'
+          guide_content['id'] = 'guide-content'
+          guide_content['class'] = 'markdown'
+
+          # Markdown doesn't have an metadata syntax, so all we can do is pray ;-)
+          # Look for a paragraph that contains tags, which we define by convention
+          # Remove if found
+          guide_content.css('p').each do |p|
+            extract(page, p, 'Author', true)
+            extract(page, p, 'Technologies', true)
+            extract(page, p, 'Level')
+            extract(page, p, 'Summary')
+            extract(page, p, 'Prerequisites', true)
+            extract(page, p, 'Target Product' )
+          end
+            
+          # Strip out title
+          h1 = guide_content.css('h1').first
+          if h1
+            page.source_title = h1.text
+            h1.remove
+          end
+
+          metadata = guide_content.css('p#metadata').remove
+
+          guide_content.css('h2').each do |header_html|
+            link_id = header_html.inner_html.gsub(' ', '_').gsub('&#8217;', '_').gsub(/[\(\)\.!]/, '').gsub(/\?/, '').downcase
+            header_html['id'] = link_id
+          end
+
+          # rebuild links
+          guide_content.css('a').each do |a|
+            if a['href'] =~ /^(.*\/)README.md(.*)$/
+              a['href'] = $1 + $2
+            end
+          end
+        
+          guide_content.to_html
+        end
+
+        def find(p, tag)
+          if p.text
+            r = p.text[/^(#{tag}: )(.+)$/, 2]
+            if r
+              p['id'] = 'metadata'
+              return r 
+            end
+          end
+        end
+
+        def extract(page, p, tag, split=false)
+          if split
+            s = find_split(p, tag)
+          else
+            s = find(p, tag)
+          end
+          if s
+            page.send("source_#{tag.downcase}=".sub(' ','_').to_sym, s)
+          end
+        end
+
+        def find_split(p, tag)
+          s = find(p, tag)
+          if s
+            return s.split(',').sort 
+          end
+        end
+        
       end
-
       ##
       # Returns a Array of unique contributors.github_id's based on the Git commit history for the given page.
       # Assumes guides are brought in as submodules so opens git rooted in the page's dir

@@ -78,8 +78,7 @@ layout: base
               .span3 
                 - if page.guide.target_product
                   %strong= "Target Product:"
-                  = ' '.concat(page.guide.target_product.map{|u| u} * ', ')
-                  = ' <span itemprop="about">'.concat(page.guide.target_product.map{|u| u} * '</span>, <span itemprop="about">').concat('</span>')
+                  = page.guide.target_product
               .span3 
                 - if page.guide.prerequisites
                   %strong= "Prerequisites:"
@@ -95,23 +94,24 @@ layout: base
  
   .container#guide
     #content{:lang=>page.language ? page.language.code : nil, :itemprop=>'articleBody'}
-      ~ content
-      %h2
-        %a#share
-          Share the Knowledge
-      %p
-        Find this guide useful?
-        .sharethispadding
-          %span.st_sharethis_large
-          %span.st_facebook_large
-          %span.st_googleplus_large
-          %span.st_twitter_large
-          %span.st_linkedin_large
-          %span.st_email_large
-          :javascript
-            stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
-      :markdown
-        #### Feedback
+      #guide-content{:class=>'asciidoc'}
+        ~ page.modified_content
+        %h2
+          %a#share
+            Share the Knowledge
+        %p
+          Find this guide useful?
+          .sharethispadding
+            %span.st_sharethis_large
+            %span.st_facebook_large
+            %span.st_googleplus_large
+            %span.st_twitter_large
+            %span.st_linkedin_large
+            %span.st_email_large
+            :javascript
+              stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
+        :markdown
+          #### Feedback
 
         Find a bug in the guide? Something missing? You can fix it by [forking the repository](#{page.guide.metadata.github_repo_url}), making the correction and [sending a pull request](http://help.github.com/send-pull-requests). If you're just plain stuck, feel free to ask a question in the [user discussion forum](#{site.base_url}/forums/jdf-users).
 
