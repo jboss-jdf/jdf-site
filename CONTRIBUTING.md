@@ -26,8 +26,7 @@ Here are the steps in detail:
 
 5. Import the `examples/ticket-monster`, `migrations/seam2`, `quickstarts/jboss-as-quickstart`, `stack/plugin-jdf`,and `stack/stacks-client` submodules.
 
-        git submodule init
-        git submodule update
+        git submodule update --init --recursive
 
 6. Create a new topic branch to contain your features, changes, or fixes.
 
