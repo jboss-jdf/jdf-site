@@ -8,7 +8,7 @@ module Awestruct
 
       class Index
         include Guide
-        
+
         def initialize(path_prefix, suffix, opts = {})
           @path_prefix = path_prefix
           @suffix = suffix
@@ -32,12 +32,26 @@ module Awestruct
           # Load any metadata parsed for this set of guides
           metadata = site.guide_metadata[@path_prefix]
 
+          #Load ignore-file from guide metadata
+          ignore_content = nil
+          if (metadata.ignore_file)
+            ignore_file = File.join(root_dir, metadata.ignore_file)
+            file = File.open(ignore_file , "rb")
+            ignore_content = file.read
+          end
+
           site.pages.each do |page|
             if ( page.relative_source_path =~ /^#{@path_prefix}\/?(.*?)([^\/]*)#{@suffix}$/ )
               subdir = $1
               name = $2
-              
-              if !metadata || !metadata.guides || metadata.guides.key?(name)
+
+              #Skip based on ignore-file content
+              unless name.empty? || ignore_content.nil? || !ignore_content.include?(name)
+                next;
+              end
+
+              if  !metadata || !metadata.guides || metadata.guides.key?(name)
+
                 # Note that calling page.content causes the source to be parsed
                 html = Nokogiri::HTML(page.content)
 
@@ -49,20 +63,20 @@ module Awestruct
                 else
                   page.modified_content = page.content
                 end
-                
+
                 guide = OpenStruct.new
 
                 # Attach the guide to the page, so we can reference it later
                 page.guide = guide
 
-                guide.name = name 
+                guide.name = name
                 guide.metadata = metadata
                 guide.dir = subdir
                 guide.path_prefix = @path_prefix
                 guide.src_root = root_dir
                 guide.git_root = git_root_dir
                 guide.src_relative_path = guide.dir + page.guide.name + @suffix
-                
+
                 #Remove the "/" - Git log does not work with /FILE.* on relative path
                 git_relative_path = (guide.src_relative_path.start_with?('/') ? guide.src_relative_path[1..-1] : guide.src_relative_path)
 
@@ -75,7 +89,7 @@ module Awestruct
 
                 # Different formats use different metadata formats
                 guide.title = page.title ? page.title : page.source_title
-                
+
                 if page.source_author
                   guide.authors = []
                   page.source_author.each do |a|
@@ -85,13 +99,13 @@ module Awestruct
                     page.author = guide.authors[0].github_id
                   end
                 end
-                guide.technologies = page.source_technologies 
+                guide.technologies = page.source_technologies
                 guide.level = page.source_level
                 guide.summary = page.source_summary
                 guide.prerequisites = page.source_prerequisites
                 guide.target_product = page.source_target_product
 
-                guide.meta = page.guide.summary  
+                guide.meta = page.guide.summary
                 if guide.technologies
                   guide.meta += ". Technologies covered include".concat(guide.technologies.map{|u| u} * ', ')
                 end
@@ -140,18 +154,18 @@ module Awestruct
                 else
                   guides << guide
                 end
-                
+
                 page.guides = guides
               end
             end
           end
           site.guides[@path_prefix] = guides
         end
-        
+
         def extract_metadata_from_asciidoc(page, content)
           # Asciidoc renders a load of stuff at the top of the page, which we need to extract bits of (e.g. author, title) but we want to dump it for rendering
           page.source_title = page.title
-          guide_content = content.css('body').first 
+          guide_content = content.css('body').first
           guide_content['id'] = 'content'
           guide_content['class'] = 'asciidoc'
 
@@ -195,7 +209,7 @@ module Awestruct
             extract(page, p, 'Prerequisites', true)
             extract(page, p, 'Target Product' )
           end
-            
+
           # Strip out title
           h1 = guide_content.css('h1').first
           if h1
@@ -216,7 +230,7 @@ module Awestruct
               a['href'] = $1 + $2
             end
           end
-        
+
           guide_content.to_html
         end
 
@@ -225,7 +239,7 @@ module Awestruct
             r = p.text[/^(#{tag}: )(.+)$/, 2]
             if r
               p['id'] = 'metadata'
-              return r 
+              return r
             end
           end
         end
@@ -244,10 +258,10 @@ module Awestruct
         def find_split(p, tag)
           s = find(p, tag)
           if s
-            return s.split(',').sort 
+            return s.split(',').sort
           end
         end
-        
+
       end
       ##
       # Returns a Array of unique contributors.github_id's based on the Git commit history for the given page.

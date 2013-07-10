@@ -31,13 +31,14 @@ jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
-  version: jdf-2.1.2.Final
+  version: jdf-2.1.5.Final
+  ignore_file: .quickstarts_ignore
 jboss-as-quickstart-guide:
   title: Getting Started Developing Applications
   index_label: Guides
   prefix: /quickstarts/jboss-as-quickstart/guide
   github_repo: jboss-as-quickstart
-  version: jdf-2.1.2.Final
+  version: jdf-2.1.5.Final
   guides:
     Introduction:
       summary:

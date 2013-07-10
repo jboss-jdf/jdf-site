@@ -7,7 +7,7 @@ ohloh_id: jboss-jdf
 disqus: jdf
 website_source_repo: https://github.com/jboss-jdf/jdf-site
 irc_transcripts: http://transcripts.jboss.org/channel/irc.freenode.org/%23jboss-jdf/
-version: 2.1.4.Final
+version: 2.1.5.Final
 
 asciidoctor:
   :backend: html5
