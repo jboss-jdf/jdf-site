@@ -20,7 +20,7 @@ module Awestruct
             s.github_repo_url ||= "http://github.com/#{s.github_org}/#{s.github_repo}"
             s.git_branch ||= s.version
             s.clone_url ||= "git://github.com/#{s.github_org}/#{s.github_repo}.git"
-            s.clone_command ||= "git clone #{s.clone_url} --branch #{s.git_branch}"
+            s.clone_command ||= "git clone --recursive #{s.clone_url} --branch #{s.git_branch}"
             s.github_source_zip ||= "#{s.github_repo_url}/zipball/#{s.git_branch}"
             s.github_url ||=  "#{s.github_repo_url}/tree/#{s.git_branch}"
 

@@ -55,7 +55,8 @@ description: Get started using the quickstarts. JBoss Developer Framework shows 
       %th Prerequisites
   %tbody
     - site.guides['/quickstarts/jboss-as-quickstart'].each do |guide|
-      - if guide.dir
+      - #Hack to remove the first line
+      - if guide.dir && guide.url != "/quickstarts/jboss-as-quickstart/"
         %tr
           %td
             %a{:href => site.base_url + guide.url, :title=> guide.name}= guide.name
