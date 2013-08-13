@@ -15,7 +15,7 @@
 
 source "https://rubygems.org"
 
-gem 'awestruct', '0.5.2'
+gem 'awestruct', '0.5.3'
 gem 'bootstrap-sass'
 gem 'rdiscount', '~> 2.0.7', :platforms => [:ruby]
 gem 'htmlcompressor'
@@ -26,3 +26,4 @@ gem 'redcarpet'
 gem 'asciidoctor'
 gem 'coderay', '~> 1.0.9'
 gem 'rb-fsevent', '~> 0.9'
+gem "win32-open3-19", :platforms => [:mingw, :mswin]
