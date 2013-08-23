@@ -24,7 +24,7 @@ Here are the steps in detail:
 
         git fetch upstream
 
-5. Import the `examples/ticket-monster`, `migrations/seam2`, `quickstarts/jboss-as-quickstart`, `stack/plugin-jdf`,and `stack/stacks-client` submodules.
+5. Import the `examples/ticket-monster`, `migrations/seam2`, `quickstarts/jboss-as-quickstart`, `quickstarts/qstools`, `stack/plugin-jdf`, and `stack/stacks-client` submodules.
 
         git submodule update --init --recursive
 

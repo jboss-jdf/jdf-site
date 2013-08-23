@@ -4,7 +4,8 @@ layout: base
 
 - page.body_class = 'guide'
 - page.toTop = 1
-- page.bottom_javascripts = [ "#{site.base_url}/javascripts/jquery-scroll.js", "http://w.sharethis.com/button/buttons.js" ]
+- page.javascripts = [ "http://w.sharethis.com/button/buttons.js" ]
+- page.bottom_javascripts = [ "#{site.base_url}/javascripts/jquery-scroll.js" ]
 - page.description = page.guide.meta
 - page.title = page.guide.title
 
@@ -109,7 +110,7 @@ layout: base
             %span.st_linkedin_large
             %span.st_email_large
             :javascript
-              stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675' });
+              stLight.options({ publisher:'0c0850b9-23f0-4286-b05a-7593cc190675', doNotHash:true, doNotCopy:true, hashAddressBar:false});
         :markdown
           #### Feedback
 
