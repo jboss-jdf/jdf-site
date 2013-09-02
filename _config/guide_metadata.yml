@@ -31,14 +31,14 @@ jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
   prefix: /quickstarts/jboss-as-quickstart
-  version: jdf-2.1.6.Final
+  version: jdf-2.1.7.Final
   ignore_file: .quickstarts_ignore
 jboss-as-quickstart-guide:
   title: Getting Started Developing Applications
   index_label: Guides
   prefix: /quickstarts/jboss-as-quickstart/guide
   github_repo: jboss-as-quickstart
-  version: jdf-2.1.6.Final
+  version: jdf-2.1.7.Final
   guides:
     Introduction:
       summary:
@@ -64,14 +64,14 @@ plugin-jdf:
   prefix: /stack/plugin-jdf
   title: Forge Plugin
   index_label: JDF Plugin for Forge
-  version: 1.0.0.Final
+  version: 1.0.0-SNAPSHOT
 stacks-client:
   prefix: /stack/stacks-client
   title: JBoss Stacks Client
   index_label: JBoss Stacks Client
-  version: 1.0.1.Final
+  version: 1.0.2.Final
 qstools:
   prefix: /quickstarts/qstools
   title: QS Tools
   index_label: QSTools
-  version: 1.0.0.Final
+  version: 1.2.0.Final
