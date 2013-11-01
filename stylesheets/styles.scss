@@ -504,7 +504,7 @@ body.guide {
     @include span(9, true);
     background-color: $guide_content_background_color;
     @include border-radius(6px 0 0 6px);
-    padding: 0 $gridGutterWidth 1em $gridGutterWidth;
+    padding: 0 $grid-gutter-width 1em $grid-gutter-width;
     border-right: 1px solid $light_border;
     margin-bottom: 0;
     h2.group {
@@ -512,8 +512,8 @@ body.guide {
       line-height: 1.3em;
     }
     h2.group, .header {
-      padding: 10px $gridGutterWidth;
-      margin: 0 (-$gridGutterWidth);
+      padding: 10px $grid-gutter-width;
+      margin: 0 (-$grid-gutter-width);
       border-bottom: 1px solid $light_border;
     }
     h2.group:first-child, .header {
@@ -587,7 +587,7 @@ body.guide {
   }
   #sidebar {
     @include border-box;
-    padding: 1em $gridGutterWidth 0 $gridGutterWidth;
+    padding: 1em $grid-gutter-width 0 $grid-gutter-width;
     @include span(3);
     h3 {
       font-family: $default_font_family;
@@ -665,7 +665,7 @@ body.guide {
 }
 
 // Include responsive Bootstrap styles
-@import "bootstrap-responsive";
+@import "bootstrap/responsive-utilities";
 
 // Contributors
 // TODO: I think this would be better to put into a partial
