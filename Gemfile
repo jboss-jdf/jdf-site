@@ -16,7 +16,7 @@
 source "https://rubygems.org"
 
 gem 'awestruct', '0.5.3'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', "~> 2.3.2.2"
 gem 'rdiscount', '~> 2.0.7', :platforms => [:ruby]
 gem 'htmlcompressor'
 gem 'coffee-script'
