@@ -2,12 +2,12 @@ ticket-monster:
   title: TicketMonster Tutorial
   index_label: Tutorials
   prefix: /examples/ticket-monster/tutorial
-  version: 2.1.5.Final
+  version: 2.1.6.Final
   alternate_formats:
     pdf:
-      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.5.Final.pdf
+      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.6.Final.pdf
     epub:
-      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.5.Final.epub
+      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.6.Final.epub
   guides: 
     WhatIsTicketMonster:
       summary: 
@@ -19,14 +19,16 @@ ticket-monster:
       summary: Learn how to design and implement the business layer of an application and how to make it usable by various front-ends
     UserFrontEnd:
       summary: Learn how to build the user interface in desktop and mobile version
-    AdminJSF: 
-      summary: Leverage JBoss Forge for rapid application development using JSF 2 and RichFaces 4
-    DashboardGWT:
-      summary: JBoss Errai and Google Web Toolkit are used to create an executive dashboard to monitor business performance - watch ticket sales happen in real-time.
+    AdminHTML5: 
+      summary: Leverage JBoss Forge for rapid application development using AngularJS
+    DashboardHTML5:
+      summary: JAX-RS, HTML5 and JavaScript are used to create an executive dashboard to monitor business performance - watch ticket sales happen in real-time.
     HybridUI:
       summary: Learn how to create hybrid mobile versions of the application with Apache Cordova
     DataGrid:
       summary: Learn how to use a data grid in the application with JBoss Data Grid
+    HibernateSearch:
+      summary: Learn how to create full text search capabilities in the application with Hibernate Search
 jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
