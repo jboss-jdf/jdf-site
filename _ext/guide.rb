@@ -220,7 +220,7 @@ module Awestruct
           metadata = guide_content.css('p#metadata').remove
 
           guide_content.css('h2').each do |header_html|
-            link_id = header_html.inner_html.gsub(' ', '_').gsub('&#8217;', '_').gsub(/[\(\)\.!]/, '').gsub(/\?/, '').downcase
+            link_id = header_html.inner_html.gsub(' ', '-').gsub('&#8217;', '-').gsub(/[\(\)\.!]/, '').gsub(/\?/, '').downcase
             header_html['id'] = link_id
           end
 
