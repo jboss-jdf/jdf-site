@@ -18,7 +18,7 @@ module Awestruct
           qs_toc_content = ''
           if site.guides[@path_prefix]
             site.guides[@path_prefix].each do |guide|
-              if guide.name
+              unless guide.name.empty?
                 qs_toc_content += "<tr><td align='left'><a href='#{site.base_url}#{guide.url}' title='#{guide.name}'>#{guide.name}</td><td align='left'>#{split(guide.technologies)}</td><td align='left'>#{guide.summary}</td><td align='left'>#{guide.level}</td><td align='left'>#{split(guide.prerequisites)}</td></tr>"
               end
             end
