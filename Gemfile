@@ -15,7 +15,8 @@
 
 source "https://rubygems.org"
 
-gem 'awestruct', '0.5.3'
+gem 'awestruct', '0.5.4.rc3'
+gem 'git'
 gem 'bootstrap-sass', '2.3.2.2'
 gem 'rdiscount', '~> 2.1.7', :platforms => [:ruby]
 gem 'htmlcompressor'
