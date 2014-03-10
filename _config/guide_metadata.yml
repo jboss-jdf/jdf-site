@@ -2,12 +2,12 @@ ticket-monster:
   title: TicketMonster Tutorial
   index_label: Tutorials
   prefix: /examples/ticket-monster/tutorial
-  version: 2.1.6.Final
+  version: 2.5.0.Final
   alternate_formats:
     pdf:
-      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.6.Final.pdf
+      download_url: http://docs.jboss.org/jdf/2.5/ticket-monster-2.5.0.Final.pdf
     epub:
-      download_url: http://docs.jboss.org/jdf/2.1/ticket-monster-2.1.6.Final.epub
+      download_url: http://docs.jboss.org/jdf/2.5/ticket-monster-2.5.0.Final.epub
   guides: 
     WhatIsTicketMonster:
       summary: 
@@ -25,10 +25,6 @@ ticket-monster:
       summary: JAX-RS, HTML5 and JavaScript are used to create an executive dashboard to monitor business performance - watch ticket sales happen in real-time.
     HybridUI:
       summary: Learn how to create hybrid mobile versions of the application with Apache Cordova
-    DataGrid:
-      summary: Learn how to use a data grid in the application with JBoss Data Grid
-    HibernateSearch:
-      summary: Learn how to create full text search capabilities in the application with Hibernate Search
 jboss-as-quickstart:
   title: Quickstarts
   index_label: Quickstarts Index
